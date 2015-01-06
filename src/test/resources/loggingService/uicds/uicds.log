@@ -1,0 +1,252 @@
+[INFO 08:02:35 XMLDBConnection] Initializing xml:db driver ...
+[INFO 08:02:36 XMLDBConnection] Using root collection: xmldb:exist://localhost:8080/exist/xmlrpc/db/UICDS
+[INFO 08:02:36 XMLDBConnection] Initializing DatabaseManager
+[INFO 08:02:38 XMLDBConnection] Initializing xml:db driver ...
+[INFO 08:02:38 XMLDBConnection] Using root collection: xmldb:exist://localhost:8080/exist/xmlrpc/db/UICDS
+[ERROR 08:02:38 XMLDBConnection] Initializing DatabaseManager
+[INFO 08:02:43 CoreConnectionImpl] CoreConnectionImpl.initilazed called: username: uicds
+[INFO 08:02:43 CoreConnectionImpl] Attempting to connect: UICDS
+
+[INFO 08:02:43 CoreConnectionImpl]      server: uicds123.us.saic.com
+[INFO 08:02:43 CoreConnectionImpl]        port: 5222
+[INFO 08:02:43 CoreConnectionImpl]    username: uicds
+[INFO 08:02:43 CoreConnectionImpl]    resource: CoreConnection
+[ERROR 08:02:47 CoreConnectionImpl] Instantiating RosterManger
+[INFO 08:02:47 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:47 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:47 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] ====> Set connection name to uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:02:48 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 08:02:48 CoreConnectionImpl] CoreConnectionImpl.initilazed done
+[INFO 08:02:48 InterestGroupManager] createInterestGroupRoot: /interestGroup
+[INFO 08:02:48 InterestGroupManager] ===> perform discovery for pubsubsvc: pubsub.uicds123.us.saic.com
+[INFO 08:02:48 InterestGroupManager] Add interestGroup root collection
+[INFO 08:02:48 CommunicationsServiceXmppImpl] CommunicationsServiceXmppImpl::init - started
+[INFO 08:02:48 CommunicationsServiceXmppImpl] CommunicationsServiceXmppImpl::init - completed
+[INFO 08:02:57 DirectoryServiceImpl] ===> registerUICDSService (serviceName: MapService)
+[INFO 08:02:57 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: MapViewContext)
+[INFO 08:02:57 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: MapViewContext)
+[INFO 08:02:58 DirectoryServiceImpl] ===> registerUICDSService (serviceName: AlertService)
+[INFO 08:02:58 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Alert)
+[INFO 08:02:58 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Alert)
+[INFO 08:02:58 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IncidentManagementService)
+[INFO 08:02:58 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Incident)
+[INFO 08:02:58 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Incident)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IncidentCommandService)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: ICS)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: MACS)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: ICS)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: MACS)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: BroadcastService)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceManagementService)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: CommitResource)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: RequestResource)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: CommitResource)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: RequestResource)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: TaskingService)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Tasking)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Tasking)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: SensorService)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: SOI)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: SOI)
+[INFO 08:03:01 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IAPService)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: IAP)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: ICSForm)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: IAP)
+[INFO 08:03:01 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: ICSForm)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: SearchService)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: NotificationService)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: LoggingService)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: AgreementService)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceProfileService)
+[INFO 08:03:02 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceInstanceService)
+[INFO 08:03:02 CommunicationsServiceXmppImpl] =====> CommunicationsServiceXmppImpl:systemInitializedHandler - sending core roster
+[INFO 08:03:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:03:02 DirectoryServiceImpl] ===> coreRosterHandler [uicds@uicds123.us.saic.com,Online]
+[INFO 08:15:55 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:45:03 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:45:03 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:53:57 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] 
+
+
+postProcessPersistenceUnitInfo: - adding persistence unit root=file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.em.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] postProcessPersistenceUnitInfo: - get pui for persistence unit name=default
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] ===> URLs in pui:
+[DEBUG 08:58:44 UICDSPersistenceUnitManager]              url:file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.em.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] postProcessPersistenceUnitInfo - leaving
+
+
+
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] 
+
+
+postProcessPersistenceUnitInfo: - adding persistence unit root=file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.infrastructure.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] postProcessPersistenceUnitInfo: - get pui for persistence unit name=default
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] postProcessPersistenceUnitInfo: adding jar with url:file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.em.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] ===> URLs in pui:
+[DEBUG 08:58:44 UICDSPersistenceUnitManager]              url:file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.infrastructure.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager]              url:file:/C:/UICDS/ServerApps/uicds/WEB-INF/lib/com.saic.uicds.core.em.services-1.0.4.jar
+[DEBUG 08:58:44 UICDSPersistenceUnitManager] postProcessPersistenceUnitInfo - leaving
+
+
+
+[DEBUG 08:58:51 DigestBridge] Creating digest bridge
+[DEBUG 08:58:55 PubSubServiceImpl] PubSubServiceImpl - init() starts
+[INFO 08:58:55 XMLDBConnection] Initializing xml:db driver ...
+[INFO 08:58:55 XMLDBConnection] Using root collection: xmldb:exist://localhost:8080/exist/xmlrpc/db/UICDS
+[INFO 08:58:55 XMLDBConnection] Initializing DatabaseManager
+[INFO 08:58:56 XMLDBConnection] Initializing xml:db driver ...
+[INFO 08:58:56 XMLDBConnection] Using root collection: xmldb:exist://localhost:8080/exist/xmlrpc/db/UICDS
+[INFO 08:58:56 XMLDBConnection] Initializing DatabaseManager
+[DEBUG 08:58:56 WorkProductXMLDBDAO] Created collection: /db/UICDS/WorkProducts
+[DEBUG 08:58:56 WorkProductXMLDBDAO] Initialized CollectionManagementService using CollectionManagementService
+[DEBUG 08:58:56 WorkProductXMLDBDAO] Initialized XPathQueryService using XPathQueryService
+[DEBUG 08:58:56 WorkProductXMLDBDAO] Initialized XQueryService using XPathQueryService
+[DEBUG 08:58:56 WorkProductXMLDBDAO] Initialized XUpdateQueryService using XUpdateQueryService
+[INFO 08:59:01 CoreConnectionImpl] CoreConnectionImpl.initilazed called: username: uicds
+[INFO 08:59:01 CoreConnectionImpl] Attempting to connect: UICDS
+
+[INFO 08:59:01 CoreConnectionImpl]      server: uicds123.us.saic.com
+[INFO 08:59:01 CoreConnectionImpl]        port: 5222
+[INFO 08:59:01 CoreConnectionImpl]    username: uicds
+[INFO 08:59:01 CoreConnectionImpl]    resource: CoreConnection
+[DEBUG 08:59:02 InterestGrpMgmtIQProvider] ====#> InterestGrpMgmtIQProvider - constructor
+[DEBUG 08:59:02 Core2CoreMessageIQProvider] =====#> Core2CoreMessageIQProvider - constructor
+[INFO 08:59:02 CoreConnectionImpl] Instantiating RosterManger
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 08:59:02 RosterManager] RosterManager : adding to map: JID=uicds@uicds123.us.saic.com name=uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] ====> Set connection name to uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 08:59:02 CoreConnectionImpl] Adding ourself: JID=uicds@uicds123.us.saic.com name=uicds@uicds123.us.saic.com to roster
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[INFO 08:59:02 CoreConnectionImpl] CoreConnectionImpl.initilazed done
+[DEBUG 08:59:02 Core2CoreMessageProcessor] ====#> Core2CoreMessageProcessor:initialize() 
+[DEBUG 08:59:02 Core2CoreMessageProcessor] ====#> Core2CoreMessageProcessor:initialize() - adding Core2CoreMessageIQListener
+[DEBUG 08:59:02 Core2CoreMessageIQListener] ====#> Core2CoreMessageIQListener - constructor
+[DEBUG 08:59:02 InterestManagerImpl] Initialize called - coreConnection is initialized? com.saic.uicds.xmpp.communications.CoreConnectionImpl@1499616
+[DEBUG 08:59:02 InterestManagerImpl] initialized done
+[DEBUG 08:59:02 InterestGroupManager] xmpp/InterestGroupManager:initialize()
+[INFO 08:59:02 InterestGroupManager] createInterestGroupRoot: /interestGroup
+[INFO 08:59:02 InterestGroupManager] ===> perform discovery for pubsubsvc: pubsub.uicds123.us.saic.com
+[INFO 08:59:02 InterestGroupManager] Add interestGroup root collection
+[INFO 08:59:02 CommunicationsServiceXmppImpl] CommunicationsServiceXmppImpl::init - started
+[INFO 08:59:02 CommunicationsServiceXmppImpl] CommunicationsServiceXmppImpl::init - completed
+[DEBUG 08:59:04 SystemInitializedController] SystemInitializedController::setSystemInitializedChannel() - called
+[DEBUG 08:59:04 SystemInitializedController] SystemInitializedController::send SystemInitilized message
+[DEBUG 08:59:05 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:05 DirectoryServiceImpl] ===> registerUICDSService (serviceName: MapService)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: MapViewContext)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: MapViewContext)
+[DEBUG 08:59:05 DirectoryServiceImpl] adding new registration for MapService
+[DEBUG 08:59:05 MapServiceImpl] systemInitializedHandler - started
+[DEBUG 08:59:05 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:05 DirectoryServiceImpl] ===> registerUICDSService (serviceName: AlertService)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Alert)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Alert)
+[DEBUG 08:59:05 DirectoryServiceImpl] adding new registration for AlertService
+[DEBUG 08:59:05 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:05 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IncidentManagementService)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Incident)
+[INFO 08:59:05 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Incident)
+[DEBUG 08:59:05 DirectoryServiceImpl] adding new registration for IncidentManagementService
+[DEBUG 08:59:05 PubSubServiceImpl] subscribeWorkProductType: prodType=Incident for subscriber:IncidentManagementService interface:com.saic.uicds.core.em.service.impl.IncidentManagementServiceImpl@ffb301
+[DEBUG 08:59:05 PubSubServiceImpl] subscriptionId=1502769007
+[DEBUG 08:59:05 PubSubServiceImpl] ===> subscribeWorkProductType: adding interface for subscriber IncidentManagementService interfacecom.saic.uicds.core.em.service.impl.IncidentManagementServiceImpl@ffb301 to map!
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IncidentCommandService)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: ICS)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: MACS)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: ICS)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: MACS)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for IncidentCommandService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: BroadcastService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for BroadcastService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceManagementService)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: CommitResource)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: RequestResource)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: CommitResource)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: RequestResource)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for ResourceManagementService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: TaskingService)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: Tasking)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: Tasking)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for TaskingService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: SensorService)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: SOI)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: SOI)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for SensorService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: IAPService)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: IAP)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (publishedProductType: ICSForm)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: IAP)
+[INFO 08:59:06 DirectoryServiceImpl] =====> registerUICDSService (subscribedproductType: ICSForm)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for IAPService
+[DEBUG 08:59:06 InterestGroupManagementComponentImpl] InterestGroupManagementComponent - initialized
+[DEBUG 08:59:06 InterestGroupManagementComponentImpl] ===> found 0 interest groups in database
+[DEBUG 08:59:06 DirectoryServiceImpl] DirectoryServiceImpl:systemInitializedHandler - started
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList (coreName: uicds@uicds123.us.saic.com)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: MapService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: IncidentManagementService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: BroadcastService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: AlertService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: TaskingService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: SensorService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: ResourceManagementService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: IncidentCommandService)
+[DEBUG 08:59:06 DirectoryServiceImpl] getServiceList: found service: IAPService)
+[DEBUG 08:59:06 DirectoryServiceImpl] number of registered services=9
+[DEBUG 08:59:06 DirectoryServiceImpl] DirectoryServiceImpl:systemInitializedHandler - completed
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: SearchService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for SearchService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: NotificationService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for NotificationService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: LoggingService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for LoggingService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: AgreementService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for AgreementService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceProfileService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for ResourceProfileService
+[DEBUG 08:59:06 GenericHibernateDAO] isSessionInitialized=true
+[INFO 08:59:06 DirectoryServiceImpl] ===> registerUICDSService (serviceName: ResourceInstanceService)
+[DEBUG 08:59:06 DirectoryServiceImpl] adding new registration for ResourceInstanceService
+[INFO 08:59:06 CommunicationsServiceXmppImpl] =====> CommunicationsServiceXmppImpl:systemInitializedHandler - sending core roster
+[DEBUG 08:59:06 CommunicationsServiceXmppImpl] =====> CommunicationsServiceXmppImpl:sendCoreRoster
+[INFO 08:59:06 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 08:59:06 DirectoryServiceImpl] =====> *** DirectoryServiceImpl.coreRosterHandler **** <=====
+[INFO 08:59:06 DirectoryServiceImpl] ===> coreRosterHandler [uicds@uicds123.us.saic.com,Online]
+[DEBUG 08:59:06 DirectoryServiceImpl] =====> *** DirectoryServiceImpl.coreRosterHandler ends **** <=====
+[DEBUG 08:59:06 CommunicationsServiceXmppImpl] =====> CommunicationsServiceXmppImpl:systemInitializedHandler - core roster sent
+[DEBUG 08:59:06 SystemInitializedController] SystemInitializedController::setSystemInitializedChannel() - completed
+[DEBUG 09:05:17 RosterManager] Got presense: <presence to="uicds@uicds123.us.saic.com" from="uicds@huangda2.us.saic.com/CoreConnection" type="unavailable"></presence>
+[INFO 09:05:17 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 09:05:17 RosterManager] presence from unknown core: uicds@huangda2.us.saic.com
+[DEBUG 09:22:34 RosterManager] Got presense: <presence id="YibjF-3" to="uicds@uicds123.us.saic.com" from="uicds@huangda2.us.saic.com/CoreConnection"></presence>
+[INFO 09:22:34 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 09:22:34 RosterManager] presence from unknown core: uicds@huangda2.us.saic.com
+[DEBUG 09:22:34 RosterManager] Got presense: <presence id="YibjF-4" to="uicds@uicds123.us.saic.com" from="uicds@huangda2.us.saic.com/CoreConnection"><priority>77</priority></presence>
+[INFO 09:22:34 CoreConnectionImpl] CoreConnectionImpl.getJID: jid=uicds@uicds123.us.saic.com
+[DEBUG 09:22:34 RosterManager] presence from unknown core: uicds@huangda2.us.saic.com

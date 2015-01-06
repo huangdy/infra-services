@@ -1,0 +1,84 @@
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-18">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Found 0 items to remove. ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="INFO" thread="Timer-18">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection /db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="INFO" thread="Timer-18">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f' took 79 ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-18">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection /db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-18">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b'... ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-23">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Found 0 items to remove. ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="INFO" thread="Timer-23">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection /db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="INFO" thread="Timer-23">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f' took 79 ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-23">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing collection /db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-23">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Mon Jan 24 12:19:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b'... ]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-0">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Thu Mar 24 00:02:18 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\exist_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-7">
+<log4j:message><![CDATA[[Component=exist]
+[Time=Thu Mar 24 00:02:22 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+

@@ -1,0 +1,839 @@
+2011.01.22 19:21:12 JettyLog: EOF
+2011.01.22 19:23:12 JettyLog: EOF
+2011.01.22 19:23:12 JettyLog: EOF
+2011.01.22 19:32:15 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:15 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:15 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:15 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:15 LdapManager: Starting LDAP search...
+2011.01.22 19:32:15 LdapManager: ... search finished
+2011.01.22 19:32:15 LdapManager: In LdapManager.checkAuthentication(userDN, password), userDN is: cn="user1",ou="users"...
+2011.01.22 19:32:15 LdapManager: Created context values, attempting to create context...
+2011.01.22 19:32:15 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:15 AuthorizationManager: Trying Default Mapping.map(user1)
+2011.01.22 19:32:15 DefaultAuthorizationMapping: No realm found
+2011.01.22 19:32:15 AuthorizationManager: Trying Default Policy.authorize(user1 , user1)
+2011.01.22 19:32:15 DefaultAuthorizationPolicy: Checking authenID realm
+2011.01.22 19:32:15 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:15 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:15 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:15 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:15 LdapManager: Starting LDAP search...
+2011.01.22 19:32:15 LdapManager: ... search finished
+2011.01.22 19:32:15 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:15 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:15 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:15 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:15 LdapManager: Starting LDAP search...
+2011.01.22 19:32:15 LdapManager: ... search finished
+2011.01.22 19:32:15 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:15 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:15 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:15 JettyLog: continuation RetryContinuation@18669586,pending
+2011.01.22 19:32:15 JettyLog: resume continuation RetryContinuation@18669586,pending,resumed
+2011.01.22 19:32:15 JettyLog: continuation still pending {}
+2011.01.22 19:32:15 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:32:16 JettyLog: continuation still pending {}
+2011.01.22 19:32:16 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:32:17 JettyLog: continuation RetryContinuation@18669586,pending
+2011.01.22 19:32:17 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:17 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:17 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:17 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:17 LdapManager: Starting LDAP search...
+2011.01.22 19:32:17 LdapManager: ... search finished
+2011.01.22 19:32:17 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:17 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:17 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:17 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:17 LdapManager: Starting LDAP search...
+2011.01.22 19:32:17 LdapManager: ... search finished
+2011.01.22 19:32:17 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:17 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:17 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:17 JettyLog: resume continuation RetryContinuation@18669586,pending,resumed
+2011.01.22 19:32:17 JettyLog: continuation still pending {}
+2011.01.22 19:32:17 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:32:18 JettyLog: continuation RetryContinuation@18669586,pending
+2011.01.22 19:32:18 JettyLog: resume continuation RetryContinuation@18669586,pending,resumed
+2011.01.22 19:32:18 JettyLog: continuation still pending {}
+2011.01.22 19:32:18 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:32:19 JettyLog: continuation RetryContinuation@18669586,pending
+2011.01.22 19:32:19 JettyLog: resume continuation RetryContinuation@18669586,pending,resumed
+2011.01.22 19:32:19 JettyLog: continuation still pending {}
+2011.01.22 19:32:19 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:32:20 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:20 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:20 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:20 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:20 LdapManager: Starting LDAP search...
+2011.01.22 19:32:20 LdapManager: ... search finished
+2011.01.22 19:32:20 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 19:32:20 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:20 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:20 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:20 LdapManager: Starting LDAP search...
+2011.01.22 19:32:20 LdapManager: ... search finished
+2011.01.22 19:32:20 Trying to find group names for user: user1@clash.saic.com using query: (&(&(cn=*)(&(cn=*)(objectClass=groupOfUniqueNames)))(uniqueMember=cn="user1",ou="users",dc="uicds",dc="us"))
+2011.01.22 19:32:20 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 19:32:20 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 19:32:20 LdapManager: ... context created successfully, returning.
+2011.01.22 19:32:20 JettyLog: continuation still pending {}
+2011.01.22 19:32:20 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:34:27 JettyLog: EOF
+2011.01.22 19:34:27 JettyLog: continuation RetryContinuation@18669586
+2011.01.22 19:46:52 000038 (00/02/00) - #0001 removed because age is 43208922ms.
+2011.01.22 19:46:52 000038 (00/01/00) - #0002 removed because age is 43208922ms.
+2011.01.22 19:46:52 000038 (00/00/00) - #0003 removed because age is 43208813ms.
+2011.01.22 19:46:52 000038 (00/01/00) - Connection #4 created to achieve minimum of 3 = AVAILABLE
+2011.01.22 19:46:52 000038 (00/02/00) - Connection #5 created to achieve minimum of 3 = AVAILABLE
+2011.01.22 19:46:52 000038 (00/03/00) - Connection #6 created to achieve minimum of 3 = AVAILABLE
+2011.01.22 20:28:06 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:28:06 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:28:06 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:06 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:06 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:06 LdapManager: Starting LDAP search...
+2011.01.22 20:28:06 LdapManager: ... search finished
+2011.01.22 20:28:06 LdapManager: In LdapManager.checkAuthentication(userDN, password), userDN is: cn="user1",ou="users"...
+2011.01.22 20:28:06 LdapManager: Created context values, attempting to create context...
+2011.01.22 20:28:06 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:06 AuthorizationManager: Trying Default Mapping.map(user1)
+2011.01.22 20:28:06 DefaultAuthorizationMapping: No realm found
+2011.01.22 20:28:06 AuthorizationManager: Trying Default Policy.authorize(user1 , user1)
+2011.01.22 20:28:06 DefaultAuthorizationPolicy: Checking authenID realm
+2011.01.22 20:28:06 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:28:06 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:06 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:06 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:06 LdapManager: Starting LDAP search...
+2011.01.22 20:28:06 LdapManager: ... search finished
+2011.01.22 20:28:06 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:28:06 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:06 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:06 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:06 LdapManager: Starting LDAP search...
+2011.01.22 20:28:06 LdapManager: ... search finished
+2011.01.22 20:28:06 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:06 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:06 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:06 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:28:06 JettyLog: continuation still pending {}
+2011.01.22 20:28:06 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:28:07 JettyLog: continuation still pending {}
+2011.01.22 20:28:07 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:28:08 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:28:08 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:28:08 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:08 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:08 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:08 LdapManager: Starting LDAP search...
+2011.01.22 20:28:08 LdapManager: ... search finished
+2011.01.22 20:28:08 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:28:08 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:08 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:08 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:08 LdapManager: Starting LDAP search...
+2011.01.22 20:28:08 LdapManager: ... search finished
+2011.01.22 20:28:08 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:28:08 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:28:08 LdapManager: ... context created successfully, returning.
+2011.01.22 20:28:08 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:28:08 JettyLog: continuation still pending {}
+2011.01.22 20:28:08 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:28:09 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:28:09 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:28:09 JettyLog: continuation still pending {}
+2011.01.22 20:28:09 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:28:10 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:29:06 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:29:06 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:29:06 JettyLog: continuation still pending {}
+2011.01.22 20:29:06 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:29:10 LocalOutgoingServerSession: OS - Trying to connect to incidents:5269(DNS lookup: incidents:5269)
+2011.01.22 20:29:12 OutgoingSessionPromise: Error sending packet to remote server: 
+<iq to="incidents" type="get" id="859:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#info"/>
+</iq>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.22 20:29:12 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<iq to="incidents" type="get" id="860:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#items"/>
+</iq>
+2011.01.22 20:29:12 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:29:12 JettyLog: continuation still pending {}
+2011.01.22 20:29:12 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:29:13 JettyLog: continuation still pending {}
+2011.01.22 20:29:13 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:29:14 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:29:17 LocalOutgoingServerSession: OS - Trying to connect to stuff:5269(DNS lookup: stuff:5269)
+2011.01.22 20:29:19 OutgoingSessionPromise: Error sending packet to remote server: 
+<iq to="stuff" type="get" id="861:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#info"/>
+</iq>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.22 20:29:19 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:29:19 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<iq to="stuff" type="get" id="862:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#items"/>
+</iq>
+2011.01.22 20:29:19 JettyLog: continuation still pending {}
+2011.01.22 20:29:19 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:29:20 JettyLog: continuation still pending {}
+2011.01.22 20:29:20 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:29:20 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:29:54 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Starting LDAP search...
+2011.01.22 20:29:54 LdapManager: ... search finished
+2011.01.22 20:29:54 LdapManager: In LdapManager.checkAuthentication(userDN, password), userDN is: cn="user1",ou="users"...
+2011.01.22 20:29:54 LdapManager: Created context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 AuthorizationManager: Trying Default Mapping.map(user1)
+2011.01.22 20:29:54 DefaultAuthorizationMapping: No realm found
+2011.01.22 20:29:54 AuthorizationManager: Trying Default Policy.authorize(user1 , user1)
+2011.01.22 20:29:54 DefaultAuthorizationPolicy: Checking authenID realm
+2011.01.22 20:29:54 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Starting LDAP search...
+2011.01.22 20:29:54 LdapManager: ... search finished
+2011.01.22 20:29:54 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Starting LDAP search...
+2011.01.22 20:29:54 LdapManager: ... search finished
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Starting LDAP search...
+2011.01.22 20:29:54 LdapManager: ... search finished
+2011.01.22 20:29:54 LdapManager: Trying to find a user's DN based on their username. cn: user1, Base DN: dc="uicds",dc="us"...
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapManager: Starting LDAP search...
+2011.01.22 20:29:54 LdapManager: ... search finished
+2011.01.22 20:29:54 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.22 20:29:54 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.22 20:29:54 LdapManager: ... context created successfully, returning.
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'pager'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'pager'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'uid'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'uid'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'mail'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'mail'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'jpeg'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'jpeg'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'homePostalAddress'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'homePostalAddress'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'image'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'image'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'l'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'l'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'homePhone'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'homePhone'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'title'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'title'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'postalCode'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'postalCode'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'departmentNumber'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'departmentNumber'=>''
+2011.01.22 20:29:54 LdapVCardProvider: Found attribute cn of type: class java.lang.String
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'cn'=>'user1'
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'telephoneNumber'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'telephoneNumber'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'jpegPhoto'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'jpegPhoto'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'postalAddress'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'postalAddress'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'st'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'st'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'displayName'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'displayName'=>''
+2011.01.22 20:29:54 LdapVCardProvider: No ldap value found for attribute 'mobile'
+2011.01.22 20:29:54 LdapVCardProvider: Ldap attribute 'mobile'=>''
+2011.01.22 20:29:54 LdapVCardProvider: Getting mapped vcard for user1
+2011.01.22 20:29:54 LdapVCardProvider: Returning vcard
+2011.01.22 20:30:20 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:30:20 JettyLog: continuation still pending {}
+2011.01.22 20:30:20 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:30:21 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:30:29 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:30:29 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:30:29 JettyLog: continuation still pending {}
+2011.01.22 20:30:29 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:30:33 LocalOutgoingServerSession: OS - Trying to connect to interestgroup:5269(DNS lookup: interestgroup:5269)
+2011.01.22 20:30:35 OutgoingSessionPromise: Error sending packet to remote server: 
+<iq to="interestgroup" type="get" id="867:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#info"/>
+</iq>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.22 20:30:35 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<iq to="interestgroup" type="get" id="868:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#items"/>
+</iq>
+2011.01.22 20:30:35 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:30:35 JettyLog: continuation still pending {}
+2011.01.22 20:30:35 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:30:36 JettyLog: continuation still pending {}
+2011.01.22 20:30:36 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:30:37 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:30:37 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:30:37 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:30:37 JettyLog: continuation still pending {}
+2011.01.22 20:30:37 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:30:41 LocalOutgoingServerSession: OS - Trying to connect to pubsub:5269(DNS lookup: pubsub:5269)
+2011.01.22 20:30:43 OutgoingSessionPromise: Error sending packet to remote server: 
+<iq to="pubsub" type="get" id="869:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#info"/>
+</iq>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.22 20:30:43 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:30:43 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<iq to="pubsub" type="get" id="870:sendIQ" from="user1@clash.saic.com/98aaaca0">
+  <query xmlns="http://jabber.org/protocol/disco#items"/>
+</iq>
+2011.01.22 20:30:43 JettyLog: continuation still pending {}
+2011.01.22 20:30:43 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:30:44 JettyLog: continuation still pending {}
+2011.01.22 20:30:44 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:30:45 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:05 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:05 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:05 JettyLog: continuation still pending {}
+2011.01.22 20:31:05 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:05 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:05 JettyLog: continuation still pending {}
+2011.01.22 20:31:05 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:06 JettyLog: continuation still pending {}
+2011.01.22 20:31:06 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:07 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:21 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:21 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:21 JettyLog: continuation still pending {}
+2011.01.22 20:31:21 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:21 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:21 JettyLog: continuation still pending {}
+2011.01.22 20:31:21 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:22 JettyLog: continuation still pending {}
+2011.01.22 20:31:22 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:23 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:24 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:24 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:24 JettyLog: continuation still pending {}
+2011.01.22 20:31:24 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:24 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:24 JettyLog: continuation still pending {}
+2011.01.22 20:31:24 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:25 JettyLog: continuation still pending {}
+2011.01.22 20:31:25 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:26 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:30 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:30 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:30 JettyLog: continuation still pending {}
+2011.01.22 20:31:30 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:30 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:30 JettyLog: continuation still pending {}
+2011.01.22 20:31:30 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:31 JettyLog: continuation still pending {}
+2011.01.22 20:31:31 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:32 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:35 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:35 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:35 JettyLog: continuation still pending {}
+2011.01.22 20:31:35 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:35 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:35 JettyLog: continuation still pending {}
+2011.01.22 20:31:35 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:36 JettyLog: continuation still pending {}
+2011.01.22 20:31:36 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:37 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:38 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:38 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:38 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:38 JettyLog: continuation still pending {}
+2011.01.22 20:31:38 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:38 JettyLog: continuation still pending {}
+2011.01.22 20:31:38 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:39 JettyLog: continuation still pending {}
+2011.01.22 20:31:39 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:40 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:52 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:52 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:52 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:52 JettyLog: continuation still pending {}
+2011.01.22 20:31:52 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:52 JettyLog: continuation still pending {}
+2011.01.22 20:31:52 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:31:53 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:31:59 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:31:59 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:31:59 JettyLog: continuation still pending {}
+2011.01.22 20:31:59 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:31:59 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:31:59 JettyLog: continuation still pending {}
+2011.01.22 20:31:59 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:32:00 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:32:05 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:32:05 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:32:05 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:32:05 JettyLog: continuation still pending {}
+2011.01.22 20:32:05 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:32:05 JettyLog: continuation still pending {}
+2011.01.22 20:32:05 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:32:06 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:33:06 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:33:06 JettyLog: continuation still pending {}
+2011.01.22 20:33:06 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:33:07 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:34:07 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:34:07 JettyLog: continuation still pending {}
+2011.01.22 20:34:07 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:34:08 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:34:41 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:34:41 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:34:41 JettyLog: continuation still pending {}
+2011.01.22 20:34:41 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:34:41 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:34:41 JettyLog: continuation still pending {}
+2011.01.22 20:34:41 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:34:42 JettyLog: continuation still pending {}
+2011.01.22 20:34:42 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:34:43 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:34:54 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:34:54 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:34:54 JettyLog: continuation still pending {}
+2011.01.22 20:34:54 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:34:54 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:34:54 JettyLog: continuation still pending {}
+2011.01.22 20:34:54 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:34:55 JettyLog: continuation still pending {}
+2011.01.22 20:34:55 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:34:56 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:02 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:02 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:02 JettyLog: continuation still pending {}
+2011.01.22 20:35:02 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:02 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:02 JettyLog: continuation still pending {}
+2011.01.22 20:35:02 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:03 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:06 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:06 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:06 JettyLog: continuation still pending {}
+2011.01.22 20:35:06 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:06 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:06 JettyLog: continuation still pending {}
+2011.01.22 20:35:06 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:07 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:12 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:12 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:12 JettyLog: continuation still pending {}
+2011.01.22 20:35:12 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:12 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:12 JettyLog: continuation still pending {}
+2011.01.22 20:35:12 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:13 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:15 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:15 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:15 JettyLog: continuation still pending {}
+2011.01.22 20:35:15 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:15 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:15 JettyLog: continuation still pending {}
+2011.01.22 20:35:15 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:16 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:22 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:22 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:22 JettyLog: continuation still pending {}
+2011.01.22 20:35:22 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:22 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:22 JettyLog: continuation still pending {}
+2011.01.22 20:35:22 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:23 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:35:24 JettyLog: resume continuation RetryContinuation@20704708,pending,resumed
+2011.01.22 20:35:24 JettyLog: continuation still pending {}
+2011.01.22 20:35:24 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:35:24 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:35:24 JettyLog: resume continuation RetryContinuation@7578460,pending,resumed
+2011.01.22 20:35:24 JettyLog: continuation still pending {}
+2011.01.22 20:35:24 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:35:25 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:36:25 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:36:25 JettyLog: continuation still pending {}
+2011.01.22 20:36:25 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:36:26 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:37:26 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:37:26 JettyLog: continuation still pending {}
+2011.01.22 20:37:26 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:37:27 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:38:27 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:38:27 JettyLog: continuation still pending {}
+2011.01.22 20:38:27 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:38:28 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:39:28 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:39:28 JettyLog: continuation still pending {}
+2011.01.22 20:39:28 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:39:29 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:40:29 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:40:29 JettyLog: continuation still pending {}
+2011.01.22 20:40:29 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:40:30 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:41:30 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:41:30 JettyLog: continuation still pending {}
+2011.01.22 20:41:30 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:41:31 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:42:31 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:42:31 JettyLog: continuation still pending {}
+2011.01.22 20:42:31 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:42:32 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:43:32 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:43:32 JettyLog: continuation still pending {}
+2011.01.22 20:43:32 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:43:33 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:44:33 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:44:33 JettyLog: continuation still pending {}
+2011.01.22 20:44:33 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:44:34 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:45:34 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:45:34 JettyLog: continuation still pending {}
+2011.01.22 20:45:34 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:45:35 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:46:35 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:46:35 JettyLog: continuation still pending {}
+2011.01.22 20:46:35 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:46:36 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:47:36 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:47:36 JettyLog: continuation still pending {}
+2011.01.22 20:47:36 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:47:37 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:48:37 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:48:37 JettyLog: continuation still pending {}
+2011.01.22 20:48:37 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:48:38 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:49:38 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:49:38 JettyLog: continuation still pending {}
+2011.01.22 20:49:38 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:49:39 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:50:39 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:50:39 JettyLog: continuation still pending {}
+2011.01.22 20:50:39 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:50:40 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:51:40 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:51:40 JettyLog: continuation still pending {}
+2011.01.22 20:51:40 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:51:41 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:52:41 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:52:41 JettyLog: continuation still pending {}
+2011.01.22 20:52:41 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:52:42 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:53:42 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:53:42 JettyLog: continuation still pending {}
+2011.01.22 20:53:42 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:53:43 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:54:43 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.22 20:54:43 JettyLog: continuation still pending {}
+2011.01.22 20:54:43 JettyLog: continuation RetryContinuation@20704708
+2011.01.22 20:54:44 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.22 20:55:44 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.22 20:55:44 JettyLog: continuation still pending {}
+2011.01.22 20:55:44 JettyLog: continuation RetryContinuation@7578460
+2011.01.22 20:55:45 JettyLog: continuation RetryContinuation@20704708,pending
+2011.01.22 20:56:45 JettyLog: resume continuation RetryContinuation@20704708,pending,expired
+2011.01.23 19:57:22 JettyLog: continuation still pending {}
+2011.01.23 19:57:22 JettyLog: continuation RetryContinuation@20704708
+2011.01.23 19:57:23 JettyLog: continuation RetryContinuation@7578460,pending
+2011.01.23 19:58:18 Open connection to www.igniterealtime.org:80
+2011.01.23 19:58:19 >> "POST /projects/openfire/versions.jsp HTTP/1.1[\r][\n]"
+2011.01.23 19:58:19 Adding Host request header
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 >> "User-Agent: Jakarta Commons-HttpClient/3.1[\r][\n]"
+2011.01.23 19:58:19 >> "Host: www.igniterealtime.org[\r][\n]"
+2011.01.23 19:58:19 >> "Content-Length: 86[\r][\n]"
+2011.01.23 19:58:19 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2011.01.23 19:58:19 >> "[\r][\n]"
+2011.01.23 19:58:19 >> "type=update&query=%3Cversion%3E%3Copenfire+current%3D%223.6.4%22%2F%3E%3C%2Fversion%3E"
+2011.01.23 19:58:19 Request body sent
+2011.01.23 19:58:19 << "HTTP/1.1 200 OK[\r][\n]"
+2011.01.23 19:58:19 << "HTTP/1.1 200 OK[\r][\n]"
+2011.01.23 19:58:19 << "Date: Mon, 24 Jan 2011 00:58:52 GMT[\r][\n]"
+2011.01.23 19:58:19 << "Set-Cookie: JSESSIONID=3C2C8F7D8C3D226E72E47AF0161E16CE; Path=/[\r][\n]"
+2011.01.23 19:58:19 << "Content-Type: text/xml[\r][\n]"
+2011.01.23 19:58:19 << "Cache-Control: max-age=300[\r][\n]"
+2011.01.23 19:58:19 << "Expires: Mon, 24 Jan 2011 01:03:52 GMT[\r][\n]"
+2011.01.23 19:58:19 << "Transfer-Encoding: chunked[\r][\n]"
+2011.01.23 19:58:19 << "[\r][\n]"
+2011.01.23 19:58:19 Cookie accepted: "$Version=0; JSESSIONID=3C2C8F7D8C3D226E72E47AF0161E16CE; $Path=/"
+2011.01.23 19:58:19 Buffering response body
+2011.01.23 19:58:19 << "1"
+2011.01.23 19:58:19 << "3"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "<version/>[\n]"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "0"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\r][\n]"
+2011.01.23 19:58:19 Resorting to protocol version default close connection policy
+2011.01.23 19:58:19 Should NOT close connection, using HTTP/1.1
+2011.01.23 19:58:19 Releasing connection back to connection manager.
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 Open connection to www.igniterealtime.org:80
+2011.01.23 19:58:19 >> "POST /projects/openfire/versions.jsp HTTP/1.1[\r][\n]"
+2011.01.23 19:58:19 Adding Host request header
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 >> "User-Agent: Jakarta Commons-HttpClient/3.1[\r][\n]"
+2011.01.23 19:58:19 >> "Host: www.igniterealtime.org[\r][\n]"
+2011.01.23 19:58:19 >> "Content-Length: 83[\r][\n]"
+2011.01.23 19:58:19 >> "Content-Type: application/x-www-form-urlencoded[\r][\n]"
+2011.01.23 19:58:19 >> "[\r][\n]"
+2011.01.23 19:58:19 >> "type=available&query=%3Cavailable%3E%3Clocale%3Een%3C%2Flocale%3E%3C%2Favailable%3E"
+2011.01.23 19:58:19 Request body sent
+2011.01.23 19:58:19 << "HTTP/1.1 200 OK[\r][\n]"
+2011.01.23 19:58:19 << "HTTP/1.1 200 OK[\r][\n]"
+2011.01.23 19:58:19 << "Date: Mon, 24 Jan 2011 00:58:52 GMT[\r][\n]"
+2011.01.23 19:58:19 << "Set-Cookie: JSESSIONID=91B51BE589EAA28F117CC0F41DAEB973; Path=/[\r][\n]"
+2011.01.23 19:58:19 << "Content-Type: text/xml[\r][\n]"
+2011.01.23 19:58:19 << "Cache-Control: max-age=300[\r][\n]"
+2011.01.23 19:58:19 << "Expires: Mon, 24 Jan 2011 01:03:52 GMT[\r][\n]"
+2011.01.23 19:58:19 << "Transfer-Encoding: chunked[\r][\n]"
+2011.01.23 19:58:19 << "[\r][\n]"
+2011.01.23 19:58:19 Cookie accepted: "$Version=0; JSESSIONID=91B51BE589EAA28F117CC0F41DAEB973; $Path=/"
+2011.01.23 19:58:19 Buffering response body
+2011.01.23 19:58:19 << "1"
+2011.01.23 19:58:19 << "f"
+2011.01.23 19:58:19 << "f"
+2011.01.23 19:58:19 << "8"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "<available><plugin name="Client Control" description="Controls clients allowed to connect and available features" url="http://www.igniterealtime.org/projects/openfire/plugins/clientControl.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/clientcontrol.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/clientcontrol/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/clientcontrol/changelog.html" latest="1.0.3" author="Jive Software" minServerVersion="3.6.0" fileSize="102121"/><plugin name="SIP Phone Plugin" description="Provides support for SIP account management" url="http://www.igniterealtime.org/projects/openfire/plugins/sip.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/sip.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/sip/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/sip/changelog.html" latest="1.0.5" author="Ignite Realtime" minServerVersion="3.6.0" fileSize="192177"/><plugin name="Registration" description="Performs various actions whenever a new user account is created." url="http://www.igniterealtime.org/projects/openfire/plugins/registration.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/registration.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/registration/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/registration/changelog.html" latest="1.4.1" author="Ryan Graham" minServerVersion="3.3.0" fileSize="22598"/><plugin name="User Import Export" description="Enables import and export of user data" url="http://www.igniterealtime.org/projects/openfire/plugins/userImportExport.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/userimportexport.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/userimportexport/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/userimportexport/changelog.html" latest="2.2.0" author="Ryan Graham" minServerVersion="3.3.0" fileSize="286832"/><plugin name="Email Listener" description="Listens for emails and sends alerts to specific users." url="http://www.igniterealtime.org/projects/openfire/plugins/emailListener.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/emaillistener.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/emaillistener/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/emaillistener/changelog.html" latest="1.0.0" author="Jive Software" minServerVersion="3.4.3" fileSize="13141"/><plugin name="Broad"
+2011.01.23 19:58:19 << "cast" description="Broadcasts messages to users." url="http://www.igniterealtime.org/projects/openfire/plugins/broadcast.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/broadcast.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/broadcast/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/broadcast/changelog.html" latest="1.7.0" author="Jive Software" minServerVersion="3.4.1" fileSize="20167"/><plugin name="MotD (Message of the Day)" description="Allows admins to have a message sent to users each time they log in." url="http://www.igniterealtime.org/projects/openfire/plugins/motd.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/motd.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/motd/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/motd/changelog.html" latest="1.0.4" author="Ryan Graham" minServerVersion="3.5.0" fileSize="12192"/><plugin name="Fastpath Webchat" description="Web based chat client for Fastpath." url="http://www.igniterealtime.org/projects/openfire/plugins/webchat.war" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/webchat.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/webchat/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/webchat/changelog.html" latest="4.0.0" author="Jive Software" minServerVersion="3.5.0" fileSize="2231993"/><plugin name="User Service" description="Allows administration of users via HTTP requests." url="http://www.igniterealtime.org/projects/openfire/plugins/userservice.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/userservice.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/userservice/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/userservice/changelog.html" latest="1.3.0" author="Justin Hunt" minServerVersion="3.3.0" fileSize="14497"/><plugin name="Presence Service" description="Exposes presence information through HTTP." url="http://www.igniterealtime.org/projects/openfire/plugins/presence.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/presence.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/presence/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/presence/changelog.html" latest="1.4.0" author="Jive Software" minServerVersion="3.3.0" fileSize="17954"/><plugin name="Asterisk-IM Openfire Plugin" description="Integration for Asterisk and Openfire." url="http://www.igniterealtime.org/projects/openfire/plugins/asterisk-im.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/asterisk-im.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/asterisk-im/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/asterisk-im/changelog.html" latest="1.4.0" author="Jive Software" minServerVersion="3.4.1" fileSize="436202"/><plugin name="Packet Filter" description="Rules to enforce ethical communication" url="http://www.igniterealtime.org/projects/openfire/plugins/packetFilter.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/packetfilter.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/packetfilter/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/packetfilter/changelog.html" latest="2.0.2" author="Nate Putnam" minServerVersion="3.5.0" fileSize="59103"/><plugin name="Fastpath Service" description="Support for managed queued chat requests, such as a support team might use." url="http://www.igniterealtime.org/projects/openfire/plugins/fastpath.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/fastpath.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/fastpath/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/fastpath/changelog.html" latest="4.1.0" author="Jive Software" minServerVersion="3.6.0" fileSize="414972"/><plugin n"
+2011.01.23 19:58:19 << "ame="Subscription" description="Automatically accepts or rejects subsription requests" url="http://www.igniterealtime.org/projects/openfire/plugins/subscription.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/subscription.gif" readme="http://www.igniterealtim"
+2011.01.23 19:58:19 << "e.org/projects/openfire/plugins/subscription/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/subscription/changelog.html" latest="1.2.0" author="Ryan Graham" minServerVersion="3.3.0" fileSize="14544"/><plugin name="Search" description="Provides support for Jabber Search (XEP-0055)" url="http://www.igniterealtime.org/projects/openfire/plugins/search.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/search.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/search/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/search/changelog.html" latest="1.4.3" author="Ryan Graham" minServerVersion="3.5.0" fileSize="29898"/><plugin name="Monitoring Service" description="Monitors conversations and statistics of the server." url="http://www.igniterealtime.org/projects/openfire/plugins/monitoring.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/monitoring.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/monitoring/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/p"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "4"
+2011.01.23 19:58:19 << "8"
+2011.01.23 19:58:19 << "3"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "lugins/monitoring/changelog.html" latest="1.1.1" author="Jive Software" minServerVersion="3.6.0" fileSize="1527382"/><plugin name="Clustering Plugin" description="Clustering support for Openfire." url="http://www.igniterealtime.org/projects/openfire/plugins/clustering.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/clustering.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/clustering/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/clustering/changelog.html" latest="1.2.0" author="Jive Software" minServerVersion="3.5.2" fileSize="59779"/><plugin name="Content Filter" description="Scans message packets for defined patterns" url="http://www.igniterealtime.org/projects/openfire/plugins/contentFilter.jar" icon="http://www.igniterealtime.org/projects/openfire/plugins/cache/contentfilter.gif" readme="http://www.igniterealtime.org/projects/openfire/plugins/contentfilter/readme.html" changelog="http://www.igniterealtime.org/projects/openfire/plugins/contentfilter/changelog.html" latest="1.5.0" author="Conor Hayes" minServerVersion="3.3.0" fileSize="17422"/></available>[\n]"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "0"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\r]"
+2011.01.23 19:58:19 << "[\n]"
+2011.01.23 19:58:19 << "[\r][\n]"
+2011.01.23 19:58:19 Resorting to protocol version default close connection policy
+2011.01.23 19:58:19 Should NOT close connection, using HTTP/1.1
+2011.01.23 19:58:19 Releasing connection back to connection manager.
+2011.01.23 19:58:19 Default charset used: ISO-8859-1
+2011.01.23 19:58:19 DefaultAdminProvider: Property was set: update.lastCheck
+2011.01.23 19:58:23 JettyLog: resume continuation RetryContinuation@7578460,pending,expired
+2011.01.23 20:39:03 JettyLog: continuation still pending {}
+2011.01.23 20:39:03 JettyLog: continuation RetryContinuation@7578460
+2011.01.23 20:39:03 JettyLog: EXCEPTION 
+java.io.IOException: An established connection was aborted by the software in your host machine
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.read(Unknown Source)
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source)
+	at org.mortbay.io.nio.ChannelEndPoint.fill(ChannelEndPoint.java:122)
+	at org.mortbay.jetty.HttpParser.parseNext(HttpParser.java:282)
+	at org.mortbay.jetty.HttpParser.parseAvailable(HttpParser.java:205)
+	at org.mortbay.jetty.HttpConnection.handle(HttpConnection.java:380)
+	at org.mortbay.io.nio.SelectChannelEndPoint.run(SelectChannelEndPoint.java:395)
+	at org.mortbay.thread.QueuedThreadPool$PoolThread.run(QueuedThreadPool.java:488)
+2011.01.23 20:39:03 JettyLog: EOF
+2011.01.23 20:39:03 JettyLog: continuation RetryContinuation@7578460
+2011.01.23 20:39:31 ConnectionHandler: 
+java.io.IOException: An existing connection was forcibly closed by the remote host
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.read(Unknown Source)
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.read(SocketIoProcessor.java:218)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.process(SocketIoProcessor.java:198)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.access$400(SocketIoProcessor.java:45)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor$Worker.run(SocketIoProcessor.java:485)
+	at org.apache.mina.util.NamePreservingRunnable.run(NamePreservingRunnable.java:51)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.23 20:39:31 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LdapManager: Starting LDAP search...
+2011.01.23 20:39:31 LdapManager: ... search finished
+2011.01.23 20:39:31 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LdapManager: Starting LDAP search...
+2011.01.23 20:39:31 LdapManager: ... search finished
+2011.01.23 20:39:31 Trying to find group names for user: uicds@clash.saic.com using query: (&(&(cn=*)(&(cn=*)(objectClass=groupOfUniqueNames)))(uniqueMember=cn="uicds",ou="users",dc="uicds",dc="us"))
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LdapManager: Starting LDAP search...
+2011.01.23 20:39:31 LdapManager: ... search finished
+2011.01.23 20:39:31 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LdapManager: Starting LDAP search...
+2011.01.23 20:39:31 LdapManager: ... search finished
+2011.01.23 20:39:31 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:31 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:31 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:31 LocalOutgoingServerSession: OS - Trying to connect to danzig.saic.com:5269(DNS lookup: danzig.saic.com:5269)
+2011.01.23 20:39:31 LocalOutgoingServerSession: OS - Trying to connect to saic.com:5269(DNS lookup: saic.com:5269)
+2011.01.23 20:39:31 RoutingTableImpl: Failed to route packet to JID: uicds@clash.saic.com/CoreConnection packet: 
+<presence to="uicds@clash.saic.com/CoreConnection" from="uicds@danzig.saic.com" type="error">
+  <error code="404" type="cancel">
+    <remote-server-not-found xmlns="urn:ietf:params:xml:ns:xmpp-stanzas"/>
+  </error>
+</presence>
+2011.01.23 20:39:31 OutgoingSessionPromise: Error sending packet to remote server: 
+<presence type="unavailable" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com"/>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.23 20:39:41 NIOConnection: startTLS: using c2s
+2011.01.23 20:39:41 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:41 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:41 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:41 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:41 LdapManager: Starting LDAP search...
+2011.01.23 20:39:41 LdapManager: ... search finished
+2011.01.23 20:39:41 LdapManager: In LdapManager.checkAuthentication(userDN, password), userDN is: cn="uicds",ou="users"...
+2011.01.23 20:39:41 LdapManager: Created context values, attempting to create context...
+2011.01.23 20:39:41 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:41 AuthorizationManager: Trying Default Mapping.map(uicds)
+2011.01.23 20:39:41 DefaultAuthorizationMapping: No realm found
+2011.01.23 20:39:41 AuthorizationManager: Trying Default Policy.authorize(uicds , uicds)
+2011.01.23 20:39:41 DefaultAuthorizationPolicy: Checking authenID realm
+2011.01.23 20:39:41 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:41 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:41 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:41 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:41 LdapManager: Starting LDAP search...
+2011.01.23 20:39:41 LdapManager: ... search finished
+2011.01.23 20:39:41 LdapManager: Trying to find a user's DN based on their username. cn: uicds, Base DN: dc="uicds",dc="us"...
+2011.01.23 20:39:41 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:41 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:41 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:41 LdapManager: Starting LDAP search...
+2011.01.23 20:39:41 LdapManager: ... search finished
+2011.01.23 20:39:41 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.23 20:39:41 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.23 20:39:41 LdapManager: ... context created successfully, returning.
+2011.01.23 20:39:41 LocalOutgoingServerSession: OS - Trying to connect to danzig.saic.com:5269(DNS lookup: danzig.saic.com:5269)
+2011.01.23 20:39:41 LocalOutgoingServerSession: OS - Trying to connect to saic.com:5269(DNS lookup: saic.com:5269)
+2011.01.23 20:39:41 OutgoingSessionPromise: Error sending packet to remote server: 
+<presence id="jLIJ3-14" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com"/>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.23 20:39:41 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<presence type="probe" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com"/>
+2011.01.26 06:27:44 Trying to find group names for user: uicds@clash.saic.com using query: (&(&(cn=*)(&(cn=*)(objectClass=groupOfUniqueNames)))(uniqueMember=cn="uicds",ou="users",dc="uicds",dc="us"))
+2011.01.26 06:27:44 LdapManager: Creating a DirContext in LdapManager.getContext()...
+2011.01.26 06:27:44 LdapManager: Created hashtable with context values, attempting to create context...
+2011.01.26 06:27:44 LdapManager: ... context created successfully, returning.
+2011.01.26 06:27:48 LocalOutgoingServerSession: OS - Trying to connect to danzig.saic.com:5269(DNS lookup: danzig.saic.com:5269)
+2011.01.26 06:28:13 LocalOutgoingServerSession: OS - Trying to connect to saic.com:5269(DNS lookup: saic.com:5269)
+2011.01.26 06:28:34 OutgoingSessionPromise: Error sending packet to remote server: 
+<presence id="V3e9U-3" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com"/>
+java.lang.Exception: Failed to create connection to remote server
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.sendPacket(OutgoingSessionPromise.java:252)
+	at org.jivesoftware.openfire.server.OutgoingSessionPromise$PacketsProcessor.run(OutgoingSessionPromise.java:216)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)
+2011.01.26 06:28:34 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<presence type="probe" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com"/>
+2011.01.26 06:28:34 OutgoingSessionPromise: Error sending packet to remote server (fast discard): 
+<presence id="V3e9U-4" from="uicds@clash.saic.com/CoreConnection" to="uicds@danzig.saic.com">
+  <priority>77</priority>
+</presence>
+2011.01.26 11:24:27 ConnectionHandler: 
+java.io.IOException: An existing connection was forcibly closed by the remote host
+	at sun.nio.ch.SocketDispatcher.read0(Native Method)
+	at sun.nio.ch.SocketDispatcher.read(Unknown Source)
+	at sun.nio.ch.IOUtil.readIntoNativeBuffer(Unknown Source)
+	at sun.nio.ch.IOUtil.read(Unknown Source)
+	at sun.nio.ch.SocketChannelImpl.read(Unknown Source)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.read(SocketIoProcessor.java:218)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.process(SocketIoProcessor.java:198)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor.access$400(SocketIoProcessor.java:45)
+	at org.apache.mina.transport.socket.nio.SocketIoProcessor$Worker.run(SocketIoProcessor.java:485)
+	at org.apache.mina.util.NamePreservingRunnable.run(NamePreservingRunnable.java:51)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.runTask(Unknown Source)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.lang.Thread.run(Unknown Source)

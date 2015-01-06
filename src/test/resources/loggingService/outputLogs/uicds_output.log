@@ -1,0 +1,42 @@
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-20">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Jan 01 08:02:38 EST 1970]
+[Status:NORMAL-NORMAL]
+[Message=Initializing DatabaseManager]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-20">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Jan 01 08:02:47 EST 1970]
+[Status:NORMAL-NORMAL]
+[Message=Instantiating RosterManger]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-26">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Jan 01 08:02:38 EST 1970]
+[Status:NORMAL-NORMAL]
+[Message=Initializing DatabaseManager]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-26">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Jan 01 08:02:47 EST 1970]
+[Status:NORMAL-NORMAL]
+[Message=Instantiating RosterManger]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-0">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Mar 24 00:02:18 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\uicds_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-7">
+<log4j:message><![CDATA[[Component=uicds]
+[Time=Thu Mar 24 00:02:22 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+

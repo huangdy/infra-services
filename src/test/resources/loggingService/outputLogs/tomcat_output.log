@@ -1,0 +1,105 @@
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-21">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:01:05 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Initialization processed in 28162169 ms]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-21">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:01:13 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Deploying configuration descriptor uicds.xml]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-21">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:58:34 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\UICDS\Server\Tomcat\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Roxio Shared\DLLShared\;C:\Program Files\Common Files\Roxio Shared\9.0\DLLShared\;C:\Program Files\QuickTime\QTSystem\]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-21">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:59:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Starting Coyote HTTP/1.1 on http-80]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-21">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:59:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Starting Coyote HTTP/1.1 on http-443]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-25">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:01:05 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Initialization processed in 28162169 ms]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-25">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:01:13 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Deploying configuration descriptor uicds.xml]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-25">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:58:34 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\UICDS\Server\Tomcat\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Roxio Shared\DLLShared\;C:\Program Files\Common Files\Roxio Shared\9.0\DLLShared\;C:\Program Files\QuickTime\QTSystem\]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-25">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:59:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Starting Coyote HTTP/1.1 on http-80]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="Timer-25">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Wed Feb 09 08:59:06 EST 2011]
+[Status:NORMAL-NORMAL]
+[Message=Starting Coyote HTTP/1.1 on http-443]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-0">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Thu Mar 24 00:02:18 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="DEBUG" thread="Timer-7">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=Thu Mar 24 00:02:22 EDT 2011]
+[Status:NORMAL-NORMAL]
+[Message=No Event since 25000 milliseconds (No rule matched the last Event)]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="main">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=null]
+[Status:ERROR-ERROR]
+[Message=Exception in tomcat]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="main">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=null]
+[Status:ERROR-ERROR]
+[Message=Exception in tomcat]]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="C:\Users\santhosha\uicdsworkspace\uicds\core\infrastructure\services\src\test\resources\loggingService\outputLogs\tomcat_output.log" timestamp="0" sequenceNumber="0" level="ERROR" thread="main">
+<log4j:message><![CDATA[[Component=tomcat]
+[Time=null]
+[Status:ERROR-ERROR]
+[Message=Exception in tomcat]]]></log4j:message>
+</log4j:event>
+

@@ -1,0 +1,52 @@
+Feb 9, 2011 8:01:05 AM org.apache.coyote.http11.Http11Protocol init INFO: Initializing Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:01:05 AM org.apache.catalina.startup.Catalina load ERROR: Initialization processed in 28162169 ms
+Feb 9, 2011 8:01:06 AM org.apache.catalina.core.StandardService start INFO: Starting service Catalina
+Feb 9, 2011 8:01:06 AM org.apache.catalina.core.StandardEngine start DEBUG: Starting Servlet Engine: Apache Tomcat/6.0.30
+Feb 9, 2011 8:01:12 AM org.apache.catalina.startup.HostConfig deployDescriptor INFO: Deploying configuration descriptor manager.xml
+Feb 9, 2011 8:01:13 AM org.apache.catalina.startup.HostConfig deployDescriptor ERROR: Deploying configuration descriptor uicds.xml
+Feb 9, 2011 8:01:33 AM org.apache.catalina.loader.WebappClassLoader validateJarFile INFO: validateJarFile(C:\UICDS\Server\Tomcat\..\..\ServerApps\uicds\WEB-INF\lib\servlet-api-2.4.jar) - jar not loaded. See Servlet Spec 2.3, section 9.7.2. Offending class: javax/servlet/Servlet.class
+Feb 9, 2011 8:03:02 AM org.apache.catalina.startup.HostConfig deployDirectory INFO: Deploying web application directory docs
+Feb 9, 2011 8:03:02 AM org.apache.coyote.http11.Http11Protocol start INFO: Starting Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:03:02 AM org.apache.coyote.http11.Http11Protocol start INFO: Starting Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:03:03 AM org.apache.jk.common.ChannelSocket init INFO: JK: ajp13 listening on /0.0.0.0:8009
+Feb 9, 2011 8:03:03 AM org.apache.jk.server.JkMain start INFO: Jk running ID=0 time=0/838  config=null
+Feb 9, 2011 8:03:03 AM org.apache.catalina.startup.Catalina start INFO: Server startup in 116903 ms
+Feb 9, 2011 8:54:41 AM org.apache.coyote.http11.Http11Protocol pause INFO: Pausing Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:54:41 AM org.apache.coyote.http11.Http11Protocol pause INFO: Pausing Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:54:42 AM org.apache.catalina.core.StandardService stop INFO: Stopping service Catalina
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads SEVERE: The web application [/uicds] appears to have started a thread named [Smack Packet Writer (0)] but has failed to stop it. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads SEVERE: The web application [/uicds] appears to have started a thread named [Smack Packet Reader (0)] but has failed to stop it. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads SEVERE: The web application [/uicds] appears to have started a thread named [Smack Keep Alive (0)] but has failed to stop it. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearReferencesThreads SEVERE: The web application [/uicds] appears to have started a thread named [Smack Listener Processor (0)] but has failed to stop it. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap SEVERE: The web application [/uicds] created a ThreadLocal with key of type [org.apache.xmlbeans.impl.schema.SchemaTypeLoaderImpl$1] (value [org.apache.xmlbeans.impl.schema.SchemaTypeLoaderImpl$1@d76d1e]) and a value of type [java.util.ArrayList] (value [[java.lang.ref.SoftReference@13ce184]]) but failed to remove it when the web application was stopped. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:42 AM org.apache.catalina.loader.WebappClassLoader clearThreadLocalMap SEVERE: The web application [/uicds] created a ThreadLocal with key of type [org.apache.xmlbeans.XmlBeans$1] (value [org.apache.xmlbeans.XmlBeans$1@1f9cdda]) and a value of type [java.lang.ref.SoftReference] (value [java.lang.ref.SoftReference@139d369]) but failed to remove it when the web application was stopped. This is very likely to create a memory leak.
+Feb 9, 2011 8:54:44 AM org.apache.coyote.http11.Http11Protocol destroy INFO: Stopping Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:54:44 AM org.apache.coyote.http11.Http11Protocol destroy INFO: Stopping Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:56:32 AM org.apache.catalina.core.AprLifecycleListener init INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\UICDS\Server\Tomcat\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Roxio Shared\DLLShared\;C:\Program Files\Common Files\Roxio Shared\9.0\DLLShared\;C:\Program Files\QuickTime\QTSystem\
+Feb 9, 2011 8:56:32 AM org.apache.tomcat.util.digester.SetPropertiesRule begin WARNING: [SetPropertiesRule]{Server/Service/Engine/Realm} Setting property 'debug' to '99' did not find a matching property.
+Feb 9, 2011 8:56:32 AM org.apache.tomcat.util.digester.SetPropertiesRule begin WARNING: [SetPropertiesRule]{Server/Service/Engine/Host/Context} Setting property 'debug' to 'true' did not find a matching property.
+Feb 9, 2011 8:56:32 AM org.apache.coyote.http11.Http11Protocol init INFO: Initializing Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:56:33 AM org.apache.coyote.http11.Http11Protocol init INFO: Initializing Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:56:33 AM org.apache.catalina.startup.Catalina load INFO: Initialization processed in 702 ms
+Feb 9, 2011 8:56:33 AM org.apache.catalina.core.StandardService start INFO: Starting service Catalina
+Feb 9, 2011 8:56:33 AM org.apache.catalina.core.StandardEngine start INFO: Starting Servlet Engine: Apache Tomcat/6.0.30
+Feb 9, 2011 8:56:33 AM org.apache.catalina.startup.HostConfig deployDescriptor INFO: Deploying configuration descriptor manager.xml
+Feb 9, 2011 8:56:33 AM org.apache.catalina.startup.HostConfig deployDescriptor INFO: Deploying configuration descriptor uicds.xml
+Feb 9, 2011 8:56:36 AM org.apache.catalina.loader.WebappClassLoader validateJarFile INFO: validateJarFile(C:\UICDS\Server\Tomcat\..\..\ServerApps\uicds\WEB-INF\lib\servlet-api-2.4.jar) - jar not loaded. See Servlet Spec 2.3, section 9.7.2. Offending class: javax/servlet/Servlet.class
+Feb 9, 2011 8:58:34 AM org.apache.catalina.core.AprLifecycleListener init ERROR: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: C:\UICDS\Server\Tomcat\bin;.;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Program Files\Common Files\Roxio Shared\DLLShared\;C:\Program Files\Common Files\Roxio Shared\9.0\DLLShared\;C:\Program Files\QuickTime\QTSystem\
+Feb 9, 2011 8:58:34 AM org.apache.tomcat.util.digester.SetPropertiesRule begin WARNING: [SetPropertiesRule]{Server/Service/Engine/Realm} Setting property 'debug' to '99' did not find a matching property.
+Feb 9, 2011 8:58:34 AM org.apache.tomcat.util.digester.SetPropertiesRule begin WARNING: [SetPropertiesRule]{Server/Service/Engine/Host/Context} Setting property 'debug' to 'true' did not find a matching property.
+Feb 9, 2011 8:58:34 AM org.apache.coyote.http11.Http11Protocol init INFO: Initializing Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:58:35 AM org.apache.coyote.http11.Http11Protocol init INFO: Initializing Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:58:35 AM org.apache.catalina.startup.Catalina load INFO: Initialization processed in 706 ms
+Feb 9, 2011 8:58:35 AM org.apache.catalina.core.StandardService start INFO: Starting service Catalina
+Feb 9, 2011 8:58:35 AM org.apache.catalina.core.StandardEngine start INFO: Starting Servlet Engine: Apache Tomcat/6.0.30
+Feb 9, 2011 8:58:35 AM org.apache.catalina.startup.HostConfig deployDescriptor INFO: Deploying configuration descriptor manager.xml
+Feb 9, 2011 8:58:35 AM org.apache.catalina.startup.HostConfig deployDescriptor INFO: Deploying configuration descriptor uicds.xml
+Feb 9, 2011 8:58:35 AM org.apache.catalina.loader.WebappClassLoader validateJarFile INFO: validateJarFile(C:\UICDS\Server\Tomcat\..\..\ServerApps\uicds\WEB-INF\lib\servlet-api-2.4.jar) - jar not loaded. See Servlet Spec 2.3, section 9.7.2. Offending class: javax/servlet/Servlet.class
+Feb 9, 2011 8:59:06 AM org.apache.catalina.startup.HostConfig deployDirectory INFO: Deploying web application directory docs
+Feb 9, 2011 8:59:06 AM org.apache.coyote.http11.Http11Protocol start ERROR: Starting Coyote HTTP/1.1 on http-80
+Feb 9, 2011 8:59:06 AM org.apache.coyote.http11.Http11Protocol start ERROR: Starting Coyote HTTP/1.1 on http-443
+Feb 9, 2011 8:59:06 AM org.apache.jk.common.ChannelSocket init INFO: JK: ajp13 listening on /0.0.0.0:8009
+Feb 9, 2011 8:59:06 AM org.apache.jk.server.JkMain start INFO: Jk running ID=0 time=0/16  config=null
+Feb 9, 2011 8:59:06 AM org.apache.catalina.startup.Catalina start INFO: Server startup in 31440 ms

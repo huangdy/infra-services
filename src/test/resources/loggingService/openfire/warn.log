@@ -1,0 +1,74 @@
+2010.10.28 12:50:30 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.10.28 12:50:30 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.02 10:54:13 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.02 10:54:13 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.04 10:54:13 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.04 10:54:13 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.08 14:43:56 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.08 14:43:56 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.10 14:43:57 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.10 14:43:57 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.13 09:17:32 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.13 09:17:32 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.15 09:22:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.15 09:22:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.17 09:22:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.17 09:22:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.19 09:22:45 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.19 09:22:45 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.26 16:05:35 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.26 16:05:35 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.29 08:30:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.11.29 08:30:44 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.01 09:31:30 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.01 09:31:30 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.03 13:18:27 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.03 13:18:27 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.03 15:34:04 Unexpected packet tag (not message,iq,presence)<stream:error xmlns:stream="http://etherx.jabber.org/streams"><system-shutdown xmlns="urn:ietf:params:xml:ns:xmpp-streams"/></stream:error>
+2010.12.05 13:18:27 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.05 13:18:28 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.07 14:38:26 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.07 14:38:27 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.09 14:38:28 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.09 14:38:28 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.13 07:45:50 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.13 07:45:50 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.15 15:27:56 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.15 15:27:56 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.22 07:36:37 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2010.12.22 07:36:37 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.04 13:54:26 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.04 13:54:26 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.04 21:00:14 TLS was required by the server and connection was never secured. Closing connection : org.jivesoftware.openfire.nio.NIOConnection@149453c MINA Session: (SOCKET, R: /127.0.0.1:1459, L: /127.0.0.1:5222, S: 0.0.0.0/0.0.0.0:5222)
+2011.01.06 13:54:26 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.06 13:54:26 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.11 08:24:43 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.11 08:24:43 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.13 10:53:16 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.13 10:53:16 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.15 10:53:17 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.15 10:53:17 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.17 10:53:17 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.17 10:53:17 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.21 19:58:18 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.21 19:58:18 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.22 19:08:20 Error parsing user request. [192.168.1.7]
+2011.01.22 19:11:33 Error parsing user request. [192.168.1.7]
+2011.01.22 19:11:48 Error parsing user request. [192.168.1.7]
+2011.01.23 19:58:19 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.23 19:58:19 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.25 19:58:20 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.25 19:58:23 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.26 20:58:42 TLS was required by the server and connection was never secured. Closing connection : org.jivesoftware.openfire.nio.NIOConnection@1e12e2c MINA Session: (SOCKET, R: /127.0.0.1:4770, L: /127.0.0.1:5222, S: 0.0.0.0/0.0.0.0:5222)
+2011.01.27 19:58:24 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.27 19:58:24 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.29 19:58:25 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.01.29 19:58:25 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.01 09:34:01 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.01 09:34:01 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.03 09:34:01 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.03 09:34:01 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.08 08:44:48 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.08 08:44:48 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.24 14:11:12 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+2011.02.24 14:28:12 Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.

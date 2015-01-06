@@ -1,0 +1,701 @@
+2011-01-24 12:19:06,178 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Incident'... 
+2011-01-24 12:19:06,178 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Incident' took 422 
+2011-01-24 12:19:06,178 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/ICS'... 
+2011-01-24 12:19:06,178 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f'... 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 40 items to remove. 
+2011-01-24 12:19:06,225 [main] ERROR (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,225 [main] INFO (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f 
+2011-01-24 12:19:06,225 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,225 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,225 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f' from its parent... 
+2011-01-24 12:19:06,225 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,225 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f'... 
+2011-01-24 12:19:06,257 [main] INFO (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-a1e11337-357c-47ce-8388-c0d060d1e24f' took 79 
+2011-01-24 12:19:06,257 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b'... 
+2011-01-24 12:19:06,350 [main] DEBUG (DefaultCacheManager.java [requestMem]:189) - Growing cache elements.dbx (a org.exist.storage.cache.LRDCache) from 486 to 729 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 40 items to remove. 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,350 [main] ERROR (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b 
+2011-01-24 12:19:06,350 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,350 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,350 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b' from its parent... 
+2011-01-24 12:19:06,350 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,350 [main] ERROR (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b'... 
+2011-01-24 12:19:06,382 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-dd328a82-fedf-4071-b23d-924312485c1b' took 125 
+2011-01-24 12:19:06,382 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7'... 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 40 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7 
+2011-01-24 12:19:06,428 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,428 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7' from its parent... 
+2011-01-24 12:19:06,428 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,428 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7'... 
+2011-01-24 12:19:06,491 [main] DEBUG (DefaultCacheManager.java [requestMem]:189) - Growing cache dom.dbx (a org.exist.storage.cache.LRDCache) from 216 to 324 
+2011-01-24 12:19:06,491 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-0a430800-4839-4143-8ed9-f6c11a99bad7' took 109 
+2011-01-24 12:19:06,491 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b'... 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 40 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b 
+2011-01-24 12:19:06,507 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,507 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b' from its parent... 
+2011-01-24 12:19:06,507 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,507 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b'... 
+2011-01-24 12:19:06,553 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/ICS/ICS-013a6b89-a509-4a4d-abb9-a9098effef8b' took 62 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/ICS 
+2011-01-24 12:19:06,569 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,569 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/ICS 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/ICS' from its parent... 
+2011-01-24 12:19:06,569 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,569 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/ICS'... 
+2011-01-24 12:19:06,569 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/ICS' took 391 
+2011-01-24 12:19:06,569 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/MapViewContext'... 
+2011-01-24 12:19:06,569 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30'... 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 62 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30 
+2011-01-24 12:19:06,647 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,647 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30' from its parent... 
+2011-01-24 12:19:06,647 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,647 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30'... 
+2011-01-24 12:19:06,663 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-d5a237f8-f87a-4306-9b8c-e8d592fb9b30' took 94 
+2011-01-24 12:19:06,663 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3'... 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 62 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3 
+2011-01-24 12:19:06,725 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,725 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,725 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3' from its parent... 
+2011-01-24 12:19:06,725 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:19:06,741 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3'... 
+2011-01-24 12:19:06,788 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/MapViewContext/MapViewContext-82917d46-7a02-471f-8f7a-98b4224dfde3' took 125 
+2011-01-24 12:19:06,788 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,788 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,788 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,788 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,788 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,788 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/MapViewContext 
+2011-01-24 12:19:06,803 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,803 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/MapViewContext 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/MapViewContext' from its parent... 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/MapViewContext'... 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/MapViewContext' took 234 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts 
+2011-01-24 12:19:06,803 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:19:06,803 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts' from its parent... 
+2011-01-24 12:19:06,803 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts'... 
+2011-01-24 12:19:06,803 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts' took 14203 
+2011-01-24 12:19:06,803 [main] INFO  (BrokerPool.java [shutdown]:1506) - Database is shutting down ... 
+2011-01-24 12:19:06,803 [main] DEBUG (NotificationService.java [debug]:76) - Registered UpdateListeners: 
+2011-01-24 12:19:06,803 [main] DEBUG (BrokerPool.java [shutdown]:1571) - Calling shutdown ... 
+2011-01-24 12:19:06,803 [main] DEBUG (NGramIndex.java [close]:81) - SYNC NGRAM 
+2011-01-24 12:19:06,866 [main] DEBUG (NGramIndex.java [sync]:86) - SYNC NGRAM 
+2011-01-24 12:19:06,866 [main] INFO  (NativeBroker.java [sync]:3191) - Memory: 130,112K total; 520,256K max; 121,981K free 
+2011-01-24 12:19:06,866 [main] INFO  (BTree.java [printStatistics]:2348) - dom.dbx INDEX Buffers occupation : 100% (324 out of 324) Cache efficiency : 30% 
+2011-01-24 12:19:06,866 [main] INFO  (DOMFile.java [printStatistics]:1434) - dom.dbx DATA Buffers occupation : 0% (1 out of 256) Cache efficiency : 70% 
+2011-01-24 12:19:06,866 [main] INFO  (BTree.java [printStatistics]:2348) - collections.dbx INDEX Buffers occupation : 55% (35 out of 64) Cache efficiency : 98% 
+2011-01-24 12:19:06,866 [main] INFO  (BFile.java [printStatistics]:427) - collections.dbx DATA Buffers occupation : 9% (6 out of 64) Cache efficiency : 99% 
+2011-01-24 12:19:06,866 [main] INFO  (BTree.java [printStatistics]:2348) - elements.dbx INDEX Buffers occupation : 100% (729 out of 729) Cache efficiency : 31% 
+2011-01-24 12:19:06,866 [main] INFO  (BFile.java [printStatistics]:427) - elements.dbx DATA Buffers occupation : 2% (1 out of 64) Cache efficiency : 99% 
+2011-01-24 12:19:06,866 [main] INFO  (BTree.java [printStatistics]:2348) - values.dbx INDEX Buffers occupation : 2% (1 out of 64) Cache efficiency : 99% 
+2011-01-24 12:19:06,866 [main] INFO  (BFile.java [printStatistics]:427) - values.dbx DATA Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:19:06,882 [main] INFO  (FileLock.java [release]:175) - Deleting lock file: c:\UICDS\Server\eXist\webapp\WEB-INF\data\journal.lck 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=ProcessReport 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=DiskUsage 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist.tasks:type=SanityReport 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=Database 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=values.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=values.dbx,cache-type=DATA 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=elements.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=elements.dbx,cache-type=DATA 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=collections.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=collections.dbx,cache-type=DATA 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=dom.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=dom.dbx,cache-type=DATA 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=words.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=words.dbx,cache-type=DATA 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=ngram.dbx,cache-type=BTREE 
+2011-01-24 12:19:06,928 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager.Cache,name=ngram.dbx,cache-type=DATA 
+2011-01-24 12:19:06,944 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CollectionCacheManager 
+2011-01-24 12:19:06,944 [main] DEBUG (JMXAgent.java [closeDBInstance]:123) - deregistering JMX MBean: org.exist.management.exist:type=CacheManager 
+2011-01-24 12:19:06,944 [main] INFO  (FileLock.java [release]:175) - Deleting lock file: c:\UICDS\Server\eXist\webapp\WEB-INF\data\dbx_dir.lck 
+2011-01-24 12:19:06,944 [main] INFO  (BrokerPool.java [shutdown]:1624) - shutdown complete ! 
+2011-01-24 12:19:06,944 [main] DEBUG (BrokerPool.java [shutdown]:1630) - removing shutdown hook 
+2011-01-24 12:41:40,427 [main] DEBUG (ConfigurationHelper.java [getExistHome]:61) - Could not retieve instance of brokerpool: database instance 'exist' is not available 
+2011-01-24 12:41:40,427 [main] DEBUG (ConfigurationHelper.java [getExistHome]:68) - Got eXist home from system property 'exist.home': C:\UICDS\Server\eXist 
+2011-01-24 12:41:40,474 [main] DEBUG (ConfigurationHelper.java [getExistHome]:61) - Could not retieve instance of brokerpool: database instance 'exist' is not available 
+2011-01-24 12:41:40,474 [main] DEBUG (ConfigurationHelper.java [getExistHome]:68) - Got eXist home from system property 'exist.home': C:\UICDS\Server\eXist 
+2011-01-24 12:41:40,474 [main] DEBUG (ConfigurationHelper.java [getExistHome]:61) - Could not retieve instance of brokerpool: database instance 'exist' is not available 
+2011-01-24 12:41:40,474 [main] DEBUG (ConfigurationHelper.java [getExistHome]:68) - Got eXist home from system property 'exist.home': C:\UICDS\Server\eXist 
+2011-01-24 12:41:40,740 [main] DEBUG (ConfigurationHelper.java [getExistHome]:61) - Could not retieve instance of brokerpool: database instance 'exist' is not available 
+2011-01-24 12:41:40,740 [main] DEBUG (ConfigurationHelper.java [getExistHome]:68) - Got eXist home from system property 'exist.home': C:\UICDS\Server\eXist 
+2011-01-24 12:41:40,740 [main] INFO  (Configuration.java [<init>]:266) - Reading configuration from file C:\UICDS\Server\eXist\conf.xml 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1085) - indexer.stem: false 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1091) - indexer.store-term-freq: true 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1097) - indexer.tokenizer: org.exist.storage.analysis.SimpleTokenizer 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1103) - indexer.case-sensitive: true 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1128) - indexer.index-depth: 5 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1137) - indexer.suppress-whitespace: none 
+2011-01-24 12:41:40,865 [main] DEBUG (Configuration.java [configureIndexer]:1143) - indexer.preserve-whitespace-mixed-content: false 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:701) - database: native 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:713) - db-connection.data-dir: c:\UICDS\Server\eXist\webapp\WEB-INF\data 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:722) - db-connection.cache-size: 48m 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:734) - db-connection.collection-cache-mem: 24m 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:744) - db-connection.page-size: 4096 
+2011-01-24 12:41:40,896 [main] DEBUG (Configuration.java [configureBackend]:765) - db-connection.nodes-buffer: -1 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configureBackend]:841) - db-connection.security.class: class org.exist.security.XMLSecurityManager 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configurePool]:1030) - db-connection.pool.min: 1 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configurePool]:1040) - db-connection.pool.max: 20 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configurePool]:1050) - db-connection.pool.sync-period: 120000 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configurePool]:1060) - wait-before-shutdown: 120000 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configureXQueryPool]:985) - db-connection.query-pool.max-stack-size: 5 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configureXQueryPool]:995) - db-connection.query-pool.size: 128 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configureXQueryPool]:1005) - db-connection.query-pool.timeout: 120000 
+2011-01-24 12:41:40,912 [main] DEBUG (Configuration.java [configureXQueryPool]:1015) - db-connection.query-pool.timeout-check-interval: 30000 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureWatchdog]:960) - db-connection.watchdog.query-timeout: -1 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureWatchdog]:970) - db-connection.watchdog.output-size-limit: 1000000 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:875) - db-connection.recovery.enabled: true 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:879) - db-connection.recovery.sync-on-commit: false 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:883) - db-connection.recovery.group-commit: false 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:894) - db-connection.recovery.journal-dir: c:\UICDS\Server\eXist\webapp\WEB-INF\data 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:904) - db-connection.recovery.size-limit: 100m 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:916) - db-connection.recovery.force-restart: false 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureRecovery]:924) - db-connection.recovery.consistency-check: true 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureTransformer]:484) - transformer.class: org.apache.xalan.processor.TransformerFactoryImpl 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureTransformer]:523) - transformer.caching: true 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:534) - serialization.enable-xinclude: yes 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:540) - serialization.enable-xsl: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:546) - serialization.indent: yes 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:552) - serialization.compress-output: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:558) - serialization.add-exist-id: none 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:564) - serialization.match-tagging-elements: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureSerializer]:570) - serialization.match-tagging-attributes: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXUpdate]:468) - xupdate.fragmentation: 100 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXUpdate]:475) - xupdate.consistency-checks: false 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXQuery]:415) - xquery.enable-java-binding: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXQuery]:420) - xquery.disable-deprecated-functions: false 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXQuery]:425) - xquery.enable-query-rewriting: yes 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXQuery]:431) - xquery.backwardCompatible: no 
+2011-01-24 12:41:40,927 [main] DEBUG (Configuration.java [configureXQuery]:436) - xquery.raise-error-on-failed-retrieval: false 
+2011-01-24 12:41:41,177 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/util' implemented in 'org.exist.xquery.functions.util.UtilModule' 
+2011-01-24 12:41:41,193 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/transform' implemented in 'org.exist.xquery.functions.transform.TransformModule' 
+2011-01-24 12:41:41,365 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/xmldb' implemented in 'org.exist.xquery.functions.xmldb.XMLDBModule' 
+2011-01-24 12:41:41,568 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/request' implemented in 'org.exist.xquery.functions.request.RequestModule' 
+2011-01-24 12:41:41,584 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/response' implemented in 'org.exist.xquery.functions.response.ResponseModule' 
+2011-01-24 12:41:41,584 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/session' implemented in 'org.exist.xquery.functions.session.SessionModule' 
+2011-01-24 12:41:41,646 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/text' implemented in 'org.exist.xquery.functions.text.TextModule' 
+2011-01-24 12:41:41,662 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/examples' implemented in 'org.exist.xquery.modules.example.ExampleModule' 
+2011-01-24 12:41:41,709 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/validation' implemented in 'org.exist.xquery.functions.validation.ValidationModule' 
+2011-01-24 12:41:41,755 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/system' implemented in 'org.exist.xquery.functions.system.SystemModule' 
+2011-01-24 12:41:41,771 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/ngram' implemented in 'org.exist.xquery.modules.ngram.NGramModule' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/lucene' implemented in 'org.exist.xquery.modules.lucene.LuceneModule' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://exist-db.org/xquery/kwic' to 'resource:org/exist/xquery/lib/kwic.xql' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://exist-db.org/xquery/sequences' to 'resource:org/exist/xquery/lib/sequences.xq' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://exist-db.org/versioning' to 'resource:org/exist/versioning/xquery/versioning.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://www.json.org' to 'resource:org/exist/xquery/lib/json.xq' 
+2011-01-24 12:41:41,802 [main] WARN  (XQueryContext.java [lookupModuleClass]:2816) - Module http://exist-db.org/xquery/httpclient could not be initialized due to a missing dependancy (NoClassDefFoundError): org/apache/commons/httpclient/URIException 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/httpclient' implemented in 'org.exist.xquery.modules.httpclient.HTTPClientModule' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://www.expath.org/mod/http-client' to 'resource:org/expath/www/mod/http-client/http-client.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/const' to 'resource:net/xproc/xprocxq/src/xquery/const.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc' to 'resource:net/xproc/xprocxq/src/xquery/xproc.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/util' to 'resource:net/xproc/xprocxq/src/xquery/util.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/functions' to 'resource:net/xproc/xprocxq/src/xquery/functions.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/std' to 'resource:net/xproc/xprocxq/src/xquery/std.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/ext' to 'resource:net/xproc/xprocxq/src/xquery/ext.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/opt' to 'resource:net/xproc/xprocxq/src/xquery/opt.xqm' 
+2011-01-24 12:41:41,802 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2787) - Registered mapping for module 'http://xproc.net/xproc/naming' to 'resource:net/xproc/xprocxq/src/xquery/naming.xqm' 
+2011-01-24 12:41:41,834 [main] DEBUG (XQueryContext.java [loadModuleClasses]:2793) - Configured module 'http://exist-db.org/xquery/geom' implemented in 'org.exist.xquery.modules.geom.GeomModule' 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:363) - cluster.protocol: UDP(mcast_addr=228.1.2.3;mcast_port=45566;ip_ttl=8;ip_mcast=true;mcast_send_buf_size=800000;mcast_recv_buf_size=150000;ucast_send_buf_size=800000;ucast_recv_buf_size=150000;loopback=true):PING(timeout=2000;num_initial_members=3;up_thread=true;down_thread=true):MERGE2(min_interval=10000;max_interval=20000):FD(shun=true;up_thread=true;down_thread=true;timeout=2500;max_tries=5):VERIFY_SUSPECT(timeout=3000;num_msgs=3;up_thread=true;down_thread=true):pbcast.NAKACK(gc_lag=50;retransmit_timeout=300,600,1200,2400,4800;max_xmit_size=8192;up_thread=true;down_thread=true):UNICAST(timeout=300,600,1200,2400,4800;window_size=100;min_threshold=10;down_thread=true):pbcast.STABLE(desired_avg_gossip=20000;up_thread=true;down_thread=true):FRAG(frag_size=8192;down_thread=true;up_thread=true):pbcast.GMS(join_timeout=5000;join_retry_timeout=2000;shun=true;print_local_addr=true) 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:368) - cluster.user: admin 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:373) - cluster.pwd:  
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:378) - cluster.journalDir: webapp/WEB-INF/data/journal 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:391) - cluster.exclude: [/db/system, /db/system/config, /db/system/temp] 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:399) - cluster.journal.maxStore: 65000 
+2011-01-24 12:41:41,834 [main] DEBUG (Configuration.java [configureCluster]:406) - cluster.journal.shift: 100 
+2011-01-24 12:41:41,849 [main] INFO  (eXistURLStreamHandlerFactory.java [init]:53) - Succesfully registered eXistURLStreamHandlerFactory. 
+2011-01-24 12:41:41,849 [main] DEBUG (Configuration.java [configureValidation]:1185) - validation.mode: no 
+2011-01-24 12:41:41,849 [main] DEBUG (Configuration.java [configureValidation]:1191) - Creating eXist catalog resolver 
+2011-01-24 12:41:41,849 [main] DEBUG (eXistXMLCatalogResolver.java [<init>]:50) - Initializing 
+2011-01-24 12:41:41,849 [main] DEBUG (Configuration.java [configureValidation]:1199) - Found 1 catalog uri entries. 
+2011-01-24 12:41:41,849 [main] DEBUG (Configuration.java [configureValidation]:1200) - Using dbHome=C:\UICDS\Server\eXist 
+2011-01-24 12:41:41,849 [main] DEBUG (Configuration.java [configureValidation]:1213) - using webappHome=file:/C:/UICDS/Server/eXist/webapp/ 
+2011-01-24 12:41:41,865 [main] INFO  (Configuration.java [configureValidation]:1228) - Add catalog uri file:/C:/UICDS/Server/eXist/webapp//WEB-INF/catalog.xml 
+2011-01-24 12:41:41,865 [main] INFO  (GrammarPool.java [<init>]:53) - Initializing GrammarPool. 
+2011-01-24 12:41:41,865 [main] DEBUG (BrokerPool.java [configure]:212) - configuring database instance 'exist'... 
+2011-01-24 12:41:41,880 [main] INFO  (BrokerPool.java [<init>]:582) - database instance 'exist' will have between 1 and 20 brokers 
+2011-01-24 12:41:41,880 [main] INFO  (BrokerPool.java [<init>]:589) - database instance 'exist' will be synchronized every 120,000 ms 
+2011-01-24 12:41:41,880 [main] INFO  (BrokerPool.java [<init>]:596) - database instance 'exist' will wait  120,000 ms during shutdown 
+2011-01-24 12:41:41,880 [main] INFO  (BrokerPool.java [<init>]:602) - database instance 'exist' is enabled for transactions : true 
+2011-01-24 12:41:42,459 [main] DEBUG (BrokerPool.java [<init>]:649) - isReadOnly: false 
+2011-01-24 12:41:42,459 [main] DEBUG (BrokerPool.java [initialize]:722) - initializing database instance 'exist'... 
+2011-01-24 12:41:42,474 [main] INFO  (DefaultCacheManager.java [<init>]:141) - Cache settings: 49,152k; totalPages: 12,288; maxCacheSize: 11,059 
+2011-01-24 12:41:42,505 [main] DEBUG (JMXAgent.java [<init>]:66) - Creating the JMX MBeanServer. 
+2011-01-24 12:41:42,615 [main] INFO  (XQueryPool.java [<init>]:112) - QueryPool: size = 128; maxStackSize = 5; timeout = 120,000; timeoutCheckInterval = 30,000 
+2011-01-24 12:41:42,662 [main] DEBUG (CollectionCacheManager.java [<init>]:51) - collection collectionCache will be using 25165824 bytes max. 
+2011-01-24 12:41:42,662 [main] DEBUG (BrokerPool.java [initialize]:752) - Reserved memory: 182045900; max: 532742144; min: 106548428 
+2011-01-24 12:41:42,677 [main] DEBUG (Journal.java [<init>]:163) - SyncOnCommit = false 
+2011-01-24 12:41:42,677 [main] DEBUG (Journal.java [<init>]:192) - Using directory for the journal: c:\UICDS\Server\eXist\webapp\WEB-INF\data 
+2011-01-24 12:41:42,677 [main] DEBUG (TransactionManager.java [<init>]:96) - GroupCommits = false 
+2011-01-24 12:41:42,677 [main] DEBUG (TransactionManager.java [<init>]:102) - ForceRestart = false 
+2011-01-24 12:41:43,115 [main] DEBUG (NGramIndex.java [open]:77) - Created NGram index: c:\UICDS\Server\eXist\webapp\WEB-INF\data\ngram.dbx 
+2011-01-24 12:41:43,115 [main] INFO  (IndexManager.java [<init>]:89) - Registered index org.exist.indexing.ngram.NGramIndex as ngram-index 
+2011-01-24 12:41:43,146 [main] DEBUG (LuceneIndex.java [configure]:49) - Configuring Lucene index 
+2011-01-24 12:41:43,146 [main] DEBUG (LuceneIndex.java [configure]:60) - Using buffer size: 32.0 
+2011-01-24 12:41:43,177 [main] DEBUG (LuceneIndex.java [configure]:71) - Using default analyzer: org.apache.lucene.analysis.standard.StandardAnalyzer 
+2011-01-24 12:41:43,177 [main] DEBUG (LuceneIndex.java [open]:77) - Opening Lucene index directory: c:\UICDS\Server\eXist\webapp\WEB-INF\data\lucene 
+2011-01-24 12:41:43,427 [main] INFO  (IndexManager.java [<init>]:89) - Registered index org.exist.indexing.lucene.LuceneIndex as lucene-index 
+2011-01-24 12:41:43,443 [main] DEBUG (FTIndex.java [open]:75) - Creating 'words.dbx'... 
+2011-01-24 12:41:43,474 [main] INFO  (IndexManager.java [<init>]:89) - Registered index org.exist.fulltext.FTIndex as ft-legacy-index 
+2011-01-24 12:41:43,927 [main] DEBUG (TextSearchEngine.java [<init>]:111) - using tokenizer: org.exist.storage.analysis.SimpleTokenizer 
+2011-01-24 12:41:43,943 [main] DEBUG (NativeBroker.java [<init>]:201) - Initializing broker 19098837 
+2011-01-24 12:41:43,990 [main] DEBUG (TransformerFactoryAllocator.java [getTransformerFactory]:101) - Set transformer factory: org.apache.xalan.processor.TransformerFactoryImpl 
+2011-01-24 12:41:44,052 [main] DEBUG (NativeElementIndex.java [<init>]:118) - Creating 'elements.dbx'... 
+2011-01-24 12:41:44,084 [main] DEBUG (NativeValueIndex.java [<init>]:156) - Creating 'values.dbx'... 
+2011-01-24 12:41:44,099 [main] DEBUG (BrokerPool.java [createBroker]:1203) - created broker 'org.exist.storage.NativeBroker_exist_1 for database instance 'exist' 
+2011-01-24 12:41:44,177 [main] DEBUG (RecoveryManager.java [recover]:98) - Database is in clean state. Last checkpoint: Jan 24, 2011 12:37:59 PM 
+2011-01-24 12:41:44,177 [main] DEBUG (Journal.java [switchFiles]:383) - Creating new journal: c:\UICDS\Server\eXist\webapp\WEB-INF\data\00000000c4.log 
+2011-01-24 12:41:44,490 [main] DEBUG (XMLSecurityManager.java [attach]:142) - loading acl 
+2011-01-24 12:41:44,568 [main] DEBUG (NGramIndex.java [sync]:86) - SYNC NGRAM 
+2011-01-24 12:41:44,568 [main] INFO  (NativeBroker.java [sync]:3191) - Memory: 130,112K total; 520,256K max; 121,238K free 
+2011-01-24 12:41:44,568 [main] INFO  (BTree.java [printStatistics]:2348) - dom.dbx INDEX Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:41:44,568 [main] INFO  (DOMFile.java [printStatistics]:1434) - dom.dbx DATA Buffers occupation : 0% (1 out of 256) Cache efficiency : 99% 
+2011-01-24 12:41:44,568 [main] INFO  (BTree.java [printStatistics]:2348) - collections.dbx INDEX Buffers occupation : 5% (3 out of 64) Cache efficiency : 83% 
+2011-01-24 12:41:44,568 [main] INFO  (BFile.java [printStatistics]:427) - collections.dbx DATA Buffers occupation : 2% (1 out of 64) Cache efficiency : 83% 
+2011-01-24 12:41:44,568 [main] INFO  (BTree.java [printStatistics]:2348) - elements.dbx INDEX Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:41:44,568 [main] INFO  (BFile.java [printStatistics]:427) - elements.dbx DATA Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:41:44,568 [main] INFO  (BTree.java [printStatistics]:2348) - values.dbx INDEX Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:41:44,568 [main] INFO  (BFile.java [printStatistics]:427) - values.dbx DATA Buffers occupation : 0% (0 out of 64) Cache efficiency : N/A 
+2011-01-24 12:41:44,568 [main] DEBUG (Journal.java [checkpoint]:318) - Checkpoint reached 
+2011-01-24 12:41:44,599 [main] DEBUG (NotificationService.java [debug]:76) - Registered UpdateListeners: 
+2011-01-24 12:41:44,709 [main] DEBUG (BrokerPool.java [initialize]:883) - database instance 'exist' initialized 
+2011-01-24 12:41:44,709 [main] DEBUG (BrokerPool.java [configure]:228) - shutdown hook registered 
+2011-01-24 12:41:44,834 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts'... 
+2011-01-24 12:41:44,849 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert'... 
+2011-01-24 12:41:44,849 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3'... 
+2011-01-24 12:41:45,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:45,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,349 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3 
+2011-01-24 12:41:45,365 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:45,365 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3 
+2011-01-24 12:41:45,365 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,365 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3' from its parent... 
+2011-01-24 12:41:45,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:45,396 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3'... 
+2011-01-24 12:41:45,521 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a51230bb-7efd-47d7-95b4-e13fa83992b3' took 672 
+2011-01-24 12:41:45,521 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b'... 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b 
+2011-01-24 12:41:45,568 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:45,568 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b' from its parent... 
+2011-01-24 12:41:45,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:45,568 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b'... 
+2011-01-24 12:41:45,631 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-cd6a2234-3926-42e4-99fa-06f71eff197b' took 110 
+2011-01-24 12:41:45,631 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303'... 
+2011-01-24 12:41:45,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:45,709 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,709 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,709 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,709 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,709 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303 
+2011-01-24 12:41:45,724 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:45,724 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303 
+2011-01-24 12:41:45,724 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,724 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303' from its parent... 
+2011-01-24 12:41:45,724 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:45,724 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303'... 
+2011-01-24 12:41:45,771 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-257d9826-d325-4b2e-ad23-356463f8b303' took 140 
+2011-01-24 12:41:45,787 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b'... 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b 
+2011-01-24 12:41:45,802 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:45,802 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b 
+2011-01-24 12:41:45,802 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:45,802 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b' from its parent... 
+2011-01-24 12:41:45,818 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:45,818 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b'... 
+2011-01-24 12:41:45,834 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-4336fd71-1b11-4eb0-bdba-aab8a2d0959b' took 47 
+2011-01-24 12:41:45,834 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b'... 
+2011-01-24 12:41:45,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b 
+2011-01-24 12:41:46,006 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,006 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b' from its parent... 
+2011-01-24 12:41:46,006 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,006 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b'... 
+2011-01-24 12:41:46,146 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-6ed247a9-cba0-4d82-9651-656fb05c696b' took 312 
+2011-01-24 12:41:46,146 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890'... 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890 
+2011-01-24 12:41:46,209 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,209 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890' from its parent... 
+2011-01-24 12:41:46,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,209 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890'... 
+2011-01-24 12:41:46,256 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-5485a32d-f401-4fda-b69c-188e0de46890' took 110 
+2011-01-24 12:41:46,256 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e'... 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e 
+2011-01-24 12:41:46,287 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,287 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e' from its parent... 
+2011-01-24 12:41:46,287 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,287 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e'... 
+2011-01-24 12:41:46,318 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-60c2172d-1d2c-4420-8542-6eb02f908e5e' took 62 
+2011-01-24 12:41:46,318 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283'... 
+2011-01-24 12:41:46,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283 
+2011-01-24 12:41:46,334 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,334 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283' from its parent... 
+2011-01-24 12:41:46,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,334 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283'... 
+2011-01-24 12:41:46,365 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-cd03ad06-340d-4468-acfd-a3b14fad9283' took 47 
+2011-01-24 12:41:46,365 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3'... 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3 
+2011-01-24 12:41:46,381 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,381 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3' from its parent... 
+2011-01-24 12:41:46,381 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,381 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3'... 
+2011-01-24 12:41:46,427 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-94a95d27-0972-4a40-a0a7-a42f5d7e60d3' took 62 
+2011-01-24 12:41:46,427 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2'... 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2 
+2011-01-24 12:41:46,490 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,490 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2' from its parent... 
+2011-01-24 12:41:46,490 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,490 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2'... 
+2011-01-24 12:41:46,537 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a2b9f5e4-77e5-4533-8b0e-8547485211a2' took 110 
+2011-01-24 12:41:46,537 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af'... 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af 
+2011-01-24 12:41:46,615 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,615 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af' from its parent... 
+2011-01-24 12:41:46,615 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,615 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af'... 
+2011-01-24 12:41:46,693 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-71e64d13-17cb-4d6c-b444-f8bfa34ac1af' took 156 
+2011-01-24 12:41:46,693 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6'... 
+2011-01-24 12:41:46,740 [main] DEBUG (DefaultCacheManager.java [requestMem]:189) - Growing cache elements.dbx (a org.exist.storage.cache.LRDCache) from 64 to 96 
+2011-01-24 12:41:46,740 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:46,771 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,771 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,771 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,771 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,771 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6 
+2011-01-24 12:41:46,787 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:46,787 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6 
+2011-01-24 12:41:46,787 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:46,787 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6' from its parent... 
+2011-01-24 12:41:46,787 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:46,787 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6'... 
+2011-01-24 12:41:46,927 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-9d731c24-a9f0-4c61-a769-e038322e06f6' took 234 
+2011-01-24 12:41:46,927 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0'... 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0 
+2011-01-24 12:41:47,209 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:47,209 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0 
+2011-01-24 12:41:47,209 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,209 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0' from its parent... 
+2011-01-24 12:41:47,224 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:47,224 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0'... 
+2011-01-24 12:41:47,365 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-2403417d-9e0b-4ffd-b312-85a54456f1c0' took 438 
+2011-01-24 12:41:47,365 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94'... 
+2011-01-24 12:41:47,459 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94 
+2011-01-24 12:41:47,474 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:47,474 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94' from its parent... 
+2011-01-24 12:41:47,474 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:47,474 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94'... 
+2011-01-24 12:41:47,521 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-08942796-d9f4-4090-9871-2d4eefab0b94' took 156 
+2011-01-24 12:41:47,521 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48'... 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48 
+2011-01-24 12:41:47,553 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:47,553 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48 
+2011-01-24 12:41:47,553 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,553 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48' from its parent... 
+2011-01-24 12:41:47,568 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:47,568 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48'... 
+2011-01-24 12:41:47,771 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-529617ea-1054-4d56-9063-4f43f8f3ec48' took 250 
+2011-01-24 12:41:47,771 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f'... 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f 
+2011-01-24 12:41:47,865 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:47,865 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f' from its parent... 
+2011-01-24 12:41:47,865 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:47,865 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f'... 
+2011-01-24 12:41:47,974 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-62315bd5-0b58-45c0-a9bb-ba5e1e4e657f' took 203 
+2011-01-24 12:41:47,974 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516'... 
+2011-01-24 12:41:48,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:48,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,318 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,318 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516 
+2011-01-24 12:41:48,318 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:48,318 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516 
+2011-01-24 12:41:48,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,334 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516' from its parent... 
+2011-01-24 12:41:48,334 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:48,334 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516'... 
+2011-01-24 12:41:48,396 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-9443609d-8110-4ccc-8512-e26b7bde9516' took 422 
+2011-01-24 12:41:48,396 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845'... 
+2011-01-24 12:41:48,662 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845 
+2011-01-24 12:41:48,693 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:48,693 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845' from its parent... 
+2011-01-24 12:41:48,693 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:48,693 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845'... 
+2011-01-24 12:41:48,959 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-7c97dae2-4677-4c9b-a541-310f861e4845' took 563 
+2011-01-24 12:41:48,959 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2'... 
+2011-01-24 12:41:49,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,068 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,068 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,068 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,068 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,068 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2 
+2011-01-24 12:41:49,084 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,084 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2 
+2011-01-24 12:41:49,084 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,084 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2' from its parent... 
+2011-01-24 12:41:49,084 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,084 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2'... 
+2011-01-24 12:41:49,146 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-a1e6b24f-3bc5-468c-9d84-2f308de050c2' took 187 
+2011-01-24 12:41:49,146 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3'... 
+2011-01-24 12:41:49,178 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3 
+2011-01-24 12:41:49,193 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,193 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3' from its parent... 
+2011-01-24 12:41:49,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,193 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3'... 
+2011-01-24 12:41:49,209 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-27f21838-3a99-47fa-9daf-1afe09f244f3' took 63 
+2011-01-24 12:41:49,209 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d'... 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d 
+2011-01-24 12:41:49,271 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,271 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d' from its parent... 
+2011-01-24 12:41:49,271 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,271 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d'... 
+2011-01-24 12:41:49,318 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-60a58ce2-586e-4b94-b57b-9405fac9f86d' took 109 
+2011-01-24 12:41:49,318 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9'... 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9 
+2011-01-24 12:41:49,349 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,349 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9' from its parent... 
+2011-01-24 12:41:49,349 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,349 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9'... 
+2011-01-24 12:41:49,412 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-e769c626-8c10-48df-bd59-df27aadf64f9' took 94 
+2011-01-24 12:41:49,412 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076'... 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076 
+2011-01-24 12:41:49,443 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,443 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,443 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076' from its parent... 
+2011-01-24 12:41:49,443 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,459 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076'... 
+2011-01-24 12:41:49,537 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-d7d06f55-2aae-43cc-9105-60f073639076' took 125 
+2011-01-24 12:41:49,537 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612'... 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612 
+2011-01-24 12:41:49,756 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,756 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612' from its parent... 
+2011-01-24 12:41:49,756 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,756 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612'... 
+2011-01-24 12:41:49,803 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-8d7f9900-df9d-4188-987d-32f2a4a66612' took 266 
+2011-01-24 12:41:49,803 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d'... 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d 
+2011-01-24 12:41:49,834 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,834 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d' from its parent... 
+2011-01-24 12:41:49,834 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,834 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d'... 
+2011-01-24 12:41:49,912 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-b7d471c2-38fa-4fb6-a0fb-7c0a980bdd9d' took 109 
+2011-01-24 12:41:49,912 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5'... 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5 
+2011-01-24 12:41:49,974 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:49,974 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5' from its parent... 
+2011-01-24 12:41:49,974 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:49,974 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5'... 
+2011-01-24 12:41:50,006 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-bda1a9d2-b7fb-4edf-afca-183896cd09a5' took 94 
+2011-01-24 12:41:50,006 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a'... 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:230) - Removing collection /db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a 
+2011-01-24 12:41:50,053 [main] DEBUG (LuceneIndexWorker.java [removeCollection]:249) - Collection removed. 
+2011-01-24 12:41:50,053 [main] DEBUG (NGramIndexWorker.java [removeCollection]:342) - Dropping NGram index for collection /db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (NativeBroker.java [removeCollection]:1040) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a' from its parent... 
+2011-01-24 12:41:50,053 [main] DEBUG (BFile.java [removeAll]:334) - Found 1 items to remove. 
+2011-01-24 12:41:50,053 [main] DEBUG (NativeBroker.java [removeCollection]:1109) - Removing resources in '/db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a'... 
+2011-01-24 12:41:50,115 [main] DEBUG (DefaultCacheManager.java [requestMem]:189) - Growing cache dom.dbx (a org.exist.storage.cache.LRDCache) from 64 to 96 
+2011-01-24 12:41:50,131 [main] DEBUG (NativeBroker.java [removeCollection]:1184) - Removing collection '/db/UICDS/WorkProducts/Alert/Alert-ed3d9904-3fa4-43bf-8f6b-2bf0b89d018a' took 125 
+2011-01-24 12:41:50,131 [main] DEBUG (NativeBroker.java [removeCollection]:1002) - Removing children collections from their parent '/db/UICDS/WorkProducts/Alert/Alert-2c003a75-a3b8-4454-ae3d-d3e5d55a3884'... 
+2011-01-24 12:41:50,178 [main] DEBUG (BFile.java [removeAll]:334) - Found 72 items to remove. 
+2011-01-24 12:41:50,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 
+2011-01-24 12:41:50,193 [main] DEBUG (BFile.java [removeAll]:334) - Found 0 items to remove. 

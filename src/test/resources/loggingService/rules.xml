@@ -1,0 +1,266 @@
+<rules>
+	<status name="NORMAL" category="NORMAL" />
+	<status name="WARY" category="WARN" />
+	<status name="WARN" category="WARN" />
+	<status name="CAUTIOUS" category="ERROR" />
+	<status name="ERROR" category="ERROR" />
+
+	<!-- H2 -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="H2"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="H2"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Errors</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="H2"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="H2"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	<rule 
+		component="H2"
+		event="INFO,WARN,ERROR"
+		beginStatus="CAUTIOUS"
+		endStatus="ERROR">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	
+	<!-- TOMCAT -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="TOMCAT"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="TOMCAT"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="TOMCAT"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="TOMCAT"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	<rule 
+		component="EXIST,OPENDS,OPENFIRE,TOMCAT,UICDS"
+		event="INFO,WARN,ERROR"
+		beginStatus="CAUTIOUS"
+		endStatus="ERROR">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	
+	<!-- EXIST -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="EXIST"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut></timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="EXIST"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="EXIST"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="EXIST"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	
+	<!-- OPENFIRE -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="OPENFIRE"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut></timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="OPENFIRE"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="OPENFIRE"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="OPENFIRE"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	
+	
+	<!-- OPENDS -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="OPENDS"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="OPENDS"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="OPENDS"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="OPENDS"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	
+	
+	<!-- UICDS -->
+	<!-- if exception log message, move to ERROR -->
+	<rule
+		component="UICDS"
+		event="ERROR"
+		beginStatus="NORMAL"
+		endStatus="ERROR">
+		<containsAny>Exception</containsAny>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message refers to an error, move to WARNING -->
+	<rule 
+		component="UICDS"
+		event="INFO"
+		beginStatus="NORMAL"
+		endStatus="WARN">
+		<containsAny>Exception Failed Error</containsAny>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if non-exception log message does not refer to error, move to CAUTIOUS -->
+	<rule
+		component="UICDS"
+		event="INFO,WARN"
+		beginStatus="ERROR"
+		endStatus="CAUTIOUS">
+		<containsNone>Exception Failed Error</containsNone>
+		<timeOut>15000</timeOut>
+	</rule>
+	<!-- if non-exception log message does not refer to error, move to WARNING -->
+	<rule 
+		component="UICDS"
+		event="INFO,WARN"
+		beginStatus="CAUTIOUS"
+		endStatus="WARN">
+		<containsNone>Exception Failed Error</containsNone>		
+		<timeOut>15000</timeOut>
+	</rule>	
+	<!-- if exception log, move back to ERROR -->
+	
+	<rule 
+		component="EXIST,OPENDS,OPENFIRE,TOMCATUICDS"
+		event="TIMEOUT"
+		beginStatus="ERROR"
+		endStatus="WARN">
+	</rule>	
+</rules>

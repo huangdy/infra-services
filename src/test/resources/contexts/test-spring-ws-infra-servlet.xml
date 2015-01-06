@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+    <!--
+        Map Service Endpoint Mapping This is mapped separately from the rest of the services because
+        it is not using the XMLBeans marshalling endpoint adapter, but rather using DOM to represent
+        requests and responses
+    -->
+    <bean class="org.springframework.ws.server.endpoint.adapter.PayloadEndpointAdapter" />
+
+
+
+    <!-- -->
+    <!-- XMLBEANS -->
+    <!-- -->
+    <bean id="xmlbeansMarshaller" class="org.springframework.oxm.xmlbeans.XmlBeansMarshaller" />
+    <bean class="org.springframework.ws.server.endpoint.adapter.GenericMarshallingMethodEndpointAdapter">
+        <property name="marshaller" ref="xmlbeansMarshaller" />
+        <property name="unmarshaller" ref="xmlbeansMarshaller" />
+    </bean>
+
+    <!-- -->
+    <!-- SCAN THE CLASSPATH FOR ENDPOIINTS -->
+    <!-- -->
+    <context:component-scan base-package="com.saic.uicds.core.infrastructure.endpoint" />
+
+    <!-- -->
+    <!-- ENDPOINT MAPPING -->
+    <!-- -->
+    <bean
+        class="org.springframework.ws.server.endpoint.mapping.PayloadRootAnnotationMethodEndpointMapping">
+        <property name="interceptors">
+            <bean class="org.springframework.ws.server.endpoint.interceptor.PayloadLoggingInterceptor" />
+        </property>
+    </bean>
+
+
+</beans>
