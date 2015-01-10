@@ -901,12 +901,12 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param agreementDAO the new agreement dao
      */
-    public void setAgreementDAO(final AgreementDAO agreementDAO) {
+    public void setAgreementDAO(AgreementDAO agreementDAO) {
 
         agreementDAO = agreementDAO;
     }
 
-    public void setCommunicationsService(final CommunicationsService communicationsService) {
+    public void setCommunicationsService(CommunicationsService communicationsService) {
 
         communicationsService = communicationsService;
     }
@@ -927,7 +927,7 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param directoryService the new directory service
      */
-    public void setDirectoryService(final DirectoryService directoryService) {
+    public void setDirectoryService(DirectoryService directoryService) {
 
         directoryService = directoryService;
     }
@@ -963,7 +963,7 @@ implements NotificationService, ServiceNamespaces {
         pubSubService = service;
     }
 
-    public void setUserInterestGroupDAO(final UserInterestGroupDAO userInterestGroupDAO) {
+    public void setUserInterestGroupDAO(UserInterestGroupDAO userInterestGroupDAO) {
 
         userInterestGroupDAO = userInterestGroupDAO;
     }
@@ -973,7 +973,7 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param webServiceTemplate the new web service template
      */
-    public void setWebServiceTemplate(final WebServiceTemplate webServiceTemplate) {
+    public void setWebServiceTemplate(WebServiceTemplate webServiceTemplate) {
 
         webServiceTemplate = webServiceTemplate;
     }
@@ -983,7 +983,7 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param workProductService the new work product service
      */
-    public void setWorkProductService(final WorkProductService workProductService) {
+    public void setWorkProductService(WorkProductService workProductService) {
 
         workProductService = workProductService;
     }
