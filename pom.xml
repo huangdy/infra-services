@@ -26,10 +26,6 @@
             <name>The global repository for the general purpose</name>
             <url>https://github.com/huangdy/xchangecore-maven-repo/raw/master/</url>
         </repository>
-        <repository>
-            <id>xmlbeans-infrastructure</id>
-            <url>https://github.com/huangdy/xmlbeans-infrastructure/raw/mvn-repo</url>
-        </repository>
     </repositories>
 
     <dependencies>
