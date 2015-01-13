@@ -137,55 +137,62 @@ import com.leidos.xchangecore.core.infrastructure.util.WorkProductView;
  * @author William Summers
  * @idd
  */
-public class QueryController extends AbstractController {
+public class QueryController
+    extends AbstractController {
 
     private ISearchService service;
     private String serviceName;
     private NodeRenderer nodeRenderer;
 
     public NodeRenderer getNodeRenderer() {
+
         return nodeRenderer;
     }
 
     public void setNodeRenderer(NodeRenderer nodeRenderer) {
+
         this.nodeRenderer = nodeRenderer;
     }
     Logger log = LoggerFactory.getLogger(getClass());
 
     public String getServiceName() {
+
         return serviceName;
     }
 
     public void setServiceName(String serviceName) {
+
         this.serviceName = serviceName;
     }
 
     @SuppressWarnings("unchecked")
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+                                                 HttpServletResponse response) throws Exception {
 
         // a copy must be made to avoid synchronization issues
-        HashMap<String, String[]> params = new HashMap<String, String[]>(
-                request.getParameterMap());
-        
+        HashMap<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
+
         // we're already adding the remoteuser (no need for principal object since 
         // this is all we need to filter feeds objects.
         if (request.getRemoteUser() != null) {
-            String[] remoteUser = {StringEscapeUtils.escapeXml(request
-                .getRemoteUser())};
+            String[] remoteUser = {
+                StringEscapeUtils.escapeXml(request.getRemoteUser())
+            };
             params.put("req.remoteUser", remoteUser);
         }
-        
+
         if (request.getPathInfo() != null) {
-            String[] resourcePath = {StringEscapeUtils.escapeXml(request
-                .getPathInfo())};
+            String[] resourcePath = {
+                StringEscapeUtils.escapeXml(request.getPathInfo())
+            };
             params.put("req.resourcePath", resourcePath);
         }
 
         if (request.getQueryString() != null) {
-            String[] queryString = {StringEscapeUtils.escapeXml(request
-                .getQueryString())};
+            String[] queryString = {
+                StringEscapeUtils.escapeXml(request.getQueryString())
+            };
             params.put("req.queryString", queryString);
         }
 
@@ -201,10 +208,12 @@ public class QueryController extends AbstractController {
     }
 
     public ISearchService getService() {
+
         return service;
     }
 
     public void setService(ISearchService service) {
+
         this.service = service;
     }
 }

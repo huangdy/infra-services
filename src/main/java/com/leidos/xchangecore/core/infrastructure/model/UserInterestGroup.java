@@ -24,21 +24,22 @@ import org.hibernate.search.annotations.Index;
  */
 @Entity
 @Table(name = "USER_INTEREST_GROUP")
-public class UserInterestGroup implements Serializable {
+public class UserInterestGroup
+    implements Serializable {
 
     /**
      * 
      */
-    private static final long serialVersionUID    = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "UIG_ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer           id;
+    private Integer id;
 
     @Column(name = "USER_JID")
     @Field(index = Index.TOKENIZED)
-    private String            user;
+    private String user;
 
     @Column(name = "INTEREST_GROUP_ID_LIST")
     @CollectionOfElements(fetch = FetchType.EAGER)

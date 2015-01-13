@@ -15,10 +15,11 @@ public interface InfrastructureNamespaces {
 
     public static final String URI_UICDS = "ucids.org";
     public static final String VERS_UICDS = "0.8";
-    
+
     public static final String UICDS_EVENT_CODESPACE = "http://uicds.gov/1.0/codespace/event";
     public static final String UICDS_EVENT_STATUS_CODESPACE = "http://uicds.gov/1.0/codespace/event/status/experimental";
-    public static final String UICDS_WORK_PRODUCT_STATUS_CODE_SPACE = NS_UICDS + "/1.0/codespace/workproduct/status";
+    public static final String UICDS_WORK_PRODUCT_STATUS_CODE_SPACE = NS_UICDS +
+                                                                      "/1.0/codespace/workproduct/status";
 
     public static final String S_DATA_ITEM_STATUS = "DataItemStatus";
     public static final String S_DIGEST = "Digest";

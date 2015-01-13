@@ -22,7 +22,8 @@ import com.leidos.xchangecore.core.infrastructure.service.SearchService;
  * 
  * @ssdd
  */
-public class SearchServiceImpl implements SearchService {
+public class SearchServiceImpl
+    implements SearchService {
 
     /** The log. */
     Logger log = LoggerFactory.getLogger(SearchServiceImpl.class);
@@ -39,6 +40,7 @@ public class SearchServiceImpl implements SearchService {
      * @param directoryService the new directory service
      */
     public void setDirectoryService(DirectoryService directoryService) {
+
         this.directoryService = directoryService;
     }
 
@@ -53,6 +55,7 @@ public class SearchServiceImpl implements SearchService {
      */
     @Override
     public List<?> findEntities(String queryString, Class<?>... classes) {
+
         List<?> results = null;
 
         try {
@@ -75,8 +78,11 @@ public class SearchServiceImpl implements SearchService {
     }
 
     public void systemInitializedHandler(String messgae) {
+
         WorkProductTypeListType typeList = WorkProductTypeListType.Factory.newInstance();
         directoryService.registerUICDSService("http://uicds.dctd.saic.com/searchService",
-            SEARCH_SERVICE_NAME, typeList, typeList);
+            SEARCH_SERVICE_NAME,
+            typeList,
+            typeList);
     }
 }

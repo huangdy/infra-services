@@ -16,10 +16,12 @@ public class WorkProductDeserializer {
     private ObjectInputStream ois = null;
 
     public WorkProductDeserializer() {
+
         this(fName);
     }
 
     public WorkProductDeserializer(String fName) {
+
         if (ois == null) {
             try {
                 ois = new ObjectInputStream(new FileInputStream(fName));
@@ -42,6 +44,7 @@ public class WorkProductDeserializer {
     }
 
     public void closeIt() {
+
         if (ois != null) {
             try {
                 ois.close();

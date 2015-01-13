@@ -8,21 +8,23 @@ import org.slf4j.LoggerFactory;
 import org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager;
 import org.springframework.orm.jpa.persistenceunit.MutablePersistenceUnitInfo;
 
-public class UICDSPersistenceUnitManager extends DefaultPersistenceUnitManager {
+public class UICDSPersistenceUnitManager
+    extends DefaultPersistenceUnitManager {
 
     static Logger log = LoggerFactory.getLogger(UICDSPersistenceUnitManager.class);
 
     protected void postProcessPersistenceUnitInfo(MutablePersistenceUnitInfo pui) {
+
         try {
             super.postProcessPersistenceUnitInfo(pui);
 
             pui.addJarFileUrl(pui.getPersistenceUnitRootUrl());
-            log.debug("\n\n\npostProcessPersistenceUnitInfo: - adding persistence unit root="
-                + pui.getPersistenceUnitRootUrl());
+            log.debug("\n\n\npostProcessPersistenceUnitInfo: - adding persistence unit root=" +
+                      pui.getPersistenceUnitRootUrl());
 
             MutablePersistenceUnitInfo oldPui = getPersistenceUnitInfo(pui.getPersistenceUnitName());
-            log.debug("postProcessPersistenceUnitInfo: - get pui for persistence unit name="
-                + pui.getPersistenceUnitName());
+            log.debug("postProcessPersistenceUnitInfo: - get pui for persistence unit name=" +
+                      pui.getPersistenceUnitName());
 
             if (oldPui != null) {
                 List<URL> urls = oldPui.getJarFileUrls();

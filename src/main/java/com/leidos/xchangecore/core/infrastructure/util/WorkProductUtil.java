@@ -10,14 +10,18 @@ import org.slf4j.LoggerFactory;
 import com.leidos.xchangecore.core.infrastructure.service.WorkProductService;
 
 public class WorkProductUtil {
+
     static Logger log = LoggerFactory.getLogger(InterestGroupInfoUtil.class);
 
     public static final String getACT() {
-    	Date now = new Date();
-        return WorkProductService.ACTPrefix + "-"  + now.toString() + "-" + UUID.randomUUID().toString();
+
+        Date now = new Date();
+        return WorkProductService.ACTPrefix + "-" + now.toString() + "-" +
+               UUID.randomUUID().toString();
     }
-    
+
     public static final String calculateChecksum(String date, Integer version, Integer size) {
+
         String crcStr = date.concat(version.toString() + size.toString());
         long crc = calculateCRC(crcStr);
         String checksum = date + ":" + version + ":" + size.toString() + ":" + crc;
@@ -25,6 +29,7 @@ public class WorkProductUtil {
     }
 
     private static final long calculateCRC(String crcStr) {
+
         long crc = 0;
         try {
             byte bytes[] = crcStr.getBytes();

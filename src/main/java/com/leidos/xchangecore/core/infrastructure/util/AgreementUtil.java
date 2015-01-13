@@ -116,16 +116,16 @@ public class AgreementUtil {
                             extendedMetadata.setLabel(em.getLabel());
                             extendedMetadata.setStringValue(em.getValue());
                             logger.debug("copying extended metadata: " +
-                                      extendedMetadata.getCodespace() + " - " +
-                                      extendedMetadata.getCode() + " = " +
-                                      extendedMetadata.getStringValue());
+                                         extendedMetadata.getCodespace() + " - " +
+                                         extendedMetadata.getCode() + " = " +
+                                         extendedMetadata.getStringValue());
                         }
 
                     }
 
                     if (rule.getRemoteCoreProximity() != null) {
                         logger.debug("copying Proximity value: " +
-                                  rule.getRemoteCoreProximity().toString());
+                                     rule.getRemoteCoreProximity().toString());
                         RemoteCoreProximity proximity = condition.addNewRemoteCoreProximity();
                         proximity.setShareOnNoLoc(Boolean.valueOf(rule.getShareOnNoLoc()));
                         proximity.setStringValue(rule.getRemoteCoreProximity());

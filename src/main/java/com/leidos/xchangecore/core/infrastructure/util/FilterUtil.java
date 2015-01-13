@@ -15,10 +15,13 @@ import org.uicds.resourceProfileService.Interest;
 import com.saic.precis.x2009.x06.base.NamespaceMapItemType;
 import com.saic.precis.x2009.x06.base.NamespaceMapType;
 
-public class FilterUtil implements ServiceNamespaces {
+public class FilterUtil
+    implements ServiceNamespaces {
+
     public static final String WS_NOTIFICATION = "http://docs.oasis-open.org/wsn/b-2";
 
     public static FilterType get(Interest interest) throws XmlException {
+
         XmlOptions xo = new XmlOptions();
         xo.setSaveInner();
         XmlCursor ic = interest.newCursor();
@@ -28,6 +31,7 @@ public class FilterUtil implements ServiceNamespaces {
     }
 
     public static Map<String, String> getNamespaceMap(FilterType what) {
+
         HashMap<String, String> namespaceMap = new HashMap<String, String>();
 
         QName topicExpressionNode = new QName(NS_ProfileService, "NamespaceMap");
@@ -82,6 +86,7 @@ public class FilterUtil implements ServiceNamespaces {
     }
 
     public static String getTopic(FilterType what) {
+
         String productType = "";
         QName topicExpressionNode = new QName(NS_ProfileService, "TopicExpression");
         XmlObject[] topics = what.selectChildren(topicExpressionNode);
@@ -114,6 +119,7 @@ public class FilterUtil implements ServiceNamespaces {
     }
 
     public static String getXPath(FilterType what) {
+
         String xPath = "";
 
         QName contentQname = new QName(NS_ProfileService, "MessageContent");

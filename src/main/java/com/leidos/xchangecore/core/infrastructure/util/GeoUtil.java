@@ -22,6 +22,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.LinearRing;
 
 public class GeoUtil {
+
     static Logger log = LoggerFactory.getLogger(GeoUtil.class);
 
     private static GeoGeometryFactory geometryFactory = new GeoGeometryFactory();
@@ -88,8 +89,10 @@ public class GeoUtil {
             LinearRingType linearRing = getLinearRingFromPolygonCoordinateString(coords);
             if (linearRing != null) {
                 XmlUtil.substitute(gPolygon.addNewExterior().addNewAbstractRing(),
-                    InfrastructureNamespaces.NS_GML, DigestConstant.S_LinearRing,
-                    LinearRingType.type, linearRing);
+                    InfrastructureNamespaces.NS_GML,
+                    DigestConstant.S_LinearRing,
+                    LinearRingType.type,
+                    linearRing);
                 // If there were not at least 3 points in the polygon then return null because it
                 // is not a well formed polygon
             } else {
@@ -109,7 +112,7 @@ public class GeoUtil {
             String[] points = point.split(",");
             if (points.length == 2) {
                 Coordinate coord = new Coordinate(Double.parseDouble(points[0]),
-                    Double.parseDouble(points[1]));
+                                                  Double.parseDouble(points[1]));
                 coordList.add(coord);
             }
 
@@ -177,7 +180,7 @@ public class GeoUtil {
         // didn't specify coordinates properly
         if (lonDegree == null || latDegree == null) {
             log.warn("Coordinates were not specified properly in Incident work product, "
-                + "unable to determine location for default map");
+                     + "unable to determine location for default map");
             return null;
         }
 

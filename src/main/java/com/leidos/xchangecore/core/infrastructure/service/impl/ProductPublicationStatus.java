@@ -7,13 +7,13 @@ import com.leidos.xchangecore.core.infrastructure.model.WorkProduct;
  * @see com.leidos.xchangecore.core.infrastructure.model.WorkProduct WorkProduct Data Model
  */
 public class ProductPublicationStatus {
-    
+
     /** The Constant SuccessStatus. */
     public static final String SuccessStatus = "Success";
-    
+
     /** The Constant FailureStatus. */
     public static final String FailureStatus = "Failure";
-    
+
     /** The Constant PendingStatus. */
     public static final String PendingStatus = "Pending";
 
@@ -26,6 +26,7 @@ public class ProductPublicationStatus {
      * Instantiates a new product publication status.
      */
     public ProductPublicationStatus() {
+
     }
 
     /**
@@ -34,6 +35,7 @@ public class ProductPublicationStatus {
      * @param reasonForFailure the reason for failure
      */
     public ProductPublicationStatus(String reasonForFailure) {
+
         super();
         this.status = ProductPublicationStatus.FailureStatus;
         this.reasonForFailure = reasonForFailure;
@@ -45,6 +47,7 @@ public class ProductPublicationStatus {
      * @return the status
      */
     public String getStatus() {
+
         return status;
     }
 
@@ -54,6 +57,7 @@ public class ProductPublicationStatus {
      * @param status the new status
      */
     public void setStatus(String status) {
+
         this.status = status;
     }
 
@@ -63,6 +67,7 @@ public class ProductPublicationStatus {
      * @return the product
      */
     public WorkProduct getProduct() {
+
         return product;
     }
 
@@ -72,6 +77,7 @@ public class ProductPublicationStatus {
      * @param product the new product
      */
     public void setProduct(WorkProduct product) {
+
         this.product = product;
     }
 
@@ -81,6 +87,7 @@ public class ProductPublicationStatus {
      * @return the reason for failure
      */
     public String getReasonForFailure() {
+
         return reasonForFailure;
     }
 
@@ -90,6 +97,7 @@ public class ProductPublicationStatus {
      * @param reasonForFailure the new reason for failure
      */
     public void setReasonForFailure(String reasonForFailure) {
+
         this.reasonForFailure = reasonForFailure;
     }
 
@@ -99,6 +107,7 @@ public class ProductPublicationStatus {
      * @return the act
      */
     public String getAct() {
+
         return act;
     }
 
@@ -108,6 +117,7 @@ public class ProductPublicationStatus {
      * @param act the new act
      */
     public void setAct(String act) {
+
         this.act = act;
     }
 }

@@ -180,7 +180,7 @@ public class DirectoryServiceImpl
 
         coreLocationMap.put(coreName.toLowerCase(), location);
         logger.debug("Added " + coreName + " to status map - retrieved location: " +
-            coreLocationMap.get(coreName));
+                     coreLocationMap.get(coreName));
     }
 
     /**
@@ -228,8 +228,8 @@ public class DirectoryServiceImpl
             sendMessageToConsole(coreName, "remove");
         } else {
             logger.info("coreStatusUpdate: [" + coreName + "], status: " + coreStatus +
-                ", mutually agreed: " +
-                (getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? "true" : "false"));
+                        ", mutually agreed: " +
+                        (getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? "true" : "false"));
             CoreStatusType.Enum updatedStatus = coreStatus.equals(CoreStatusUpdateMessage.Status_Available) &&
                                                 getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName)
                                                                                                       ? CoreStatusType.ONLINE
@@ -764,7 +764,7 @@ public class DirectoryServiceImpl
         if (!registeredServiceDAO.isSessionInitialized()) {
             if (logger.isInfoEnabled()) {
                 logger.info("registerUICDSService - session not yer initialized - cache requrest for (serviceName: " +
-                    serviceName + ")");
+                            serviceName + ")");
             }
 
             // buffer up this request for later
@@ -783,7 +783,7 @@ public class DirectoryServiceImpl
             for (Integer i = 0; i < publishedProducts.sizeOfProductTypeArray(); i++) {
                 if (logger.isInfoEnabled()) {
                     logger.info("=====> registerUICDSService (publishedProductType: " +
-                        publishedProducts.getProductTypeArray(i) + ")");
+                                publishedProducts.getProductTypeArray(i) + ")");
                 }
                 PublishedProduct publishedProduct = new PublishedProduct(publishedProducts.getProductTypeArray(i));
                 publishedList.add(publishedProduct);
@@ -792,7 +792,7 @@ public class DirectoryServiceImpl
             Set<SubscribedProduct> subscribedList = new HashSet<SubscribedProduct>();
             for (Integer i = 0; i < subscribedProducts.sizeOfProductTypeArray(); i++) {
                 logger.info("=====> registerUICDSService (subscribedproductType: " +
-                    subscribedProducts.getProductTypeArray(i) + ")");
+                            subscribedProducts.getProductTypeArray(i) + ")");
                 SubscribedProduct subscribedProduct = new SubscribedProduct(subscribedProducts.getProductTypeArray(i));
                 subscribedList.add(subscribedProduct);
             }
@@ -813,7 +813,7 @@ public class DirectoryServiceImpl
             for (RegisteredService svc : services) {
                 if (logger.isDebugEnabled()) {
                     logger.debug("Remove existing registration for " +
-                        svc.getServiceName().toString());
+                                 svc.getServiceName().toString());
                 }
                 registeredServiceDAO.makeTransient(svc);
             }
@@ -937,7 +937,7 @@ public class DirectoryServiceImpl
             }
         } catch (Throwable e) {
             logger.error("Exception caught while getting service list.   exception=" +
-                e.getMessage());
+                         e.getMessage());
             e.printStackTrace();
         }
 

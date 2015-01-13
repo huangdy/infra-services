@@ -19,7 +19,8 @@ import org.hibernate.search.annotations.Index;
  */
 @Entity
 @Table(name = "INTEREST_NAMESPACE_TYPE")
-public class InterestNamespaceType implements Serializable {
+public class InterestNamespaceType
+    implements Serializable {
 
     private static final long serialVersionUID = 6157253001335701160L;
 
@@ -43,6 +44,7 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -53,6 +55,7 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -63,6 +66,7 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public String getPrefix() {
+
         return prefix;
     }
 
@@ -73,6 +77,7 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public void setPrefix(String prefix) {
+
         this.prefix = prefix;
     }
 
@@ -83,6 +88,7 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public String getUri() {
+
         return uri;
     }
 
@@ -93,11 +99,13 @@ public class InterestNamespaceType implements Serializable {
      * @ssdd
      */
     public void setUri(String uri) {
+
         this.uri = uri;
     }
 
     @Override
     public int hashCode() {
+
         final int prime = 31;
         int result = 1;
         result = prime * result + ((prefix == null) ? 0 : prefix.hashCode());
@@ -107,6 +115,7 @@ public class InterestNamespaceType implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null)

@@ -28,6 +28,7 @@ import org.w3c.dom.Element;
  * 
  */
 public interface NotificationMessage {
+
     /**
      * This method allows you to add message content
      * 

@@ -100,8 +100,7 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
                 }
             }
         }
-        logger.debug("findByCriteria: found " + (list != null ? list.size()
-                                                             : 0) + " entries");
+        logger.debug("findByCriteria: found " + (list != null ? list.size() : 0) + " entries");
         if (list != null && list.size() > 1) {
             return DistinctResultTransformer.INSTANCE.transformList(list);
         } else {
@@ -142,8 +141,8 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
             }
         }
 
-        logger.debug("findByCriteriaAndOrder: found " + (list != null ? list.size()
-                                                                     : 0) + " entries");
+        logger.debug("findByCriteriaAndOrder: found " + (list != null ? list.size() : 0) +
+                     " entries");
 
         return list;
     }

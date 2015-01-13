@@ -5,7 +5,8 @@ import java.util.List;
 import com.leidos.xchangecore.core.dao.GenericDAO;
 import com.leidos.xchangecore.core.infrastructure.model.ProductSubscriptionByID;
 
-public interface ProductSubscriptionByIDDAO extends GenericDAO<ProductSubscriptionByID, Integer> {
+public interface ProductSubscriptionByIDDAO
+    extends GenericDAO<ProductSubscriptionByID, Integer> {
 
     public List<ProductSubscriptionByID> findByProductID(String productId);
 

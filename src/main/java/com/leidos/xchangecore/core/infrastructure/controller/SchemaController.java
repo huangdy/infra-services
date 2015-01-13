@@ -9,11 +9,12 @@ import org.apache.commons.io.IOUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
-public class SchemaController extends AbstractController {
+public class SchemaController
+    extends AbstractController {
 
     @Override
     protected ModelAndView handleRequestInternal(HttpServletRequest request,
-            HttpServletResponse response) throws Exception {
+                                                 HttpServletResponse response) throws Exception {
 
         String path = "schemaorg_apache_xmlbeans/src" + request.getServletPath();
 

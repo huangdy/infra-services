@@ -44,11 +44,15 @@ public class RegisteredService {
     @Column(name = "CORE_NAME")
     private String coreName;
 
-    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<PublishedProduct> publishedProducts = new HashSet<PublishedProduct>();
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
+    @ManyToMany(cascade = {
+        CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE
+    })
     private Set<SubscribedProduct> subscribedProducts = new HashSet<SubscribedProduct>();
 
     public RegisteredService() {
@@ -67,8 +71,9 @@ public class RegisteredService {
      * @ssdd
      */
     public RegisteredService(String urn, String serviceName, SERVICE_TYPE serviceType,
-        String coreName, Set<PublishedProduct> publishedProducts,
-        Set<SubscribedProduct> subscribedProducts) {
+                             String coreName, Set<PublishedProduct> publishedProducts,
+                             Set<SubscribedProduct> subscribedProducts) {
+
         this.setURN(urn);
         this.setServiceName(serviceName);
         this.setServiceType(serviceType);
@@ -78,11 +83,13 @@ public class RegisteredService {
     }
 
     public boolean equals(Object obj) {
+
         RegisteredService svcObj = (RegisteredService) obj;
         return serviceName.equals(svcObj.getServiceName());
     }
 
     public int hashCode() {
+
         return serviceName.hashCode();
         // return 42;
     }
@@ -94,6 +101,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -104,6 +112,7 @@ public class RegisteredService {
      * @ssdd
      */
     public Integer getId() {
+
         return this.id;
     }
 
@@ -114,6 +123,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setURN(String urn) {
+
         this.urn = urn;
     }
 
@@ -124,6 +134,7 @@ public class RegisteredService {
      * @ssdd
      */
     public String getURN() {
+
         return this.urn;
     }
 
@@ -134,6 +145,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setServiceName(String serviceName) {
+
         this.serviceName = serviceName;
     }
 
@@ -144,6 +156,7 @@ public class RegisteredService {
      * @ssdd
      */
     public String getServiceName() {
+
         return this.serviceName;
     }
 
@@ -154,6 +167,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setServiceType(SERVICE_TYPE serviceType) {
+
         this.serviceType = serviceType;
     }
 
@@ -164,6 +178,7 @@ public class RegisteredService {
      * @ssdd
      */
     public SERVICE_TYPE getServiceType() {
+
         return this.serviceType;
     }
 
@@ -174,6 +189,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setCoreName(String coreName) {
+
         this.coreName = coreName;
     }
 
@@ -184,6 +200,7 @@ public class RegisteredService {
      * @ssdd
      */
     public String getCoreName() {
+
         return this.coreName;
     }
 
@@ -194,6 +211,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setPublishedProducts(Set<PublishedProduct> publishedProducts) {
+
         for (PublishedProduct product : publishedProducts) {
             product.setPublisher(this);
             this.publishedProducts.add(product);
@@ -207,6 +225,7 @@ public class RegisteredService {
      * @ssdd
      */
     public Set<PublishedProduct> getPublishedProducts() {
+
         return this.publishedProducts;
     }
 
@@ -217,6 +236,7 @@ public class RegisteredService {
      * @ssdd
      */
     public void setSubscribedProducts(Set<SubscribedProduct> subscribedProducts) {
+
         for (SubscribedProduct product : subscribedProducts) {
             product.getSubscribers().add(this);
             this.subscribedProducts.add(product);
@@ -230,6 +250,7 @@ public class RegisteredService {
      * @ssdd
      */
     public Set<SubscribedProduct> getSubscribedProducts() {
+
         return this.subscribedProducts;
     }
 

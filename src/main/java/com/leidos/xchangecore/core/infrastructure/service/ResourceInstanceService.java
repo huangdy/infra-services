@@ -23,7 +23,7 @@ public interface ResourceInstanceService {
 
     public static final String RESOURCEINSTANCE_SERVICE_NAME = "ResourceInstanceService";
     public static final String RESOURCE_ID_PREFIX = "ResourceInstance";
-    
+
     /**
      * Create a resource instance and use the given resource identifier.
      * @param resourceID (optional, if null or empty a UUID will be generated)
@@ -42,7 +42,9 @@ public interface ResourceInstanceService {
      * @return the resource instance model
      * @ssdd
      */
-    public ResourceInstanceModel checkin(IdentifierType id, IdentifierType localResourceID, IdentifierType resourceProfileID);
+    public ResourceInstanceModel checkin(IdentifierType id,
+                                         IdentifierType localResourceID,
+                                         IdentifierType resourceProfileID);
 
     /**
      * Applications must have a Resource Profile created for them by an administrator and must
@@ -54,9 +56,11 @@ public interface ResourceInstanceService {
      * @return the resource instance model
      * @ssdd
      */
-    public ResourceInstanceModel register(IdentifierType id,  IdentifierType localResourceID, IdentifierType resourceProfileID)
-    throws ResourceProfileDoesNotExist;
-    
+    public ResourceInstanceModel register(IdentifierType id,
+                                          IdentifierType localResourceID,
+                                          IdentifierType resourceProfileID)
+        throws ResourceProfileDoesNotExist;
+
     /**
      * Remove a Resource Instance.  This will remove the resource instance's endpoint and all of 
      * the notification messages on that endpoint.  This cleans up the resources on the core that
@@ -77,7 +81,7 @@ public interface ResourceInstanceService {
      * @ssdd
      */
     public ResourceInstance checkout(ResourceInstance ris);
-    
+
     /**
      * Returns true if the given resource profile id has checked in.
      * @param resourceProfileID
@@ -85,7 +89,7 @@ public interface ResourceInstanceService {
      * @ssdd
      */
     public boolean isCheckedIn(ResourceInstance ris);
-    
+
     /**
      * Offers the resource profile to the resource instance.  The resource instance will receive a message
      * on its notification queue requesting that it wants to accept this position.
@@ -94,7 +98,7 @@ public interface ResourceInstanceService {
      * @ssdd
      */
     public void offerProfile(ResourceInstance ris, IdentifierType resourceProfileID);
-    
+
     /**
      * Apply the given profile to the given resource instance which means subscribe this resource
      * instance to the interests of the given profile.
@@ -104,8 +108,8 @@ public interface ResourceInstanceService {
      * @ssdd
      */
     public boolean applyProfile(ResourceInstanceModel ris, IdentifierType resourceProfileID)
-    throws ResourceProfileDoesNotExist;
-    
+        throws ResourceProfileDoesNotExist;
+
     /**
      * Return a list of resource instances whose IDs that match the input query string.
      * Query string is currently not used
@@ -113,7 +117,7 @@ public interface ResourceInstanceService {
      * @ssdd
      */
     public ResourceInstanceListType getResourceInstanceList(String queryString);
-    
+
     /**
      * Returns the resource instance for the given identifier.
      * 
@@ -136,22 +140,21 @@ public interface ResourceInstanceService {
     public void systemInitializedHandler(String messgae);
 
     /**
-	 * Update endpoint.
-	 * 
-	 * Update the resource instance's endpoint address. Could either be a
-	 * pullpoint address where the user manually looks for messages to pull from
-	 * or it could be a web service url where messages will automatically be
-	 * sent to the specified WS-Notification URL.
-	 * 
+     * Update endpoint.
+     * 
+     * Update the resource instance's endpoint address. Could either be a
+     * pullpoint address where the user manually looks for messages to pull from
+     * or it could be a web service url where messages will automatically be
+     * sent to the specified WS-Notification URL.
+     * 
      * @param id UICDS identifier - should be the same name as that used for authentication.
-	 * @param endpoint
-	 *            - address of the endpoint desired
-	 * @param isWebService
-	 *            - tells the notification service whether the endpoint is a WS.
-	 * @return true, if successful
+     * @param endpoint
+     *            - address of the endpoint desired
+     * @param isWebService
+     *            - tells the notification service whether the endpoint is a WS.
+     * @return true, if successful
      * @ssdd
-	 */
-	public boolean updateEndpoint(IdentifierType id, String endpoint, boolean isWebService);
-
+     */
+    public boolean updateEndpoint(IdentifierType id, String endpoint, boolean isWebService);
 
 }

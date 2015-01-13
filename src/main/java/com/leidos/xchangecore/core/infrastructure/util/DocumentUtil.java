@@ -36,8 +36,9 @@ public class DocumentUtil {
         return instance;
     }
 
-    public static boolean exist(String expression, XmlObject content,
-        Map<String, String> namespaceMap) throws InvalidXpathException {
+    public static boolean exist(String expression,
+                                XmlObject content,
+                                Map<String, String> namespaceMap) throws InvalidXpathException {
 
         String result = "";
         Document doc;
@@ -50,8 +51,8 @@ public class DocumentUtil {
             xpath.setNamespaceContext(new SimpleNamespaceContext(namespaceMap));
             result = xpath.evaluate(expression, doc);
         } catch (XPathExpressionException e) {
-            throw new InvalidXpathException("Invalid XPath: " + expression + ". Cause: "
-                + e.getCause().getMessage().trim());
+            throw new InvalidXpathException("Invalid XPath: " + expression + ". Cause: " +
+                                            e.getCause().getMessage().trim());
         } catch (Exception e) {
             throw new InvalidXpathException("XPath evaluation: Document: " + e.getMessage());
         }

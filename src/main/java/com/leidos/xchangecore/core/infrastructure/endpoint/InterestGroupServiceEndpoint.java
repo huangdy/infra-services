@@ -1,9 +1,5 @@
 package com.leidos.xchangecore.core.infrastructure.endpoint;
 
-
-
-
-
 import javax.xml.datatype.DatatypeConfigurationException;
 
 import org.slf4j.Logger;
@@ -11,9 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
-
-
-
 
 import com.leidos.xchangecore.core.infrastructure.service.ConfigurationService;
 import com.leidos.xchangecore.core.infrastructure.service.InterestGroupService;
@@ -42,8 +35,6 @@ import org.uicds.interestGroupService.UnShareInterestGroupResponseDocument.UnSha
 import org.uicds.interestGroupService.UpdateInterestGroupRequestDocument;
 import org.uicds.interestGroupService.UpdateInterestGroupResponseDocument;
 import org.uicds.workProductService.WorkProductListDocument.WorkProductList;
-
-
 
 /**
  * The Interest Group Service allows clients to manage UICDS Interest Group. It includes services
@@ -119,8 +110,7 @@ public class InterestGroupServiceEndpoint
         throws DatatypeConfigurationException {
 
         ArchiveInterestGroupResponseDocument response = ArchiveInterestGroupResponseDocument.Factory.newInstance();
-        response.addNewArchiveInterestGroupResponse().set(
-            WorkProductHelper.toWorkProductProcessingStatus(interestGroupService.archiveInterestGroup(request.getArchiveInterestGroupRequest().getInterestGroupId())));
+        response.addNewArchiveInterestGroupResponse().set(WorkProductHelper.toWorkProductProcessingStatus(interestGroupService.archiveInterestGroup(request.getArchiveInterestGroupRequest().getInterestGroupId())));
         return response;
     }
 
@@ -143,8 +133,7 @@ public class InterestGroupServiceEndpoint
         throws DatatypeConfigurationException {
 
         CloseInterestGroupResponseDocument response = CloseInterestGroupResponseDocument.Factory.newInstance();
-        response.addNewCloseInterestGroupResponse().set(
-            WorkProductHelper.toWorkProductProcessingStatus(interestGroupService.closeInterestGroup(request.getCloseInterestGroupRequest().getInterestGroupId())));
+        response.addNewCloseInterestGroupResponse().set(WorkProductHelper.toWorkProductProcessingStatus(interestGroupService.closeInterestGroup(request.getCloseInterestGroupRequest().getInterestGroupId())));
         return response;
     }
 
@@ -168,14 +157,12 @@ public class InterestGroupServiceEndpoint
         CreateInterestGroupResponseDocument response = CreateInterestGroupResponseDocument.Factory.newInstance();
         response.addNewCreateInterestGroupResponse().setInterestGroup(request.getCreateInterestGroupRequest().getInterestGroup());
         /**response.addNewCreateInterestGroupResponse().setInterestGroupId(interestGroupService.createInterestGroup(request.getCreateInterestGroupRequest().getInterestGroup(),request.getCreateInterestGroupRequest().getWorkProductIdentificationList()));**/
-        response.addNewCreateInterestGroupResponse().setInterestGroupId(interestGroupService.createInterestGroup(request.getCreateInterestGroupRequest().getInterestGroup(), request.getCreateInterestGroupRequest().getWorkProductIdentificationList()));
+        response.addNewCreateInterestGroupResponse().setInterestGroupId(interestGroupService.createInterestGroup(request.getCreateInterestGroupRequest().getInterestGroup(),
+            request.getCreateInterestGroupRequest().getWorkProductIdentificationList()));
 
         log.debug("CreateInterestGroupResponse: [ " + response.toString() + " ]");
         return response;
     }
-
-
-
 
     /**
      * Get a list of all the interest group on the core. The returned list contains the 
@@ -230,7 +217,6 @@ public class InterestGroupServiceEndpoint
 
         GetListOfWorkProductResponseDocument response = GetListOfWorkProductResponseDocument.Factory.newInstance();
         response.addNewGetListOfWorkProductResponse().setWorkProductList(workProductList);
-        
 
         return response;
     }
@@ -296,7 +282,8 @@ public class InterestGroupServiceEndpoint
         }
 
         return response;
-    }    
+    }
+
     /**
      * Allows the client to update the interest group.
      * 
@@ -312,23 +299,23 @@ public class InterestGroupServiceEndpoint
     @PayloadRoot(namespace = NS_InterestGroupService, localPart = "UpdateInterestGroupRequest")
     public UpdateInterestGroupResponseDocument updateInterestGroup(UpdateInterestGroupRequestDocument request)
         throws DatatypeConfigurationException {
-        
+
         UpdateInterestGroupResponseDocument response = UpdateInterestGroupResponseDocument.Factory.newInstance();
-        log.debug("updateInterestGroup: id=" + request.getUpdateInterestGroupRequest().getInterestGroupId());
+        log.debug("updateInterestGroup: id=" +
+                  request.getUpdateInterestGroupRequest().getInterestGroupId());
         try {
             response.addNewUpdateInterestGroupResponse().setInterestGroup(request.addNewUpdateInterestGroupRequest().getInterestGroup());
-            } catch (Exception e) {
-            }
+        } catch (Exception e) {}
 
-        return response;   
-        
+        return response;
+
     }
 
     @PayloadRoot(namespace = NS_InterestGroupService, localPart = "GetInterestGroupRequest")
-    public GetInterestGroupResponseDocument getInterestGroup(GetInterestGroupRequestDocument request){
-     
-      GetInterestGroupResponseDocument response = GetInterestGroupResponseDocument.Factory.newInstance();
-	return response;
-    
-      }
+    public GetInterestGroupResponseDocument getInterestGroup(GetInterestGroupRequestDocument request) {
+
+        GetInterestGroupResponseDocument response = GetInterestGroupResponseDocument.Factory.newInstance();
+        return response;
+
+    }
 }

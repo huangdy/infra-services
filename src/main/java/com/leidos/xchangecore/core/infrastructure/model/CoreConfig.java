@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "CORE_CONFIG")
 public class CoreConfig {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,10 +32,10 @@ public class CoreConfig {
 
     @Column(name = "ONLINE_STATUS")
     private String onlineStatus;
-    
+
     @Column(name = "LATITUDE")
     private String latitude;
-    
+
     @Column(name = "LONGITUDE")
     private String longitude;
 
@@ -47,6 +48,7 @@ public class CoreConfig {
      * @ssdd
      */
     public CoreConfig(String name, String url, String onlineStatus) {
+
         this.name = name;
         this.url = url;
         this.onlineStatus = onlineStatus;
@@ -59,6 +61,7 @@ public class CoreConfig {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -69,6 +72,7 @@ public class CoreConfig {
      * @ssdd
      */
     public Integer getId() {
+
         return this.id;
     }
 
@@ -79,6 +83,7 @@ public class CoreConfig {
      * @ssdd
      */
     public void setName(String name) {
+
         this.name = name;
     }
 
@@ -89,6 +94,7 @@ public class CoreConfig {
      * @ssdd
      */
     public String getName() {
+
         return this.name;
     }
 
@@ -99,6 +105,7 @@ public class CoreConfig {
      * @ssdd
      */
     public void setUrl(String url) {
+
         this.url = url;
     }
 
@@ -109,6 +116,7 @@ public class CoreConfig {
      * @ssdd
      */
     public String getUrl() {
+
         return this.url;
     }
 
@@ -119,6 +127,7 @@ public class CoreConfig {
      * @ssdd
      */
     public void setOnlineStatus(String onlineStatus) {
+
         this.onlineStatus = onlineStatus;
     }
 
@@ -129,6 +138,7 @@ public class CoreConfig {
      * @ssdd
      */
     public String getOnlineStatus() {
+
         return this.onlineStatus;
     }
 
@@ -139,6 +149,7 @@ public class CoreConfig {
      * @ssdd
      */
     public void setLocalCore(boolean localCore) {
+
         this.localCore = localCore;
     }
 
@@ -149,28 +160,32 @@ public class CoreConfig {
      * @ssdd
      */
     public boolean getLocalCore() {
+
         return this.localCore;
     }
 
     public String getLatitude() {
+
         return latitude;
     }
 
     public void setLatitude(String latitude) {
+
         this.latitude = latitude;
     }
 
     public String getLongitude() {
+
         return longitude;
     }
 
     public void setLongitude(String longitude) {
+
         this.longitude = longitude;
     }
 
     public CoreConfig() {
 
     }
-
 
 }

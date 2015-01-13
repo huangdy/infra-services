@@ -15,6 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "EXTERNAL_DATASOURCE_CONFIG")
 public class ExternalDataSourceConfig {
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +39,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public ExternalDataSourceConfig(String urn, String coreName) {
+
         setUrn(urn);
         setCoreName(coreName);
     }
@@ -49,6 +51,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -59,6 +62,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public Integer getId() {
+
         return this.id;
     }
 
@@ -69,6 +73,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public void setUrn(String urn) {
+
         this.urn = urn;
     }
 
@@ -79,6 +84,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public String getUrn() {
+
         return this.urn;
     }
 
@@ -89,6 +95,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public void setCoreName(String coreName) {
+
         this.coreName = coreName;
     }
 
@@ -99,6 +106,7 @@ public class ExternalDataSourceConfig {
      * @ssdd
      */
     public String getCoreName() {
+
         return this.coreName;
     }
 

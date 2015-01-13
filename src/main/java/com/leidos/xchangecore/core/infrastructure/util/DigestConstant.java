@@ -11,12 +11,12 @@ public interface DigestConstant {
     public static final String S_CircleByCenterPoint = "CircleByCenterPoint";
     public static final String S_Event = "Event";
     public static final String S_Entity = "Entity";
-    
+
     // ????
     public static final String S_Collection = "Collection";
     public static final String S_TimeInterval = "TimeInterval";
     public static final String S_TimeInstant = "TimeInstant";
-    
+
     // Entity Taxonomy
     public static final String S_Cargo = "Cargo";
     public static final String S_CollectionOfThings = "CollectionOfThings";
@@ -40,7 +40,7 @@ public interface DigestConstant {
     public static final String S_Sensor = "Sensor";
     public static final String S_Vehicle = "Vehicle";
     public static final String S_Aircraft = "Aircraft";
-    public static final String S_GroundVehicle = "GroundVehicle"; 
+    public static final String S_GroundVehicle = "GroundVehicle";
     public static final String S_Spacecraft = "Spacecraft";
     public static final String S_Watercraft = "Watercraft";
 

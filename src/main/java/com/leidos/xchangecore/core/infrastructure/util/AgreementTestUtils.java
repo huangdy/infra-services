@@ -36,8 +36,11 @@ public class AgreementTestUtils {
         return agreement;
     }
 
-    public static void addShareRule(AgreementType agreement, String codespace, String incidentType,
-        String ruleID, boolean enabled) {
+    public static void addShareRule(AgreementType agreement,
+                                    String codespace,
+                                    String incidentType,
+                                    String ruleID,
+                                    boolean enabled) {
 
         ShareRules shareRules = agreement.getShareRules();
         if (shareRules == null) {

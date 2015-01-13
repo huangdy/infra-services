@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
 public class ShareRule {
 
     static Logger log = LoggerFactory.getLogger(ShareRule.class);
-    
+
     @Id
     @Column(name = "SHARE_RULE_ID")
     @GeneratedValue
@@ -55,14 +55,18 @@ public class ShareRule {
 
     // @Embedded
     // @OneToMany(mappedBy = "shareRule")
-    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     Set<CodeSpaceValueType> workProducts;
 
     @Column(name = "EXTENDED_METADATA")
-    @OneToMany(cascade = { CascadeType.ALL } )
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    })
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-    private Set<ExtendedMetadata> extendedMetadata  = new HashSet<ExtendedMetadata>();
+    private Set<ExtendedMetadata> extendedMetadata = new HashSet<ExtendedMetadata>();
 
     @Column(name = "PROXIMITY")
     private String remoteCoreProximity;
@@ -70,11 +74,10 @@ public class ShareRule {
     @Column(name = "SHARE_ON_NO_LOC")
     private String shareOnNoLoc;
 
-  
     public boolean equals(Object obj) {
-        
+
         ShareRule shareRuleObject = (ShareRule) obj;
-        
+
         StringBuffer hash = new StringBuffer();
         // Interest Group Type
         if (!("".equals(interestGroupCodeSpace) | ("".equals(interestGroupValue)))) {
@@ -90,13 +93,12 @@ public class ShareRule {
                 hash.append(data.getValue());
             }
         }
-        
+
         // Proximity
         if (!("".equals(remoteCoreProximity))) {
             hash.append(remoteCoreProximity);
-        }        
-        
-        
+        }
+
         // compute share rule object hash
         StringBuffer shareRuleObjectHash = new StringBuffer();
         // Interest Group Type
@@ -113,13 +115,13 @@ public class ShareRule {
                 shareRuleObjectHash.append(data.getValue());
             }
         }
-        
+
         // Proximity
-       if (!("".equals(shareRuleObject.remoteCoreProximity))) {
+        if (!("".equals(shareRuleObject.remoteCoreProximity))) {
             shareRuleObjectHash.append(shareRuleObject.remoteCoreProximity);
-        }       
-        
-       return (hash.equals(shareRuleObjectHash));
+        }
+
+        return (hash.equals(shareRuleObjectHash));
     }
 
     public int hashCode() {
@@ -139,12 +141,12 @@ public class ShareRule {
                 hash.append(data.getValue());
             }
         }
-        
+
         // Proximity
         if (!("".equals(remoteCoreProximity))) {
             hash.append(remoteCoreProximity);
-        }        
-        
+        }
+
         return hash.hashCode();
     }
 
@@ -296,6 +298,7 @@ public class ShareRule {
     }
 
     public Set<ExtendedMetadata> getExtendedMetadata() {
+
         if (extendedMetadata == null) {
             extendedMetadata = new HashSet<ExtendedMetadata>();
         }
@@ -303,27 +306,32 @@ public class ShareRule {
     }
 
     public void setExtendedMetadata(Set<ExtendedMetadata> extendedMetadata) {
+
         this.extendedMetadata = getExtendedMetadata();
         this.extendedMetadata.clear();
-        for (ExtendedMetadata em : extendedMetadata ) {
+        for (ExtendedMetadata em : extendedMetadata) {
             this.extendedMetadata.add(em);
         }
     }
 
     public String getRemoteCoreProximity() {
+
         return remoteCoreProximity;
     }
 
     public void setRemoteCoreProximity(String remoteCoreProximity) {
+
         this.remoteCoreProximity = remoteCoreProximity;
     }
-    
+
     public String getShareOnNoLoc() {
+
         return shareOnNoLoc;
     }
 
     public void setShareOnNoLoc(String shareOnNoLoc) {
+
         this.shareOnNoLoc = shareOnNoLoc;
     }
-    
+
 }

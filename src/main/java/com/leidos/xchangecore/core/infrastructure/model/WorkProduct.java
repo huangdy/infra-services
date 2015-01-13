@@ -435,8 +435,7 @@ public class WorkProduct
      */
     public void setActive(boolean active) {
 
-        state = active ? State_Active
-                      : State_Inactive;
+        state = active ? State_Active : State_Inactive;
     }
 
     /**

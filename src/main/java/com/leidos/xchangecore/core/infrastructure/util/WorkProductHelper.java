@@ -197,8 +197,7 @@ public class WorkProductHelper
             pkgId.addNewVersion().setStringValue(wp.getProductVersion().toString());
         }
 
-        pkgId.setState(wp.getActive() ? StateType.ACTIVE
-                                     : StateType.INACTIVE);
+        pkgId.setState(wp.getActive() ? StateType.ACTIVE : StateType.INACTIVE);
 
         return pkgId;
     }
@@ -327,8 +326,7 @@ public class WorkProductHelper
                     }
                 }
                 if (id.getState() != null) {
-                    wp.setActive(id.getState().equals(StateType.ACTIVE) ? true
-                                                                       : false);
+                    wp.setActive(id.getState().equals(StateType.ACTIVE) ? true : false);
                 }
             } else if (metadata instanceof PropertiesType) {
                 // save the interest group
@@ -402,8 +400,7 @@ public class WorkProductHelper
     public static final WorkProductDocument.WorkProduct toWorkProduct(WorkProduct wp) {
 
         WorkProductDocument wpd = toWorkProductDocument(wp, false);
-        return wpd == null ? null
-                          : toWorkProductDocument(wp, false).getWorkProduct();
+        return wpd == null ? null : toWorkProductDocument(wp, false).getWorkProduct();
     }
 
     public static final WorkProductDocument toWorkProductDocument(WorkProduct wp) {
@@ -435,67 +432,67 @@ public class WorkProductHelper
         dataItemStatus.setCodespace(UICDS_WORK_PRODUCT_STATUS_CODE_SPACE);
         dataItemStatus.setCode(wpid.getState().toString());
         XmlUtil.substitute(pkgMetadata.addNewDataItemStatusAbstract(),
-                           NS_UCORE,
-                           S_DATA_ITEM_STATUS,
-                           DataItemStatusType.type,
-                           dataItemStatus);
+            NS_UCORE,
+            S_DATA_ITEM_STATUS,
+            DataItemStatusType.type,
+            dataItemStatus);
 
         DataOwnerMetadataType ownerMetadata = pkgMetadata.addNewDataOwnerMetadata();
         // DataOwnerContact
         PointOfContactType contact = PointOfContactType.Factory.newInstance();
         contact.addNewOrganization().addName(UICDS_WEB_SITE);
         XmlUtil.substitute(ownerMetadata.addNewDataOwnerContactAbstract(),
-                           NS_UCORE,
-                           S_DATA_OWNER_CONTACT,
-                           PointOfContactType.type,
-                           contact);
+            NS_UCORE,
+            S_DATA_OWNER_CONTACT,
+            PointOfContactType.type,
+            contact);
 
         // DataOwnerIdentifier
         contact = PointOfContactType.Factory.newInstance();
         contact.addNewOrganization().addName(URI_UICDS);
         XmlUtil.substitute(ownerMetadata.addNewDataOwnerIdentifierAbstract(),
-                           NS_UCORE,
-                           S_DATA_OWNER_IDENTIFIER,
-                           PointOfContactType.type,
-                           contact);
+            NS_UCORE,
+            S_DATA_OWNER_IDENTIFIER,
+            PointOfContactType.type,
+            contact);
 
         // DataOwnerMeatdataDomainAttribute
         DomainAttributeType domain = DomainAttributeType.Factory.newInstance();
         domain.setDomainName("UICDS EM Domain");
         XmlUtil.substitute(ownerMetadata.addNewDataOwnerMetadataExtensionAbstract(),
-                           NS_ULEX_STRUCTURE,
-                           S_DATA_OWNER_METADATA_DOMAIN_ATTRIBUTE,
-                           DomainAttributeType.type,
-                           domain);
+            NS_ULEX_STRUCTURE,
+            S_DATA_OWNER_METADATA_DOMAIN_ATTRIBUTE,
+            DomainAttributeType.type,
+            domain);
 
         // DisseminatinCriteria
         XmlUtil.substitute(pkgMetadata.addNewDisseminationCriteriaAbstract(),
-                           NS_UCORE,
-                           S_DISSEMINATION_CRITERIA,
-                           DisseminationCriteria.type,
-                           DisseminationCriteria.Factory.newInstance());
+            NS_UCORE,
+            S_DISSEMINATION_CRITERIA,
+            DisseminationCriteria.type,
+            DisseminationCriteria.Factory.newInstance());
 
         // WorkProductIdentification
         XmlUtil.substitute(pkgMetadata.addNewPackageMetadataExtensionAbstract(),
-                           NS_PRECIS_STRUCTURES,
-                           S_PACKAGE_IDENTIFICATION,
-                           IdentificationType.type,
-                           wpid);
+            NS_PRECIS_STRUCTURES,
+            S_PACKAGE_IDENTIFICATION,
+            IdentificationType.type,
+            wpid);
 
         // WorkProductProperties
         XmlUtil.substitute(pkgMetadata.addNewPackageMetadataExtensionAbstract(),
-                           NS_PRECIS_STRUCTURES,
-                           S_PACKAGE_PROPERTIES,
-                           PropertiesType.type,
-                           getWorkProductProperties(wp));
+            NS_PRECIS_STRUCTURES,
+            S_PACKAGE_PROPERTIES,
+            PropertiesType.type,
+            getWorkProductProperties(wp));
 
         // Digest part
         if (wp.getDigest() != null) {
             XmlUtil.substitute(theWorkProduct.addNewDigestAbstract(),
-                               NS_UCORE,
-                               S_DIGEST,
-                               DigestType.type,
-                               wp.getDigest().getDigest());
+                NS_UCORE,
+                S_DIGEST,
+                DigestType.type,
+                wp.getDigest().getDigest());
 
         }
         // the structuredPayload part
@@ -507,7 +504,8 @@ public class WorkProductHelper
                 log.error("Payload was null for work product: " + wp.getProductID());
             }
             payload.addNewStructuredPayloadMetadata().setCommunityURI(wp.getProductType());
-            payload.getStructuredPayloadMetadata().setCommunityVersion(wp.getProductTypeVersion() != null ? wp.getProductTypeVersion()
+            payload.getStructuredPayloadMetadata().setCommunityVersion(wp.getProductTypeVersion() != null
+                                                                                                         ? wp.getProductTypeVersion()
                                                                                                          : "");
         }
 

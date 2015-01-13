@@ -418,8 +418,7 @@ public class InterestGroup
         sb.append("\tname: " + name + "\n");
         sb.append("\tsharingStatus: " + sharingStatus + "\n");
         sb.append("\towningCore: " + owningCore + "\n");
-        sb.append("\tactive: " + (active ? "Active"
-                                        : "Inactive") + "\n");
+        sb.append("\tactive: " + (active ? "Active" : "Inactive") + "\n");
 
         return sb.toString();
     }

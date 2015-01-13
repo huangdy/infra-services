@@ -23,14 +23,16 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
+public class ImportPathRewriteXsdSchema
+    implements XsdSchema, InitializingBean {
 
     private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
     private static final String SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
 
-    private static final QName SCHEMA_QNAME = QNameUtils.createQName(SCHEMA_NAMESPACE, "schema",
-            "xsd");
+    private static final QName SCHEMA_QNAME = QNameUtils.createQName(SCHEMA_NAMESPACE,
+        "schema",
+        "xsd");
 
     static {
         documentBuilderFactory.setNamespaceAware(true);
@@ -46,6 +48,7 @@ public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
      * A subsequent call to the {@link #setXsd(Resource)} method is required.
      */
     public ImportPathRewriteXsdSchema() {
+
     }
 
     /**
@@ -56,11 +59,13 @@ public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
      *             <code>null</code>
      */
     public ImportPathRewriteXsdSchema(Resource xsdResource) {
+
         Assert.notNull(xsdResource, "xsdResource must not be null");
         this.xsdResource = xsdResource;
     }
 
     public void afterPropertiesSet() throws ParserConfigurationException, IOException, SAXException {
+
         Assert.notNull(xsdResource, "'xsd' is required");
         Assert.isTrue(this.xsdResource.exists(), "xsd '" + this.xsdResource + "' does not exit");
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
@@ -68,14 +73,17 @@ public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
     }
 
     public XmlValidator createValidator() throws IOException {
+
         return XmlValidatorFactory.createValidator(xsdResource, XmlValidatorFactory.SCHEMA_W3C_XML);
     }
 
     public Source getSource() {
+
         return new DOMSource(schemaElement);
     }
 
     public String getTargetNamespace() {
+
         return schemaElement.getAttribute("targetNamespace");
     }
 
@@ -85,11 +93,13 @@ public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
      * @param xsdResource the XSD resource
      */
     public void setXsd(Resource xsdResource) {
+
         this.xsdResource = xsdResource;
     }
 
     @Override
     public String toString() {
+
         StringBuffer buffer = new StringBuffer("SimpleXsdSchema");
         buffer.append('{');
         buffer.append(getTargetNamespace());
@@ -98,19 +108,21 @@ public class ImportPathRewriteXsdSchema implements XsdSchema, InitializingBean {
     }
 
     private void loadSchema(DocumentBuilder documentBuilder) throws SAXException, IOException {
+
         Document schemaDocument = documentBuilder.parse(SaxUtils.createInputSource(xsdResource));
         schemaElement = schemaDocument.getDocumentElement();
-        Assert.isTrue(SCHEMA_QNAME.getLocalPart().equals(schemaElement.getLocalName()), xsdResource
-                + " has invalid root element : [" + schemaElement.getLocalName()
-                + "] instead of [schema]");
+        Assert.isTrue(SCHEMA_QNAME.getLocalPart().equals(schemaElement.getLocalName()),
+            xsdResource + " has invalid root element : [" + schemaElement.getLocalName() +
+                "] instead of [schema]");
         Assert.isTrue(SCHEMA_QNAME.getNamespaceURI().equals(schemaElement.getNamespaceURI()),
-                xsdResource + " has invalid root element: [" + schemaElement.getNamespaceURI()
-                        + "] instead of [" + SCHEMA_QNAME.getNamespaceURI() + "]");
+            xsdResource + " has invalid root element: [" + schemaElement.getNamespaceURI() +
+                "] instead of [" + SCHEMA_QNAME.getNamespaceURI() + "]");
         Assert.hasText(getTargetNamespace(), xsdResource + " has no targetNamespace");
         rewriteImportLocations(schemaElement);
     }
 
     private void rewriteImportLocations(Element element) {
+
         NodeList nl = element.getElementsByTagNameNS(SCHEMA_NAMESPACE, "import");
         int length = nl.getLength();
         for (int i = 0; i < length; ++i) {

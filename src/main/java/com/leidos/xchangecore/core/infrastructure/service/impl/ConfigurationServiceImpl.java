@@ -14,7 +14,7 @@ import com.leidos.xchangecore.core.infrastructure.service.DirectoryService;
 
 /**
  * The ConfigurationService Implementation
- * 
+ *
  * @ssdd
  */
 public class ConfigurationServiceImpl
@@ -46,7 +46,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the core name.
-     * 
+     *
      * @return the core name
      * @ssdd
      */
@@ -74,13 +74,13 @@ public class ConfigurationServiceImpl
             log.error(xmle.getMessage());
             return null;
         }
-        */
+         */
         return null;
     }
 
     /**
      * Gets the core name.
-     * 
+     *
      * @return the core name
      * @ssdd
      */
@@ -97,7 +97,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the fully qualified host name.
-     * 
+     *
      * @return the fully qualified host name
      * @ssdd
      */
@@ -116,9 +116,9 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the fully qualified service name urn.
-     * 
+     *
      * @param serviceName the service name
-     * 
+     *
      * @return the fully qualified service name urn
      * @ssdd
      */
@@ -130,7 +130,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the host name.
-     * 
+     *
      * @return the host name
      * @ssdd
      */
@@ -148,7 +148,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the rest base url.
-     * 
+     *
      * @return the rest base url
      * @ssdd
      */
@@ -160,9 +160,9 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the service name urn.
-     * 
+     *
      * @param serviceName the service name
-     * 
+     *
      * @return the service name urn
      * @ssdd
      */
@@ -174,7 +174,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the service urn prefix.
-     * 
+     *
      * @return the service urn prefix
      * @ssdd
      */
@@ -185,7 +185,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Gets the web service base url.
-     * 
+     *
      * @return the web service base url
      * @ssdd
      */
@@ -217,7 +217,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Sets the base url.
-     * 
+     *
      * @param url the new base url
      * @ssdd
      */
@@ -228,7 +228,7 @@ public class ConfigurationServiceImpl
 
     /**
      * Sets the core jid.
-     * 
+     *
      * @param coreJID the new core jid
      * @ssdd
      */

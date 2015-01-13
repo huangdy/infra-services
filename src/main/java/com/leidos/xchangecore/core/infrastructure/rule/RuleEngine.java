@@ -37,13 +37,14 @@ import com.usersmarts.util.DirectoryWatcher.Change;
  * @author Santhosh Amanchi - Image Matters, LLC
  * @created
  */
-public class RuleEngine implements InitializingBean, StatusEventMonitor, DirectoryWatcher.Listener,DisposableBean {
+public class RuleEngine
+    implements InitializingBean, StatusEventMonitor, DirectoryWatcher.Listener, DisposableBean {
 
     Logger log = LoggerFactory.getLogger(RuleEngine.class);
 
     private List<Rule> rules;
 
-    private Map<String, List<Rule>> rulesMap=new HashMap<String, List<Rule>>();
+    private Map<String, List<Rule>> rulesMap = new HashMap<String, List<Rule>>();
 
     private Map<String, Status> status;
 
@@ -52,9 +53,9 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     private Map<String, TimerTask> componentTimerTasks = new HashMap<String, TimerTask>();
 
     Timer timer = new Timer();
- 
-    List<Timer> timers=new ArrayList<Timer>();
-    List<TimerTask> tasks=new ArrayList<TimerTask>();
+
+    List<Timer> timers = new ArrayList<Timer>();
+    List<TimerTask> tasks = new ArrayList<TimerTask>();
 
     private List<StatusEventListener> listeners = new ArrayList<StatusEventListener>();
 
@@ -67,26 +68,32 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     boolean updated = false;
 
     public boolean isUpdated() {
+
         return updated;
     }
 
     public void setUpdated(boolean updated) {
+
         this.updated = updated;
     }
 
     public long getDelay() {
+
         return delay;
     }
 
     public void setDelay(long delay) {
+
         this.delay = delay;
     }
 
     public long getFrequency() {
+
         return frequency;
     }
 
     public void setFrequency(long frequency) {
+
         this.frequency = frequency;
     }
 
@@ -96,6 +103,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
      * Default Constructor
      */
     public RuleEngine() {
+
     }
 
     /**
@@ -103,16 +111,20 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
      * @param rulesFile
      */
     public RuleEngine(List<Rule> rules, File rulesFile) {
+
         this.rules = rules;
         this.rulesFile = rulesFile;
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
         initializeRules(getRulesFile());
         if (getRulesFile().exists()) {
-            directoryWatcher = new DirectoryWatcher(getRulesFile().getParentFile(), this,
-                    "rules.xml", true);
+            directoryWatcher = new DirectoryWatcher(getRulesFile().getParentFile(),
+                                                    this,
+                                                    "rules.xml",
+                                                    true);
             watcherTimer = new Timer();
             watcherTimer.schedule(directoryWatcher, getDelay(), getFrequency());
             timers.add(watcherTimer);
@@ -121,10 +133,12 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     }
 
     public List<Rule> getRules() {
+
         return rules;
     }
 
     public File getRulesFile() {
+
         return rulesFile;
     }
 
@@ -134,6 +148,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
      * @return Status resulting status for the component
      */
     public Status getStatus(StatusEvent event, Status status) {
+
         while (isUpdated()) {
             try {
                 Thread.sleep(5000);
@@ -142,7 +157,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
             }
         }
         List<Rule> rules = rulesMap.get(event.getComponentId().toLowerCase());
-        if(rules==null){
+        if (rules == null) {
             return status;
         }
         for (Rule rule : rules) {
@@ -160,8 +175,9 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
                     Status newStatus = rule.getNewStatus();
                     if (rule.hasTimeOut()) { // if rule has timeout set timer for no event since
                         // timeout
-                        setTimerForNoEvent(event.getComponentId(), rule.getTimeOut(),
-                                "No Error/Warn event since " + rule.getTimeOut() + " milliseconds");
+                        setTimerForNoEvent(event.getComponentId(),
+                            rule.getTimeOut(),
+                            "No Error/Warn event since " + rule.getTimeOut() + " milliseconds");
                     }
                     return newStatus;
                 }
@@ -174,19 +190,26 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
                 // timeout
                 componentTimerTasks.remove(event.getComponentId());
             }
-            setTimerForNoEvent(event.getComponentId(), 25000,
-                    "No Event since 25000 milliseconds (No rule matched the last Event)");
+            setTimerForNoEvent(event.getComponentId(),
+                25000,
+                "No Event since 25000 milliseconds (No rule matched the last Event)");
         }
         return status;
     }
 
-    private void setTimerForNoEvent(final String componentId, final int timeOut,
-            final String message) {
+    private void setTimerForNoEvent(final String componentId,
+                                    final int timeOut,
+                                    final String message) {
+
         TimerTask task = new TimerTask() {
+
             @Override
             public void run() {
-                StatusEvent timeOutEvent = new StatusEvent(componentId, "TIMEOUT", message,
-                        new Date(System.currentTimeMillis()));
+
+                StatusEvent timeOutEvent = new StatusEvent(componentId,
+                                                           "TIMEOUT",
+                                                           message,
+                                                           new Date(System.currentTimeMillis()));
                 notifyOnEvent(timeOutEvent);
 
             }
@@ -198,6 +221,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     }
 
     private boolean hasTimer(String componentId) {
+
         TimerTask timerTask = componentTimerTasks.get(componentId);
         if (timerTask != null)
             return true;
@@ -205,14 +229,16 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     }
 
     public void initializeRules(File rulesFile) {
+
         rulesMap = new HashMap<String, List<Rule>>();
         rules = new ArrayList<Rule>();
         status = new HashMap<String, Status>();
         if (!rulesFile.exists() || !rulesFile.canRead()) {
-            log.warn("Could not locate or open file containing health and status rules"+rulesFile.getAbsolutePath());
+            log.warn("Could not locate or open file containing health and status rules" +
+                     rulesFile.getAbsolutePath());
             return;
         }
-//        log.info("Using rules file:"+ rulesFile.getAbsolutePath());
+        //        log.info("Using rules file:"+ rulesFile.getAbsolutePath());
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db;
         try {
@@ -221,14 +247,14 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
             parseStatus(doc);
             parseRules(doc);
         } catch (Throwable t) {
-            log.error(
-                    "Failed to parse health and status rules from " + rulesFile.getAbsolutePath(),
-                    t);
+            log.error("Failed to parse health and status rules from " + rulesFile.getAbsolutePath(),
+                t);
         }
         setUpdated(false);
     }
 
     private void parseRules(Document doc) {
+
         // parse the rule.xml file
         NodeList ruleNodeList = doc.getElementsByTagName("rule");
         int len = ruleNodeList.getLength();
@@ -272,6 +298,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     }
 
     private void parseStatus(Document doc) throws Exception {
+
         // parse the statuses mentioned in rules.xml file
         doc.getDocumentElement().normalize();
         NodeList statusNodeList = doc.getElementsByTagName("status");
@@ -286,15 +313,18 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
     }
 
     public void setRules(List<Rule> rules) {
+
         this.rules = rules;
     }
 
     public void setRulesFile(File rulesFile) {
+
         this.rulesFile = rulesFile;
     }
 
     @Override
     public void notifyOnEvent(StatusEvent event) {
+
         for (StatusEventListener listener : listeners) {
             listener.handleStatusEvent(event);
         }
@@ -302,39 +332,42 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
 
     @Override
     public void addListener(StatusEventListener listener) {
+
         this.listeners.add(listener);
 
     }
 
     @Override
     public void removeListener(StatusEventListener listener) {
+
     }
 
     @Override
     public void doPost(LoggingEvent event) {
+
     }
 
     @Override
     public void onChange(File file, Change change) {
 
-        if (Change.DELETED.equals(change)) {
-        } else if (Change.MODIFIED.equals(change)) {
-//            log.info("Rules File has been modified");
+        if (Change.DELETED.equals(change)) {} else if (Change.MODIFIED.equals(change)) {
+            //            log.info("Rules File has been modified");
             setUpdated(true);
             initializeRules(file);
         }
     }
 
     public Status getCoreStatus(StatusEvent coreStatusEvent, Status beginStatus) {
-        String message=coreStatusEvent.getMessage();
-        List<Rule> coreRules=rulesMap.get(coreStatusEvent.getComponentId().toLowerCase());
-        for(Rule coreRule:coreRules){
-            boolean containsEvent=coreRule.contiansEvent(message);
-            if(containsEvent){
-                boolean levelCondition=coreRule.isMessage(message);
-                if(levelCondition){
-                    boolean inState=coreRule.isInState(beginStatus);
-                    if(inState){
+
+        String message = coreStatusEvent.getMessage();
+        List<Rule> coreRules = rulesMap.get(coreStatusEvent.getComponentId().toLowerCase());
+        for (Rule coreRule : coreRules) {
+            boolean containsEvent = coreRule.contiansEvent(message);
+            if (containsEvent) {
+                boolean levelCondition = coreRule.isMessage(message);
+                if (levelCondition) {
+                    boolean inState = coreRule.isInState(beginStatus);
+                    if (inState) {
                         return coreRule.getEndStatus();
                     }
                 }
@@ -345,6 +378,7 @@ public class RuleEngine implements InitializingBean, StatusEventMonitor, Directo
 
     @Override
     public void destroy() throws Exception {
+
         if (!tasks.isEmpty()) {
             for (TimerTask task : tasks) {
                 task.cancel();

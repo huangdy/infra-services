@@ -107,9 +107,9 @@ public interface InterestGroupManagementComponent {
                                    String targetCore,
                                    String detailedInfo,
                                    boolean agreementChecked)
-                                       throws InvalidInterestGroupIDException, LocalCoreNotOnlineException,
-                                       RemoteCoreUnavailableException, RemoteCoreUnknownException, XMPPComponentException,
-                                       NoShareAgreementException, NoShareRuleInAgreementException;
+        throws InvalidInterestGroupIDException, LocalCoreNotOnlineException,
+        RemoteCoreUnavailableException, RemoteCoreUnknownException, XMPPComponentException,
+        NoShareAgreementException, NoShareRuleInAgreementException;
 
     /**
      * Performs initialization operations.

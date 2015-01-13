@@ -40,15 +40,18 @@ public class PublishedProduct {
      * @param productType the product type
      */
     public PublishedProduct(String productType) {
+
         this.productType = productType;
     }
 
     public boolean equals(Object obj) {
+
         PublishedProduct pubObj = (PublishedProduct) obj;
         return productType.equals(pubObj.getProductType());
     }
 
     public int hashCode() {
+
         return productType.hashCode();
         // return 42;
     }
@@ -60,6 +63,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -70,6 +74,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public Integer getId() {
+
         return this.id;
     }
 
@@ -80,6 +85,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public void setProductType(String productType) {
+
         this.productType = productType;
     }
 
@@ -90,6 +96,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public String getProductType() {
+
         return this.productType;
     }
 
@@ -100,6 +107,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public void setPublisher(RegisteredService publisher) {
+
         this.publisher = publisher;
     }
 
@@ -110,6 +118,7 @@ public class PublishedProduct {
      * @ssdd
      */
     public RegisteredService getPublisher() {
+
         return this.publisher;
     }
 }

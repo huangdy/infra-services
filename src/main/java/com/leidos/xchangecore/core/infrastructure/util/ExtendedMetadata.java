@@ -20,71 +20,77 @@ import org.hibernate.search.annotations.Index;
  */
 
 @Entity
-@Table(name="EXTENDED_METADATA")
-public class ExtendedMetadata implements Serializable {
-    
-        @SuppressWarnings("unused")
+@Table(name = "EXTENDED_METADATA")
+public class ExtendedMetadata
+    implements Serializable {
+
+    @SuppressWarnings("unused")
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    
-        @Column(name = "CODESPACE")
-    @Field(index = Index.TOKENIZED)    
+
+    @Column(name = "CODESPACE")
+    @Field(index = Index.TOKENIZED)
     private String codespace;
-        
-        @Column(name = "CODE")
+
+    @Column(name = "CODE")
     @Field(index = Index.TOKENIZED)
-        private String code;
-        
-        @Column(name = "LABEL")
+    private String code;
+
+    @Column(name = "LABEL")
     @Field(index = Index.TOKENIZED)
-        private String label;
- 
-        @Column(name = "VALUE")
+    private String label;
+
+    @Column(name = "VALUE")
     @Field(index = Index.TOKENIZED)
-        private String value;
-   
-    
+    private String value;
+
     public String getCodespace() {
+
         return codespace;
     }
 
     public void setCodespace(String codespace) {
+
         this.codespace = codespace;
     }
 
     public String getCode() {
+
         return code;
     }
 
     public void setCode(String code) {
+
         this.code = code;
     }
 
     public String getLabel() {
+
         return label;
     }
 
     public void setLabel(String label) {
+
         this.label = label;
     }
 
     public String getValue() {
+
         return value;
     }
 
     public void setValue(String value) {
+
         this.value = value;
     }
-   
-    
-    public void ExtendedMetadata() {
-    
-        this.codespace="";
-        this.code="";
-        this.label="";
-        this.value="";
-}
-}
 
+    public void ExtendedMetadata() {
+
+        this.codespace = "";
+        this.code = "";
+        this.label = "";
+        this.value = "";
+    }
+}

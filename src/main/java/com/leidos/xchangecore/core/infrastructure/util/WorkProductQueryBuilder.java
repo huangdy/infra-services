@@ -129,7 +129,8 @@ public class WorkProductQueryBuilder
                 setBoundingBox(coords);
                 logger.debug("\tBoundingBox: " + values[0]);
             } else if (key.endsWith(Key_OrderBy) && values.length == 2) {
-                setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0]) : Order.asc(values[0]));
+                setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0])
+                                                               : Order.asc(values[0]));
                 logger.debug("\t" + values[0] + "orderBy: " + values[1]);
             } else if (paramMap.containsKey(key.toLowerCase())) {
                 List<Criterion> cList = createCriterionList(key, values);

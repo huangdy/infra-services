@@ -14,7 +14,9 @@ import org.apache.xmlbeans.XmlOptions;
  *
  */
 public class ValidationUtil {
+
     public static boolean validate(XmlObject object, boolean printValidationErrors) {
+
         boolean valid = false;
         // Set up the validation error listener.
         ArrayList<String> validationErrors = new ArrayList<String>();
@@ -32,6 +34,5 @@ public class ValidationUtil {
         }
         return valid;
     }
-
 
 }

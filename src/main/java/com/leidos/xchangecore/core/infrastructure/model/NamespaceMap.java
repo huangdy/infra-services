@@ -13,42 +13,48 @@ import org.hibernate.search.annotations.Index;
 @Entity
 @Table(name = "NAMESPACE_MAP")
 public class NamespaceMap {
-	    @Id
-	    @Column(name = "ID")
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Integer id;
 
-	    @Column(name = "PREFIX")
-	    @Field(index = Index.TOKENIZED)
-	    private String prefix;
+    @Id
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	    @Column(name = "URI")
-	    @Field(index = Index.TOKENIZED)
-	    private String uri;
+    @Column(name = "PREFIX")
+    @Field(index = Index.TOKENIZED)
+    private String prefix;
 
-		public Integer getId() {
-			return id;
-		}
+    @Column(name = "URI")
+    @Field(index = Index.TOKENIZED)
+    private String uri;
 
-		public void setId(Integer id) {
-			this.id = id;
-		}
+    public Integer getId() {
 
-		public String getPrefix() {
-			return prefix;
-		}
+        return id;
+    }
 
-		public void setPrefix(String prefix) {
-			this.prefix = prefix;
-		}
+    public void setId(Integer id) {
 
-		public String getUri() {
-			return uri;
-		}
+        this.id = id;
+    }
 
-		public void setUri(String uri) {
-			this.uri = uri;
-		}
-	    
-	    
+    public String getPrefix() {
+
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+
+        this.prefix = prefix;
+    }
+
+    public String getUri() {
+
+        return uri;
+    }
+
+    public void setUri(String uri) {
+
+        this.uri = uri;
+    }
+
 }

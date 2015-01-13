@@ -10,6 +10,7 @@ import org.w3.x2005.x08.addressing.EndpointReferenceType;
  */
 
 public interface PullPoint {
+
     /**
      * @param num =the number of messages to get
      * @return Notification messages

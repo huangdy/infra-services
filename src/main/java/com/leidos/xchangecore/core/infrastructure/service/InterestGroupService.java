@@ -21,31 +21,29 @@ import com.saic.precis.x2009.x06.structures.InterestGroupType;
 
 @Transactional
 public interface InterestGroupService {
-	public static final String INTEREST_GROUP_SERVICE_NAME = "InterestGroupService";
+
+    public static final String INTEREST_GROUP_SERVICE_NAME = "InterestGroupService";
     public static final String InterestGroupTypeUrn = "urn:uicds:interestgroup:type";
     public static final String InterestGroupIdUrn = "urn:uicds:interestgroup:id";
-    
-	public String createInterestGroup(InterestGroupType interestGroup, IdentificationListType wpList);	
 
-	public ProductPublicationStatus archiveInterestGroup(String interestGroupId);
-	
-	public ProductPublicationStatus closeInterestGroup(String interestGroupId);
+    public String createInterestGroup(InterestGroupType interestGroup, IdentificationListType wpList);
 
-	public InterestGroupListType getInterestGroupList();
+    public ProductPublicationStatus archiveInterestGroup(String interestGroupId);
 
-	public boolean shareInterestGroup(ShareInterestGroupRequest shareRequest);
+    public ProductPublicationStatus closeInterestGroup(String interestGroupId);
 
-	public boolean unShareInterestGroup();
+    public InterestGroupListType getInterestGroupList();
 
-	public boolean updateInterestGroup(
-			InterestGroupType interestGroup, String interestGroupId);
+    public boolean shareInterestGroup(ShareInterestGroupRequest shareRequest);
 
-	public WorkProductList getListOfWorkProduct(String interestGroupId);
-	
-	public WorkProduct getInterestGroup(String specializedWPId);
-	
-	public void systemInitializedHandler(String message);
-	
+    public boolean unShareInterestGroup();
 
+    public boolean updateInterestGroup(InterestGroupType interestGroup, String interestGroupId);
+
+    public WorkProductList getListOfWorkProduct(String interestGroupId);
+
+    public WorkProduct getInterestGroup(String specializedWPId);
+
+    public void systemInitializedHandler(String message);
 
 }

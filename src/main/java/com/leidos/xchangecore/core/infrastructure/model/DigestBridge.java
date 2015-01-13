@@ -32,7 +32,8 @@ import com.leidos.xchangecore.core.infrastructure.util.DigestHelper;
  * 
  * @ssdd
  */
-public class DigestBridge implements FieldBridge {
+public class DigestBridge
+    implements FieldBridge {
 
     Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -40,6 +41,7 @@ public class DigestBridge implements FieldBridge {
      * Instantiates a new digest bridge.
      */
     public DigestBridge() {
+
         logger.debug("Creating digest bridge");
     }
 
@@ -52,6 +54,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addCyberAddress(CyberAddressType cyber, Document doc, LuceneOptions opts) {
+
         VirtualCoverageType vc = cyber.getVirtualCoverage();
         addField("cyber.protocol", vc.getProtocol(), doc, opts);
         addField("cyber.address", vc.getAddress(), doc, opts);
@@ -66,6 +69,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addEvent(EventType event, Document doc, LuceneOptions opts) {
+
         if (event.getDescriptor() != null) {
             String descriptor = event.getDescriptor().getStringValue();
             addField("digest.event.descriptor", descriptor, doc, opts);
@@ -84,6 +88,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addEntity(EntityType entity, Document doc, LuceneOptions opts) {
+
         if (entity.getDescriptor() != null) {
             String descriptor = entity.getDescriptor().getStringValue();
             addField("digest.entity.descriptor", descriptor, doc, opts);
@@ -103,8 +108,12 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addField(String name, String value, Document document, LuceneOptions options) {
-        Field field = new Field(name, value, options.getStore(), options.getIndex(),
-            options.getTermVector());
+
+        Field field = new Field(name,
+                                value,
+                                options.getStore(),
+                                options.getIndex(),
+                                options.getTermVector());
         document.add(field);
         logger.debug("Adding field: name='" + name + "' value='" + value + "'");
     }
@@ -118,6 +127,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addGeoLocation(GeoLocationType geo, Document doc, LuceneOptions opts) {
+
         Geometry geometry = DigestHelper.getGeometry(geo);
         if (geometry != null) {
             Envelope bbox = geometry.getEnvelopeInternal();
@@ -138,6 +148,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addLocation(LocationType location, Document doc, LuceneOptions opts) {
+
         for (GeoLocationType geo : location.getGeoLocationArray()) {
             addGeoLocation(geo, doc, opts);
         }
@@ -157,8 +168,10 @@ public class DigestBridge implements FieldBridge {
      * @param opts the opts
      * @ssdd
      */
-    protected void addLocationRelationship(EntityLocationRelationshipType where, Document doc,
-        LuceneOptions opts) {
+    protected void addLocationRelationship(EntityLocationRelationshipType where,
+                                           Document doc,
+                                           LuceneOptions opts) {
+
         // not supported at the moment
         // this is where a location and a time are associated with the ThingType
     }
@@ -172,6 +185,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addPhysicalAddress(PhysicalAddressType physical, Document doc, LuceneOptions opts) {
+
         PostalAddress postal = physical.getPostalAddress();
         addField("where.city", postal.getCity(), doc, opts);
         addField("where.postalCode", postal.getPostalCode(), doc, opts);
@@ -191,8 +205,10 @@ public class DigestBridge implements FieldBridge {
      * @param opts the opts
      * @ssdd
      */
-    protected void addRelationships(RelationshipType[] relationships, Document doc,
-        LuceneOptions opts) {
+    protected void addRelationships(RelationshipType[] relationships,
+                                    Document doc,
+                                    LuceneOptions opts) {
+
         for (RelationshipType relationship : relationships) {
             if (relationship instanceof EntityLocationRelationshipType) {
                 addLocationRelationship((EntityLocationRelationshipType) relationship, doc, opts);
@@ -209,6 +225,7 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addThingTypes(ThingType[] types, Document doc, LuceneOptions opts) {
+
         for (ThingType type : types) {
             String nodeName = type.getDomNode().getNodeName();
             if (type instanceof EventType) {
@@ -216,7 +233,7 @@ public class DigestBridge implements FieldBridge {
             } else if (type instanceof LocationType) {
                 addLocation((LocationType) type, doc, opts);
             } else if (type instanceof EntityType) {
-            	addEntity((EntityType) type, doc, opts);
+                addEntity((EntityType) type, doc, opts);
             } else {
                 logger.info("Unknown thing type: " + nodeName);
             }
@@ -232,11 +249,13 @@ public class DigestBridge implements FieldBridge {
      * @ssdd
      */
     protected void addWhat(WhatType what, Document doc, LuceneOptions opts) {
+
         addField("digest.event.what", what.getCodespace() + what.getCode(), doc, opts);
     }
 
     @Override
     public void set(String name, Object value, Document doc, LuceneOptions opts) {
+
         WorkProduct workProduct = (WorkProduct) value;
         DigestDocument digestDoc = workProduct.getDigest();
         if (digestDoc != null) {

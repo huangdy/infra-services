@@ -18,8 +18,7 @@ import org.w3c.dom.Document;
 
 public class XmlUtil {
 
-    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint()
-        .setLoadStripWhitespace();
+    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint().setLoadStripWhitespace();
 
     public static final XmlOptions innerOnly = new XmlOptions().setSavePrettyPrint().setSaveInner();
 
@@ -42,6 +41,7 @@ public class XmlUtil {
     }
 
     public static String getTextFromAny(XmlObject object) {
+
         XmlCursor c = object.newCursor();
         String text = c.getTextValue();
         c.dispose();
@@ -54,8 +54,8 @@ public class XmlUtil {
                                         SchemaType subSchemaType,
                                         XmlObject theObject) {
 
-        XmlObject subObject =
-            parentObject.substitute(new QName(subNamespace, subTypeName), subSchemaType);
+        XmlObject subObject = parentObject.substitute(new QName(subNamespace, subTypeName),
+            subSchemaType);
         if (subObject != parentObject) {
             subObject.set(theObject);
         }

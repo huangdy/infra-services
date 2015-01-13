@@ -12,11 +12,14 @@ import com.leidos.xchangecore.core.dao.hb.GenericHibernateDAO;
 import com.leidos.xchangecore.core.infrastructure.dao.LoggerDAO;
 import com.leidos.xchangecore.core.infrastructure.model.Log;
 
-public class LoggerDAOHibernate extends GenericHibernateDAO<Log, Integer> implements LoggerDAO {
+public class LoggerDAOHibernate
+    extends GenericHibernateDAO<Log, Integer>
+    implements LoggerDAO {
 
     Logger logger = LoggerFactory.getLogger(LoggerDAOHibernate.class);
 
     public List<Log> findByHostname(String hostname) {
+
         Log log = new Log();
         log.setHostname(hostname);
         List<Log> results = findByExample(log);
@@ -24,6 +27,7 @@ public class LoggerDAOHibernate extends GenericHibernateDAO<Log, Integer> implem
     }
 
     public List<Log> findByLogger(String logger) {
+
         Log log = new Log();
         log.setLogger(logger);
         List<Log> results = findByExample(log);
@@ -31,6 +35,7 @@ public class LoggerDAOHibernate extends GenericHibernateDAO<Log, Integer> implem
     }
 
     public Log logRequest(Log log) {
+
         logger.debug("in log Request()...");
         if (logger.isDebugEnabled()) {
             logger.debug("in log Request...");

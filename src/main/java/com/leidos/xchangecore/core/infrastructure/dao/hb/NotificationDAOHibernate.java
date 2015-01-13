@@ -19,8 +19,9 @@ import com.leidos.xchangecore.core.dao.hb.GenericHibernateDAO;
 import com.leidos.xchangecore.core.infrastructure.dao.NotificationDAO;
 import com.leidos.xchangecore.core.infrastructure.model.Notification;
 
-public class NotificationDAOHibernate extends GenericHibernateDAO<Notification, String> implements
-    NotificationDAO {
+public class NotificationDAOHibernate
+    extends GenericHibernateDAO<Notification, String>
+    implements NotificationDAO {
 
     private static Logger logger = LoggerFactory.getLogger(NotificationDAOHibernate.class);
 
@@ -56,9 +57,8 @@ public class NotificationDAOHibernate extends GenericHibernateDAO<Notification, 
         //we use hibernate root sql call and do this way.
 
         final String sql_query = "SELECT ENTITY_ID FROM notification,notification_subscription " +
-            "WHERE notification.NOTIFICATION_ID = notification_subscription.NOTIFICATION_ID " +
-            "and notification_subscription.SUBSCRIPTION_ID=" +
-            SubID;
+                                 "WHERE notification.NOTIFICATION_ID = notification_subscription.NOTIFICATION_ID " +
+                                 "and notification_subscription.SUBSCRIPTION_ID=" + SubID;
 
         final Query query = getSession().createSQLQuery(sql_query);
         @SuppressWarnings("unchecked")

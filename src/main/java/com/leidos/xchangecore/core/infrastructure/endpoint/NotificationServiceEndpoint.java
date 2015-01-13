@@ -167,7 +167,8 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * @idd
  */
 @Endpoint
-public class NotificationServiceEndpoint implements MessageEndpoint, ServiceNamespaces {
+public class NotificationServiceEndpoint
+    implements MessageEndpoint, ServiceNamespaces {
 
     @Autowired
     NotificationService notificationService;
@@ -201,7 +202,7 @@ public class NotificationServiceEndpoint implements MessageEndpoint, ServiceName
 
         // get the entity id from the to element
         XmlObject[] to = request.getGetCurrentMessageRequest().selectChildren("http://docs.oasis-open.org/wsn/b-2",
-                                                                              "Topic");
+            "Topic");
         if (to.length > 0) {
             log.debug("GetCurrentMessageRequest: to: " + to[0].toString());
             XmlCursor cursor = to[0].newCursor();
@@ -221,7 +222,7 @@ public class NotificationServiceEndpoint implements MessageEndpoint, ServiceName
             String jid = "admin";
             log.debug("getCurrentMessage: use jid whenever it's available" + jid);
             NotificationMessageHolderType notificationMessage = notificationService.getCurrentMessage(new QName(topicName),
-                                                                                                      jid);
+                jid);
             if (notificationMessage != null) {
                 response.getGetCurrentMessageResponse().set(notificationMessage.getMessage());
             }
@@ -250,7 +251,7 @@ public class NotificationServiceEndpoint implements MessageEndpoint, ServiceName
         log.debug("GetMessageRequest for " + entityID);
 
         NotificationMessageHolderType[] notificationMessageArray = notificationService.getMessages(entityID,
-                                                                                                   1);
+            1);
         if (notificationMessageArray != null && notificationMessageArray.length > 0) {
             response.getGetMessagesResponse().setNotificationMessageArray(notificationMessageArray);
         }
@@ -278,7 +279,7 @@ public class NotificationServiceEndpoint implements MessageEndpoint, ServiceName
 
         // get the entity id from the to element
         XmlObject[] to = request.getNotifyRequest().selectChildren("http://www.w3.org/2005/08/addressing",
-                                                                   "To");
+            "To");
         if (to.length > 0) {
             // log.debug("found "+to[0].toString());
             XmlCursor cursor = to[0].newCursor();
@@ -326,9 +327,8 @@ public class NotificationServiceEndpoint implements MessageEndpoint, ServiceName
         GetMatchingMessagesResponseDocument responseDoc = GetMatchingMessagesResponseDocument.Factory.newInstance();
         GetMatchingMessagesResponse response = responseDoc.addNewGetMatchingMessagesResponse();
         log.debug("getMatchingMessages: requested user: " +
-            request.getGetMatchingMessagesRequest().getID().getStringValue() +
-            ", real user: " +
-            ServletUtil.getPrincipalName());
+                  request.getGetMatchingMessagesRequest().getID().getStringValue() +
+                  ", real user: " + ServletUtil.getPrincipalName());
         // IdentificationType[] identificationArray = notificationService.getMatchingMessages(request.getGetMatchingMessagesRequest().getID().getStringValue());
         IdentificationType[] identificationArray = notificationService.getMatchingMessages(ServletUtil.getPrincipalName());
         IdentificationListType workProductIdentificationList = response.addNewWorkProductIdentificationList();

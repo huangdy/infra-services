@@ -63,8 +63,12 @@ public class MapRenderer {
      * @throws Exception
      * @ssdd
      */
-    public Image render(Element viewContext, String[] layers, Envelope bbox, int width, int height,
-            String format) throws Exception {
+    public Image render(Element viewContext,
+                        String[] layers,
+                        Envelope bbox,
+                        int width,
+                        int height,
+                        String format) throws Exception {
 
         String formatType = format.substring(format.indexOf("/") + 1, format.length());
         BufferedImage image = createImage(formatType, width, height, true);
@@ -99,8 +103,12 @@ public class MapRenderer {
      * @return List of urls for get map requests
      * @ssdd
      */
-    private List<String> getLayerRequests(Element layerList, String[] layers, Envelope bbox,
-            int width, int height, String format) {
+    private List<String> getLayerRequests(Element layerList,
+                                          String[] layers,
+                                          Envelope bbox,
+                                          int width,
+                                          int height,
+                                          String format) {
 
         List<String> requests = new ArrayList<String>();
         String lastServer = null;
@@ -140,6 +148,7 @@ public class MapRenderer {
      * @ssdd
      */
     private boolean contains(String[] array, String item) {
+
         if (array == null || array.length == 0)
             return true;
         for (String arrayItem : array) {
@@ -162,13 +171,18 @@ public class MapRenderer {
      * @return String url for a GetMap request to the layer's WMS
      * @ssdd
      */
-    protected String getMapRequest(String href, String name, Envelope bbox, int width, int height,
-            String format) {
-        String url = href.contains("?") ? (!href.endsWith("?") ? href + "&" : href + "") : href
-                + "?";
+    protected String getMapRequest(String href,
+                                   String name,
+                                   Envelope bbox,
+                                   int width,
+                                   int height,
+                                   String format) {
+
+        String url = href.contains("?") ? (!href.endsWith("?") ? href + "&" : href + "") : href +
+                                                                                           "?";
         url += "request=GetMap&service=WMS&version=1.1.1";
-        url += "&bbox=" + bbox.getMinX() + "," + bbox.getMinY() + "," + bbox.getMaxX() + ","
-                + bbox.getMaxY();
+        url += "&bbox=" + bbox.getMinX() + "," + bbox.getMinY() + "," + bbox.getMaxX() + "," +
+               bbox.getMaxY();
         url += "&width=" + width;
         url += "&height=" + height;
         url += "&format=" + format;
@@ -193,8 +207,7 @@ public class MapRenderer {
 
         try {
             // BufferedImage layer = ImageIO.read(new URL(url));
-            BufferedImage layer = toBufferedImage(Toolkit.getDefaultToolkit().createImage(
-                    new URL(url)));
+            BufferedImage layer = toBufferedImage(Toolkit.getDefaultToolkit().createImage(new URL(url)));
             // if(log.isDebugEnabled()) {
             // String f = format.substring(format.indexOf("/")+1, format.length());
             // InputStream in = new URL(url).openStream();
@@ -225,8 +238,11 @@ public class MapRenderer {
      * @return BufferedImage
      * @ssdd
      */
-    public static BufferedImage createImage(String format, int width, int height,
-            boolean transparent) {
+    public static BufferedImage createImage(String format,
+                                            int width,
+                                            int height,
+                                            boolean transparent) {
+
         BufferedImage image;
         int imageType = transparent ? BufferedImage.TYPE_INT_ARGB : BufferedImage.TYPE_INT_RGB;
         image = new BufferedImage(width, height, imageType);
@@ -304,6 +320,7 @@ public class MapRenderer {
      * @ssdd
      */
     public static boolean hasAlpha(Image image) {
+
         // // If buffered image, the color model is readily available
         // if (image instanceof BufferedImage) {
         // BufferedImage bimage = (BufferedImage)image;

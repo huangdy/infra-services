@@ -25,7 +25,8 @@ import org.slf4j.LoggerFactory;
  * @author Santhosh Amanchi - Image Matters, LLC
  * @created
  */
-public class UrlDirectoryWatcher extends TimerTask {
+public class UrlDirectoryWatcher
+    extends TimerTask {
 
     public enum Change {
         MODIFIED, ADDED, DELETED
@@ -47,6 +48,7 @@ public class UrlDirectoryWatcher extends TimerTask {
      * @param manager
      */
     public UrlDirectoryWatcher(ServletConfig config, String directoryPath, Listener listener) {
+
         this(config, directoryPath, listener, null, false);
     }
 
@@ -54,7 +56,8 @@ public class UrlDirectoryWatcher extends TimerTask {
      * @param manager
      */
     public UrlDirectoryWatcher(ServletConfig config, String directoryPath, Listener listener,
-            String pattern, boolean notifyInInit) {
+                               String pattern, boolean notifyInInit) {
+
         this.directoryPath = directoryPath;
         this.listener = listener;
         if (pattern != null) {
@@ -65,10 +68,12 @@ public class UrlDirectoryWatcher extends TimerTask {
     }
 
     public final void setPattern(String pattern) {
+
         this.pattern = Pattern.compile(pattern);
     }
 
     public void run() {
+
         try {
 
             Set<String> dir = config.getServletContext().getResourcePaths(directoryPath);
@@ -119,6 +124,7 @@ public class UrlDirectoryWatcher extends TimerTask {
     }
 
     protected final void init(boolean notify) {
+
         Set<String> dir = config.getServletContext().getResourcePaths("/");
         Iterator it = dir.iterator();
         while (it.hasNext()) {
@@ -145,6 +151,7 @@ public class UrlDirectoryWatcher extends TimerTask {
     }
 
     public interface Listener {
+
         void onChange(URL url, Change change);
     }
 }

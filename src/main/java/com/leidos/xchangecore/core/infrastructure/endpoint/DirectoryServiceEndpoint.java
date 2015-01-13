@@ -136,8 +136,7 @@ public class DirectoryServiceEndpoint
         if (products != null && products.length > 0) {
             for (WorkProduct product : products) {
                 if (product != null) {
-                    productList.addNewWorkProduct().set(
-                        WorkProductHelper.toWorkProductSummary(product));
+                    productList.addNewWorkProduct().set(WorkProductHelper.toWorkProductSummary(product));
                 }
             }
         }
@@ -183,8 +182,7 @@ public class DirectoryServiceEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_DirectoryService, localPart = "GetExternalDataSourceListRequest")
-    public GetExternalDataSourceListResponseDocument GetExternalDataSourceList(
-        GetExternalDataSourceListRequestDocument requestDoc) {
+    public GetExternalDataSourceListResponseDocument GetExternalDataSourceList(GetExternalDataSourceListRequestDocument requestDoc) {
 
         String coreName = requestDoc.getGetExternalDataSourceListRequest().getCoreName();
         log.debug("GetExternalToolList (coreName: " + coreName + ")");
@@ -192,8 +190,7 @@ public class DirectoryServiceEndpoint
         ExternalDataSourceConfigListType externalDataSourceList = ds.getExternalDataSourceList(coreName);
         GetExternalDataSourceListResponseDocument responseDoc = GetExternalDataSourceListResponseDocument.Factory.newInstance();
 
-        responseDoc.addNewGetExternalDataSourceListResponse().setExternalDataSourceList(
-            externalDataSourceList);
+        responseDoc.addNewGetExternalDataSourceListResponse().setExternalDataSourceList(externalDataSourceList);
         return responseDoc;
     }
 
@@ -210,8 +207,7 @@ public class DirectoryServiceEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_DirectoryService, localPart = "GetExternalToolListRequest")
-    public GetExternalToolListResponseDocument GetExternalToolList(
-        GetExternalToolListRequestDocument requestDoc) {
+    public GetExternalToolListResponseDocument GetExternalToolList(GetExternalToolListRequestDocument requestDoc) {
 
         String coreName = requestDoc.getGetExternalToolListRequest().getCoreName();
         log.debug("GetExternalToolList (coreName: " + coreName + ")");
@@ -309,8 +305,8 @@ public class DirectoryServiceEndpoint
         WorkProductTypeListType publishedProducts = requestDoc.getRegisterExternalToolRequest().getExternalTool().getPublishedProducts();
         WorkProductTypeListType subscribedProducts = requestDoc.getRegisterExternalToolRequest().getExternalTool().getSubscribedProducts();
 
-        log.debug("RegisterExternalTool (urn: " + urn + " publishedProducts=" + publishedProducts
-            + ")");
+        log.debug("RegisterExternalTool (urn: " + urn + " publishedProducts=" + publishedProducts +
+                  ")");
 
         ds.registerExternalTool(urn, toolName, publishedProducts, subscribedProducts);
     }

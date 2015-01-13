@@ -38,6 +38,7 @@ public class ProductSubscriptionByID {
     private Integer subscriptionId;
 
     public ProductSubscriptionByID() {
+
     }
 
     /**
@@ -49,6 +50,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public ProductSubscriptionByID(String productId, String subscriberName, Integer subscriptionId) {
+
         setProductId(productId);
         setSubscriber(subscriberName);
         setSubscriptionId(subscriptionId);
@@ -61,6 +63,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -71,6 +74,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public Integer getId() {
+
         return this.id;
     }
 
@@ -81,6 +85,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public void setProductId(String productId) {
+
         this.productId = productId;
     }
 
@@ -91,6 +96,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public String getProductId() {
+
         return this.productId;
     }
 
@@ -101,6 +107,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public void setSubscriber(String subscriberName) {
+
         this.subscriberName = subscriberName;
     }
 
@@ -111,6 +118,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public String getSubscriberName() {
+
         return this.subscriberName;
     }
 
@@ -121,6 +129,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public void setSubscriptionId(Integer subscriptionId) {
+
         this.subscriptionId = subscriptionId;
     }
 
@@ -131,6 +140,7 @@ public class ProductSubscriptionByID {
      * @ssdd
      */
     public Integer getSubscriptionId() {
+
         return this.subscriptionId;
     }
 }

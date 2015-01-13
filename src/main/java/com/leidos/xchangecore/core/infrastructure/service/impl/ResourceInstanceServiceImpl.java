@@ -121,7 +121,7 @@ public class ResourceInstanceServiceImpl
             r.getEndpoints().add(endpoint.getAddress().getStringValue());
 
             // fli added on 11/30/2011
-           // r.setNotMsgCount(notificationService.findMsgCountByEntityId(id.getStringValue()));
+            // r.setNotMsgCount(notificationService.findMsgCountByEntityId(id.getStringValue()));
 
             // create a unique identifier
             r.setIdentifier(id.getStringValue());
@@ -157,8 +157,10 @@ public class ResourceInstanceServiceImpl
      * @ssdd
      */
     @Override
-    public ResourceInstanceModel register(IdentifierType id, IdentifierType localResourceID,
-        IdentifierType resourceProfileID) throws ResourceProfileDoesNotExist {
+    public ResourceInstanceModel register(IdentifierType id,
+                                          IdentifierType localResourceID,
+                                          IdentifierType resourceProfileID)
+        throws ResourceProfileDoesNotExist {
 
         // Applications must have a Resource Profile created for them by an administrator and must
         // register with the core to begin to receive notifications. The following diagrams shows
@@ -202,8 +204,8 @@ public class ResourceInstanceServiceImpl
             resourceInstanceDAO.makeTransient(resourceModel);
             return id;
         } else {
-            throw new ResourceInstanceDoesNotExist(id.getStringValue()
-                + " resource instance does not exist");
+            throw new ResourceInstanceDoesNotExist(id.getStringValue() +
+                                                   " resource instance does not exist");
         }
     }
 
@@ -225,8 +227,9 @@ public class ResourceInstanceServiceImpl
      * @ssdd
      */
     @Override
-    public ResourceInstanceModel checkin(IdentifierType id, IdentifierType localResourceID,
-        IdentifierType resourceProfileID) {
+    public ResourceInstanceModel checkin(IdentifierType id,
+                                         IdentifierType localResourceID,
+                                         IdentifierType resourceProfileID) {
 
         // Applications can check in with or without a profile. Checking in with a profile shows how
         // an application checks into UICDS to enable it to start receiving notifications. This
@@ -292,7 +295,9 @@ public class ResourceInstanceServiceImpl
         WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
         directoryService.registerUICDSService(NS_ResourceInstanceService,
-            RESOURCEINSTANCE_SERVICE_NAME, publishedProducts, subscribedProducts);
+            RESOURCEINSTANCE_SERVICE_NAME,
+            publishedProducts,
+            subscribedProducts);
         init();
     }
 
@@ -323,20 +328,21 @@ public class ResourceInstanceServiceImpl
      */
     @Override
     public boolean applyProfile(ResourceInstanceModel resourceModel,
-        IdentifierType resourceProfileID) throws ResourceProfileDoesNotExist {
+                                IdentifierType resourceProfileID)
+        throws ResourceProfileDoesNotExist {
 
         // get the profile from the ResourceProfile service
         ResourceProfileModel profileModel = resourceProfileService.getProfile(resourceProfileID);
 
         if (profileModel == null) {
-            throw new ResourceProfileDoesNotExist(resourceProfileID.getStringValue()
-                + " does not exist");
+            throw new ResourceProfileDoesNotExist(resourceProfileID.getStringValue() +
+                                                  " does not exist");
         }
 
         // Tell the NotificationService to add the interests from the profile to the endpoint
         // if this profile has not already been applied to this resource
-        else if (resourceModel.getEndpoints().size() > 0
-            && !resourceModel.getProfiles().contains(resourceProfileID.getStringValue())) {
+        else if (resourceModel.getEndpoints().size() > 0 &&
+                 !resourceModel.getProfiles().contains(resourceProfileID.getStringValue())) {
 
             // get the resource's endpoint
             Iterator<String> i = resourceModel.getEndpoints().iterator();
@@ -365,8 +371,8 @@ public class ResourceInstanceServiceImpl
             if (profileModel.getDescription() != null) {
                 resourceModel.setDescription(profileModel.getDescription());
             } else {
-                resourceModel.setDescription(resourceModel.getIdentifier() + "-"
-                    + profileModel.getIdentifier());
+                resourceModel.setDescription(resourceModel.getIdentifier() + "-" +
+                                             profileModel.getIdentifier());
             }
 
             return true;
@@ -429,7 +435,8 @@ public class ResourceInstanceServiceImpl
             int i = 0;
             for (ResourceInstanceModel resourceInstance : resourceInstanceList) {
                 //resourceInstance.setNotMsgCount(notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
-                ResourceInstance resource = ResourceInstanceUtil.copyProperties(resourceInstance, notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
+                ResourceInstance resource = ResourceInstanceUtil.copyProperties(resourceInstance,
+                    notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
                 if (resource != null) {
                     resources[i++] = resource;
                 }
@@ -454,7 +461,8 @@ public class ResourceInstanceServiceImpl
 
         if (resourceModel != null) {
             //resourceModel.setNotMsgCount(notificationService.findMsgCountByEntityId(id.getStringValue()));
-            return ResourceInstanceUtil.copyProperties(resourceModel, notificationService.findMsgCountByEntityId(id.getStringValue()));
+            return ResourceInstanceUtil.copyProperties(resourceModel,
+                notificationService.findMsgCountByEntityId(id.getStringValue()));
         } else {
             return null;
         }

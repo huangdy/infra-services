@@ -22,7 +22,8 @@ import com.usersmarts.util.MutableNamespaceContext;
  * QueryBuilder
  * 
  */
-public class WorkProductQueryBuilder extends SimpleQueryBuilder {
+public class WorkProductQueryBuilder
+    extends SimpleQueryBuilder {
 
     private static final QName PRODUCT_TYPE = new QName("productType");
     private static final QName PRODUCT_ID = new QName("productId");
@@ -31,6 +32,7 @@ public class WorkProductQueryBuilder extends SimpleQueryBuilder {
     private static final QName TYPE = new QName("type");
 
     public WorkProductQueryBuilder() {
+
         super();
         setMaxResultsDefault(ALL_RESULTS);
         setDefaultSortOrder(false);
@@ -56,8 +58,11 @@ public class WorkProductQueryBuilder extends SimpleQueryBuilder {
 
         // associated object id parameter
         IFilterExpressionBuilderExtension idExt = new IFilterExpressionBuilderExtension() {
-            public FilterExpressionBuilder handle(PropertyName propertyName, Object value,
-                    FilterExpressionBuilder builder) {
+
+            public FilterExpressionBuilder handle(PropertyName propertyName,
+                                                  Object value,
+                                                  FilterExpressionBuilder builder) {
+
                 builder.startFunctionNode(FilterConstants.PROPERTY_IS_EQUAL_TO);
                 builder.addPropertyNameNode(propertyName);
                 builder.addConstantNode(Coerce.toInteger(value));
@@ -69,8 +74,11 @@ public class WorkProductQueryBuilder extends SimpleQueryBuilder {
 
         // when
         getExtensions().put(WHEN, new IFilterExpressionBuilderExtension() {
-            public FilterExpressionBuilder handle(PropertyName propertyName, Object value,
-                    FilterExpressionBuilder builder) {
+
+            public FilterExpressionBuilder handle(PropertyName propertyName,
+                                                  Object value,
+                                                  FilterExpressionBuilder builder) {
+
                 Date[] dates = (Date[]) value;
                 builder.startFunctionNode(FilterConstants.PROPERTY_IS_BETWEEN);
                 builder.addPropertyNameNode(propertyName);
@@ -83,25 +91,31 @@ public class WorkProductQueryBuilder extends SimpleQueryBuilder {
 
         // type
         getExtensions().put(TYPE, new IFilterExpressionBuilderExtension() {
-            public FilterExpressionBuilder handle(PropertyName propertyName, Object value,
-                    FilterExpressionBuilder builder) {
+
+            public FilterExpressionBuilder handle(PropertyName propertyName,
+                                                  Object value,
+                                                  FilterExpressionBuilder builder) {
+
                 return builder;
             }
         });
 
         // keywords
         getExtensions().put(OPENSEARCH.KEYWORDS, new IFilterExpressionBuilderExtension() {
+
             @SuppressWarnings("unchecked")
-            public FilterExpressionBuilder handle(PropertyName propertyName, Object value,
-                    FilterExpressionBuilder builder) {
+            public FilterExpressionBuilder handle(PropertyName propertyName,
+                                                  Object value,
+                                                  FilterExpressionBuilder builder) {
+
                 List<String> keywords = (List<String>) value;
                 if (!keywords.isEmpty())
                     builder.startOrNode();
                 for (String keyword : keywords) {
-                    builder.function(FilterConstants.PROPERTY_IS_LIKE, ATOM.TITLE, "*" + keyword
-                            + "*");
-                    builder.function(FilterConstants.PROPERTY_IS_LIKE, ATOM.SUMMARY, "*" + keyword
-                            + "*");
+                    builder.function(FilterConstants.PROPERTY_IS_LIKE, ATOM.TITLE, "*" + keyword +
+                                                                                   "*");
+                    builder.function(FilterConstants.PROPERTY_IS_LIKE, ATOM.SUMMARY, "*" + keyword +
+                                                                                     "*");
                 }
                 if (!keywords.isEmpty())
                     builder.endNode();

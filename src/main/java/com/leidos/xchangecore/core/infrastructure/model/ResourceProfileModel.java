@@ -35,7 +35,8 @@ import org.hibernate.search.annotations.Index;
 
 @Entity
 @Table(name = "RESOURCE_PROFILE")
-public class ResourceProfileModel implements Serializable {
+public class ResourceProfileModel
+    implements Serializable {
 
     private static final long serialVersionUID = 3631735818429898973L;
 
@@ -56,12 +57,16 @@ public class ResourceProfileModel implements Serializable {
     private String description;
 
     // key = codespace,label value =value>
-    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
-    
+
     @OneToMany(targetEntity = InterestElement.class, cascade = CascadeType.ALL)
-    @Cascade( { org.hibernate.annotations.CascadeType.DELETE_ORPHAN })
+    @Cascade({
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN
+    })
     @LazyCollection(value = LazyCollectionOption.FALSE)
     private Set<InterestElement> interests = new HashSet<InterestElement>();
 
@@ -72,6 +77,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -82,6 +88,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -92,6 +99,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public String getIdentifier() {
+
         return identifier;
     }
 
@@ -102,6 +110,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public void setIdentifier(String identifier) {
+
         this.identifier = identifier;
     }
 
@@ -112,6 +121,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public String getLabel() {
+
         return label;
     }
 
@@ -122,6 +132,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public void setLabel(String label) {
+
         this.label = label;
     }
 
@@ -132,6 +143,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public String getDescription() {
+
         return description;
     }
 
@@ -142,11 +154,10 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public void setDescription(String description) {
+
         this.description = description;
     }
 
-  
-    
     /**
      * Gets the interests.
      * 
@@ -154,6 +165,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public Set<InterestElement> getInterests() {
+
         return interests;
     }
 
@@ -166,6 +178,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public boolean addInterest(InterestElement interest) {
+
         return this.interests.add(interest);
     }
 
@@ -178,6 +191,7 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public boolean removeInterest(InterestElement interest) {
+
         return this.interests.remove(interest);
     }
 
@@ -188,10 +202,12 @@ public class ResourceProfileModel implements Serializable {
      * @ssdd
      */
     public void setInterests(Set<InterestElement> interests) {
+
         this.interests = interests;
     }
 
     public String toString() {
+
         String profile = "";
 
         profile += label + "\n";
@@ -210,6 +226,7 @@ public class ResourceProfileModel implements Serializable {
 
     @Override
     public int hashCode() {
+
         final int prime = 31;
         int result = 1;
         result = prime * result + ((description == null) ? 0 : description.hashCode());
@@ -220,6 +237,7 @@ public class ResourceProfileModel implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null)
@@ -245,20 +263,22 @@ public class ResourceProfileModel implements Serializable {
         return true;
     }
 
-	public Set<CodeSpaceValueType> getCvts() {
-		return cvts;
-	}
+    public Set<CodeSpaceValueType> getCvts() {
 
-	public void setCvts(Set<CodeSpaceValueType> cvts) {
-		this.cvts = cvts;
-	}
+        return cvts;
+    }
 
-	public void addCVT(String cs, String label, String value)
-	{
-		CodeSpaceValueType cvt=new CodeSpaceValueType();
-		cvt.setCodeSpace(cs);
-		cvt.setLabel(label);
-		cvt.setValue(value);
-		cvts.add(cvt);
-	}
+    public void setCvts(Set<CodeSpaceValueType> cvts) {
+
+        this.cvts = cvts;
+    }
+
+    public void addCVT(String cs, String label, String value) {
+
+        CodeSpaceValueType cvt = new CodeSpaceValueType();
+        cvt.setCodeSpace(cs);
+        cvt.setLabel(label);
+        cvt.setValue(value);
+        cvts.add(cvt);
+    }
 }

@@ -8,6 +8,6 @@ public interface ISearchService {
 
     // List<Object> search(HashMap<String,String[]> params);
 
-    Document searchAsDocument(HashMap<String,String[]> params);
+    Document searchAsDocument(HashMap<String, String[]> params);
 
 }

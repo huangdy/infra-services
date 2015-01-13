@@ -60,9 +60,11 @@ public class ProductSubscriptionByType
     // key: prefix
     // value: namespace. //also named as URI
 
-     @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
-     private Set<NamespaceMap> namespacemap = new HashSet<NamespaceMap>();
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
+    @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
+    private Set<NamespaceMap> namespacemap = new HashSet<NamespaceMap>();
 
     public ProductSubscriptionByType() {
 
@@ -80,7 +82,8 @@ public class ProductSubscriptionByType
      * @ssdd
      */
     public ProductSubscriptionByType(String productType, String interestGroupID, String xPath,
-        String subscriberName, Integer subscriptionId, Set<NamespaceMap> namespaceMap) {
+                                     String subscriberName, Integer subscriptionId,
+                                     Set<NamespaceMap> namespaceMap) {
 
         setProductType(productType);
         setInterestGroupID(interestGroupID);
@@ -222,7 +225,6 @@ public class ProductSubscriptionByType
         return this.subscriptionId;
     }
 
-
     public Map<String, String> getNamespaceMap() {
 
         HashMap<String, String> map = new HashMap<String, String>();
@@ -232,11 +234,13 @@ public class ProductSubscriptionByType
         return map;
     }
 
-	public Set<NamespaceMap> getNamespacemap() {
-		return this.namespacemap;
-	}
+    public Set<NamespaceMap> getNamespacemap() {
 
-	public void setNamespacemap(Set<NamespaceMap> namespacemap) {
-		this.namespacemap = namespacemap;
-	}
+        return this.namespacemap;
+    }
+
+    public void setNamespacemap(Set<NamespaceMap> namespacemap) {
+
+        this.namespacemap = namespacemap;
+    }
 }

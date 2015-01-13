@@ -5,7 +5,8 @@ import java.util.Set;
 import com.leidos.xchangecore.core.dao.GenericDAO;
 import com.leidos.xchangecore.core.infrastructure.model.RegisteredService;
 
-public interface RegisteredServiceDAO extends GenericDAO<RegisteredService, Integer> {
+public interface RegisteredServiceDAO
+    extends GenericDAO<RegisteredService, Integer> {
 
     public Set<RegisteredService> findByUrn(String urn);
 
@@ -15,8 +16,8 @@ public interface RegisteredServiceDAO extends GenericDAO<RegisteredService, Inte
 
     public Set<RegisteredService> findByCoreName(String coreName);
 
-    public Set<RegisteredService> findByServiceTypeAndCoreName(
-            RegisteredService.SERVICE_TYPE serviceType, String coreName);
+    public Set<RegisteredService> findByServiceTypeAndCoreName(RegisteredService.SERVICE_TYPE serviceType,
+                                                               String coreName);
 
     public Set<RegisteredService> findByUrnAndCoreName(String urn, String coreName);
 

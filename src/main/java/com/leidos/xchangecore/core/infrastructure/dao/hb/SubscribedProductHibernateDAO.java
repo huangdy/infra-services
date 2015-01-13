@@ -11,8 +11,9 @@ import com.leidos.xchangecore.core.dao.hb.GenericHibernateDAO;
 import com.leidos.xchangecore.core.infrastructure.dao.SubscribedProductDAO;
 import com.leidos.xchangecore.core.infrastructure.model.SubscribedProduct;
 
-public class SubscribedProductHibernateDAO extends GenericHibernateDAO<SubscribedProduct, Integer>
-        implements SubscribedProductDAO {
+public class SubscribedProductHibernateDAO
+    extends GenericHibernateDAO<SubscribedProduct, Integer>
+    implements SubscribedProductDAO {
 
     public Set<SubscribedProduct> findByProductType(String productType) {
 
@@ -29,6 +30,7 @@ public class SubscribedProductHibernateDAO extends GenericHibernateDAO<Subscribe
     }
 
     public Set<SubscribedProduct> findAllSubscribedProducts() {
+
         List<SubscribedProduct> subscribedProductList = findAll();
         Set<SubscribedProduct> subscribedProducts = new HashSet<SubscribedProduct>(subscribedProductList);
         /*

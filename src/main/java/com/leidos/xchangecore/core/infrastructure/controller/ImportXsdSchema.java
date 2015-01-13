@@ -15,10 +15,10 @@ import org.springframework.xml.xsd.XsdSchema;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-public class ImportXsdSchema implements XsdSchema {
+public class ImportXsdSchema
+    implements XsdSchema {
 
-    private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
-            .newInstance();
+    private static DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
 
     private static final String SCHEMA_NAMESPACE = "http://www.w3.org/2001/XMLSchema";
 
@@ -37,17 +37,21 @@ public class ImportXsdSchema implements XsdSchema {
      * A subsequent call to the {@link #setXsd(Resource)} method is required.
      */
     public ImportXsdSchema() {
+
     }
 
     public XmlValidator createValidator() throws IOException {
+
         return XmlValidatorFactory.createValidator(xsdResource, XmlValidatorFactory.SCHEMA_W3C_XML);
     }
 
     public String getSchemaLocation() {
+
         return schemaLocation;
     }
 
     public Source getSource() {
+
         DOMSource result = new DOMSource();
         try {
             DocumentBuilderFactory builderFactory = DocumentBuilderFactory.newInstance();
@@ -70,19 +74,23 @@ public class ImportXsdSchema implements XsdSchema {
     }
 
     public String getTargetNamespace() {
+
         return targetNamespace;
     }
 
     public void setSchemaLocation(String schemaLocation) {
+
         this.schemaLocation = schemaLocation;
     }
 
     public void setTargetNamespace(String targetNamespace) {
+
         this.targetNamespace = targetNamespace;
     }
 
     @Override
     public String toString() {
+
         StringBuffer buffer = new StringBuffer("ImportXsdSchema");
         buffer.append('{');
         buffer.append(getTargetNamespace());

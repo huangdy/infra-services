@@ -82,12 +82,9 @@ public class WorkProductDAOHibernate
 
         List<WorkProduct> productList = findUniquProductList(isAscending ? SortByLastUpdated_Asc
                                                                         : SortByLastUpdated_Desc);
-        logger.debug("findAll: " + (isAscending ? Order_Asc
-                                               : Order_Desc) + ", found " +
-                     (productList == null ? 0
-                                         : productList.size()) + " entries");
-        return productList == null ? new ArrayList<WorkProduct>()
-                                  : productList;
+        logger.debug("findAll: " + (isAscending ? Order_Asc : Order_Desc) + ", found " +
+                     (productList == null ? 0 : productList.size()) + " entries");
+        return productList == null ? new ArrayList<WorkProduct>() : productList;
     }
 
     @Override
@@ -152,7 +149,7 @@ public class WorkProductDAOHibernate
         logger.debug("findByInterestGroupAndType: IGID: " + interestGroupID + ", ProductType: " +
                      productType);
         List<WorkProduct> productList = findUniquProductList(null, Restrictions.eq(C_ProductType,
-                                                                                   productType));
+            productType));
         List<WorkProduct> products = new ArrayList<WorkProduct>();
         for (WorkProduct product : productList) {
             if (product.getAssociatedInterestGroupIDs().contains(interestGroupID)) {
@@ -176,8 +173,7 @@ public class WorkProductDAOHibernate
         List<WorkProduct> productList = findByCriteriaAndOrder(0, orders, criterions);
 
         logger.debug("findByProductID: " + productID + ", found " +
-                     (productList == null ? 0
-                                         : productList.size()) + " entries");
+                     (productList == null ? 0 : productList.size()) + " entries");
         if (productList == null || productList.size() == 0) {
             return null;
         }
@@ -210,10 +206,9 @@ public class WorkProductDAOHibernate
         logger.debug("findByProductType: ProductType: " + productType);
 
         List<WorkProduct> productList = findUniquProductList(null, Restrictions.eq(C_ProductType,
-                                                                                   productType));
+            productType));
         logger.debug("findByProductType: " + productType + ", found " +
-                     (productList != null ? productList.size()
-                                         : 0) + " entries");
+                     (productList != null ? productList.size() : 0) + " entries");
 
         return productList;
     }
@@ -240,11 +235,10 @@ public class WorkProductDAOHibernate
         Criterion c3 = Restrictions.eq(C_ProductType, pkgId.getType().getStringValue());
         Criterion c4 = Restrictions.eq(C_State, pkgId.getState().toString());
         Criterion c5 = Restrictions.eq(C_ProductVersion,
-                                       Integer.parseInt(pkgId.getVersion().getStringValue()));
+            Integer.parseInt(pkgId.getVersion().getStringValue()));
         List<WorkProduct> productList = findUniquProductList(null, c1, c2, c3, c4, c5);
         logger.debug("findByWorkProductIdentification found: " + productList.size() + " entries");
-        return productList != null ? productList.get(0)
-                                  : null;
+        return productList != null ? productList.get(0) : null;
     }
 
     @Override
@@ -268,8 +262,8 @@ public class WorkProductDAOHibernate
         orderList.add(queryBuilder.getOrder());
 
         List<WorkProduct> products = findByCriteriaAndOrder(queryBuilder.getStartIndex(),
-                                                            orderList,
-                                                            queryBuilder.getCriterionList());
+            orderList,
+            queryBuilder.getCriterionList());
 
         Hashtable<String, WorkProduct> productSet = new Hashtable<String, WorkProduct>();
         List<WorkProduct> productList = new ArrayList<WorkProduct>();
@@ -323,7 +317,7 @@ public class WorkProductDAOHibernate
                 // filtered by the bounding box
                 if (queryBuilder.getBoundingBox() != null &&
                     intersects(queryBuilder.getBoundingBox(),
-                               DigestHelper.getFirstGeometry(WorkProductHelper.getDigestElement(productDocument))) == false) {
+                        DigestHelper.getFirstGeometry(WorkProductHelper.getDigestElement(productDocument))) == false) {
                     continue;
                 }
                 Node node = doc.importNode(productDocument.getDomNode(), true);

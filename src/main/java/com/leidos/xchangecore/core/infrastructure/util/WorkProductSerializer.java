@@ -29,6 +29,7 @@ public class WorkProductSerializer {
     }
 
     public static WorkProductSerializer getInstance() {
+
         if (instance == null) {
             synchronized (WorkProductSerializer.class) {
                 if (instance == null) {
@@ -66,6 +67,7 @@ public class WorkProductSerializer {
      * @param args
      */
     public static void main(String[] args) {
+
         // TODO Auto-generated method stub
 
     }

@@ -30,7 +30,8 @@ import com.leidos.xchangecore.core.infrastructure.util.WorkProductHelper;
  * @created Dec 11, 2008
  * 
  */
-public class WorkProductController extends RestfulController<WorkProduct> {
+public class WorkProductController
+    extends RestfulController<WorkProduct> {
 
     @Autowired
     WorkProductService workProductService;
@@ -52,8 +53,9 @@ public class WorkProductController extends RestfulController<WorkProduct> {
 
     @SuppressWarnings("unchecked")
     @Override
-    protected void setView(HttpServletRequest request, HttpServletResponse response,
-        ModelAndView modelAndView) throws Exception {
+    protected void setView(HttpServletRequest request,
+                           HttpServletResponse response,
+                           ModelAndView modelAndView) throws Exception {
 
         // this works for any object that maps
         if ("digest".equals(request.getParameter("view"))) {
@@ -68,8 +70,9 @@ public class WorkProductController extends RestfulController<WorkProduct> {
     }
 
     @Override
-    protected WorkProduct adaptObject(HttpServletRequest request, HttpServletResponse response,
-        Object object) throws Exception {
+    protected WorkProduct adaptObject(HttpServletRequest request,
+                                      HttpServletResponse response,
+                                      Object object) throws Exception {
 
         WorkProduct WorkProduct = (WorkProduct) object;
         return WorkProduct;
@@ -85,7 +88,8 @@ public class WorkProductController extends RestfulController<WorkProduct> {
         setService(new WorkProductGenericService(wps));
     }
 
-    class WorkProductGenericService implements GenericService<WorkProduct> {
+    class WorkProductGenericService
+        implements GenericService<WorkProduct> {
 
         WorkProductService wps;
 

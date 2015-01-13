@@ -22,29 +22,30 @@ import org.hibernate.search.annotations.Index;
  */
 @Entity
 @Table(name = "NotificationMessage")
-public class NotificationMessage implements Serializable {
+public class NotificationMessage
+    implements Serializable {
 
-	private static final long serialVersionUID = 6530136814536038579L;
+    private static final long serialVersionUID = 6530136814536038579L;
 
-	/**
+    /**
      * 
      */
-	@Id
+    @Id
     @Column(name = "NOTIFICATION_MESSAGE_ID")
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-	@Column(name = "SUBSCRIPTION_ID")
-	@Field(index = Index.TOKENIZED)
+    @Column(name = "SUBSCRIPTION_ID")
+    @Field(index = Index.TOKENIZED)
     private Integer subscriptionID;
 
-	@Column(name = "MESSAGE_TYPE")
-	@Field(index = Index.TOKENIZED)
-	private String type;
+    @Column(name = "MESSAGE_TYPE")
+    @Field(index = Index.TOKENIZED)
+    private String type;
 
-	@Column(name = "MESSAGE_STRING")
-	@Lob
-	private byte[] message;
+    @Column(name = "MESSAGE_STRING")
+    @Lob
+    private byte[] message;
 
     @ManyToOne(targetEntity = Notification.class)
     @JoinColumn(name = "NOTIFICATION_ID", nullable = false)
@@ -62,45 +63,49 @@ public class NotificationMessage implements Serializable {
     // return hash.hashCode();
     // }
 
-	/**
-	 * Gets the message id.
-	 * 
-	 * @return the message id
-	 * @ssdd
-	 */
+    /**
+     * Gets the message id.
+     * 
+     * @return the message id
+     * @ssdd
+     */
     public Integer getId() {
+
         return id;
-	}
+    }
 
-	/**
-	 * Sets the message id.
-	 * 
-	 * @param messageID the new message id
-	 * @ssdd
-	 */
+    /**
+     * Sets the message id.
+     * 
+     * @param messageID the new message id
+     * @ssdd
+     */
     public void seId(Integer id) {
+
         this.id = id;
-	}
+    }
 
-	/**
-	 * Gets the subscription id.
-	 * 
-	 * @return the subscription id
-	 * @ssdd
-	 */
+    /**
+     * Gets the subscription id.
+     * 
+     * @return the subscription id
+     * @ssdd
+     */
     public Integer getSubscriptionID() {
-		return subscriptionID;
-	}
 
-	/**
-	 * Sets the subscription id.
-	 * 
-	 * @param subscriptionID the new subscription id
-	 * @ssdd
-	 */
+        return subscriptionID;
+    }
+
+    /**
+     * Sets the subscription id.
+     * 
+     * @param subscriptionID the new subscription id
+     * @ssdd
+     */
     public void setSubscriptionID(Integer subscriptionID) {
-		this.subscriptionID = subscriptionID;
-	}
+
+        this.subscriptionID = subscriptionID;
+    }
 
     /**
      * Gets the message.
@@ -109,38 +114,42 @@ public class NotificationMessage implements Serializable {
      * @ssdd
      */
     public byte[] getMessage() {
-		return message;
-	}
 
-	/**
-	 * Sets the message.
-	 * 
-	 * @param message the new message
-	 * @ssdd
-	 */
-	public void setMessage(byte[] message) {
-		this.message = message;
-	}
+        return message;
+    }
 
-	/**
-	 * Sets the type.
-	 * 
-	 * @param type the new type
-	 * @ssdd
-	 */
-	public void setType(String type) {
-		this.type = type;
-	}
+    /**
+     * Sets the message.
+     * 
+     * @param message the new message
+     * @ssdd
+     */
+    public void setMessage(byte[] message) {
 
-	/**
-	 * Gets the type.
-	 * 
-	 * @return the type
-	 * @ssdd
-	 */
-	public String getType() {
-		return type;
-	}
+        this.message = message;
+    }
+
+    /**
+     * Sets the type.
+     * 
+     * @param type the new type
+     * @ssdd
+     */
+    public void setType(String type) {
+
+        this.type = type;
+    }
+
+    /**
+     * Gets the type.
+     * 
+     * @return the type
+     * @ssdd
+     */
+    public String getType() {
+
+        return type;
+    }
 
     /**
      * Gets the notification.
@@ -149,6 +158,7 @@ public class NotificationMessage implements Serializable {
      * @ssdd
      */
     public Notification getNotification() {
+
         return notification;
     }
 
@@ -160,6 +170,7 @@ public class NotificationMessage implements Serializable {
      */
 
     public void setNotification(Notification notification) {
+
         this.notification = notification;
     }
 

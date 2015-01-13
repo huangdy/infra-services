@@ -22,7 +22,8 @@ import org.hibernate.search.annotations.Index;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "LOG")
-public class Log implements Serializable {
+public class Log
+    implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -68,6 +69,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -78,6 +80,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -88,6 +91,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public String getLogger() {
+
         return logger;
     }
 
@@ -98,6 +102,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setLogger(String logger) {
+
         this.logger = logger;
     }
 
@@ -108,6 +113,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public Date getTimestamp() {
+
         return timestamp;
     }
 
@@ -118,6 +124,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setTimestamp(Date timestamp) {
+
         this.timestamp = timestamp;
     }
 
@@ -128,6 +135,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public String getHostname() {
+
         return hostname;
     }
 
@@ -138,6 +146,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setHostname(String hostname) {
+
         this.hostname = hostname;
     }
 
@@ -148,6 +157,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public String getLoggingType() {
+
         return loggingType;
     }
 
@@ -158,6 +168,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setLoggingType(String loggingType) {
+
         this.loggingType = loggingType;
     }
 
@@ -168,6 +179,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public String getMessage() {
+
         return message;
     }
 
@@ -178,6 +190,7 @@ public class Log implements Serializable {
      * @ssdd
      */
     public void setMessage(String message) {
+
         this.message = message;
     }
 }

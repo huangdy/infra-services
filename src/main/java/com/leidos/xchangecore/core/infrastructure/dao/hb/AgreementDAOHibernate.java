@@ -21,8 +21,9 @@ import com.leidos.xchangecore.core.infrastructure.model.ShareRule;
  * 
  */
 @Transactional
-public class AgreementDAOHibernate extends GenericHibernateDAO<Agreement, Integer> implements
-    AgreementDAO {
+public class AgreementDAOHibernate
+    extends GenericHibernateDAO<Agreement, Integer>
+    implements AgreementDAO {
 
     Logger logger = LoggerFactory.getLogger(AgreementDAOHibernate.class);
 
@@ -73,9 +74,7 @@ public class AgreementDAOHibernate extends GenericHibernateDAO<Agreement, Intege
     @Override
     public void setRemoteCoreMutuallyAgreed(String remoteJID, boolean isMutuallyAgreed) {
 
-        logger.debug("setRemoteCoreMutuallyAgreed: [" +
-                     remoteJID +
-                     "] to " +
+        logger.debug("setRemoteCoreMutuallyAgreed: [" + remoteJID + "] to " +
                      (isMutuallyAgreed ? "true" : "false"));
         Agreement agreement = findByRemoteCoreName(remoteJID);
         if (agreement != null) {

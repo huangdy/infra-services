@@ -18,7 +18,7 @@ public interface ConfigurationService {
      * @ssdd
      */
     public XmlObject getConfig();
-	
+
     /**
      * Gets the core name.
      * 

@@ -56,7 +56,7 @@ public interface PubSubService {
      */
     public void addAgreementListener(Integer agreementID,
                                      NotificationListener<AgreementRosterMessage> listener)
-                                         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
+        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
 
     /**
      * Subscribe to a profile with the specified ID.
@@ -75,7 +75,7 @@ public interface PubSubService {
      */
     public void addProfileListener(String profileID,
                                    NotificationListener<ProfileNotificationMessage> listener)
-                                       throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
+        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
 
     /**
      * Handles agreement roster change notifications.
@@ -181,7 +181,7 @@ public interface PubSubService {
                                                               String xPath,
                                                               Map<String, String> namespaceMap,
                                                               PubSubNotificationService subscriber)
-                                                                  throws NullSubscriberException, EmptySubscriberNameException;
+        throws NullSubscriberException, EmptySubscriberNameException;
 
     /**
      * Sends its subscriber interface upon restart
@@ -229,7 +229,7 @@ public interface PubSubService {
      */
     public Integer subscribeWorkProductIDNewVersions(String workProductID,
                                                      PubSubNotificationService subscriber)
-                                                         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
+        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException;
 
     /**
      * Subscribe to work products of the specified product type.
@@ -253,7 +253,7 @@ public interface PubSubService {
                                             String xPath,
                                             Map<String, String> namespaceMap,
                                             PubSubNotificationService subscriber)
-                                                throws NullSubscriberException, EmptySubscriberNameException;
+        throws NullSubscriberException, EmptySubscriberNameException;
 
     /**
      * Unregister a previous subscription, identified by the specified subscription ID.

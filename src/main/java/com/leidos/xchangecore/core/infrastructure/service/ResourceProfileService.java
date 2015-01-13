@@ -29,7 +29,7 @@ public interface ResourceProfileService {
      * @ssdd
      */
     public ResourceProfileModel createProfile(ResourceProfile request);
-    
+
     /**
      * Update a profile
      * @param request

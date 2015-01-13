@@ -9,6 +9,7 @@ import java.util.List;
  * @ssdd
  */
 public interface SearchService {
+
     public static final String SEARCH_SERVICE_NAME = "SearchService";
 
     /**

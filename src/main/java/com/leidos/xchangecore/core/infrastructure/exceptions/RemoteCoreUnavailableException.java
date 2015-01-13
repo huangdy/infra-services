@@ -3,6 +3,7 @@ package com.leidos.xchangecore.core.infrastructure.exceptions;
 @SuppressWarnings("serial")
 public class RemoteCoreUnavailableException
     extends UICDSException {
+
     public String coreName;
 
     public RemoteCoreUnavailableException(String coreName) {

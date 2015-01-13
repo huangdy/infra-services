@@ -43,441 +43,448 @@ import org.xml.sax.SAXException;
 import com.usersmarts.util.DirectoryWatcher;
 import com.usersmarts.util.DirectoryWatcher.Change;
 
-public class NodeRenderer implements ServletContextAware,
-		DirectoryWatcher.Listener {
+public class NodeRenderer
+    implements ServletContextAware, DirectoryWatcher.Listener {
 
-	private Logger log = LoggerFactory.getLogger(getClass());
+    private Logger log = LoggerFactory.getLogger(getClass());
 
-	private String configPath;
+    private String configPath;
 
-	private File configDirectory;
+    private File configDirectory;
 
-	public File getConfigDirectory() {
-		return configDirectory;
-	}
+    public File getConfigDirectory() {
 
-	public void setConfigDirectory(File configDirectory) {
-		this.configDirectory = configDirectory;
-	}
+        return configDirectory;
+    }
 
-	private DirectoryWatcher directoryWatcher;
+    public void setConfigDirectory(File configDirectory) {
 
-	private Timer watcherTimer = null;
+        this.configDirectory = configDirectory;
+    }
 
-	private long frequency = 20000;
+    private DirectoryWatcher directoryWatcher;
 
-	private long delay = 5000;
+    private Timer watcherTimer = null;
 
-	private Node configDom = null;
+    private long frequency = 20000;
 
-	private HashMap<String, Query> preparedQueries = new HashMap<String, Query>();
+    private long delay = 5000;
 
-	public NodeRenderer() {
+    private Node configDom = null;
 
-	}
+    private HashMap<String, Query> preparedQueries = new HashMap<String, Query>();
 
-	private String buildDispatchXQ(File transform, Properties properties) {
-		URI uri=transform.toURI();
-		String path =uri.getPath();
-		String dispatchXQ = "import module namespace ns = '"
-				+ properties.getProperty("modulens") + "' "
-				+ "	at '"+path+"/"
-				+ properties.getProperty("xquery") + "'; "
-				+ "declare variable $config external; "
-				+ "declare variable $properties external; "
-				+ "declare variable $workproducts external; "
-				+ "let $b:='bar' " + "return "
-				+ "  ns:render($config, $properties, $workproducts)";
-		return dispatchXQ;
-	}
+    public NodeRenderer() {
 
-	public void buildPreparedQuery(File transform) {
+    }
 
-		log.info("Preparing renderer: " + transform.getName());
+    private String buildDispatchXQ(File transform, Properties properties) {
 
-		String dispatchXQ = null;
-		XQPreparedExpression query = null;
-		Properties properties = null;
-		File xqueryFile, propsFile = null;
+        URI uri = transform.toURI();
+        String path = uri.getPath();
+        String dispatchXQ = "import module namespace ns = '" + properties.getProperty("modulens") +
+                            "' " + "	at '" + path + "/" + properties.getProperty("xquery") + "'; " +
+                            "declare variable $config external; " +
+                            "declare variable $properties external; " +
+                            "declare variable $workproducts external; " + "let $b:='bar' " +
+                            "return " + "  ns:render($config, $properties, $workproducts)";
+        return dispatchXQ;
+    }
 
-		XQDataSource ds = null;
-		XQConnection conn = null;
-		try {
-			ds = new SaxonXQDataSource();
-			conn = ds.getConnection();
-		} catch (XQException e) {
-			log.error(e.getMessage());
-		}
+    public void buildPreparedQuery(File transform) {
 
-		if (conn != null) {
-			// loading the properties object
-			properties = new Properties();
-			try {
-				propsFile = new File(transform, "properties");
-				if (propsFile.exists()) {
-					// open fileInputStream
-					FileInputStream fis = new FileInputStream(propsFile
-							.getAbsoluteFile());
+        log.info("Preparing renderer: " + transform.getName());
 
-					// load the properties file
-					properties.load(fis);
+        String dispatchXQ = null;
+        XQPreparedExpression query = null;
+        Properties properties = null;
+        File xqueryFile, propsFile = null;
 
-					// close fileInputStream
-					fis.close();
-				} else {
-					log.warn("No properties file found.  Setting default values.");
-				}
-				// fill in any missing properties...
-				if (properties.getProperty("mediatype") == null) {
-					properties.put("mediatype", "application/octet-stream");
-				}
-				if (properties.getProperty("method") == null) {
-					properties.put("method", "text");
-				}
-				if (properties.getProperty("xquery") == null) {
-					properties.put("xquery", "render.xquery");
-				}
+        XQDataSource ds = null;
+        XQConnection conn = null;
+        try {
+            ds = new SaxonXQDataSource();
+            conn = ds.getConnection();
+        } catch (XQException e) {
+            log.error(e.getMessage());
+        }
 
-				if (properties.getProperty("modulens") != null) {
+        if (conn != null) {
+            // loading the properties object
+            properties = new Properties();
+            try {
+                propsFile = new File(transform, "properties");
+                if (propsFile.exists()) {
+                    // open fileInputStream
+                    FileInputStream fis = new FileInputStream(propsFile.getAbsoluteFile());
 
-					// check to see if the renderer exists
-					xqueryFile = new File(transform,
-							properties.getProperty("xquery"));
-					if (xqueryFile.exists()) {
-						// compile the query
-						dispatchXQ = buildDispatchXQ(transform, properties);
-						query = conn.prepareExpression(dispatchXQ);
+                    // load the properties file
+                    properties.load(fis);
 
-						if (query != null) {
-							// add it to the map.
-							preparedQueries.put(transform.getName()
-									.toLowerCase(),
-									new Query(properties, query));
-						} else {
-							log.error("Preparation failed. Query failed to compile.");
-						}
+                    // close fileInputStream
+                    fis.close();
+                } else {
+                    log.warn("No properties file found.  Setting default values.");
+                }
+                // fill in any missing properties...
+                if (properties.getProperty("mediatype") == null) {
+                    properties.put("mediatype", "application/octet-stream");
+                }
+                if (properties.getProperty("method") == null) {
+                    properties.put("method", "text");
+                }
+                if (properties.getProperty("xquery") == null) {
+                    properties.put("xquery", "render.xquery");
+                }
 
-					} else {
-						log.error("Preparation failed. XQquery file "
-								+ properties.getProperty("xquery")
-								+ " was not found.");
-					}
+                if (properties.getProperty("modulens") != null) {
 
+                    // check to see if the renderer exists
+                    xqueryFile = new File(transform, properties.getProperty("xquery"));
+                    if (xqueryFile.exists()) {
+                        // compile the query
+                        dispatchXQ = buildDispatchXQ(transform, properties);
+                        query = conn.prepareExpression(dispatchXQ);
 
-				} else {
-					log.error("Preparation failed. Module namespace is not set.");
-				}
+                        if (query != null) {
+                            // add it to the map.
+                            preparedQueries.put(transform.getName().toLowerCase(),
+                                new Query(properties, query));
+                        } else {
+                            log.error("Preparation failed. Query failed to compile.");
+                        }
 
-			} catch (XQException e) {
-				log.error(e.getMessage());
-			} catch (IOException ex) {
-				log.error(ex.getMessage());
-			}
-		} else {
-			log.error("Preparation failed. XQConnection was null");
-		}
-	}
+                    } else {
+                        log.error("Preparation failed. XQquery file " +
+                                  properties.getProperty("xquery") + " was not found.");
+                    }
 
-	public String domNodeToString(Node node) {
-		TransformerFactory transFactory = TransformerFactory.newInstance();
-		Transformer transformer;
-		StringWriter buffer = new StringWriter();
+                } else {
+                    log.error("Preparation failed. Module namespace is not set.");
+                }
 
-		try {
-			transformer = transFactory.newTransformer();
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-			transformer.transform(new DOMSource(node), new StreamResult(buffer));
-		} catch (TransformerConfigurationException e) {
-			log.error(e.getMessage());
-			//e1.printStackTrace();
-		} catch (TransformerException e) {
-			log.error(e.getMessage());
-			//e1.printStackTrace();
-		}
-		return buffer.toString();
-	}
+            } catch (XQException e) {
+                log.error(e.getMessage());
+            } catch (IOException ex) {
+                log.error(ex.getMessage());
+            }
+        } else {
+            log.error("Preparation failed. XQConnection was null");
+        }
+    }
 
-	public Map<String, Object> exec(Node sourceData,
-			Map<String, String[]> propertiesMap, String formatName) {
+    public String domNodeToString(Node node) {
 
-		Map<String, Object> map = new HashMap<String, Object>();
+        TransformerFactory transFactory = TransformerFactory.newInstance();
+        Transformer transformer;
+        StringWriter buffer = new StringWriter();
 
-		log.debug("Executing query " + formatName);
+        try {
+            transformer = transFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            transformer.transform(new DOMSource(node), new StreamResult(buffer));
+        } catch (TransformerConfigurationException e) {
+            log.error(e.getMessage());
+            //e1.printStackTrace();
+        } catch (TransformerException e) {
+            log.error(e.getMessage());
+            //e1.printStackTrace();
+        }
+        return buffer.toString();
+    }
 
-		Query query = preparedQueries.get(formatName);
+    public Map<String, Object> exec(Node sourceData,
+                                    Map<String, String[]> propertiesMap,
+                                    String formatName) {
 
-		Node sourceNode = null;
-		try {
-			DocumentBuilderFactory dfactory = DocumentBuilderFactory.newInstance();
-	        dfactory.setNamespaceAware(true);
-	        DocumentBuilder docBuilder;
+        Map<String, Object> map = new HashMap<String, Object>();
 
-			docBuilder = dfactory.newDocumentBuilder();
+        log.debug("Executing query " + formatName);
 
-	        DOMSource source = new DOMSource(sourceData);
-	        StringWriter xmlAsWriter = new StringWriter();
-	        StreamResult sresult = new StreamResult(xmlAsWriter);
+        Query query = preparedQueries.get(formatName);
 
-			TransformerFactory.newInstance().newTransformer().transform(source, sresult);
+        Node sourceNode = null;
+        try {
+            DocumentBuilderFactory dfactory = DocumentBuilderFactory.newInstance();
+            dfactory.setNamespaceAware(true);
+            DocumentBuilder docBuilder;
 
-	        // write changes
-	        ByteArrayInputStream inputStream;
+            docBuilder = dfactory.newDocumentBuilder();
 
-	        inputStream = new ByteArrayInputStream(xmlAsWriter.toString().getBytes("UTF-8"));
+            DOMSource source = new DOMSource(sourceData);
+            StringWriter xmlAsWriter = new StringWriter();
+            StreamResult sresult = new StreamResult(xmlAsWriter);
 
-	        sourceNode = docBuilder.parse(inputStream);
+            TransformerFactory.newInstance().newTransformer().transform(source, sresult);
 
+            // write changes
+            ByteArrayInputStream inputStream;
 
-			if (query != null) {
+            inputStream = new ByteArrayInputStream(xmlAsWriter.toString().getBytes("UTF-8"));
 
-				try {
-					map.put("properties", query.getProperties());
+            sourceNode = docBuilder.parse(inputStream);
 
-					query.getXQPreparedExpression().bindNode(new QName("config"),
-							this.configDom, null);
-					query.getXQPreparedExpression().bindNode(
-							new QName("properties"), mapToXMLNode(propertiesMap),
-							null);
-					query.getXQPreparedExpression().bindNode(
-							new QName("workproducts"), sourceNode, null);
+            if (query != null) {
 
-					XQResultSequence result = query.getXQPreparedExpression()
-							.executeQuery();
+                try {
+                    map.put("properties", query.getProperties());
 
-					if (result != null) {
-						result.next();
-						StringWriter sw = new StringWriter();
-						if (query.getProperties().getProperty("method")
-								.equals("xml")) {
-//							System.out.println("method = xml");
-							Transformer t = TransformerFactory.newInstance()
-									.newTransformer();
-							t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,
-									"yes");
-							t.setOutputProperty(OutputKeys.INDENT, "yes");
-							t.transform(new DOMSource(result.getNode()),
-									new StreamResult(sw));
-						} else {
-							System.out.println("method != xml");
-							sw.append(result.getAtomicValue());
-						}
-						map.put("output", sw.toString());
-					} else {
-						log.error("The query result set returned null.");
-						map.put("output", "The query result set returned null.");
-					}
+                    query.getXQPreparedExpression().bindNode(new QName("config"),
+                        this.configDom,
+                        null);
+                    query.getXQPreparedExpression().bindNode(new QName("properties"),
+                        mapToXMLNode(propertiesMap),
+                        null);
+                    query.getXQPreparedExpression().bindNode(new QName("workproducts"),
+                        sourceNode,
+                        null);
 
-				} catch (XQException e) {
-					log.error(e.getMessage());
-					map.put("output", "An XQuery error occurred");
-				} catch (TransformerException e) {
-					log.error(e.getMessage());
-					map.put("output", "A transformation error occurred");
-				}
-			} else {
-				map.put("output", "The specified renderer " + formatName
-						+ " was not found.");
-			}
+                    XQResultSequence result = query.getXQPreparedExpression().executeQuery();
 
-		} catch (SAXException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (IOException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (TransformerConfigurationException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (TransformerException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (TransformerFactoryConfigurationError e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (ParserConfigurationException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		}
+                    if (result != null) {
+                        result.next();
+                        StringWriter sw = new StringWriter();
+                        if (query.getProperties().getProperty("method").equals("xml")) {
+                            //							System.out.println("method = xml");
+                            Transformer t = TransformerFactory.newInstance().newTransformer();
+                            t.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+                            t.setOutputProperty(OutputKeys.INDENT, "yes");
+                            t.transform(new DOMSource(result.getNode()), new StreamResult(sw));
+                        } else {
+                            System.out.println("method != xml");
+                            sw.append(result.getAtomicValue());
+                        }
+                        map.put("output", sw.toString());
+                    } else {
+                        log.error("The query result set returned null.");
+                        map.put("output", "The query result set returned null.");
+                    }
 
-		return map;
-	}
+                } catch (XQException e) {
+                    log.error(e.getMessage());
+                    map.put("output", "An XQuery error occurred");
+                } catch (TransformerException e) {
+                    log.error(e.getMessage());
+                    map.put("output", "A transformation error occurred");
+                }
+            } else {
+                map.put("output", "The specified renderer " + formatName + " was not found.");
+            }
 
-	private Node mapToXMLNode(Map<String, String[]> map) {
+        } catch (SAXException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (IOException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (TransformerConfigurationException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (TransformerException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (TransformerFactoryConfigurationError e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (ParserConfigurationException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        }
 
-		Node propertiesNode = null;
-		StringBuilder xml = new StringBuilder();
+        return map;
+    }
 
-		xml.append("<props xmlns=\"util:properties\">");
-		for (String key : map.keySet()) {
-			for (String value : map.get(key)) {
-				xml.append("<prop name=\"" + key + "\" value=\"" + value
-						+ "\"/>");
-			}
-		}
-		xml.append("</props>");
+    private Node mapToXMLNode(Map<String, String[]> map) {
 
-		try {
-			propertiesNode = DocumentBuilderFactory
-					.newInstance()
-					.newDocumentBuilder()
-					.parse(new ByteArrayInputStream((new String(xml))
-							.getBytes())).getDocumentElement();
-		} catch (SAXException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (IOException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		} catch (ParserConfigurationException e1) {
-			log.error(e1.getMessage());
-			//e1.printStackTrace();
-		}
+        Node propertiesNode = null;
+        StringBuilder xml = new StringBuilder();
 
-		return propertiesNode;
-	}
+        xml.append("<props xmlns=\"util:properties\">");
+        for (String key : map.keySet()) {
+            for (String value : map.get(key)) {
+                xml.append("<prop name=\"" + key + "\" value=\"" + value + "\"/>");
+            }
+        }
+        xml.append("</props>");
 
-	public String getConfigPath() {
-		return configPath;
-	}
+        try {
+            propertiesNode = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream((new String(xml)).getBytes())).getDocumentElement();
+        } catch (SAXException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (IOException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        } catch (ParserConfigurationException e1) {
+            log.error(e1.getMessage());
+            //e1.printStackTrace();
+        }
 
-	public Node getConfigDom() {
-		return configDom;
-	}
+        return propertiesNode;
+    }
+
+    public String getConfigPath() {
+
+        return configPath;
+    }
+
+    public Node getConfigDom() {
+
+        return configDom;
+    }
 
     public long getDelay() {
-		return delay;
-	}
 
-	public long getFrequency() {
-		return frequency;
-	}
+        return delay;
+    }
 
-	public HashMap<String, Query> getPreparedQueries() {
-		return preparedQueries;
-	}
+    public long getFrequency() {
 
-	public void loadConfiguration() {
-		log.info("Instantiating Render Engine...");
-		// initialize config file
-		File configDirectory = getConfigDirectory();
-		try {
-			log.info("Reading configDom from "
-					+ configDirectory.getAbsolutePath() + "/config.xml");
-			File configFile = new File(configDirectory, "config.xml");
-			configDom = XmlObject.Factory.parse(configFile).getDomNode();
+        return frequency;
+    }
+
+    public HashMap<String, Query> getPreparedQueries() {
+
+        return preparedQueries;
+    }
+
+    public void loadConfiguration() {
+
+        log.info("Instantiating Render Engine...");
+        // initialize config file
+        File configDirectory = getConfigDirectory();
+        try {
+            log.info("Reading configDom from " + configDirectory.getAbsolutePath() + "/config.xml");
+            File configFile = new File(configDirectory, "config.xml");
+            configDom = XmlObject.Factory.parse(configFile).getDomNode();
         } catch (Exception e) {
-			log.error(e.getMessage());
-		}
+            log.error(e.getMessage());
+        }
 
-		// initialize prepared queries
-		log.info("Initializing prepared queries");
-		preparedQueries = new HashMap<String, Query>();
+        // initialize prepared queries
+        log.info("Initializing prepared queries");
+        preparedQueries = new HashMap<String, Query>();
 
-		// iterate through sub-directory names of transforms directory
-		FileFilter dirFilter = new FileFilter() {
-			public boolean accept(File file) {
-				return file.isDirectory();
-			}
-		};
+        // iterate through sub-directory names of transforms directory
+        FileFilter dirFilter = new FileFilter() {
 
-		File[] transforms = (new File(configDirectory, "transforms"))
-				.listFiles(dirFilter);
+            public boolean accept(File file) {
 
-		for (File transform : transforms) {
-			buildPreparedQuery(transform);
-		}
-	}
+                return file.isDirectory();
+            }
+        };
 
-	@Override
-	public void onChange(File file, Change change) {
-		String fileName = file.getName();
-		if (fileName.equals("config.xml")) {
-			loadConfiguration();
-		} else {
-			updateQueries(file, change);
-		}
-	}
+        File[] transforms = (new File(configDirectory, "transforms")).listFiles(dirFilter);
 
-	public void setConfigPath(String configPath) {
-		this.configPath = configPath;
-	}
+        for (File transform : transforms) {
+            buildPreparedQuery(transform);
+        }
+    }
 
-	public void setConfigDom(Node configDom) {
-		this.configDom = configDom;
-	}
+    @Override
+    public void onChange(File file, Change change) {
 
-	public void setDelay(long delay) {
-		this.delay = delay;
-	}
+        String fileName = file.getName();
+        if (fileName.equals("config.xml")) {
+            loadConfiguration();
+        } else {
+            updateQueries(file, change);
+        }
+    }
 
-	public void setFrequency(long frequency) {
-		this.frequency = frequency;
-	}
+    public void setConfigPath(String configPath) {
 
-	public void setPreparedQueries(HashMap<String, Query> preparedQueries) {
-		this.preparedQueries = preparedQueries;
-	}
+        this.configPath = configPath;
+    }
 
-	@Override
-	public void setServletContext(ServletContext context) {
-		String path = context.getRealPath(getConfigPath());
-		File configDirectory = new File(path);
-		if (configDirectory.exists()) {
-			log.debug("Watching for new renderers in " + configDirectory.getPath());
-			setConfigDirectory(configDirectory);
-			loadConfiguration();
-			File transformsDirectory=new File(configDirectory,"transforms");
-			startDirectoryWatcher(transformsDirectory);
-		} else {
-			log.debug("Could not find transforms directory " + configDirectory.getPath());
-		}
-	}
+    public void setConfigDom(Node configDom) {
 
-	private void startDirectoryWatcher(File directory) {
-		directoryWatcher = new DirectoryWatcher(directory, this, null, true);
-		watcherTimer = new Timer();
-		watcherTimer.schedule(directoryWatcher, delay, frequency);
-	}
+        this.configDom = configDom;
+    }
 
-	private void updateQueries(File file, Change change) {
-		String fileName = file.getName();
-		if (Change.DELETED.equals(change)) {
-			log.info("Deleted: " + fileName);
-			if (preparedQueries.containsKey(fileName)) {
-				preparedQueries.remove(fileName);
-			}
-		} else if (Change.ADDED.equals(change)
-				|| Change.MODIFIED.equals(change)) {
-			log.info(change.toString() + ": " + fileName);
-			if (file.isDirectory()) {
-				buildPreparedQuery(file);
-			}
-		}
-	}
+    public void setDelay(long delay) {
 
-	private class Query {
-		Properties properties = null;
-		XQPreparedExpression query = null;
+        this.delay = delay;
+    }
 
-		public Query(Properties properties, XQPreparedExpression query) {
-			this.properties = properties;
-			this.query = query;
-		}
+    public void setFrequency(long frequency) {
 
-		public XQPreparedExpression getXQPreparedExpression() {
-			return this.query;
-		}
+        this.frequency = frequency;
+    }
 
-		public void setXQPreparedExpression(XQPreparedExpression query) {
-			this.query = query;
-		}
+    public void setPreparedQueries(HashMap<String, Query> preparedQueries) {
 
-		public Properties getProperties() {
-			return properties;
-		}
+        this.preparedQueries = preparedQueries;
+    }
 
-		public void setProperties(Properties properties) {
-			this.properties = properties;
-		}
-	}
+    @Override
+    public void setServletContext(ServletContext context) {
+
+        String path = context.getRealPath(getConfigPath());
+        File configDirectory = new File(path);
+        if (configDirectory.exists()) {
+            log.debug("Watching for new renderers in " + configDirectory.getPath());
+            setConfigDirectory(configDirectory);
+            loadConfiguration();
+            File transformsDirectory = new File(configDirectory, "transforms");
+            startDirectoryWatcher(transformsDirectory);
+        } else {
+            log.debug("Could not find transforms directory " + configDirectory.getPath());
+        }
+    }
+
+    private void startDirectoryWatcher(File directory) {
+
+        directoryWatcher = new DirectoryWatcher(directory, this, null, true);
+        watcherTimer = new Timer();
+        watcherTimer.schedule(directoryWatcher, delay, frequency);
+    }
+
+    private void updateQueries(File file, Change change) {
+
+        String fileName = file.getName();
+        if (Change.DELETED.equals(change)) {
+            log.info("Deleted: " + fileName);
+            if (preparedQueries.containsKey(fileName)) {
+                preparedQueries.remove(fileName);
+            }
+        } else if (Change.ADDED.equals(change) || Change.MODIFIED.equals(change)) {
+            log.info(change.toString() + ": " + fileName);
+            if (file.isDirectory()) {
+                buildPreparedQuery(file);
+            }
+        }
+    }
+
+    private class Query {
+
+        Properties properties = null;
+        XQPreparedExpression query = null;
+
+        public Query(Properties properties, XQPreparedExpression query) {
+
+            this.properties = properties;
+            this.query = query;
+        }
+
+        public XQPreparedExpression getXQPreparedExpression() {
+
+            return this.query;
+        }
+
+        public void setXQPreparedExpression(XQPreparedExpression query) {
+
+            this.query = query;
+        }
+
+        public Properties getProperties() {
+
+            return properties;
+        }
+
+        public void setProperties(Properties properties) {
+
+            this.properties = properties;
+        }
+    }
 }

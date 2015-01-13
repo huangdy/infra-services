@@ -2,7 +2,6 @@ package com.leidos.xchangecore.core.infrastructure.model;
 
 import java.io.Serializable;
 
-
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -34,7 +33,8 @@ import org.hibernate.search.annotations.Index;
 
 @Entity
 @Table(name = "RESOURCE_INSTANCE")
-public class ResourceInstanceModel implements Serializable {
+public class ResourceInstanceModel
+    implements Serializable {
 
     private static final long serialVersionUID = 4631735818419898973L;
 
@@ -74,22 +74,24 @@ public class ResourceInstanceModel implements Serializable {
     private Set<String> profiles = new HashSet<String>();
 
     //use set to replace that below map<string,string>
-    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
-    
+
     /* 
     @CollectionOfElements
     private Map<String, String> keywords = new HashMap<String, String>();
-	*/
-        
+    */
+
     // TODO: need to store Description (what size of text field do we need to
     // store for this?)
 
     @CollectionOfElements
     @Lob
     private Set<String> endpoints = new HashSet<String>();
-    
+
     //FLI added on 11/30/2011
     //private int notMsgCount;
 
@@ -100,6 +102,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -110,6 +113,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -120,6 +124,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getIdentifier() {
+
         return identifier;
     }
 
@@ -130,6 +135,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setIdentifier(String identifier) {
+
         this.identifier = identifier;
     }
 
@@ -140,6 +146,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getLabel() {
+
         return label;
     }
 
@@ -150,6 +157,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setLabel(String label) {
+
         this.label = label;
     }
 
@@ -160,6 +168,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getDescription() {
+
         return description;
     }
 
@@ -170,6 +179,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setDescription(String description) {
+
         this.description = description;
     }
 
@@ -180,6 +190,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public Set<String> getEndpoints() {
+
         return endpoints;
     }
 
@@ -190,6 +201,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setEndpoints(Set<String> endpoints) {
+
         this.endpoints = endpoints;
     }
 
@@ -200,6 +212,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public Set<String> getProfiles() {
+
         return profiles;
     }
 
@@ -210,6 +223,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setProfiles(Set<String> profiles) {
+
         this.profiles = profiles;
     }
 
@@ -220,6 +234,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getOwningCore() {
+
         return owningCore;
     }
 
@@ -230,6 +245,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setOwningCore(String owningCore) {
+
         this.owningCore = owningCore;
     }
 
@@ -240,6 +256,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getResourceID() {
+
         return resourceID;
     }
 
@@ -250,6 +267,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setResourceID(String resourceID) {
+
         this.resourceID = resourceID;
     }
 
@@ -260,6 +278,7 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public String getLocalResourceID() {
+
         return localResourceID;
     }
 
@@ -270,24 +289,27 @@ public class ResourceInstanceModel implements Serializable {
      * @ssdd
      */
     public void setLocalResourceID(String localResourceID) {
+
         this.localResourceID = localResourceID;
     }
 
-	public Set<CodeSpaceValueType> getCvts() {
-		return cvts;
-	}
+    public Set<CodeSpaceValueType> getCvts() {
 
-	public void setCvts(Set<CodeSpaceValueType> cvts) {
-		this.cvts = cvts;
-	}
+        return cvts;
+    }
 
-	/* comment out for now
-	public int getNotMsgCount() {
-		return notMsgCount;
-	}
+    public void setCvts(Set<CodeSpaceValueType> cvts) {
 
-	public void setNotMsgCount(int notMsgCount) {
-		this.notMsgCount = notMsgCount;
-	}
-	*/
+        this.cvts = cvts;
+    }
+
+    /* comment out for now
+    public int getNotMsgCount() {
+    	return notMsgCount;
+    }
+
+    public void setNotMsgCount(int notMsgCount) {
+    	this.notMsgCount = notMsgCount;
+    }
+    */
 }

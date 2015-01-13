@@ -3,6 +3,7 @@ package com.leidos.xchangecore.core.infrastructure.util;
 public class LatLonConversion {
 
     public static String[] toDegMinSec(String decimal) {
+
         double d = Double.parseDouble(decimal);
         int degrees = (int) d;
         d = Math.abs(d - degrees) * 60;
@@ -16,6 +17,7 @@ public class LatLonConversion {
     }
 
     public static void main(String[] args) {
+
         System.out.print("convert " + args[0] + " into ");
         String[] points = toDegMinSec(args[0]);
         System.out.println(points[0] + " " + points[1] + "' " + points[2] + "\"");

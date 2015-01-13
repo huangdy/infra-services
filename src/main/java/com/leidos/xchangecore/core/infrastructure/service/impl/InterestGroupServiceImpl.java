@@ -110,7 +110,7 @@ public class InterestGroupServiceImpl
 
         // get the owning core first
         String owningCore = getConfigurationService().getCoreName();
-        // create interest group 
+        // create interest group
         InterestGroupInfo igInfo = new InterestGroupInfo();
         igInfo.setInterestGroupID(null);
         igInfo.setInterestGroupType(interestGroup.getInterestGroupType());
@@ -126,7 +126,7 @@ public class InterestGroupServiceImpl
             logger.debug("associating specialized wp to interest group");
             try {
                 String swp = workProductService.associateWorkProductToInterestGroup(interestGroup.getSpecializedWorkProduct().toString(),
-                                                                                    interestGroupID);
+                    interestGroupID);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -136,7 +136,7 @@ public class InterestGroupServiceImpl
         if (wpList != null && wpList.sizeOfIdentificationArray() > 0) {
             for (IdentificationType identification : wpList.getIdentificationArray()) {
                 String result = workProductService.associateWorkProductToInterestGroup(wpList.getIdentificationArray().toString(),
-                                                                                       interestGroupID);
+                    interestGroupID);
 
             }
 
@@ -265,9 +265,9 @@ public class InterestGroupServiceImpl
         boolean status = true;
         try {
             interestGroupManagementComponent.shareInterestGroup(shareRequest.getInterestGroupID(),
-                                                                shareRequest.getCoreName(),
-                                                                shareRequest.getDetailedInfo(),
-                                                                false);
+                shareRequest.getCoreName(),
+                shareRequest.getDetailedInfo(),
+                false);
         } catch (Exception e) {
             logger.error("Unable to share interest group");
             e.printStackTrace();
@@ -284,9 +284,9 @@ public class InterestGroupServiceImpl
         WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
         directoryService.registerUICDSService(urn,
-                                              INTEREST_GROUP_SERVICE_NAME,
-                                              publishedProducts,
-                                              subscribedProducts);
+            INTEREST_GROUP_SERVICE_NAME,
+            publishedProducts,
+            subscribedProducts);
     }
 
     private InterestGroupListInfoType toInterestGroupType(InterestGroupInfo ig) {
@@ -325,7 +325,7 @@ public class InterestGroupServiceImpl
         boolean status = true;
         // get the owning core first
         String owningCore = getConfigurationService().getCoreName();
-        // create interest group 
+        // create interest group
         InterestGroupInfo igInfo = new InterestGroupInfo();
         igInfo.setInterestGroupID(interestGroupId);
         igInfo.setInterestGroupType(request.getInterestGroupType());
@@ -362,7 +362,7 @@ public class InterestGroupServiceImpl
         }
         // if the core is not the owning core then return failure
         if (getInterestGroupDAO().ownedByCore(interestGroupID,
-                                              getDirectoryService().getLocalCoreJid()) == false) {
+            getDirectoryService().getLocalCoreJid()) == false) {
 
             ProductPublicationStatus status = new ProductPublicationStatus();
             status.setStatus(ProductPublicationStatus.FailureStatus);

@@ -44,7 +44,7 @@ import com.saic.precis.x2009.x06.structures.WorkProductPropertiesDocument;
  * @ssdd
  */
 public class WorkProductServiceImpl
-implements WorkProductService {
+    implements WorkProductService {
 
     private final static Logger logger = LoggerFactory.getLogger(WorkProductServiceImpl.class);
 
@@ -104,8 +104,8 @@ implements WorkProductService {
             // not the owner
             if (isOwner == false) {
                 return new ProductPublicationStatus(getDirectoryService().getCoreName() +
-                    " is not owner: Cannot archive product: " +
-                    productID);
+                                                    " is not owner: Cannot archive product: " +
+                                                    productID);
             }
         }
 
@@ -190,8 +190,8 @@ implements WorkProductService {
                 // not the owner
                 if (isOwner == false) {
                     return new ProductPublicationStatus(getDirectoryService().getCoreName() +
-                        " is not owner: Cannot close product: " +
-                        productID);
+                                                        " is not owner: Cannot close product: " +
+                                                        productID);
                 }
             }
         }
@@ -246,10 +246,10 @@ implements WorkProductService {
                     properties,
                     ProductChangeNotificationMessage.ChangeIndicator.Delete);
                 logger.debug("deleteIt: sending DELETE message for product ID=" + productID +
-                    " ... done ...");
+                             " ... done ...");
             } else {
                 logger.error("deleteIt: cannot obtain product type from the closed product ID=" +
-                    productID + " DELETE message not sent!");
+                             productID + " DELETE message not sent!");
             }
 
             status.setStatus(ProductPublicationStatus.SuccessStatus);
@@ -466,9 +466,9 @@ implements WorkProductService {
      */
     @Override
     public List<WorkProduct> getProductByTypeAndXQuery(String productType,
-        String query,
-        Map<String, String> namespaceMap)
-            throws InvalidXpathException {
+                                                       String query,
+                                                       Map<String, String> namespaceMap)
+        throws InvalidXpathException {
 
         List<WorkProduct> listOfProducts = new ArrayList<WorkProduct>();
         List<WorkProduct> products = getWorkProductDAO().findByProductType(productType);
@@ -539,9 +539,9 @@ implements WorkProductService {
      */
     @Override
     public List<String> getProductIDListByTypeAndXQuery(String productType,
-        String query,
-        Map<String, String> namespaceMap)
-            throws InvalidXpathException {
+                                                        String query,
+                                                        Map<String, String> namespaceMap)
+        throws InvalidXpathException {
 
         ArrayList<String> productIDs = new ArrayList<String>();
         List<WorkProduct> products = getWorkProductDAO().findByProductType(productType);
@@ -706,8 +706,8 @@ implements WorkProductService {
                                            ProductChangeNotificationMessage.ChangeIndicator changeIndicaor) {
 
         ProductChangeNotificationMessage notification = new ProductChangeNotificationMessage(identification,
-            properties,
-            changeIndicaor);
+                                                                                             properties,
+                                                                                             changeIndicaor);
 
         logger.debug("Work product change notification: " + notification.getProductID());
 
@@ -718,7 +718,7 @@ implements WorkProductService {
             // System.err.println("notifyOfWorkProductChange Exception sending message: "
             // + e.getMessage());
             logger.error("Exception sending message on productChangeNotificationChannel: " +
-                e.getMessage());
+                         e.getMessage());
         }
     }
 
@@ -727,17 +727,17 @@ implements WorkProductService {
                                                              ProductToInterestGroupAssociationMessage.AssociationType associationType) {
 
         logger.debug("Notify Communication Service to " +
-            (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Associate
+                     (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Associate
                                                                                                            ? "associate"
-                                                                                                     : "de-associate") +
-            " work product to incident");
+                                                                                                           : "de-associate") +
+                     " work product to incident");
 
         InterestGroup interestGroup = getInterestGroupDAO().findByInterestGroup(interestGroupID);
         // if it's shared work product not need to notify the communication service
         if (interestGroup.getOwningCore().equals(getConfigurationService().getCoreName()) == false) {
             logger.error(product.getProductID() + " is owned by " + interestGroup.getOwningCore() +
-                " and this core is " + getConfigurationService().getCoreName() +
-                ". No notification needed");
+                         " and this core is " + getConfigurationService().getCoreName() +
+                         ". No notification needed");
             return;
         }
 
@@ -780,9 +780,9 @@ implements WorkProductService {
 
                 status.setStatus("Failure");
                 String reason = "Invalid version number and/or checksum: " +
-                    " specified version number=" + theProduct.getProductVersion() +
-                    "; specified checksum=[" + theProduct.getChecksum() + "]." +
-                    "  The current version number=" + product.getProductVersion();
+                                " specified version number=" + theProduct.getProductVersion() +
+                                "; specified checksum=[" + theProduct.getChecksum() + "]." +
+                                "  The current version number=" + product.getProductVersion();
                 status.setReasonForFailure(reason);
                 return status;
             }
@@ -959,9 +959,9 @@ implements WorkProductService {
             // Send the publish request to owning core for approval first.
 
             logger.debug("This an publish/update by a joined core=" +
-                directoryService.getCoreName() +
-                "    ...   Send update request to owning core  " +
-                interestGroup.getOwningCore() + " for approval first.");
+                         directoryService.getCoreName() +
+                         "    ...   Send update request to owning core  " +
+                         interestGroup.getOwningCore() + " for approval first.");
 
             try {
                 ProductPublicationStatus status = new ProductPublicationStatus();
@@ -1015,7 +1015,7 @@ implements WorkProductService {
     public void publishProductFromOwner(WorkProduct theProduct) {
 
         logger.debug("publishProductFromOwner: productID: " + theProduct.getProductID() +
-            ", IGID: " + theProduct.getFirstAssociatedInterestGroupID());
+                     ", IGID: " + theProduct.getFirstAssociatedInterestGroupID());
         // Get the current version of the product
         /*
         WorkProduct product = null;
@@ -1050,7 +1050,7 @@ implements WorkProductService {
         List<WorkProduct> productList = getWorkProductDAO().findAllVersionOfProduct(productID);
         for (WorkProduct product : productList) {
             logger.debug("purgeWorkProduct: Product:/" + productID + "/, Version:/" +
-                product.getProductVersion() + "/ ...");
+                         product.getProductVersion() + "/ ...");
             getWorkProductDAO().makeTransient(product);
         }
     }

@@ -103,7 +103,7 @@ public class ResourceInstanceServiceEndpoint
 
     @Autowired
     private ResourceInstanceService risService;
-    
+
     //@Autowired
     //private NotificationService notificationService;
 
@@ -127,12 +127,13 @@ public class ResourceInstanceServiceEndpoint
         CheckinResponseDocument response = CheckinResponseDocument.Factory.newInstance();
         CheckinRequest request = requestDoc.getCheckinRequest();
         ResourceInstanceModel resourceModel = risService.checkin(request.getID(),
-            request.getLocalResourceID(), request.getResourceProfileID());
-        
+            request.getLocalResourceID(),
+            request.getResourceProfileID());
+
         //since the checkin is not working so well yet, just use count=0 for now.
         int count = 0; //notificationService.findMsgCountByEntityId(resourceModel.get)
-        response.addNewCheckinResponse().setResourceInstance(
-            ResourceInstanceUtil.copyProperties(resourceModel, count));
+        response.addNewCheckinResponse().setResourceInstance(ResourceInstanceUtil.copyProperties(resourceModel,
+            count));
         return response;
     }
 
@@ -152,12 +153,13 @@ public class ResourceInstanceServiceEndpoint
         RegisterResponseDocument response = RegisterResponseDocument.Factory.newInstance();
         RegisterRequest request = requestDoc.getRegisterRequest();
         ResourceInstanceModel resourceModel = risService.register(request.getID(),
-            request.getLocalResourceID(), request.getResourceProfileID());
+            request.getLocalResourceID(),
+            request.getResourceProfileID());
 
-      //since the checkin is not working so well yet, just use count=0 for now.
+        //since the checkin is not working so well yet, just use count=0 for now.
         int count = 0;
-        response.addNewRegisterResponse().setResourceInstance(
-            ResourceInstanceUtil.copyProperties(resourceModel, count));
+        response.addNewRegisterResponse().setResourceInstance(ResourceInstanceUtil.copyProperties(resourceModel,
+            count));
         return response;
     }
 
@@ -215,8 +217,7 @@ public class ResourceInstanceServiceEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_ResourceInstanceService, localPart = "GetResourceInstanceListRequest")
-    public GetResourceInstanceListResponseDocument getResourceInstanceList(
-        GetResourceInstanceListRequestDocument requestDoc) {
+    public GetResourceInstanceListResponseDocument getResourceInstanceList(GetResourceInstanceListRequestDocument requestDoc) {
 
         GetResourceInstanceListResponseDocument response = GetResourceInstanceListResponseDocument.Factory.newInstance();
         response.addNewGetResourceInstanceListResponse();
@@ -240,8 +241,7 @@ public class ResourceInstanceServiceEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_ResourceInstanceService, localPart = "GetResourceInstanceRequest")
-    public GetResourceInstanceResponseDocument getResourceInstance(
-        GetResourceInstanceRequestDocument requestDoc) {
+    public GetResourceInstanceResponseDocument getResourceInstance(GetResourceInstanceRequestDocument requestDoc) {
 
         GetResourceInstanceResponseDocument response = GetResourceInstanceResponseDocument.Factory.newInstance();
         response.addNewGetResourceInstanceResponse();

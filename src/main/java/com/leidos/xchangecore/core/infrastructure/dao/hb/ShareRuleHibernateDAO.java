@@ -8,8 +8,9 @@ import com.leidos.xchangecore.core.dao.hb.GenericHibernateDAO;
 import com.leidos.xchangecore.core.infrastructure.dao.ShareRuleDAO;
 import com.leidos.xchangecore.core.infrastructure.model.ShareRule;
 
-public class ShareRuleHibernateDAO extends GenericHibernateDAO<ShareRule, Integer>
-        implements ShareRuleDAO {
+public class ShareRuleHibernateDAO
+    extends GenericHibernateDAO<ShareRule, Integer>
+    implements ShareRuleDAO {
 
     public Set<ShareRule> findAllShareRules() {
 
@@ -21,7 +22,7 @@ public class ShareRuleHibernateDAO extends GenericHibernateDAO<ShareRule, Intege
             shareRules.add(shareRule);
         }
         */
-        
+
         return shareRules;
     }
 

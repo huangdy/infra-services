@@ -21,7 +21,8 @@ import org.hibernate.search.annotations.Index;
  */
 @Entity
 @Table(name = "NOTIFICATION_SUBSCRIPTION")
-public class NotificationSubscription implements Serializable {
+public class NotificationSubscription
+    implements Serializable {
 
     private static final long serialVersionUID = 7064547589797190026L;
 

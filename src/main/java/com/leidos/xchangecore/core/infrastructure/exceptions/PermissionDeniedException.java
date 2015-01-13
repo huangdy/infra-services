@@ -2,7 +2,8 @@ package com.leidos.xchangecore.core.infrastructure.exceptions;
 
 import javax.xml.soap.SOAPException;
 
-public class PermissionDeniedException extends SOAPException {
+public class PermissionDeniedException
+    extends SOAPException {
 
     /**
      * 

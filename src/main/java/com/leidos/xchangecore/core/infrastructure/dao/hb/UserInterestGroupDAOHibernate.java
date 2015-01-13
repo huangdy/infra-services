@@ -55,8 +55,7 @@ public class UserInterestGroupDAOHibernate
 
         final UserInterestGroup userInterestGroup = findByUser(user);
 
-        return userInterestGroup != null ? userInterestGroup.getInterestGroupIDList()
-                                        : null;
+        return userInterestGroup != null ? userInterestGroup.getInterestGroupIDList() : null;
     }
 
     @Override

@@ -209,7 +209,7 @@ public class WorkProductEndpoint
         }
 
         if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                            wp.getFirstAssociatedInterestGroupID())) {
+            wp.getFirstAssociatedInterestGroupID())) {
             response.addNewArchiveProductResponse().set(WorkProductHelper.toWorkProductProcessingStatus(productService.archiveProduct(request.getArchiveProductRequest().getWorkProductIdentification())));
         } else {
             throw new SOAPException("Permission Denied");
@@ -245,7 +245,7 @@ public class WorkProductEndpoint
         }
 
         String wpID = productService.associateWorkProductToInterestGroup(request.getAssociateWorkProductToInterestGroupRequest().getWorkProductID().getStringValue(),
-                                                                         request.getAssociateWorkProductToInterestGroupRequest().getIncidentID().getStringValue());
+            request.getAssociateWorkProductToInterestGroupRequest().getIncidentID().getStringValue());
 
         WorkProduct wp = productService.getProduct(wpID);
 
@@ -289,7 +289,7 @@ public class WorkProductEndpoint
         }
 
         if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                            wp.getFirstAssociatedInterestGroupID())) {
+            wp.getFirstAssociatedInterestGroupID())) {
             response.addNewCloseProductResponse().addNewWorkProductPublicationResponse().set(WorkProductHelper.toWorkProductPublicationResponse(productService.closeProduct(request.getCloseProductRequest().getWorkProductIdentification())));
         } else {
             throw new SOAPException("Permission Denied");
@@ -321,7 +321,7 @@ public class WorkProductEndpoint
         List<WorkProduct> productList = new ArrayList<WorkProduct>();
         for (WorkProduct wp : products) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                                wp.getFirstAssociatedInterestGroupID())) {
+                wp.getFirstAssociatedInterestGroupID())) {
                 productList.add(wp);
             }
         }
@@ -361,7 +361,7 @@ public class WorkProductEndpoint
         WorkProduct wp = productService.getProduct(request.getGetProductRequest().getWorkProductIdentification());
         if (wp != null) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                                wp.getFirstAssociatedInterestGroupID())) {
+                wp.getFirstAssociatedInterestGroupID())) {
                 WorkProductDocument.WorkProduct theWorkProduct = WorkProductHelper.toWorkProduct(wp);
                 response.addNewGetProductResponse().setWorkProduct(theWorkProduct);
             } else {
@@ -398,7 +398,7 @@ public class WorkProductEndpoint
         WorkProduct wp = productService.getProduct(request.getGetProductCurrentVersionRequest().getIdentifier().getStringValue());
         if (wp != null) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                                wp.getFirstAssociatedInterestGroupID())) {
+                wp.getFirstAssociatedInterestGroupID())) {
                 WorkProductDocument.WorkProduct theWorkProduct = WorkProductHelper.toWorkProduct(wp);
                 response.addNewGetProductCurrentVersionResponse().setWorkProduct(theWorkProduct);
             } else {
@@ -443,7 +443,7 @@ public class WorkProductEndpoint
         // if the product associated with an interest group then check the permission for this user to see whether he/she can publish it
         if (wp.getFirstAssociatedInterestGroupID() != null &&
             userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                                            wp.getFirstAssociatedInterestGroupID()) == false) {
+                wp.getFirstAssociatedInterestGroupID()) == false) {
             throw new PermissionDeniedException();
         }
 

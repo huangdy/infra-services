@@ -11,14 +11,14 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public  class WorkProductSqlBuilder {
+public class WorkProductSqlBuilder {
 
     Logger log = LoggerFactory.getLogger(getClass());
-    
+
     private Map<String, String> tableParams = new HashMap<String, String>();
 
     private Map<String, String> tableOps = new HashMap<String, String>();
-    
+
     // UserInterestGroupDAO
     private static UserInterestGroupDAO userInterestGroupDAO;
 
@@ -85,7 +85,7 @@ public  class WorkProductSqlBuilder {
         } else {
             setStartIndex(1);
         }
-        
+
         boolean hasCount = false;
         if (params.containsKey("count")) {
             String count = params.get("count")[0];
@@ -102,28 +102,29 @@ public  class WorkProductSqlBuilder {
         Map<String, String[]> queryParams = refineParams(params);
         StringBuilder query = new StringBuilder();
         // query.append(buildSqlBaseStatement());
-        
+
         // new query base
- 
+
         query.append("SELECT * FROM ( ");
-	query.append("SELECT guest.workproducts.*,ROW_NUMBER() OVER (ORDER BY id asc) as [RowNo] ");
-	query.append("FROM  USER_INTEREST_GROUP_interestGroupIDList  ");
-	query.append("	INNER JOIN USER_INTEREST_GROUP ON USER_INTEREST_GROUP_interestGroupIDList.USER_INTEREST_GROUP_UIG_ID = USER_INTEREST_GROUP.UIG_ID  ");
-	query.append("	INNER JOIN guest.workproducts ON USER_INTEREST_GROUP_interestGroupIDList.INTEREST_GROUP_ID_LIST = guest.workproducts.AssociatedGroups  ");
+        query.append("SELECT guest.workproducts.*,ROW_NUMBER() OVER (ORDER BY id asc) as [RowNo] ");
+        query.append("FROM  USER_INTEREST_GROUP_interestGroupIDList  ");
+        query.append("	INNER JOIN USER_INTEREST_GROUP ON USER_INTEREST_GROUP_interestGroupIDList.USER_INTEREST_GROUP_UIG_ID = USER_INTEREST_GROUP.UIG_ID  ");
+        query.append("	INNER JOIN guest.workproducts ON USER_INTEREST_GROUP_interestGroupIDList.INTEREST_GROUP_ID_LIST = guest.workproducts.AssociatedGroups  ");
         query.append("  WHERE ( ");
-        query.append("     USER_INTEREST_GROUP.USER_JID = '" + params.get("req.remoteUser")[0] + "' ");
+        query.append("     USER_INTEREST_GROUP.USER_JID = '" + params.get("req.remoteUser")[0] +
+                     "' ");
         String paramQuery = buildParamQuery(queryParams);
-        query.append(paramQuery); 
-	query.append(") ) AS products ");
+        query.append(paramQuery);
+        query.append(") ) AS products ");
         query.append("WHERE RowNo >= ").append(getStartIndex());
-        
+
         if (hasCount) {
             int count = getStartIndex() + getCount() - 1;
             query.append(" AND RowNo<=").append(count);
-        }        
-        
+        }
+
         log.debug("Query: " + query.toString());
-        
+
         return query.toString();
     }
 
@@ -180,12 +181,14 @@ public  class WorkProductSqlBuilder {
 
         this.startIndex = startIndex;
     }
-    
+
     public UserInterestGroupDAO getUserInterestGroupDAO() {
+
         return userInterestGroupDAO;
     }
 
     public void setUserInterestGroupDAO(UserInterestGroupDAO userInterestGroupDAO) {
+
         this.userInterestGroupDAO = userInterestGroupDAO;
     }
 }

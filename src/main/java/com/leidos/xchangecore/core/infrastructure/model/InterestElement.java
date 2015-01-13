@@ -25,7 +25,8 @@ import org.hibernate.search.annotations.Index;
 
 @Entity
 @Table(name = "INTEREST")
-public class InterestElement implements Serializable {
+public class InterestElement
+    implements Serializable {
 
     private static final long serialVersionUID = -231519527018186603L;
 
@@ -43,10 +44,13 @@ public class InterestElement implements Serializable {
     private String messageContent;
 
     @OneToMany(targetEntity = InterestNamespaceType.class, cascade = CascadeType.ALL)
-    @Cascade( { org.hibernate.annotations.CascadeType.DELETE_ORPHAN })
+    @Cascade({
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN
+    })
     private Set<InterestNamespaceType> namespaces = new HashSet<InterestNamespaceType>();
 
     public InterestElement() {
+
         // No arg constructor
     }
 
@@ -57,6 +61,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public Integer getId() {
+
         return id;
     }
 
@@ -67,6 +72,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public void setId(Integer id) {
+
         this.id = id;
     }
 
@@ -77,6 +83,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public String getTopicExpression() {
+
         return topicExpression;
     }
 
@@ -87,6 +94,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public void setTopicExpression(String topicExpression) {
+
         this.topicExpression = topicExpression;
     }
 
@@ -97,6 +105,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public String getMessageContent() {
+
         return messageContent;
     }
 
@@ -107,6 +116,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public void setMessageContent(String messageContent) {
+
         this.messageContent = messageContent;
     }
 
@@ -117,6 +127,7 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public Set<InterestNamespaceType> getNamespaces() {
+
         return namespaces;
     }
 
@@ -127,11 +138,13 @@ public class InterestElement implements Serializable {
      * @ssdd
      */
     public void setNamespaces(Set<InterestNamespaceType> namespaces) {
+
         this.namespaces = namespaces;
     }
 
     @Override
     public int hashCode() {
+
         final int prime = 31;
         int result = 1;
         result = prime * result + ((messageContent == null) ? 0 : messageContent.hashCode());
@@ -142,6 +155,7 @@ public class InterestElement implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null)

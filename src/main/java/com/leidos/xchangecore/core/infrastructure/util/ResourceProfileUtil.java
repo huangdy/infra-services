@@ -27,10 +27,11 @@ import com.saic.precis.x2009.x06.base.NamespaceMapItemType;
 public class ResourceProfileUtil {
 
     static Logger log = LoggerFactory.getLogger(ResourceProfileUtil.class);
-    
+
     static final String defaultProfileIDLabel = "ID";
 
     public static ResourceProfileModel copyProperties(ResourceProfile profile) {
+
         ResourceProfileModel profileModel = new ResourceProfileModel();
 
         profileModel.setIdentifier(profile.getID().getStringValue());
@@ -42,10 +43,9 @@ public class ResourceProfileUtil {
         profileModel.setDescription(profile.getDescription());
 
         // resource typing
-        if (profile.getResourceTyping() != null
-                && profile.getResourceTyping().sizeOfTypeArray() > 0) {
-            for (CodespaceValueType type : profile.getResourceTyping().getTypeArray()) 
-            {
+        if (profile.getResourceTyping() != null &&
+            profile.getResourceTyping().sizeOfTypeArray() > 0) {
+            for (CodespaceValueType type : profile.getResourceTyping().getTypeArray()) {
                 profileModel.addCVT(type.getCodespace(), type.getLabel(), type.getStringValue());
             }
         }
@@ -59,6 +59,7 @@ public class ResourceProfileUtil {
     }
 
     public static ResourceProfileModel copyProperties(ResourceProfile profile, Integer id) {
+
         ResourceProfileModel profileModel = new ResourceProfileModel();
         profileModel.setId(id);
 
@@ -71,8 +72,8 @@ public class ResourceProfileUtil {
         profileModel.setDescription(profile.getDescription());
 
         // resource typing
-        if (profile.getResourceTyping() != null
-                && profile.getResourceTyping().sizeOfTypeArray() > 0) {
+        if (profile.getResourceTyping() != null &&
+            profile.getResourceTyping().sizeOfTypeArray() > 0) {
             for (CodespaceValueType type : profile.getResourceTyping().getTypeArray()) {
                 profileModel.addCVT(type.getCodespace(), type.getLabel(), type.getStringValue());
             }
@@ -93,7 +94,8 @@ public class ResourceProfileUtil {
      * @return ResourceProfile
      */
     public static ResourceProfile copyProperties(ResourceProfileModel profileModel) {
-//        log.debug("getting profile from: " + profileModel);
+
+        //        log.debug("getting profile from: " + profileModel);
         if (profileModel == null)
             return null;
 
@@ -107,18 +109,18 @@ public class ResourceProfileUtil {
         //FLi redo the loop as the below old code does
         if (profileModel.getCvts() != null && profileModel.getCvts().size() > 0) {
             profileType.addNewResourceTyping();
-            
+
             Set<CodeSpaceValueType> csets = profileModel.getCvts();
-            
+
             Iterator<CodeSpaceValueType> it = csets.iterator();
             while (it.hasNext()) {
-            	CodeSpaceValueType obj = (CodeSpaceValueType)it.next();
-            	CodespaceValueType type = profileType.getResourceTyping().addNewType();
-            	type.setStringValue(obj.getValue());
-            	type.setCodespace(obj.getCodeSpace());
-            	type.setLabel(obj.getLabel());
+                CodeSpaceValueType obj = (CodeSpaceValueType) it.next();
+                CodespaceValueType type = profileType.getResourceTyping().addNewType();
+                type.setStringValue(obj.getValue());
+                type.setCodespace(obj.getCodeSpace());
+                type.setLabel(obj.getLabel());
             }
-            
+
             /* old code
             for (String codespaceLabelStr : profileModel.getResourceTyping().keySet()) {
                 CodespaceValueType type = profileType.getResourceTyping().addNewType();
@@ -134,7 +136,7 @@ public class ResourceProfileUtil {
                 }
             }
             */
-            
+
         }
 
         // if interests are present, add them to profile
@@ -145,8 +147,8 @@ public class ResourceProfileUtil {
                 newInterest.setTopicExpression(interest.getTopicExpression());
                 // newInterest.setTopicExpression(QName.valueOf(interest.getTopicExpression()));
                 // set messageContent
-                if (interest.getMessageContent() != null
-                        && interest.getMessageContent().length() > 0) {
+                if (interest.getMessageContent() != null &&
+                    interest.getMessageContent().length() > 0) {
                     newInterest.addNewMessageContent();
                     XmlCursor cursor = newInterest.getMessageContent().newCursor();
                     cursor.toNextToken();
@@ -171,6 +173,7 @@ public class ResourceProfileUtil {
     }
 
     public static InterestElement copyProperties(Interest interest) {
+
         if (interest == null)
             return null;
 
@@ -204,6 +207,7 @@ public class ResourceProfileUtil {
      */
     // TODO:: For each merged type, hashcode and equals must be defined
     public static void merge(Interests interests, Set<InterestElement> list) {
+
         // if interests are present, add them to profile
         if (interests != null && interests.sizeOfInterestArray() > 0) {
             // Subscription List
@@ -244,6 +248,7 @@ public class ResourceProfileUtil {
      * @return
      */
     public static boolean validSearchKey(String name) {
+
         // FIXME::
         return name.equalsIgnoreCase(name);
     }

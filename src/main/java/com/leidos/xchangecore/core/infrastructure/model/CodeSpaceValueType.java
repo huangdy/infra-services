@@ -59,7 +59,6 @@ public class CodeSpaceValueType {
         this.id = id;
     }
 
-  
     /**
      * Gets the code space.
      * 

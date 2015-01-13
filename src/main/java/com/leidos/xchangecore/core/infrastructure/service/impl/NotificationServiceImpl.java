@@ -90,10 +90,10 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  * @ssdd
  */
 public class NotificationServiceImpl
-implements NotificationService, ServiceNamespaces {
+    implements NotificationService, ServiceNamespaces {
 
     private class MessageComparator
-    implements Comparator<NotificationMessage> {
+        implements Comparator<NotificationMessage> {
 
         @Override
         public int compare(final NotificationMessage msg1, final NotificationMessage msg2) {
@@ -153,8 +153,8 @@ implements NotificationService, ServiceNamespaces {
                                         final String message) {
 
         logger.debug("addNotificationMessage:\n\tNotification: " + notification +
-            "\n\tsubscriptionID: " + subscriptionID + "\n\tmsgType: " + msgType +
-            "\n\tmesage: " + message);
+                     "\n\tsubscriptionID: " + subscriptionID + "\n\tmsgType: " + msgType +
+                     "\n\tmesage: " + message);
         notification.addMessage(subscriptionID, msgType, message);
         notificationDAO.makePersistent(notification);
     }
@@ -234,7 +234,7 @@ implements NotificationService, ServiceNamespaces {
                 }
             } catch (final XmlException e) {
                 logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
-                    "]  into xml object");
+                             "]  into xml object");
                 e.printStackTrace();
             }
 
@@ -249,7 +249,7 @@ implements NotificationService, ServiceNamespaces {
                 }
             } catch (final XmlException e) {
                 logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
-                    "]  into xml object");
+                             "]  into xml object");
                 e.printStackTrace();
             }
         }
@@ -269,7 +269,7 @@ implements NotificationService, ServiceNamespaces {
                 }
             } catch (final XmlException e) {
                 logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
-                    "]  into xml object");
+                             "]  into xml object");
                 e.printStackTrace();
             }
         }
@@ -302,7 +302,7 @@ implements NotificationService, ServiceNamespaces {
 
         // Set the url for the notification service for pull points
         endpoint.addNewAddress().setStringValue(getConfigurationService().getWebServiceBaseURL() +
-            "/" + entityID);
+                                                "/" + entityID);
 
         // Add the service identification
         final MetadataType metadata = endpoint.addNewMetadata();
@@ -400,7 +400,7 @@ implements NotificationService, ServiceNamespaces {
     public NotificationMessageHolderType getCurrentMessage(final QName topic, final String jid) {
 
         logger.debug("Looking for last current message on topic: " + topic.toString() + ", jid: " +
-            jid);
+                     jid);
         final String message = pubSubService.getLastPublishedMessage(topic.toString());
         logger.debug("Last current message received: " + message);
 
@@ -498,7 +498,7 @@ implements NotificationService, ServiceNamespaces {
             if (notfMessages.size() > 0) {
 
                 logger.debug("getMessage: User: " + entityID + " has " + notfMessages.size() +
-                    " messages");
+                             " messages");
                 final List<NotificationMessage> notificationMessages = new ArrayList<NotificationMessage>();
                 notificationMessages.addAll(notfMessages);
                 Collections.sort(notificationMessages, new MessageComparator());
@@ -516,7 +516,7 @@ implements NotificationService, ServiceNamespaces {
                 clearNotificationMessages(notification);
             }
             logger.debug("getMessage: User: " + entityID + " can asscess " + messages.size() +
-                " messages");
+                         " messages");
 
             response = new NotificationMessageHolderType[messages.size()];
             response = messages.toArray(response);
@@ -667,7 +667,7 @@ implements NotificationService, ServiceNamespaces {
                     final ProductPublicationStatus status = new ProductPublicationStatus();
                     status.setStatus(ProductPublicationStatus.FailureStatus);
                     status.setReasonForFailure("Subscription for [" + notification.getEntityID() +
-                        "]. " + errorMessage);
+                                               "]. " + errorMessage);
                     final WorkProductPublicationResponseType errorResponse = WorkProductHelper.toWorkProductPublicationResponse(status);
                     final WorkProductPublicationResponseDocument errorResponseDoc = WorkProductPublicationResponseDocument.Factory.newInstance();
                     errorResponseDoc.addNewWorkProductPublicationResponse().set(errorResponse);
@@ -733,7 +733,7 @@ implements NotificationService, ServiceNamespaces {
         logger.debug("interest group ID: " + igID);
         boolean eligibility = userInterestGroupDAO.isEligible(jid, igID);
         logger.debug("User: " + jid + " is" + (eligibility ? " " : " not") +
-            " allowed to access IG: " + igID);
+                     " allowed to access IG: " + igID);
         return eligibility;
     }
 
@@ -786,14 +786,14 @@ implements NotificationService, ServiceNamespaces {
 
                     for (final Notification notification : notifications) {
                         logger.debug("adding workproduct: " + productID + " with IGID: " + igID +
-                            " to subid: " + subscriptionId + " to entity: " +
-                            notification.getEntityID());
+                                     " to subid: " + subscriptionId + " to entity: " +
+                                     notification.getEntityID());
                         productDoc.setWorkProduct(summary);
 
                         // if endpoint is web service url
                         if (notification.isEndpointWS()) {
                             logger.debug("Notification going to be SENT to webServiceURL: " +
-                                notification.getEndpointURL());
+                                         notification.getEndpointURL());
                             final String url = notification.getEndpointURL();
                             try {
                                 final URI u = new URI(url);
@@ -808,10 +808,10 @@ implements NotificationService, ServiceNamespaces {
                                             u.getSchemeSpecificPart());
                                     } catch (final IllegalArgumentException e) {
                                         logger.error("IllegalArgumentException newWorkProductVersion sending XMPP message: " +
-                                            e.getMessage());
+                                                     e.getMessage());
                                     } catch (final Exception e) {
                                         logger.error("Exception newWorkProductVersion IllegalArgumentException: " +
-                                            e.getMessage());
+                                                     e.getMessage());
                                     }
                                 } else {
                                     // invoke specified webService
@@ -828,11 +828,11 @@ implements NotificationService, ServiceNamespaces {
                         else {
                             List<String> igIDList = userIGIDListHash.get(notification.getEntityID());
                             logger.debug("User: " + notification.getEntityID() + " can access " +
-                                igIDList.size() + " IGs");
+                                         igIDList.size() + " IGs");
                             if (igID == null || igIDList.size() > 0 && igIDList.contains(igID)) {
 
                                 logger.debug("Add notification for User: " +
-                                    notification.getEntityID());
+                                             notification.getEntityID());
 
                                 if (version > 1) {
                                     notification.clearoldMessage(productID);
@@ -843,7 +843,7 @@ implements NotificationService, ServiceNamespaces {
                                     productDoc.toString());
                             } else {
                                 logger.debug("User: " + notification.getEntityID() +
-                                    " can NOT access " + igID);
+                                             " can NOT access " + igID);
                             }
                         }
                     }
@@ -853,7 +853,7 @@ implements NotificationService, ServiceNamespaces {
             // System.err.println("productChangeNotificationHandler calling publishWorkProduct Exception sending message: "
             // + e.getMessage());
             logger.error("Exception handling product change notification message when publishing: " +
-                e.getMessage());
+                         e.getMessage());
         }
     }
 
@@ -901,14 +901,14 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param agreementDAO the new agreement dao
      */
-    public void setAgreementDAO(AgreementDAO agreementDAO) {
+    public void setAgreementDAO(final AgreementDAO agreementDAO) {
 
-        agreementDAO = agreementDAO;
+        this.agreementDAO = agreementDAO;
     }
 
-    public void setCommunicationsService(CommunicationsService communicationsService) {
+    public void setCommunicationsService(final CommunicationsService communicationsService) {
 
-        communicationsService = communicationsService;
+        this.communicationsService = communicationsService;
     }
 
     /**
@@ -927,9 +927,9 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param directoryService the new directory service
      */
-    public void setDirectoryService(DirectoryService directoryService) {
+    public void setDirectoryService(final DirectoryService directoryService) {
 
-        directoryService = directoryService;
+        this.directoryService = directoryService;
     }
 
     /**
@@ -963,9 +963,9 @@ implements NotificationService, ServiceNamespaces {
         pubSubService = service;
     }
 
-    public void setUserInterestGroupDAO(UserInterestGroupDAO userInterestGroupDAO) {
+    public void setUserInterestGroupDAO(final UserInterestGroupDAO userInterestGroupDAO) {
 
-        userInterestGroupDAO = userInterestGroupDAO;
+        this.userInterestGroupDAO = userInterestGroupDAO;
     }
 
     /**
@@ -973,9 +973,9 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param webServiceTemplate the new web service template
      */
-    public void setWebServiceTemplate(WebServiceTemplate webServiceTemplate) {
+    public void setWebServiceTemplate(final WebServiceTemplate webServiceTemplate) {
 
-        webServiceTemplate = webServiceTemplate;
+        this.webServiceTemplate = webServiceTemplate;
     }
 
     /**
@@ -983,9 +983,9 @@ implements NotificationService, ServiceNamespaces {
      *
      * @param workProductService the new work product service
      */
-    public void setWorkProductService(WorkProductService workProductService) {
+    public void setWorkProductService(final WorkProductService workProductService) {
 
-        workProductService = workProductService;
+        this.workProductService = workProductService;
     }
 
     /**
@@ -1080,31 +1080,31 @@ implements NotificationService, ServiceNamespaces {
                             entityID);
                     }
                 } else // if productType has incident qualifier (<productType>/incident/*)
-                    if (productTypeValue.equalsIgnoreCase("Incident")) {
-                        String incidentIdQualifier = "";
-                        if (tokenizer.hasMoreTokens() && topicTreeCount > 2) {
-                            incidentIdQualifier = tokenizer.nextToken();
-                        } else {
-                            incidentIdQualifier = "*";
-                        }
-                        logger.debug("Subscribing to ProductType : " + productType +
-                            " associated with IncidentID : " + incidentIdQualifier);
-                        subscribeIncidentIdAndWorkProductType(productType,
+                if (productTypeValue.equalsIgnoreCase("Incident")) {
+                    String incidentIdQualifier = "";
+                    if (tokenizer.hasMoreTokens() && topicTreeCount > 2) {
+                        incidentIdQualifier = tokenizer.nextToken();
+                    } else {
+                        incidentIdQualifier = "*";
+                    }
+                    logger.debug("Subscribing to ProductType : " + productType +
+                                 " associated with IncidentID : " + incidentIdQualifier);
+                    subscribeIncidentIdAndWorkProductType(productType,
                         incidentIdQualifier,
                         xPath,
                         namespaceMap,
                         entityID);
-                    }
+                }
                 // All other productTypes in from <productType>/*
-                    else if (productTypeValue.equals("*")) {
-                        logger.debug("Subscribing ProductType: " + productType);
-                        subscribeWorkProductType(productType, xPath, namespaceMap, entityID);
-                    } else {
-                        // the type could be something like application/pdf
-                        final String type = productType + "/" + productTypeValue;
-                        logger.debug("Subscribing ProductType: " + type);
-                        subscribeWorkProductType(type, xPath, namespaceMap, entityID);
-                    }
+                else if (productTypeValue.equals("*")) {
+                    logger.debug("Subscribing ProductType: " + productType);
+                    subscribeWorkProductType(productType, xPath, namespaceMap, entityID);
+                } else {
+                    // the type could be something like application/pdf
+                    final String type = productType + "/" + productTypeValue;
+                    logger.debug("Subscribing ProductType: " + type);
+                    subscribeWorkProductType(type, xPath, namespaceMap, entityID);
+                }
             } else {
                 throw new InvalidProductTypeException();
             }
@@ -1145,7 +1145,7 @@ implements NotificationService, ServiceNamespaces {
         getPubSubService().addAgreementListener(aID,
             new NotificationListener<AgreementRosterMessage>() {
 
-            @Override
+                @Override
                 public void onChange(final AgreementRosterMessage message) {
 
                     logger.debug("AgreementListener.:onChange: agreementID: " +
@@ -1182,7 +1182,7 @@ implements NotificationService, ServiceNamespaces {
                                                          final String xpContext,
                                                          final Map<String, String> namespaceMap,
                                                          final String entityID)
-                                                             throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
+        throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
 
         final Integer subID = getPubSubService().subscribeInterestGroupIdAndWorkProductType(wpType,
             incidentID,
@@ -1303,7 +1303,7 @@ implements NotificationService, ServiceNamespaces {
                                             final String xpContext,
                                             final Map<String, String> namespaceMap,
                                             final String entityID)
-                                                throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
+        throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
 
         final Integer subID = getPubSubService().subscribeWorkProductType(wpType,
             xpContext,
@@ -1387,12 +1387,12 @@ implements NotificationService, ServiceNamespaces {
             doc.getWorkProductDeletedNotification().addNewWorkProductProperties().set(productChangedMessage.getProperties().getWorkProductProperties());
             String interestGroupID = productChangedMessage.getProperties().getWorkProductProperties().getAssociatedGroups().getIdentifierArray(0).getStringValue();
             logger.debug("trying to delete work product for " + notification.getEntityID() +
-                " with IGID: " + interestGroupID);
+                         " with IGID: " + interestGroupID);
 
             // if endpoint is web service url
             if (notification.isEndpointWS()) {
                 logger.debug("Notification going to be SENT to webServiceURL: " +
-                    notification.getEndpointURL());
+                             notification.getEndpointURL());
                 // invoke specified webService
                 invokeWebServiceTemplate(notification, "WorkProductDeleted", doc.toString());
             } else if (userInterestGroupDAO.isEligible(notification.getEntityID(), interestGroupID)) {

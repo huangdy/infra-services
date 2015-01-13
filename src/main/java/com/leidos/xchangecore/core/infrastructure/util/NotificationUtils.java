@@ -14,15 +14,16 @@ import com.leidos.xchangecore.core.infrastructure.service.NotificationService;
 import com.leidos.xchangecore.core.infrastructure.service.impl.ConfigurationServiceImpl;
 
 public class NotificationUtils {
-	
+
     static ConfigurationService configurationService = new ConfigurationServiceImpl();
-    
+
     public static EndpointReferenceType createEndpoint(String entityID) {
+
         EndpointReferenceType endpoint = EndpointReferenceType.Factory.newInstance();
 
         // Set the url for the notification service for pull points
-        endpoint.addNewAddress().setStringValue(
-                configurationService.getWebServiceBaseURL() + "/" + entityID);
+        endpoint.addNewAddress().setStringValue(configurationService.getWebServiceBaseURL() + "/" +
+                                                entityID);
 
         // Add the service identification
         MetadataType metadata = endpoint.addNewMetadata();
@@ -36,6 +37,7 @@ public class NotificationUtils {
     }
 
     public static FilterType getFilterFromInterest(Interest interest) throws XmlException {
+
         XmlOptions xo = new XmlOptions();
         xo.setSaveInner();
         XmlCursor ic = interest.newCursor();
@@ -45,38 +47,39 @@ public class NotificationUtils {
     }
 
     public static FilterType getFilterFromInterest(InterestElement interest) {
-    	FilterType filter = FilterType.Factory.newInstance();
-    	XmlCursor cursor = filter.newCursor();
-    	cursor.toNextToken();
-    	cursor.insertElementWithText("TopicExpression", interest.getTopicExpression());
-    	cursor.toNextToken();
-    	cursor.dispose();
-    	// TODO: copy query expression types and namespace maps
-    	return filter;
+
+        FilterType filter = FilterType.Factory.newInstance();
+        XmlCursor cursor = filter.newCursor();
+        cursor.toNextToken();
+        cursor.insertElementWithText("TopicExpression", interest.getTopicExpression());
+        cursor.toNextToken();
+        cursor.dispose();
+        // TODO: copy query expression types and namespace maps
+        return filter;
     }
-//	Interests interests = profile.addNewInterests();
-//	Interest interest = interests.addNewInterest();
-//
-//	QName topicExpression = new QName(IncidentManagementService.Type);
-//	interest.setTopicExpression(topicExpression.toString());
-//
-//	if (addTopicQuery) {
-//		QueryExpressionType query = interest.addNewMessageContent();
-//		query.setDialect(WSN_XPATH_DIALECT);
-//		XmlCursor queryCursor = query.newCursor();
-//		queryCursor.toNextToken();
-//		queryCursor.toNextToken();
-//		queryCursor.insertChars("//stuff");
-//		queryCursor.dispose();
-//
-//		NamespaceMapType map = interest.addNewNamespaceMap();
-//		NamespaceMapItemType item = map.addNewItem();
-//		item.setPrefix("de");
-//		item.setUri("urn:oasis:names:tc:emergency:EDXL:DE:1.0");
-//
-//		item = map.addNewItem();
-//		item.setPrefix("cap");
-//		item.setUri("urn:oasis:names:tc:emergency:cap:1.1");
-//	}
+    //	Interests interests = profile.addNewInterests();
+    //	Interest interest = interests.addNewInterest();
+    //
+    //	QName topicExpression = new QName(IncidentManagementService.Type);
+    //	interest.setTopicExpression(topicExpression.toString());
+    //
+    //	if (addTopicQuery) {
+    //		QueryExpressionType query = interest.addNewMessageContent();
+    //		query.setDialect(WSN_XPATH_DIALECT);
+    //		XmlCursor queryCursor = query.newCursor();
+    //		queryCursor.toNextToken();
+    //		queryCursor.toNextToken();
+    //		queryCursor.insertChars("//stuff");
+    //		queryCursor.dispose();
+    //
+    //		NamespaceMapType map = interest.addNewNamespaceMap();
+    //		NamespaceMapItemType item = map.addNewItem();
+    //		item.setPrefix("de");
+    //		item.setUri("urn:oasis:names:tc:emergency:EDXL:DE:1.0");
+    //
+    //		item = map.addNewItem();
+    //		item.setPrefix("cap");
+    //		item.setUri("urn:oasis:names:tc:emergency:cap:1.1");
+    //	}
 
 }

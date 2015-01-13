@@ -19,7 +19,8 @@ import org.hibernate.search.annotations.Index;
  */
 @Entity
 @Table(name = "USER_ROLES")
-public class UserRole implements Serializable {
+public class UserRole
+    implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -38,6 +39,7 @@ public class UserRole implements Serializable {
     private String roleRefId;
 
     public UserRole() {
+
     }
 
     /**
@@ -48,6 +50,7 @@ public class UserRole implements Serializable {
      * @ssdd
      */
     public UserRole(String userRefID, String roleRefID) {
+
         setUserRefId(userRefID);
         setRoleRefId(roleRefID);
     }
@@ -59,6 +62,7 @@ public class UserRole implements Serializable {
      * @ssdd
      */
     public String getUserRefId() {
+
         return userRefId;
     }
 
@@ -69,6 +73,7 @@ public class UserRole implements Serializable {
      * @ssdd
      */
     public void setUserRefId(String userRefId) {
+
         this.userRefId = userRefId;
     }
 
@@ -79,6 +84,7 @@ public class UserRole implements Serializable {
      * @ssdd
      */
     public String getRoleRefId() {
+
         return roleRefId;
     }
 
@@ -89,11 +95,13 @@ public class UserRole implements Serializable {
      * @ssdd
      */
     public void setRoleRefId(String roleRefId) {
+
         this.roleRefId = roleRefId;
     }
 
     @Override
     public int hashCode() {
+
         final int prime = 31;
         int result = 1;
         result = prime * result + ((roleRefId == null) ? 0 : roleRefId.hashCode());
@@ -103,6 +111,7 @@ public class UserRole implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
+
         if (this == obj)
             return true;
         if (obj == null)

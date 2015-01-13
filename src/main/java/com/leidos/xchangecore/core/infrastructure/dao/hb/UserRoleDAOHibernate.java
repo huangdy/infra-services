@@ -11,11 +11,13 @@ import com.leidos.xchangecore.core.dao.hb.GenericHibernateDAO;
 import com.leidos.xchangecore.core.infrastructure.dao.UserRoleDAO;
 import com.leidos.xchangecore.core.infrastructure.model.UserRole;
 
-public class UserRoleDAOHibernate extends GenericHibernateDAO<UserRole, String> implements
-        UserRoleDAO {
+public class UserRoleDAOHibernate
+    extends GenericHibernateDAO<UserRole, String>
+    implements UserRoleDAO {
 
     @Override
     public List<UserRole> findUsersByRole(String roleRefID) {
+
         return findByCriteria(Restrictions.eq("roleRefId", roleRefID));
     }
 

@@ -19,7 +19,7 @@ public class ResourceInstanceUtil {
 
     public static ResourceInstance copyProperties(ResourceInstanceModel model, int count) {
 
-    	//
+        //
         ResourceInstance ris = ResourceInstance.Factory.newInstance();
         ris.addNewID().setLabel(model.getLabel());
         ris.getID().setStringValue(model.getIdentifier());
@@ -48,7 +48,7 @@ public class ResourceInstanceUtil {
                 address.setStringValue(iface);
                 XmlCursor xc = address.newCursor();
                 xc.insertAttributeWithValue("notificationCount",
-                    ServiceNamespaces.NS_NotificationService, 
+                    ServiceNamespaces.NS_NotificationService,
                     Integer.toString(count));
                 xc.dispose();
             }
