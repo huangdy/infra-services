@@ -11,8 +11,8 @@
 
     <artifactId>infra-services</artifactId>
     <packaging>jar</packaging>
+    <version>${infra-services.version}</version>
     <name>xChangeCore's Infrastructure's Services</name>
-    <version>${infrastructure.version}</version>
 
     <dependencies>
 
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.leidos.xchangecore.core</groupId>
             <artifactId>infra-messages</artifactId>
-            <version>${infrastructure.version}</version>
+            <version>${infra-messages.version}</version>
         </dependency>
         <dependency>
             <groupId>com.leidos.xchangecore.core</groupId>
