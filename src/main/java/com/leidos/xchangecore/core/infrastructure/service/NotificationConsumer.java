@@ -5,10 +5,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * WS-Notification v1.3 Interface
- * 
- * @see com.saic.uicds.core.endpoint.NotificationServiceEndpoint
+ *
+ * @see com.leidos.xchangecore.core.endpoint.NotificationServiceEndpoint
  * @ssdd
- * 
+ *
  */
 @Transactional
 public interface NotificationConsumer {
@@ -19,9 +19,11 @@ public interface NotificationConsumer {
 
     /**
      * Send a directed notify message to a desired client with the specified array of notifications
-     * 
-     * @param entityID is the name of the client you want to notify
-     * @param notifications to be delivered to endpoint when notified
+     *
+     * @param entityID
+     *            is the name of the client you want to notify
+     * @param notifications
+     *            to be delivered to endpoint when notified
      * @ssdd
      */
     public void notify(String entityID, NotificationMessageHolderType[] notifications);// throws

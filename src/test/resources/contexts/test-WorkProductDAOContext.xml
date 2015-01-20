@@ -8,8 +8,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <!-- -->
     <!-- DAOs -->
-    <bean id="userInterestGroupDAO" class="com.saic.uicds.core.infrastructure.dao.hb.UserInterestGroupDAOHibernate" />   
-    <bean id="workProductDAO" class="com.saic.uicds.core.infrastructure.dao.hb.WorkProductDAOHibernate">
+    <bean id="userInterestGroupDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.UserInterestGroupDAOHibernate" />   
+    <bean id="workProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.WorkProductDAOHibernate">
         <property name="userInterestGroupDAO" ref="userInterestGroupDAO"></property>
     </bean>
 

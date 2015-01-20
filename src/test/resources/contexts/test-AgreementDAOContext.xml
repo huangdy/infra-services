@@ -8,7 +8,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <!-- -->
     <!-- DAOs -->
-    <bean id="agreementDAO" class="com.saic.uicds.core.infrastructure.dao.hb.AgreementDAOHibernate">
+    <bean id="agreementDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.AgreementDAOHibernate">
     </bean>
 
 </beans>

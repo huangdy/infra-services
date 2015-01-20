@@ -23,71 +23,76 @@ import org.w3c.dom.Element;
  * Situation, for example, describing different aspects of the Situation, destined for different
  * target recipients, etc. Conversely it is possible that several essentially different Situations
  * give rise to NotificationMessages of the same type.
- * 
- * @see com.saic.uicds.core.endpoint.NotificationServiceEndpoint
- * 
+ *
+ * @see com.leidos.xchangecore.core.endpoint.NotificationServiceEndpoint
+ *
  */
 public interface NotificationMessage {
 
     /**
      * This method allows you to add message content
-     * 
-     * @param what Element
+     *
+     * @param what
+     *            Element
      */
     public void addMessageContent(Element what);
 
     /**
      * This method allows you to add message content
-     * 
-     * @param qn for QName
-     * @param what Object
+     *
+     * @param qn
+     *            for QName
+     * @param what
+     *            Object
      */
     public void addMessageContent(QName qn, Object what); // throws fault
 
     /**
-     * @param qn for Qname
+     * @param qn
+     *            for Qname
      * @return The element Message that has that name
      */
     public Element getMessageContent(QName qn);
 
     /**
      * @param qn
-     * @param what class
+     * @param what
+     *            class
      * @return The Object that has that Qname
      */
     public Object getMessageContent(QName qname, Class<?> what); // throws fault
 
     /**
-     * 
+     *
      * @return Element names added under Messages
      */
     public Collection<?> getMessageContentNames();
 
     /**
-     * 
+     *
      * @return The EPR of who sent the message
-     * 
+     *
      */
     public EndpointReferenceType getProducerReference();
 
     /**
-     * 
+     *
      * @return The EPR of the subscription
-     * 
+     *
      */
     public EndpointReferenceType getSubscriptionReference();
 
     /**
-     * 
+     *
      * @return The qn topic that this message was published under.
-     * 
+     *
      */
     public QName getTopic();
 
     /**
-     * 
+     *
      * @return topic dialect string
-     * 
+     *
      */
     public String getTopicDialect();
 
@@ -96,12 +101,14 @@ public interface NotificationMessage {
     public void setSubscriptionReference(EndpointReferenceType subscription);
 
     /**
-     * @param tp (topic path)
+     * @param tp
+     *            (topic path)
      */
     public void setTopic(QName tp);// throws what fault?
 
     /**
-     * @param d (topic dialect)
+     * @param d
+     *            (topic dialect)
      */
     public void setTopicDialect(String d);// throws TopicExpressionDialectUnknownFault;
 }

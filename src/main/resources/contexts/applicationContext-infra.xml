@@ -166,45 +166,45 @@
     <!-- -->
     <!-- DAOs -->
     <!-- -->
-    <bean id="queuedMessageDAO" class="com.saic.uicds.core.infrastructure.dao.hb.QueuedMessageDAOHibernate" />
+    <bean id="queuedMessageDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.QueuedMessageDAOHibernate" />
     <!-- UserInterestGroup is to persist the user versus InterestGroup relationship -->
-    <bean id="userInterestGroupDAO" class="com.saic.uicds.core.infrastructure.dao.hb.UserInterestGroupDAOHibernate" />
-    <bean id="interestGroupDAO" class="com.saic.uicds.core.infrastructure.dao.hb.InterestGroupDAOHibernate" />
-    <bean id="coreConfigDAO" class="com.saic.uicds.core.infrastructure.dao.hb.CoreConfigHibernateDAO" />
-    <bean id="externalDataSourceConfigDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ExternalDataSourceConfigHibernateDAO" />
-    <bean id="registeredServiceDAO" class="com.saic.uicds.core.infrastructure.dao.hb.RegisteredServiceHibernateDAO" />
-    <bean id="publishedProductDAO" class="com.saic.uicds.core.infrastructure.dao.hb.PublishedProductHibernateDAO" />
-    <bean id="subscribedProductDAO" class="com.saic.uicds.core.infrastructure.dao.hb.SubscribedProductHibernateDAO" />
-    <bean id="productSubscriptionByIDDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ProductSubscriptionByIDHibernateDAO" />
-    <bean id="productSubscriptionByTypeDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ProductSubscriptionByTypeHibernateDAO" />
-    <bean id="loggerDAO" class="com.saic.uicds.core.infrastructure.dao.hb.LoggerDAOHibernate" />
-    <bean id="agreementDAO" class="com.saic.uicds.core.infrastructure.dao.hb.AgreementDAOHibernate" />
-    <bean id="shareRuleDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ShareRuleHibernateDAO" />
-    <bean id="codeSpaceValueTypeDAO" class="com.saic.uicds.core.infrastructure.dao.hb.CodeSpaceValueTypeHibernateDAO" />
-    <bean id="resourceProfileDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ResourceProfileDAOHibernate" />
-    <bean id="resourceInstanceDAO" class="com.saic.uicds.core.infrastructure.dao.hb.ResourceInstanceDAOHibernate" />
-    <bean id="userRoleDAO" class="com.saic.uicds.core.infrastructure.dao.hb.UserRoleDAOHibernate" />
-    <bean id="notificationDAO" class="com.saic.uicds.core.infrastructure.dao.hb.NotificationDAOHibernate" />
-    <bean id="notificationMessageDAO" class="com.saic.uicds.core.infrastructure.dao.hb.NotificationMessageDAOHibernate" />
+    <bean id="userInterestGroupDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.UserInterestGroupDAOHibernate" />
+    <bean id="interestGroupDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.InterestGroupDAOHibernate" />
+    <bean id="coreConfigDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.CoreConfigHibernateDAO" />
+    <bean id="externalDataSourceConfigDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ExternalDataSourceConfigHibernateDAO" />
+    <bean id="registeredServiceDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.RegisteredServiceHibernateDAO" />
+    <bean id="publishedProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.PublishedProductHibernateDAO" />
+    <bean id="subscribedProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.SubscribedProductHibernateDAO" />
+    <bean id="productSubscriptionByIDDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByIDHibernateDAO" />
+    <bean id="productSubscriptionByTypeDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByTypeHibernateDAO" />
+    <bean id="loggerDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.LoggerDAOHibernate" />
+    <bean id="agreementDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.AgreementDAOHibernate" />
+    <bean id="shareRuleDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ShareRuleHibernateDAO" />
+    <bean id="codeSpaceValueTypeDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.CodeSpaceValueTypeHibernateDAO" />
+    <bean id="resourceProfileDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ResourceProfileDAOHibernate" />
+    <bean id="resourceInstanceDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ResourceInstanceDAOHibernate" />
+    <bean id="userRoleDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.UserRoleDAOHibernate" />
+    <bean id="notificationDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationDAOHibernate" />
+    <bean id="notificationMessageDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationMessageDAOHibernate" />
 
-    <bean id="nodeRenderer" class="com.saic.uicds.core.infrastructure.util.NodeRenderer">
+    <bean id="nodeRenderer" class="com.leidos.xchangecore.core.infrastructure.util.NodeRenderer">
         <property name="configPath" value="/config/resources/" />
         <property name="frequency" value="20000" />
         <property name="delay" value="5000" />
     </bean>
 
-    <bean id="ldapUtil" class="com.saic.uicds.core.infrastructure.util.LdapUtil">
+    <bean id="ldapUtil" class="com.leidos.xchangecore.core.infrastructure.util.LdapUtil">
         <property name="password">
             <value>${ldap.password}</value>
         </property>
 
     </bean>
 
-    <bean id="workProductDAO" class="com.saic.uicds.core.infrastructure.dao.hb.WorkProductDAOHibernate">
+    <bean id="workProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.WorkProductDAOHibernate">
         <property name="userInterestGroupDAO" ref="userInterestGroupDAO" />
     </bean>
 
-    <bean id="queryController" class="com.saic.uicds.core.infrastructure.controller.QueryController">
+    <bean id="queryController" class="com.leidos.xchangecore.core.infrastructure.controller.QueryController">
         <property name="service" ref="feedSearchService" />
         <property name="serviceName" value="exist" />
         <property name="nodeRenderer" ref="nodeRenderer" />
@@ -212,12 +212,12 @@
 
     <!--
         <bean id="workProductSqlBuilder"
-        class="com.saic.uicds.core.infrastructure.util.WorkProductSqlBuilder">
+        class="com.leidos.xchangecore.core.infrastructure.util.WorkProductSqlBuilder">
         <property name="userInterestGroupDAO" ref="userInterestGroupDAO" />
         </bean>
     -->
 
-    <bean id="feedSearchService" class="com.saic.uicds.core.infrastructure.service.impl.SQLSearchServiceImpl">
+    <bean id="feedSearchService" class="com.leidos.xchangecore.core.infrastructure.service.impl.SQLSearchServiceImpl">
         <property name="workProductDAO" ref="workProductDAO" />
     </bean>
 
@@ -234,7 +234,7 @@
     <!-- -->
     <!-- Log Monitor Components -->
 
-    <bean id="existLogMonitor" class="com.saic.uicds.core.infrastructure.status.ComponentLogMonitor">
+    <bean id="existLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
             <list>
                 <value>%INSTALL_HOME%/Server/eXist/webapp/WEB-INF/logs/exist.log</value>
@@ -246,7 +246,7 @@
         <property name="thresholdLevel" value="INFO" />
         <property name="pollingDelay" value="20000" />
     </bean>
-    <bean id="opendsLogMonitor" class="com.saic.uicds.core.infrastructure.status.ComponentLogMonitor">
+    <bean id="opendsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
             <list>
                 <value>%INSTALL_HOME%/Server/OpenDJ/logs/errors</value>
@@ -258,7 +258,7 @@
         <property name="thresholdLevel" value="ERROR" />
         <property name="pollingDelay" value="20000" />
     </bean>
-    <bean id="tomcatLogMonitor" class="com.saic.uicds.core.infrastructure.status.ComponentLogMonitor">
+    <bean id="tomcatLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
             <list>
                 <value>%INSTALL_HOME%/Server/Tomcat/logs/catalina.{yyyy-MM-dd}.log</value>
@@ -270,7 +270,7 @@
         <property name="thresholdLevel" value="INFO" />
         <property name="pollingDelay" value="20000" />
     </bean>
-    <bean id="uicdsLogMonitor" class="com.saic.uicds.core.infrastructure.status.ComponentLogMonitor">
+    <bean id="uicdsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
             <list>
                 <value>%INSTALL_HOME%/Logs/uicds.log.{yyyy-MM-dd}</value>
@@ -282,7 +282,7 @@
         <property name="thresholdLevel" value="WARN" />
         <property name="pollingDelay" value="20000" />
     </bean>
-    <bean id="openfireLogMonitor" class="com.saic.uicds.core.infrastructure.status.ComponentLogMonitor">
+    <bean id="openfireLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
             <list>
                 <value>%INSTALL_HOME%/Server/Openfire/logs/error.log</value>
@@ -300,36 +300,36 @@
 
     <!-- Component Status -->
 
-    <bean id="existStatus" class="com.saic.uicds.core.infrastructure.status.Status">
+    <bean id="existStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="name" value="NORMAL" />
         <property name="category" value="NORMAL" />
     </bean>
-    <bean id="opendsStatus" class="com.saic.uicds.core.infrastructure.status.Status">
+    <bean id="opendsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
     </bean>
-    <bean id="openfireStatus" class="com.saic.uicds.core.infrastructure.status.Status">
+    <bean id="openfireStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
     </bean>
-    <bean id="tomcatStatus" class="com.saic.uicds.core.infrastructure.status.Status">
+    <bean id="tomcatStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
     </bean>
-    <bean id="uicdsStatus" class="com.saic.uicds.core.infrastructure.status.Status">
+    <bean id="uicdsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
     </bean>
 
     <!-- RuleEngine -->
-    <bean id="ruleEngine" class="com.saic.uicds.core.infrastructure.rule.RuleEngine">
+    <bean id="ruleEngine" class="com.leidos.xchangecore.core.infrastructure.rule.RuleEngine">
         <property name="rulesFile" value="${install.home.dir}/ServerApps/uicds/config/rules.xml" />
     </bean>
     <!-- -->
     <!-- Scheduled Tasks (temp cleanup, etc) -->
     <!-- -->
     <!-- run every X seconds (period in milliseconds)
-        <bean id="tempCleaner" class="com.saic.uicds.core.infrastructure.util.TempCleaner"> </bean>
+        <bean id="tempCleaner" class="com.leidos.xchangecore.core.infrastructure.util.TempCleaner"> </bean>
 
         <bean id="cleanerTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
         <property name="period" value="300000"/>
@@ -346,7 +346,7 @@
     -->
 
     <!-- XSLT Type -->
-    <bean id="workProductXsltType" class="com.saic.uicds.core.infrastructure.util.WorkProductXsltType">
+    <bean id="workProductXsltType" class="com.leidos.xchangecore.core.infrastructure.util.WorkProductXsltType">
         <property name="types">
             <list>
                 <value>incident</value>
@@ -363,7 +363,7 @@
     <!-- Services -->
     <!-- -->
 
-    <bean id="communicationsService" class="com.saic.uicds.core.infrastructure.service.impl.CommunicationsServiceImpl">
+    <bean id="communicationsService" class="com.leidos.xchangecore.core.infrastructure.service.impl.CommunicationsServiceImpl">
         <property name="shareInterestGroupChannel" ref="shareInterestGroupChannel" />
         <property name="newInterestGroupCreatedChannel" ref="newInterestGroupCreatedChannel" />
         <property name="deleteInterestGroupChannel" ref="deleteInterestGroupChannel" />
@@ -381,7 +381,7 @@
         <property name="agreementService" ref="agreementService" />
     </bean>
     <bean id="interestGroupManagementComponent"
-        class="com.saic.uicds.core.infrastructure.service.impl.InterestGroupManagementComponentImpl">
+        class="com.leidos.xchangecore.core.infrastructure.service.impl.InterestGroupManagementComponentImpl">
         <property name="interestGroupStateNotificationChannel" ref="interestGroupStateNotificationChannel" />
         <property name="newJoinedInterestGroupChannel" ref="newJoinedInterestGroupChannel" />
         <property name="deleteJoinedInterestGroupChannel" ref="deleteJoinedInterestGroupChannel" />
@@ -391,7 +391,7 @@
         <property name="agreementDAO" ref="agreementDAO" />
         <property name="interestGroupDAO" ref="interestGroupDAO" />
     </bean>
-    <bean id="workProductService" class="com.saic.uicds.core.infrastructure.service.impl.WorkProductServiceImpl">
+    <bean id="workProductService" class="com.leidos.xchangecore.core.infrastructure.service.impl.WorkProductServiceImpl">
         <property name="productChangeNotificationChannel" ref="productChangeNotificationChannel" />
         <property name="joinedPublishProductRequestChannel" ref="joinedPublishProductRequestChannel" />
         <property name="configurationService" ref="configurationService" />
@@ -401,10 +401,10 @@
         <property name="interestGroupDAO" ref="interestGroupDAO" />
         <property name="ldapUtil" ref="ldapUtil" />
     </bean>
-    <bean id="searchService" class="com.saic.uicds.core.infrastructure.service.impl.SearchServiceImpl">
+    <bean id="searchService" class="com.leidos.xchangecore.core.infrastructure.service.impl.SearchServiceImpl">
         <property name="directoryService" ref="directoryService" />
     </bean>
-    <bean id="directoryService" class="com.saic.uicds.core.infrastructure.service.impl.DirectoryServiceImpl">
+    <bean id="directoryService" class="com.leidos.xchangecore.core.infrastructure.service.impl.DirectoryServiceImpl">
         <property name="configurationService" ref="configurationService" />
         <property name="registeredServiceDAO" ref="registeredServiceDAO" />
         <property name="subscribedProductDAO" ref="subscribedProductDAO" />
@@ -415,18 +415,18 @@
         <property name="pubSubService" ref="pubSubService" />
         <property name="communicationsService" ref="communicationsService" />
     </bean>
-    <bean id="pubSubService" class="com.saic.uicds.core.infrastructure.service.impl.PubSubServiceImpl">
+    <bean id="pubSubService" class="com.leidos.xchangecore.core.infrastructure.service.impl.PubSubServiceImpl">
         <property name="workProductService" ref="workProductService" />
         <property name="productSubscriptionByIDDAO" ref="productSubscriptionByIDDAO" />
         <property name="productSubscriptionByTypeDAO" ref="productSubscriptionByTypeDAO" />
     </bean>
-    <bean id="configurationService" class="com.saic.uicds.core.infrastructure.service.impl.ConfigurationServiceImpl">
+    <bean id="configurationService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ConfigurationServiceImpl">
         <property name="coreJID">
             <value>uicds@${xmpp.fqdn}</value>
         </property>
         <property name="directoryService" ref="directoryService" />
     </bean>
-    <bean id="notificationsService" class="com.saic.uicds.core.infrastructure.service.impl.NotificationServiceImpl">
+    <bean id="notificationsService" class="com.leidos.xchangecore.core.infrastructure.service.impl.NotificationServiceImpl">
         <property name="userInterestGroupDAO" ref="userInterestGroupDAO" />
         <property name="notificationDAO" ref="notificationDAO" />
         <property name="agreementDAO" ref="agreementDAO" />
@@ -438,21 +438,21 @@
         <property name="communicationsService" ref="communicationsService" />
         <property name="webServiceTemplate" ref="webServiceTemplate" />
     </bean>
-    <bean id="agreementService" class="com.saic.uicds.core.infrastructure.service.impl.AgreementServiceImpl">
+    <bean id="agreementService" class="com.leidos.xchangecore.core.infrastructure.service.impl.AgreementServiceImpl">
         <property name="dao" ref="agreementDAO" />
         <property name="agreementRosterChannel" ref="agreementRosterChannel" />
         <property name="deleteInterestGroupSharedFromRemoteCoreChannel" ref="deleteInterestGroupSharedFromRemoteCoreChannel" />
         <property name="configurationService" ref="configurationService" />
         <property name="directoryService" ref="directoryService" />
     </bean>
-    <bean id="interestGroupService" class="com.saic.uicds.core.infrastructure.service.impl.InterestGroupServiceImpl">
+    <bean id="interestGroupService" class="com.leidos.xchangecore.core.infrastructure.service.impl.InterestGroupServiceImpl">
         <property name="interestGroupDAO" ref="interestGroupDAO" />
         <property name="configurationService" ref="configurationService" />
         <property name="directoryService" ref="directoryService" />
         <property name="workProductService" ref="workProductService" />
         <property name="interestGroupManagementComponent" ref="interestGroupManagementComponent" />
     </bean>
-    <bean id="loggingService" class="com.saic.uicds.core.infrastructure.service.impl.LoggingServiceImpl">
+    <bean id="loggingService" class="com.leidos.xchangecore.core.infrastructure.service.impl.LoggingServiceImpl">
         <property name="dao" ref="loggerDAO" />
         <property name="directoryService" ref="directoryService" />
         <property name="communicationsService" ref="communicationsService" />
@@ -530,12 +530,12 @@
         </property>
 
     </bean>
-    <bean id="resourceProfileService" class="com.saic.uicds.core.infrastructure.service.impl.ResourceProfileServiceImpl">
+    <bean id="resourceProfileService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceProfileServiceImpl">
         <property name="workProductService" ref="workProductService" />
         <property name="resourceProfileDAO" ref="resourceProfileDAO" />
         <property name="directoryService" ref="directoryService" />
     </bean>
-    <bean id="resourceInstanceService" class="com.saic.uicds.core.infrastructure.service.impl.ResourceInstanceServiceImpl">
+    <bean id="resourceInstanceService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceInstanceServiceImpl">
         <property name="resourceInstanceDAO" ref="resourceInstanceDAO" />
         <property name="directoryService" ref="directoryService" />
         <property name="notificationService" ref="notificationsService" />
@@ -544,7 +544,7 @@
     </bean>
 
     <!-- TYPE SYSTEM -->
-    <bean id="typeSystem" class="com.saic.uicds.core.infrastructure.controller.UicdsTypeSystem" />
+    <bean id="typeSystem" class="com.leidos.xchangecore.core.infrastructure.controller.UicdsTypeSystem" />
     <bean id="typeSystemUtils" class="com.usersmarts.cx.hbm.search.lucene.TypeSystemUtils"
         p:typeSystem-ref="typeSystem" />
 
@@ -565,7 +565,7 @@
         <property name="connectorService" ref="connectorService" />
     </bean>
 
-    <bean id="disseminationManagerComponent" class="com.saic.uicds.core.infrastructure.service.DisseminationManagerComponent">
+    <bean id="disseminationManagerComponent" class="com.leidos.xchangecore.core.infrastructure.service.DisseminationManagerComponent">
         <property name="userInterestGroupDAO" ref="userInterestGroupDAO" />
     </bean>
 

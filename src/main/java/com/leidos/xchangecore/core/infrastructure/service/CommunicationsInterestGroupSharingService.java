@@ -18,9 +18,9 @@ import com.leidos.xchangecore.core.infrastructure.messages.PublishProductMessage
  *
  * @author Aruna Hau
  * @since 1.0
- * @see com.saic.uicds.core.infrastructure.service.impl.CommunicationsService
- * @see com.saic.uicds.core.infrastructure.service.impl.CommunicationsInterestGroupSharingService
- * @see com.saic.uicds.core.infrastructure.service.impl.PubSubNotificationService
+ * @see com.leidos.xchangecore.core.infrastructure.service.impl.CommunicationsService
+ * @see com.leidos.xchangecore.core.infrastructure.service.impl.CommunicationsInterestGroupSharingService
+ * @see com.leidos.xchangecore.core.infrastructure.service.impl.PubSubNotificationService
  * @ssdd
  */
 public interface CommunicationsInterestGroupSharingService {
@@ -34,7 +34,8 @@ public interface CommunicationsInterestGroupSharingService {
      * @see DeleteJoinedInterestGroupMessage
      * @ssdd
      */
-    public void deleteJoinedInterestGroupNotificationHandler(DeleteJoinedInterestGroupMessage message);
+    public void deleteJoinedInterestGroupNotificationHandler(
+            DeleteJoinedInterestGroupMessage message);
 
     /**
      * Handles the notification of the deletion of a joined work product. This notification is
@@ -74,7 +75,8 @@ public interface CommunicationsInterestGroupSharingService {
      * @see JoinedInterestGroupNotificationMessage
      * @ssdd
      */
-    public void joinedInterestGroupNotificationHandler(JoinedInterestGroupNotificationMessage message);
+    public void joinedInterestGroupNotificationHandler(
+            JoinedInterestGroupNotificationMessage message);
 
     /**
      * Handles the notification of a joined core's request to publish/uodate a work product
@@ -118,6 +120,7 @@ public interface CommunicationsInterestGroupSharingService {
      * @see ProductPublicationStatusNotificationMessage
      * @ssdd
      */
-    public void productPublicationStatusNotificationHandler(ProductPublicationStatusNotificationMessage message);
+    public void productPublicationStatusNotificationHandler(
+            ProductPublicationStatusNotificationMessage message);
 
 }

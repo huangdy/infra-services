@@ -15,38 +15,39 @@ import org.slf4j.LoggerFactory;
 
 /**
  * XmlObjectUserType Data Model
- * 
+ *
  * @author Christopher Lakey
  * @created September 07, 2009
  */
 @SuppressWarnings("unchecked")
-public class XmlBeansUserType
-    implements UserType {
+public class XmlBeansUserType implements UserType {
 
     // This constant is referenced by Hibernate @Type annotations
-    public final static String NAME = "com.saic.uicds.core.infrastructure.model.XmlBeansUserType";
+    public final static String NAME = "com.leidos.xchangecore.core.infrastructure.model.XmlBeansUserType";
 
-    private static final int[] sqlTypes = new int[] {
-        Types.CLOB
-    };
+    private static final int[] sqlTypes = new int[] { Types.CLOB };
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
+    @Override
     public Object assemble(Serializable value, Object owner) throws HibernateException {
 
         return value;
     }
 
+    @Override
     public Object deepCopy(Object value) throws HibernateException {
 
         return value;
     }
 
+    @Override
     public Serializable disassemble(Object value) throws HibernateException {
 
         return (Serializable) value;
     }
 
+    @Override
     public boolean equals(Object arg0, Object arg1) throws HibernateException {
 
         if (arg0 == arg1)
@@ -56,18 +57,21 @@ public class XmlBeansUserType
         return arg0.equals(arg1);
     }
 
+    @Override
     public int hashCode(Object arg0) throws HibernateException {
 
         return arg0.hashCode();
     }
 
+    @Override
     public boolean isMutable() {
 
         return false;
     }
 
+    @Override
     public Object nullSafeGet(ResultSet rset, String[] names, Object owner)
-        throws HibernateException, SQLException {
+            throws HibernateException, SQLException {
 
         Object result = null;
         String value = rset.getString(names[0]);
@@ -81,8 +85,9 @@ public class XmlBeansUserType
         return result;
     }
 
+    @Override
     public void nullSafeSet(PreparedStatement stmt, Object value, int index)
-        throws HibernateException, SQLException {
+            throws HibernateException, SQLException {
 
         if (value instanceof XmlObject) {
             XmlObject xmlObject = (XmlObject) value;
@@ -92,16 +97,19 @@ public class XmlBeansUserType
         }
     }
 
+    @Override
     public Object replace(Object original, Object target, Object owner) throws HibernateException {
 
         return original;
     }
 
+    @Override
     public Class returnedClass() {
 
         return XmlObject.class;
     }
 
+    @Override
     public int[] sqlTypes() {
 
         return sqlTypes;

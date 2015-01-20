@@ -6,33 +6,31 @@
     <!-- TX MANAGER -->
     <!-- -->
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <property name="entityManagerFactory" ref="entityManagerFactory"/>
-        <property name="dataSource" ref="dataSource"/>
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="persistenceUnitManager"
-        class="com.saic.uicds.core.infrastructure.util.UICDSPersistenceUnitManager">
+    <bean id="persistenceUnitManager" class="com.leidos.xchangecore.core.core.infrastructure.util.UICDSPersistenceUnitManager">
         <property name="persistenceXmlLocations">
             <list>
                 <value>classpath*:META-INF/persistence.xml</value>
             </list>
         </property>
-        <property name="defaultDataSource" ref="dataSource"/>
+        <property name="defaultDataSource" ref="dataSource" />
     </bean>
 
     <!-- -->
     <!-- ENTITY MANAGER FACTORY -->
     <!-- -->
-    <bean id="entityManagerFactory"
-        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <!-- <property name="persistenceUnitName" value="services-test" /> -->
-        <property name="persistenceUnitManager" ref="persistenceUnitManager"/>
-        <property name="dataSource" ref="dataSource"/>
+        <property name="persistenceUnitManager" ref="persistenceUnitManager" />
+        <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false"/>
-                <property name="generateDdl" value="true"/>
-                <property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect"/>
+                <property name="showSql" value="false" />
+                <property name="generateDdl" value="true" />
+                <property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect" />
             </bean>
         </property>
         <property name="jpaProperties">

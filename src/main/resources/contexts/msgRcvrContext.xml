@@ -15,10 +15,10 @@ http://www.springframework.org/schema/security http://www.springframework.org/sc
     <!-- MESSAGE CHANNELS -->
     <integration:service-activator input-channel="productChangeNotificationChannel"
         ref="messageReceiver" method="handleProductChange" />
-        
+
     <integration:service-activator input-channel="incidentStateNotificationChannel"
         ref="messageReceiver" method="handleIncidentState" />
-        
-    <bean id="messageReceiver" class="com.saic.uicds.core.infrastructure.service.MessageReceiver" />
+
+    <bean id="messageReceiver" class="com.leidos.xchangecore.core.core.infrastructure.service.MessageReceiver" />
 
 </beans>
