@@ -10,7 +10,7 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-2.5.xsd">
 
-    <import resource="./CoreProperties.xml" />
+    <import resource="CoreProperties.xml" />
     <import resource="applicationContext-dataSrc.xml" />
 
     <!-- -->
@@ -113,10 +113,10 @@
     -->
     <integration:service-activator input-channel="coreStatusUpdateChannel"
         ref="directoryService" method="coreStatusUpdateHandler" />
-    <!-- this is handled by agreementDAO 
-    <integration:service-activator input-channel="coreStatusUpdateChannel"
+    <!-- this is handled by agreementDAO
+        <integration:service-activator input-channel="coreStatusUpdateChannel"
         ref="agreementService" method="coreStatusUpdateHandler" />
-     -->
+    -->
     <integration:service-activator input-channel="coreStatusUpdateChannel"
         ref="interestGroupManagementComponent" method="coreStatusUpdateHandler" />
 
@@ -147,8 +147,10 @@
         ref="searchService" method="systemInitializedHandler" />
     <integration:service-activator input-channel="systemInitializedChannel"
         ref="notificationsService" method="systemInitializedHandler" />
+        <!-- 
     <integration:service-activator input-channel="systemInitializedChannel"
         ref="loggingService" method="systemInitializedHandler" />
+         -->
     <integration:service-activator input-channel="systemInitializedChannel"
         ref="agreementService" method="systemInitializedHandler" />
     <integration:service-activator input-channel="systemInitializedChannel"
@@ -171,12 +173,15 @@
     <bean id="userInterestGroupDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.UserInterestGroupDAOHibernate" />
     <bean id="interestGroupDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.InterestGroupDAOHibernate" />
     <bean id="coreConfigDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.CoreConfigHibernateDAO" />
-    <bean id="externalDataSourceConfigDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ExternalDataSourceConfigHibernateDAO" />
+    <bean id="externalDataSourceConfigDAO"
+        class="com.leidos.xchangecore.core.infrastructure.dao.hb.ExternalDataSourceConfigHibernateDAO" />
     <bean id="registeredServiceDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.RegisteredServiceHibernateDAO" />
     <bean id="publishedProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.PublishedProductHibernateDAO" />
     <bean id="subscribedProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.SubscribedProductHibernateDAO" />
-    <bean id="productSubscriptionByIDDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByIDHibernateDAO" />
-    <bean id="productSubscriptionByTypeDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByTypeHibernateDAO" />
+    <bean id="productSubscriptionByIDDAO"
+        class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByIDHibernateDAO" />
+    <bean id="productSubscriptionByTypeDAO"
+        class="com.leidos.xchangecore.core.infrastructure.dao.hb.ProductSubscriptionByTypeHibernateDAO" />
     <bean id="loggerDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.LoggerDAOHibernate" />
     <bean id="agreementDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.AgreementDAOHibernate" />
     <bean id="shareRuleDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ShareRuleHibernateDAO" />
@@ -185,7 +190,8 @@
     <bean id="resourceInstanceDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.ResourceInstanceDAOHibernate" />
     <bean id="userRoleDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.UserRoleDAOHibernate" />
     <bean id="notificationDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationDAOHibernate" />
-    <bean id="notificationMessageDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationMessageDAOHibernate" />
+    <bean id="notificationMessageDAO"
+        class="com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationMessageDAOHibernate" />
 
     <bean id="nodeRenderer" class="com.leidos.xchangecore.core.infrastructure.util.NodeRenderer">
         <property name="configPath" value="/config/resources/" />
@@ -234,92 +240,94 @@
     <!-- -->
     <!-- Log Monitor Components -->
 
-    <bean id="existLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
+    <!-- No needed anymore
+        <bean id="existLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
-            <list>
-                <value>%INSTALL_HOME%/Server/eXist/webapp/WEB-INF/logs/exist.log</value>
-            </list>
+        <list>
+        <value>%INSTALL_HOME%/Server/eXist/webapp/WEB-INF/logs/exist.log</value>
+        </list>
         </property>
         <property name="logName" value="exist" />
         <property name="logPattern" value="TIMESTAMP [THREAD] LEVEL (FILE [METHOD]:LINE) - MESSAGE" />
         <property name="doTailing" value="true" />
         <property name="thresholdLevel" value="INFO" />
         <property name="pollingDelay" value="20000" />
-    </bean>
-    <bean id="opendsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
+        </bean>
+        <bean id="opendsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
-            <list>
-                <value>%INSTALL_HOME%/Server/OpenDJ/logs/errors</value>
-            </list>
+        <list>
+        <value>%INSTALL_HOME%/Server/OpenDJ/logs/errors</value>
+        </list>
         </property>
         <property name="logName" value="opends" />
         <property name="logPattern" value="[PROP(RELATIVETIME)] * *=LEVEL MESSAGE" />
         <property name="doTailing" value="true" />
         <property name="thresholdLevel" value="ERROR" />
         <property name="pollingDelay" value="20000" />
-    </bean>
-    <bean id="tomcatLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
+        </bean>
+        <bean id="tomcatLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
-            <list>
-                <value>%INSTALL_HOME%/Server/Tomcat/logs/catalina.{yyyy-MM-dd}.log</value>
-            </list>
+        <list>
+        <value>%INSTALL_HOME%/Server/Tomcat/logs/catalina.{yyyy-MM-dd}.log</value>
+        </list>
         </property>
         <property name="logName" value="tomcat" />
         <property name="logPattern" value="TIMESTAMP CLASS METHOD LEVEL: MESSAGE" />
         <property name="doTailing" value="true" />
         <property name="thresholdLevel" value="INFO" />
         <property name="pollingDelay" value="20000" />
-    </bean>
-    <bean id="uicdsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
+        </bean>
+        <bean id="uicdsLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
-            <list>
-                <value>%INSTALL_HOME%/Logs/uicds.log.{yyyy-MM-dd}</value>
-            </list>
+        <list>
+        <value>%INSTALL_HOME%/Logs/uicds.log.{yyyy-MM-dd}</value>
+        </list>
         </property>
         <property name="logName" value="uicds" />
         <property name="logPattern" value="[LEVEL PROP(RELATIVETIME) CLASS] MESSAGE" />
         <property name="doTailing" value="true" />
         <property name="thresholdLevel" value="WARN" />
         <property name="pollingDelay" value="20000" />
-    </bean>
-    <bean id="openfireLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
+        </bean>
+        <bean id="openfireLogMonitor" class="com.leidos.xchangecore.core.infrastructure.status.ComponentLogMonitor">
         <property name="logFiles">
-            <list>
-                <value>%INSTALL_HOME%/Server/Openfire/logs/error.log</value>
-                <value>%INSTALL_HOME%/Server/Openfire/logs/debug.log</value>
-                <value>%INSTALL_HOME%/Server/Openfire/logs/warn.log</value>
-                <value>%INSTALL_HOME%/Server/Openfire/logs/info.log</value>
-            </list>
+        <list>
+        <value>%INSTALL_HOME%/Server/Openfire/logs/error.log</value>
+        <value>%INSTALL_HOME%/Server/Openfire/logs/debug.log</value>
+        <value>%INSTALL_HOME%/Server/Openfire/logs/warn.log</value>
+        <value>%INSTALL_HOME%/Server/Openfire/logs/info.log</value>
+        </list>
         </property>
         <property name="logName" value="openfire" />
         <property name="logPattern" value="PROP(RELATIVETIME) [CLASS(FILE:LINE)" />
         <property name="doTailing" value="true" />
         <property name="thresholdLevel" value="ERROR" />
         <property name="pollingDelay" value="20000" />
-    </bean>
+        </bean>
+    -->
 
-    <!-- Component Status -->
-
-    <bean id="existStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
+    <!-- Component Status
+        <bean id="existStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="name" value="NORMAL" />
         <property name="category" value="NORMAL" />
-    </bean>
-    <bean id="opendsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
+        </bean>
+        <bean id="opendsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
-    </bean>
-    <bean id="openfireStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
+        </bean>
+        <bean id="openfireStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
-    </bean>
-    <bean id="tomcatStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
+        </bean>
+        <bean id="tomcatStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
-    </bean>
-    <bean id="uicdsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
+        </bean>
+        <bean id="uicdsStatus" class="com.leidos.xchangecore.core.infrastructure.status.Status">
         <property name="category" value="NORMAL" />
         <property name="name" value="NORMAL" />
-    </bean>
+        </bean>
+    -->
 
     <!-- RuleEngine -->
     <bean id="ruleEngine" class="com.leidos.xchangecore.core.infrastructure.rule.RuleEngine">
@@ -363,7 +371,8 @@
     <!-- Services -->
     <!-- -->
 
-    <bean id="communicationsService" class="com.leidos.xchangecore.core.infrastructure.service.impl.CommunicationsServiceImpl">
+    <bean id="communicationsService"
+        class="com.leidos.xchangecore.core.infrastructure.service.impl.CommunicationsServiceImpl">
         <property name="shareInterestGroupChannel" ref="shareInterestGroupChannel" />
         <property name="newInterestGroupCreatedChannel" ref="newInterestGroupCreatedChannel" />
         <property name="deleteInterestGroupChannel" ref="deleteInterestGroupChannel" />
@@ -452,6 +461,7 @@
         <property name="workProductService" ref="workProductService" />
         <property name="interestGroupManagementComponent" ref="interestGroupManagementComponent" />
     </bean>
+    <!-- DDH
     <bean id="loggingService" class="com.leidos.xchangecore.core.infrastructure.service.impl.LoggingServiceImpl">
         <property name="dao" ref="loggerDAO" />
         <property name="directoryService" ref="directoryService" />
@@ -528,14 +538,17 @@
                 </entry>
             </map>
         </property>
-
     </bean>
-    <bean id="resourceProfileService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceProfileServiceImpl">
+     -->
+     
+    <bean id="resourceProfileService"
+        class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceProfileServiceImpl">
         <property name="workProductService" ref="workProductService" />
         <property name="resourceProfileDAO" ref="resourceProfileDAO" />
         <property name="directoryService" ref="directoryService" />
     </bean>
-    <bean id="resourceInstanceService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceInstanceServiceImpl">
+    <bean id="resourceInstanceService"
+        class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceInstanceServiceImpl">
         <property name="resourceInstanceDAO" ref="resourceInstanceDAO" />
         <property name="directoryService" ref="directoryService" />
         <property name="notificationService" ref="notificationsService" />

@@ -10,7 +10,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean id="persistenceUnitManager" class="com.leidos.xchangecore.core.core.infrastructure.util.UICDSPersistenceUnitManager">
+    <bean id="persistenceUnitManager" class="com.leidos.xchangecore.core.infrastructure.util.UICDSPersistenceUnitManager">
         <property name="persistenceXmlLocations">
             <list>
                 <value>classpath*:META-INF/persistence.xml</value>
@@ -39,7 +39,7 @@
                 <prop key="hibernate.search.default.directory_provider">org.hibernate.search.store.FSDirectoryProvider</prop>
                 <prop key="hibernate.search.default.indexBase">target/lucene</prop>
 
-                <!-- Use in-memory Lucene Index for search <prop key="hibernate.search.default.directory_provider"> 
+                <!-- Use in-memory Lucene Index for search <prop key="hibernate.search.default.directory_provider">
                     org.hibernate.search.store.RAMDirectoryProvider </prop> -->
 
             </props>
