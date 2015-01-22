@@ -9,8 +9,8 @@
 
         <property name="locations">
             <list>
-                <value>core.properties</value>
                 <value>classpath:contexts/core.properties</value>
+                <value>core.properties</value>
             </list>
         </property>
     </bean>
