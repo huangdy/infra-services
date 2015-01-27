@@ -16,7 +16,7 @@ public class BoundingBoxTest {
     private boolean intersects(Double[][] boundingBox, Geometry geom) {
 
         System.out.println("BoundingBox: ");
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 5; i++) {
             System.out.println("Coordinate: (" + boundingBox[i][0] + ", " + boundingBox[i][1] + ")");
         }
 
