@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WorkProductQueryBuilder
-    implements WorkProductConstants {
+implements WorkProductConstants {
 
     private final Logger logger = LoggerFactory.getLogger(WorkProductQueryBuilder.class);
 
@@ -32,7 +32,7 @@ public class WorkProductQueryBuilder
 
     public static HashMap<String, String[]> paramMap;
 
-    private Double[][] boundingBox = null;
+    private Double[][] boundingBox = new Double[5][2];
     private final List<Criterion> criterionList = new ArrayList<Criterion>();
     private Order order = Order.desc(C_UpdatedDate);
     private String username = null;
@@ -44,40 +44,50 @@ public class WorkProductQueryBuilder
     static {
         paramMap = new HashMap<String, String[]>();
         paramMap.put("productid", new String[] {
-            C_ProductID, OP_EQUAL
+            C_ProductID,
+            OP_EQUAL
         });
         paramMap.put("producttypeversion", new String[] {
-            C_ProductTypeVersion, OP_LIKE
+            C_ProductTypeVersion,
+            OP_LIKE
         });
         paramMap.put("productversion", new String[] {
-            C_ProductVersion, OP_EQUAL
+            C_ProductVersion,
+            OP_EQUAL
         });
         paramMap.put("producttype", new String[] {
-            C_ProductType, OP_LIKE
+            C_ProductType,
+            OP_LIKE
         });
         paramMap.put("productstate", new String[] {
-            C_State, OP_LIKE
+            C_State,
+            OP_LIKE
         });
         paramMap.put("createdbegin", new String[] {
-            C_CreatedDate, OP_GE
+            C_CreatedDate,
+            OP_GE
         });
         paramMap.put("createdend", new String[] {
-            C_CreatedDate, OP_LE
+            C_CreatedDate,
+            OP_LE
         });
         paramMap.put("updatedbegin", new String[] {
-            C_UpdatedDate, OP_GE
+            C_UpdatedDate,
+            OP_GE
         });
         paramMap.put("updatedend", new String[] {
-            C_UpdatedDate, OP_LE
+            C_UpdatedDate,
+            OP_LE
         });
         paramMap.put("mimetype", new String[] {
-            C_Mimetype, OP_LIKE
+            C_Mimetype,
+            OP_LIKE
         });
         /*
         paramMap.put("interestgroup", new String[] {
             C_InterestGroupID, OP_EQUAL
         });
-        */
+         */
     }
 
     public WorkProductQueryBuilder() {
@@ -86,92 +96,89 @@ public class WorkProductQueryBuilder
 
     public WorkProductQueryBuilder(Map<String, String[]> params) {
 
-        Set<String> keys = params.keySet();
-        for (String key : keys) {
-            String[] values = params.get(key);
+        final Set<String> keys = params.keySet();
+        for (final String key : keys) {
+            final String[] values = params.get(key);
             if (key.equalsIgnoreCase(Key_InterestGroup)) {
-                setIGIDSet(values);
-                logger.debug("\tsetInterestGroupID: " + values.length + " entries");
+                this.setIGIDSet(values);
+                this.logger.debug("\tsetInterestGroupID: " + values.length + " entries");
             } else if (key.equalsIgnoreCase(Key_Username)) {
-                setUsername(values[0]);
-                logger.debug("\tsetUsername: " + getUsername());
+                this.setUsername(values[0]);
+                this.logger.debug("\tsetUsername: " + this.getUsername());
             } else if (key.equalsIgnoreCase(Key_Full)) {
-                if (values != null && values[0].equalsIgnoreCase("true")) {
-                    setFull(true);
-                    logger.debug("\tfull: true");
+                if ((values != null) && values[0].equalsIgnoreCase("true")) {
+                    this.setFull(true);
+                    this.logger.debug("\tfull: true");
                 }
             } else if (key.equalsIgnoreCase(Key_StartIndex)) {
-                setStartIndex(getIntegerValue(values[0]));
-                logger.debug("\tstartIndex: " + getStartIndex());
+                this.setStartIndex(this.getIntegerValue(values[0]));
+                this.logger.debug("\tstartIndex: " + this.getStartIndex());
             } else if (key.equalsIgnoreCase(Key_Count)) {
-                setCount(getIntegerValue(values[0]));
-                logger.debug("\tcount: " + getCount());
+                this.setCount(this.getIntegerValue(values[0]));
+                this.logger.debug("\tcount: " + this.getCount());
             } else if (key.equalsIgnoreCase(Key_BBox)) {
                 // the coordinates are lon/lat or x/y based on the JTS
-                String[] coordArray = values[0].split(",", -1);
-                Double[][] coords = new Double[5][2];
-                Double west = Double.valueOf(coordArray[0]);
-                Double south = Double.valueOf(coordArray[1]);
-                Double east = Double.valueOf(coordArray[2]);
-                Double north = Double.valueOf(coordArray[3]);
-
-                coords[0][0] = west;
-                coords[0][1] = north;
-                coords[1][0] = east;
-                coords[1][1] = north;
-                coords[2][0] = east;
-                coords[2][1] = south;
-                coords[3][0] = west;
-                coords[3][1] = south;
-                coords[4][0] = west;
-                coords[4][1] = north;
-
-                setBoundingBox(coords);
-                logger.debug("\tBoundingBox: " + values[0]);
-            } else if (key.endsWith(Key_OrderBy) && values.length == 2) {
-                setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0])
-                                                               : Order.asc(values[0]));
-                logger.debug("\t" + values[0] + "orderBy: " + values[1]);
+                final String[] coordArray = values[0].split(",", -1);
+                final Double south = Double.valueOf(coordArray[0]);
+                final Double west = Double.valueOf(coordArray[1]);
+                final Double north = Double.valueOf(coordArray[2]);
+                final Double east = Double.valueOf(coordArray[3]);
+                // the boundingBox will be used by vividsolution as the format of (x, y)
+                this.boundingBox[0][0] = west;
+                this.boundingBox[0][1] = south;
+                this.boundingBox[1][0] = west;
+                this.boundingBox[1][1] = north;
+                this.boundingBox[2][0] = east;
+                this.boundingBox[2][1] = north;
+                this.boundingBox[3][0] = east;
+                this.boundingBox[3][1] = south;
+                this.boundingBox[4][0] = west;
+                this.boundingBox[4][1] = south;
+                this.logger.debug("\tBoundingBox: " + values[0]);
+            } else if (key.endsWith(Key_OrderBy) && (values.length == 2)) {
+                this.setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0]) : Order.asc(values[0]));
+                this.logger.debug("\t" + values[0] + "orderBy: " + values[1]);
             } else if (paramMap.containsKey(key.toLowerCase())) {
-                List<Criterion> cList = createCriterionList(key, values);
+                final List<Criterion> cList = this.createCriterionList(key, values);
                 if (cList.size() == 1) {
-                    criterionList.add(cList.get(0));
+                    this.criterionList.add(cList.get(0));
                 } else {
-                    Disjunction or = Restrictions.disjunction();
-                    for (Criterion c : cList) {
+                    final Disjunction or = Restrictions.disjunction();
+                    for (final Criterion c : cList) {
                         or.add(c);
                     }
-                    criterionList.add(or);
+                    this.criterionList.add(or);
                 }
             } else {
-                logger.warn("Unresolved parameter: [key/value]: [" + key + "/" + values[0] + "]");
+                this.logger.warn("Unresolved parameter: [key/value]: [" + key + "/" + values[0] +
+                    "]");
             }
         }
     }
 
     private List<Criterion> createCriterionList(String key, String[] values) {
 
-        String[] ops = paramMap.get(key.toLowerCase());
-        List<Criterion> cList = new ArrayList<Criterion>();
-        for (String value : values) {
+        final String[] ops = paramMap.get(key.toLowerCase());
+        final List<Criterion> cList = new ArrayList<Criterion>();
+        for (final String value : values) {
             if (value.length() == 0) {
                 continue;
             }
             if (ops[1].equalsIgnoreCase(OP_EQUAL)) {
                 cList.add(Restrictions.eq(ops[0],
                     ops[0].equalsIgnoreCase(C_ProductVersion) ? new Integer(value) : value));
-                logger.debug("\t" + ops[0] + " = " + value);
+                this.logger.debug("\t" + ops[0] + " = " + value);
             } else if (ops[1].equalsIgnoreCase(OP_LIKE)) {
                 cList.add(Restrictions.like(ops[0], value));
-                logger.debug("\t" + ops[0] + " like " + value);
+                this.logger.debug("\t" + ops[0] + " like " + value);
             } else if (ops[1].equalsIgnoreCase(OP_LE)) {
                 cList.add(Restrictions.le(ops[0], value));
-                logger.debug("\t" + ops[0] + " <= " + value);
+                this.logger.debug("\t" + ops[0] + " <= " + value);
             } else if (ops[1].equalsIgnoreCase(OP_GE)) {
                 cList.add(Restrictions.ge(ops[0], value));
-                logger.debug("\t" + ops[0] + " >= " + value);
+                this.logger.debug("\t" + ops[0] + " >= " + value);
             } else {
-                logger.error("non-processed operation: " + ops[1] + " for " + ops[0]);
+                this.logger.error("non-processed operation: " + ops[1] + " for " + ops[0]);
             }
         }
 
@@ -180,52 +187,52 @@ public class WorkProductQueryBuilder
 
     public Double[][] getBoundingBox() {
 
-        return boundingBox;
+        return this.boundingBox;
     }
 
     public int getCount() {
 
-        return count;
+        return this.count;
     }
 
     public List<Criterion> getCriterionList() {
 
-        return criterionList;
+        return this.criterionList;
     }
 
     public Set<String> getIGIDSet() {
 
-        return iGIDSet;
+        return this.iGIDSet;
     }
 
     private Integer getIntegerValue(String intString) {
 
         try {
             return new Integer(Integer.parseInt(intString));
-        } catch (Exception e) {
-            logger.error(intString + " is invalide integer");
+        } catch (final Exception e) {
+            this.logger.error(intString + " is invalide integer");
             return new Integer(1);
         }
     }
 
     public Order getOrder() {
 
-        return order;
+        return this.order;
     }
 
     public int getStartIndex() {
 
-        return startIndex;
+        return this.startIndex;
     }
 
     public String getUsername() {
 
-        return username;
+        return this.username;
     }
 
     public boolean isFull() {
 
-        return full;
+        return this.full;
     }
 
     public void setBoundingBox(Double[][] boundingBox) {
@@ -245,9 +252,9 @@ public class WorkProductQueryBuilder
 
     public void setIGIDSet(String[] iGIDs) {
 
-        iGIDSet = new HashSet<String>();
-        for (String iGID : iGIDs) {
-            iGIDSet.add(iGID);
+        this.iGIDSet = new HashSet<String>();
+        for (final String iGID : iGIDs) {
+            this.iGIDSet.add(iGID);
         }
     }
 
