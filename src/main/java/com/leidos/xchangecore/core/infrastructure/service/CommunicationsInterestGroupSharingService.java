@@ -34,8 +34,7 @@ public interface CommunicationsInterestGroupSharingService {
      * @see DeleteJoinedInterestGroupMessage
      * @ssdd
      */
-    public void deleteJoinedInterestGroupNotificationHandler(
-            DeleteJoinedInterestGroupMessage message);
+    public void deleteJoinedInterestGroupNotificationHandler(DeleteJoinedInterestGroupMessage message);
 
     /**
      * Handles the notification of the deletion of a joined work product. This notification is
@@ -75,8 +74,7 @@ public interface CommunicationsInterestGroupSharingService {
      * @see JoinedInterestGroupNotificationMessage
      * @ssdd
      */
-    public void joinedInterestGroupNotificationHandler(
-            JoinedInterestGroupNotificationMessage message);
+    public void joinedInterestGroupNotificationHandler(JoinedInterestGroupNotificationMessage message);
 
     /**
      * Handles the notification of a joined core's request to publish/uodate a work product
@@ -120,7 +118,6 @@ public interface CommunicationsInterestGroupSharingService {
      * @see ProductPublicationStatusNotificationMessage
      * @ssdd
      */
-    public void productPublicationStatusNotificationHandler(
-            ProductPublicationStatusNotificationMessage message);
+    public void productPublicationStatusNotificationHandler(ProductPublicationStatusNotificationMessage message);
 
 }

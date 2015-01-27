@@ -305,7 +305,8 @@ public class InterestGroupServiceEndpoint
                   request.getUpdateInterestGroupRequest().getInterestGroupId());
         try {
             response.addNewUpdateInterestGroupResponse().setInterestGroup(request.addNewUpdateInterestGroupRequest().getInterestGroup());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
 
         return response;
 

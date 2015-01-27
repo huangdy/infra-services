@@ -127,7 +127,8 @@ public class WorkProductModule
                 if ("getId".equals(method.getName())) {
                     try {
                         return Coerce.toString(method.invoke(value, new Object[0]));
-                    } catch (Exception e) {}
+                    } catch (Exception e) {
+                    }
                 }
             }
             return null;

@@ -16,7 +16,8 @@ public class WorkProductExistView
     private MimetypesFileTypeMap mimeTypes = new MimetypesFileTypeMap();
 
     @SuppressWarnings({
-        "rawtypes", "unchecked"
+        "rawtypes",
+        "unchecked"
     })
     @Override
     protected void renderMergedOutputModel(Map model,

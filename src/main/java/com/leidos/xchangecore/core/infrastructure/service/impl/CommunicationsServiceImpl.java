@@ -83,8 +83,9 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  *
  * @ssdd
  */
-public class CommunicationsServiceImpl implements CommunicationsService,
-        CommunicationsInterestGroupSharingService, PubSubNotificationService {
+public class CommunicationsServiceImpl
+    implements CommunicationsService, CommunicationsInterestGroupSharingService,
+    PubSubNotificationService {
 
     /** The logger. */
     Logger logger = LoggerFactory.getLogger(CommunicationsServiceImpl.class);
@@ -164,29 +165,25 @@ public class CommunicationsServiceImpl implements CommunicationsService,
     @Override
     public void core2CoreMessageNotificationHandler(Core2CoreMessage message) {
 
-        logger.debug("core2CoreMessageNotificationHandler: received messageType="
-                + message.getMessageType() + "] from " + message.getFromCore()); // + " message=[" +
+        logger.debug("core2CoreMessageNotificationHandler: received messageType=" +
+                     message.getMessageType() + "] from " + message.getFromCore()); // + " message=[" +
         // message.getMessage()
 
         if (!message.getToCore().equals(configurationService.getCoreName())) {
-            logger.error("core2CoreMessageNotificationHandler - received message intended for another core - core="
-                    + message.getToCore());
+            logger.error("core2CoreMessageNotificationHandler - received message intended for another core - core=" +
+                         message.getToCore());
         } else {
             try {
-                Core2CoreMessageDocument doc = Core2CoreMessageDocument.Factory.parse(message
-                        .getMessage());
-                Core2CoreMessageType msg = Core2CoreMessageType.Factory.parse(doc
-                        .getCore2CoreMessage().toString());
-                logger.debug("===> core2CoreMessageNotificationHandler - msg=[" + msg.toString()
-                        + "]");
+                Core2CoreMessageDocument doc = Core2CoreMessageDocument.Factory.parse(message.getMessage());
+                Core2CoreMessageType msg = Core2CoreMessageType.Factory.parse(doc.getCore2CoreMessage().toString());
+                logger.debug("===> core2CoreMessageNotificationHandler - msg=[" + msg.toString() +
+                             "]");
 
                 // set the message content to the element inside the document
                 message.setMessage(msg.toString());
-                Message<Core2CoreMessage> notification = new GenericMessage<Core2CoreMessage>(
-                        message);
+                Message<Core2CoreMessage> notification = new GenericMessage<Core2CoreMessage>(message);
 
-                CORE2CORE_MESSAGE_TYPE msgType = CORE2CORE_MESSAGE_TYPE.valueOf(message
-                        .getMessageType());
+                CORE2CORE_MESSAGE_TYPE msgType = CORE2CORE_MESSAGE_TYPE.valueOf(message.getMessageType());
                 switch (msgType) {
                 case RESOURCE_MESSAGE:
                     logger.debug("core2CoreMessageNotificationHandler: sending message to Resource Management Service ");
@@ -223,11 +220,10 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @ssdd
      */
     @Override
-    public void deleteJoinedInterestGroupNotificationHandler(
-            DeleteJoinedInterestGroupMessage message) {
+    public void deleteJoinedInterestGroupNotificationHandler(DeleteJoinedInterestGroupMessage message) {
 
-        logger.debug("deleteJoinedInterestGroupNotificationHandler: received notification of deleted joined interest group id="
-                + message.getInterestGroupID());
+        logger.debug("deleteJoinedInterestGroupNotificationHandler: received notification of deleted joined interest group id=" +
+                     message.getInterestGroupID());
 
         // Message<JoinedInterestGroupNotificationMessage> notification = new
         // GenericMessage<JoinedInterestGroupNotificationMessage>(
@@ -246,8 +242,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
     @Override
     public void deleteJoinedProductNotificationHandler(DeleteJoinedProductMessage message) {
 
-        logger.debug("deleteJoinedProductNotificationHandler: received notification of deleted joined interest group id="
-                + message.getProductID());
+        logger.debug("deleteJoinedProductNotificationHandler: received notification of deleted joined interest group id=" +
+                     message.getProductID());
         workProductService.deleteWorkProductWithoutNotify(message.getProductID());
     }
 
@@ -277,9 +273,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         for (AgreementType agreement : agreementList.getAgreementArray()) {
 
             // If there's no active agreement with this core, we share all types
-            if (agreement != null
-                    && agreement.getPrincipals().getRemoteCore().getStringValue()
-                            .contains(hostName)) {
+            if (agreement != null &&
+                agreement.getPrincipals().getRemoteCore().getStringValue().contains(hostName)) {
                 coreJID = agreement.getPrincipals().getRemoteCore().getStringValue();
                 break;
             }
@@ -345,14 +340,14 @@ public class CommunicationsServiceImpl implements CommunicationsService,
     @Override
     public void handleInterestGroupState(InterestGroupStateNotificationMessage message) {
 
-        logger.info("handleInterestGroupState: IGID: " + message.getInterestGroupID() + " state: "
-                + message.getState() + " sharingStatus: " + message.getSharingStatus()
-                + " IGIDType: " + message.getInterestGroupType());
+        logger.info("handleInterestGroupState: IGID: " + message.getInterestGroupID() + " state: " +
+                    message.getState() + " sharingStatus: " + message.getSharingStatus() +
+                    " IGIDType: " + message.getInterestGroupType());
 
-        if (message.getState().equals(InterestGroupStateNotificationMessage.State.NEW)
-                || message.getState().equals(InterestGroupStateNotificationMessage.State.RESTORE)) {
-            logger.debug("===> Receive Interest Group state change: interestGroupID="
-                    + message.getInterestGroupID() + " state:" + message.getState());
+        if (message.getState().equals(InterestGroupStateNotificationMessage.State.NEW) ||
+            message.getState().equals(InterestGroupStateNotificationMessage.State.RESTORE)) {
+            logger.debug("===> Receive Interest Group state change: interestGroupID=" +
+                         message.getInterestGroupID() + " state:" + message.getState());
 
             if (!interestGroupList.contains(message.getInterestGroupID())) {
                 interestGroupList.add(message.getInterestGroupID());
@@ -365,15 +360,13 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                     request.setOwnerProperties(message.getOwmnerProperties());
                     request.setJoinedWPTYpes(message.getJoinedWPTypes());
                 } else {
-                    if (message.getState()
-                            .equals(InterestGroupStateNotificationMessage.State.SHARE)) {
+                    if (message.getState().equals(InterestGroupStateNotificationMessage.State.SHARE)) {
                         request.setSharedCoreList(message.getSharedCoreList());
                     }
                     request.setRestored(false);
                 }
                 request.setSharingStatus(message.getSharingStatus());
-                Message<NewInterestGroupCreatedMessage> requestMessage = new GenericMessage<NewInterestGroupCreatedMessage>(
-                        request);
+                Message<NewInterestGroupCreatedMessage> requestMessage = new GenericMessage<NewInterestGroupCreatedMessage>(request);
                 newInterestGroupCreatedChannel.send(requestMessage);
             }
 
@@ -388,9 +381,9 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                 // flexibility in the future should we decide to change the interface to allow
                 // multiple shares
 
-                logger.info("===> Receive Interest group state change: interestGroupID="
-                        + message.getInterestGroupID() + " coreToShareWith=" + targetCore
-                        + " state SHARE");
+                logger.info("===> Receive Interest group state change: interestGroupID=" +
+                            message.getInterestGroupID() + " coreToShareWith=" + targetCore +
+                            " state SHARE");
 
                 if (targetCore.equals(configurationService.getCoreName())) {
                     logger.debug("handleInterestGroupState: request to share with self is ignored.");
@@ -401,8 +394,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                     notification.setRemoteCore(targetCore);
                     notification.setInterestGroupInfo(message.getInterestGroupInfo());
                     notification.setWorkProductTypesToShare(message.getWorkProductTypesToShare());
-                    Message<ShareInterestGroupMessage> msg = new GenericMessage<ShareInterestGroupMessage>(
-                            notification);
+                    Message<ShareInterestGroupMessage> msg = new GenericMessage<ShareInterestGroupMessage>(notification);
 
                     try {
                         shareInterestGroupChannel.send(msg);
@@ -415,8 +407,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             }
 
         } else if (message.getState().equals(InterestGroupStateNotificationMessage.State.UPDATE)) {
-            logger.info("===> Receive Interest group state change: interestGroupID="
-                    + message.getInterestGroupID() + " state UPDATE");
+            logger.info("===> Receive Interest group state change: interestGroupID=" +
+                        message.getInterestGroupID() + " state UPDATE");
 
             // No need to do anything here. Updated interest group info will be handled by work
             // product update
@@ -424,8 +416,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             if (interestGroupList.contains(message.getInterestGroupID())) {
                 DeleteInterestGroupMessage request = new DeleteInterestGroupMessage();
                 request.setInterestGroupID(message.getInterestGroupID());
-                Message<DeleteInterestGroupMessage> requestMessage = new GenericMessage<DeleteInterestGroupMessage>(
-                        request);
+                Message<DeleteInterestGroupMessage> requestMessage = new GenericMessage<DeleteInterestGroupMessage>(request);
                 deleteInterestGroupChannel.send(requestMessage);
                 interestGroupList.remove(message.getInterestGroupID());
             }
@@ -454,7 +445,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      *             the no share rule in agreement exception
      */
     private boolean hasShareAgreement(String targetCore) throws NoShareAgreementException,
-            NoShareRuleInAgreementException {
+        NoShareRuleInAgreementException {
 
         logger.debug("getShareAgreement - targetCore=" + targetCore);
 
@@ -470,9 +461,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         for (AgreementType agreement : agreementList.getAgreementArray()) {
 
             // If there's no active agreement with this core, we share all types
-            if (agreement != null
-                    && agreement.getPrincipals().getRemoteCore().getStringValue()
-                            .contains(targetCore)) {
+            if (agreement != null &&
+                agreement.getPrincipals().getRemoteCore().getStringValue().contains(targetCore)) {
                 agreementFound = true;
                 ShareRules shareRules = agreement.getShareRules();
                 if (shareRules != null) {
@@ -486,10 +476,12 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         if (!agreementFound) {
             // no agreement between the core and the target core
             throw new NoShareAgreementException(configurationService.getFullyQualifiedHostName(),
-                    targetCore);
+                                                targetCore);
         } else if (!shareRulesEnabled) {
-            throw new NoShareRuleInAgreementException(
-                    configurationService.getFullyQualifiedHostName(), targetCore, null, null);
+            throw new NoShareRuleInAgreementException(configurationService.getFullyQualifiedHostName(),
+                                                      targetCore,
+                                                      null,
+                                                      null);
         }
 
         return true;
@@ -520,11 +512,10 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @ssdd
      */
     @Override
-    public void joinedInterestGroupNotificationHandler(
-            JoinedInterestGroupNotificationMessage message) {
+    public void joinedInterestGroupNotificationHandler(JoinedInterestGroupNotificationMessage message) {
 
-        logger.debug("joinedInterestGroupNotificationHandler: received notification of joined interest group id="
-                + message.interestGroupID);
+        logger.debug("joinedInterestGroupNotificationHandler: received notification of joined interest group id=" +
+                     message.interestGroupID);
 
         // Message<JoinedInterestGroupNotificationMessage> notification = new
         // GenericMessage<JoinedInterestGroupNotificationMessage>(
@@ -548,16 +539,16 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         String act = message.getAct();
         String userID = message.getUserID();
 
-        logger.debug("joinedPublishProductNotificationHandler: receive product publication from "
-                + requestingCore + " act=" + act);
+        logger.debug("joinedPublishProductNotificationHandler: receive product publication from " +
+                     requestingCore + " act=" + act);
 
         // This message should only be received from another core
         if (!requestingCore.equals(configurationService.getCoreName())) {
             // TODO: need to parse back into some otheer XML object that we convert into WorkProduct
             // model
             WorkProductDocument doc = null;
-            logger.debug("joinedPublishProductNotificationHandler: receive a publish request from another core - wp=["
-                    + product + "]");
+            logger.debug("joinedPublishProductNotificationHandler: receive a publish request from another core - wp=[" +
+                         product + "]");
             try {
                 doc = WorkProductDocument.Factory.parse(product);
             } catch (Exception exception) {
@@ -565,29 +556,25 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                 exception.printStackTrace();
             }
 
-            ProductPublicationStatus status = workProductService
-                    .publishProducRequesttFromJoinedCore(
-                            WorkProductHelper.toModel(doc.getWorkProduct()), userID);
+            ProductPublicationStatus status = workProductService.publishProducRequesttFromJoinedCore(WorkProductHelper.toModel(doc.getWorkProduct()),
+                userID);
 
             // set the access control token in the return status to send back to caller
             status.setAct(act);
 
             // TODO: send publication status back to the requesting user
 
-            WorkProductPublicationResponseDocument statusDoc = WorkProductPublicationResponseDocument.Factory
-                    .newInstance();
-            statusDoc.addNewWorkProductPublicationResponse().set(
-                    WorkProductHelper.toWorkProductPublicationResponse(status));
+            WorkProductPublicationResponseDocument statusDoc = WorkProductPublicationResponseDocument.Factory.newInstance();
+            statusDoc.addNewWorkProductPublicationResponse().set(WorkProductHelper.toWorkProductPublicationResponse(status));
 
             ProductPublicationStatusMessage notification = new ProductPublicationStatusMessage();
             notification.setUserID(userID);
             notification.setRequestingCore(requestingCore);
             notification.setStatus(statusDoc.toString());
-            Message<ProductPublicationStatusMessage> msg = new GenericMessage<ProductPublicationStatusMessage>(
-                    notification);
+            Message<ProductPublicationStatusMessage> msg = new GenericMessage<ProductPublicationStatusMessage>(notification);
 
-            logger.debug("joinedPublishProductNotificationHandler: sending status back to requesting core.  status=["
-                    + notification.getStatus() + "]");
+            logger.debug("joinedPublishProductNotificationHandler: sending status back to requesting core.  status=[" +
+                         notification.getStatus() + "]");
             productPublicationStatusChannel.send(msg);
         }
     }
@@ -604,8 +591,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
     @Override
     public void newWorkProductVersion(String workProductID, Integer subscriptionId) {
 
-        logger.debug("newWorkProductVersion: workProductID: " + workProductID + ", subscriptionId:"
-                + subscriptionId);
+        logger.debug("newWorkProductVersion: workProductID: " + workProductID +
+                     ", subscriptionId:" + subscriptionId);
 
         WorkProduct wp = workProductService.getProduct(workProductID);
         if (wp != null) {
@@ -621,14 +608,15 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             wpString = doc.xmlText();
 
             // send work product publication to CommunicationServiceXmpp
-            logger.debug("newWorkProductVersion: sending ProductPublicationMessage IGID: "
-                    + interestGroupID + ", productID: " + wpID + ", status: "
-                    + ProductPublicationMessage.PublicationType.Publish);
-            ProductPublicationMessage notification = new ProductPublicationMessage(
-                    ProductPublicationMessage.PublicationType.Publish, interestGroupID, wpID,
-                    wpType, wpString);
-            Message<ProductPublicationMessage> msg = new GenericMessage<ProductPublicationMessage>(
-                    notification);
+            logger.debug("newWorkProductVersion: sending ProductPublicationMessage IGID: " +
+                         interestGroupID + ", productID: " + wpID + ", status: " +
+                         ProductPublicationMessage.PublicationType.Publish);
+            ProductPublicationMessage notification = new ProductPublicationMessage(ProductPublicationMessage.PublicationType.Publish,
+                                                                                   interestGroupID,
+                                                                                   wpID,
+                                                                                   wpType,
+                                                                                   wpString);
+            Message<ProductPublicationMessage> msg = new GenericMessage<ProductPublicationMessage>(notification);
             productPublicationChannel.send(msg);
         } else {
             logger.error("newWorkProductVersion: productID: " + workProductID + " Not Found");
@@ -651,8 +639,8 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         String product = msg.getWorkProduct();
         String owningCore = msg.getOwningCore();
 
-        logger.info("owningCoreWorkProductNotificationHandler: receive product publication from "
-                + owningCore + "'s XMPP nodes.");
+        logger.info("owningCoreWorkProductNotificationHandler: receive product publication from " +
+                    owningCore + "'s XMPP nodes.");
 
         // This message should only be received for product owned by another core
         if (!owningCore.equals(configurationService.getCoreName())) {
@@ -668,8 +656,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             }
 
             try {
-                workProductService.publishProductFromOwner(WorkProductHelper.toModel(doc
-                        .getWorkProduct()));
+                workProductService.publishProductFromOwner(WorkProductHelper.toModel(doc.getWorkProduct()));
 
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -688,33 +675,30 @@ public class CommunicationsServiceImpl implements CommunicationsService,
     @Override
     public void productAssociationHandler(ProductToInterestGroupAssociationMessage message) {
 
-        ProductToInterestGroupAssociationMessage.AssociationType associationType = message
-                .getAssociationType();
+        ProductToInterestGroupAssociationMessage.AssociationType associationType = message.getAssociationType();
         String productID = message.getProductId();
         String productType = message.getProductType();
         String interestGroupID = message.getInterestGroupId();
         String owningCore = message.getOwningCore();
 
-        logger.debug("===========> *** productAssociationHandler -  productID=" + productID
-                + " productType=" + productType + " interestGroupID=" + interestGroupID
-                + " owningCore=" + owningCore + " associationType=" + associationType.toString());
+        logger.debug("===========> *** productAssociationHandler -  productID=" + productID +
+                     " productType=" + productType + " interestGroupID=" + interestGroupID +
+                     " owningCore=" + owningCore + " associationType=" + associationType.toString());
 
         if (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Associate) {
             if (!interestGroupList.contains(interestGroupID)) {
                 interestGroupList.add(interestGroupID);
 
                 // Notify the CommunicationsServiceXmpp component if this is a new interest group
-                logger.debug("NotifyCommunicationsServiceXmppImpl of new  interest group : interestGroupID:"
-                        + interestGroupID);
+                logger.debug("NotifyCommunicationsServiceXmppImpl of new  interest group : interestGroupID:" +
+                             interestGroupID);
 
                 NewInterestGroupCreatedMessage request = new NewInterestGroupCreatedMessage();
                 request.setInterestGroupID(interestGroupID);
                 request.setOwningCore(owningCore);
                 request.setRestored(false);
-                request.setSharingStatus(InterestGroupStateNotificationMessage.SharingStatus.None
-                        .toString());
-                Message<NewInterestGroupCreatedMessage> requestMessage = new GenericMessage<NewInterestGroupCreatedMessage>(
-                        request);
+                request.setSharingStatus(InterestGroupStateNotificationMessage.SharingStatus.None.toString());
+                Message<NewInterestGroupCreatedMessage> requestMessage = new GenericMessage<NewInterestGroupCreatedMessage>(request);
                 newInterestGroupCreatedChannel.send(requestMessage);
 
             }
@@ -724,24 +708,25 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             try {
                 pubSubService.subscribeWorkProductID(productID, this);
             } catch (Exception e) {
-                logger.error("productAssociationHandler - error subscribing to productID:"
-                        + productID);
+                logger.error("productAssociationHandler - error subscribing to productID:" +
+                             productID);
                 e.printStackTrace();
             }
         } else if (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Unassociate) {
             if (interestGroupList.contains(interestGroupID)) {
 
-                logger.debug("productAssociationHandler - sending ProductPublicationMessage with interest groupID="
-                        + interestGroupID
-                        + " wpID="
-                        + productID
-                        + " pubStatus"
-                        + ProductPublicationMessage.PublicationType.Delete);
-                ProductPublicationMessage notification = new ProductPublicationMessage(
-                        ProductPublicationMessage.PublicationType.Delete, interestGroupID,
-                        productID, productType, null);
-                Message<ProductPublicationMessage> msg = new GenericMessage<ProductPublicationMessage>(
-                        notification);
+                logger.debug("productAssociationHandler - sending ProductPublicationMessage with interest groupID=" +
+                             interestGroupID +
+                             " wpID=" +
+                             productID +
+                             " pubStatus" +
+                             ProductPublicationMessage.PublicationType.Delete);
+                ProductPublicationMessage notification = new ProductPublicationMessage(ProductPublicationMessage.PublicationType.Delete,
+                                                                                       interestGroupID,
+                                                                                       productID,
+                                                                                       productType,
+                                                                                       null);
+                Message<ProductPublicationMessage> msg = new GenericMessage<ProductPublicationMessage>(notification);
                 productPublicationChannel.send(msg);
             }
         }
@@ -757,14 +742,13 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @ssdd
      */
     @Override
-    public void productPublicationStatusNotificationHandler(
-            ProductPublicationStatusNotificationMessage message) {
+    public void productPublicationStatusNotificationHandler(ProductPublicationStatusNotificationMessage message) {
 
         String userID = message.getUserID();
         String statusStr = message.getStatus();
 
-        logger.debug("productPublicationStatusNotificationHandler: sending notification to "
-                + userID);
+        logger.debug("productPublicationStatusNotificationHandler: sending notification to " +
+                     userID);
 
         // ProductPublicationStatusType status = WorkProductHelper
         // .toProductPublicationStatusType(statusStr);
@@ -779,15 +763,14 @@ public class CommunicationsServiceImpl implements CommunicationsService,
             m.set(object);
             messages.add(t);
 
-            NotificationMessageHolderType[] notification = new NotificationMessageHolderType[messages
-                    .size()];
+            NotificationMessageHolderType[] notification = new NotificationMessageHolderType[messages.size()];
 
             notification = messages.toArray(notification);
             logger.debug("productPublicationStatusNotificationHandler: size:" + notification.length);
             notificationService.notify(userID, notification);
         } catch (Throwable e) {
-            logger.error("productPublicationStatusNotificationHandler: error creating and sending product publication status notification to "
-                    + userID);
+            logger.error("productPublicationStatusNotificationHandler: error creating and sending product publication status notification to " +
+                         userID);
             e.printStackTrace();
         }
     }
@@ -850,9 +833,9 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      */
     @Override
     public void sendMessage(String message, CORE2CORE_MESSAGE_TYPE messageType, String hostName)
-            throws IllegalArgumentException, RemoteCoreUnknownException,
-            RemoteCoreUnavailableException, LocalCoreNotOnlineException, NoShareAgreementException,
-            NoShareRuleInAgreementException {
+        throws IllegalArgumentException, RemoteCoreUnknownException,
+        RemoteCoreUnavailableException, LocalCoreNotOnlineException, NoShareAgreementException,
+        NoShareRuleInAgreementException {
 
         logger.debug("sendMessage - send message=[" + message + "]");
 
@@ -876,8 +859,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
         } else {
 
             if (hasShareAgreement(hostName)) {
-                CoreConfigType coreConfig = directoryService.getCoreConfig(configurationService
-                        .getCoreName());
+                CoreConfigType coreConfig = directoryService.getCoreConfig(configurationService.getCoreName());
 
                 if (coreConfig == null || coreConfig.getOnlineStatus() != CoreStatusType.ONLINE) {
                     throw new LocalCoreNotOnlineException();
@@ -899,8 +881,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                             throw new IllegalArgumentException("Message is not a valid XML string");
                         }
 
-                        Core2CoreMessageDocument doc = Core2CoreMessageDocument.Factory
-                                .newInstance();
+                        Core2CoreMessageDocument doc = Core2CoreMessageDocument.Factory.newInstance();
                         doc.addNewCore2CoreMessage().set(xmlObj);
 
                         // send to the XMPP component
@@ -909,8 +890,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
                         msg.setToCore(coreJID);
                         msg.setMessageType(messageType.name());
                         msg.setMessage(doc.toString());
-                        Message<Core2CoreMessage> notification = new GenericMessage<Core2CoreMessage>(
-                                msg);
+                        Message<Core2CoreMessage> notification = new GenericMessage<Core2CoreMessage>(msg);
                         core2CoreMessageChannel.send(notification);
                     }
                 }
@@ -956,8 +936,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @param broadcastMessageNotificationChannel
      *            the new broadcast message notification channel
      */
-    public void setBroadcastMessageNotificationChannel(
-            MessageChannel broadcastMessageNotificationChannel) {
+    public void setBroadcastMessageNotificationChannel(MessageChannel broadcastMessageNotificationChannel) {
 
         this.broadcastMessageNotificationChannel = broadcastMessageNotificationChannel;
     }
@@ -1012,8 +991,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @param interestGroupManagementComponent
      *            the new interest group management component
      */
-    public void setInterestGroupManagementComponent(
-            InterestGroupManagementComponent interestGroupManagementComponent) {
+    public void setInterestGroupManagementComponent(InterestGroupManagementComponent interestGroupManagementComponent) {
 
         this.interestGroupManagementComponent = interestGroupManagementComponent;
     }
@@ -1079,8 +1057,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      * @param resourceMessageNotificationChannel
      *            the new resource message notification channel
      */
-    public void setResourceMessageNotificationChannel(
-            MessageChannel resourceMessageNotificationChannel) {
+    public void setResourceMessageNotificationChannel(MessageChannel resourceMessageNotificationChannel) {
 
         this.resourceMessageNotificationChannel = resourceMessageNotificationChannel;
     }
@@ -1120,7 +1097,7 @@ public class CommunicationsServiceImpl implements CommunicationsService,
      */
     @Override
     public void workProductDeleted(ProductChangeNotificationMessage changedMessage,
-            Integer subscriptionId) {
+                                   Integer subscriptionId) {
 
         pubSubService.unsubscribeBySubscriptionID(subscriptionId);
     }

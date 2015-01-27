@@ -64,8 +64,7 @@ public class UserInterestGroupDAOHibernate
         boolean eligible = false;
 
         final List<String> interestGroupIDList = getInterestGroupList(user);
-        eligible = interestGroupIDList == null ? false
-                                              : interestGroupIDList.contains(interestGroupID);
+        eligible = interestGroupIDList == null ? false : interestGroupIDList.contains(interestGroupID);
         // logger.debug("isEligible: user: " + user + " can " + (eligible ? "" : "not ") + "access IGID: " + interestGroupID);
         return eligible;
     }

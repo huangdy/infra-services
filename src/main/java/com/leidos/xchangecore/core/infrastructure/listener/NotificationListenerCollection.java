@@ -9,7 +9,8 @@ import java.util.ArrayList;
  * @param <T>
  */
 @SuppressWarnings({
-    "unchecked", "serial"
+    "unchecked",
+    "serial"
 })
 public class NotificationListenerCollection<T>
     extends ArrayList<NotificationListener<T>> {

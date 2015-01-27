@@ -59,7 +59,6 @@ public class InterestGroupDAOHibernate
     public boolean ownedByCore(String interestGroupID, String corename) {
 
         InterestGroup interestGroup = findByInterestGroup(interestGroupID);
-        return interestGroup == null ? false
-                                    : interestGroup.getOwningCore().equalsIgnoreCase(corename);
+        return interestGroup == null ? false : interestGroup.getOwningCore().equalsIgnoreCase(corename);
     }
 }

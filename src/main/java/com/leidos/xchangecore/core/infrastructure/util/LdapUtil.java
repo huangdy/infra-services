@@ -58,7 +58,8 @@ public class LdapUtil {
         logger.debug("getCNLocation: Looking up lat/lon for cn=" + cn);
 
         String[] locationArray = new String[] {
-            "", ""
+            "",
+            ""
         };
 
         try {
@@ -70,7 +71,8 @@ public class LdapUtil {
             SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             String[] attrsFilter = {
-                "geoLatitude", "geoLongitude"
+                "geoLatitude",
+                "geoLongitude"
             };
             searchControls.setReturningAttributes(attrsFilter);
 

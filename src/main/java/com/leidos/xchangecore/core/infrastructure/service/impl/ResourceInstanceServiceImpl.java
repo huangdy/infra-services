@@ -43,7 +43,8 @@ import com.saic.precis.x2009.x06.base.IdentifierType;
  *      Model
  * @ssdd
  */
-public class ResourceInstanceServiceImpl implements ResourceInstanceService, ServiceNamespaces {
+public class ResourceInstanceServiceImpl
+    implements ResourceInstanceService, ServiceNamespaces {
 
     Logger log = LoggerFactory.getLogger(this.getClass());
 
@@ -74,21 +75,21 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
      */
     @Override
     public boolean applyProfile(ResourceInstanceModel resourceModel,
-            IdentifierType resourceProfileID) throws ResourceProfileDoesNotExist {
+                                IdentifierType resourceProfileID)
+        throws ResourceProfileDoesNotExist {
 
         // get the profile from the ResourceProfile service
-        final ResourceProfileModel profileModel = this.resourceProfileService
-                .getProfile(resourceProfileID);
+        final ResourceProfileModel profileModel = this.resourceProfileService.getProfile(resourceProfileID);
 
         if (profileModel == null) {
-            throw new ResourceProfileDoesNotExist(resourceProfileID.getStringValue()
-                    + " does not exist");
+            throw new ResourceProfileDoesNotExist(resourceProfileID.getStringValue() +
+                                                  " does not exist");
         }
 
         // Tell the NotificationService to add the interests from the profile to the endpoint
         // if this profile has not already been applied to this resource
-        else if ((resourceModel.getEndpoints().size() > 0)
-                && !resourceModel.getProfiles().contains(resourceProfileID.getStringValue())) {
+        else if ((resourceModel.getEndpoints().size() > 0) &&
+                 !resourceModel.getProfiles().contains(resourceProfileID.getStringValue())) {
 
             // get the resource's endpoint
             final Iterator<String> i = resourceModel.getEndpoints().iterator();
@@ -117,8 +118,8 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
             if (profileModel.getDescription() != null) {
                 resourceModel.setDescription(profileModel.getDescription());
             } else {
-                resourceModel.setDescription(resourceModel.getIdentifier() + "-"
-                        + profileModel.getIdentifier());
+                resourceModel.setDescription(resourceModel.getIdentifier() + "-" +
+                                             profileModel.getIdentifier());
             }
 
             return true;
@@ -141,8 +142,9 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
      * @ssdd
      */
     @Override
-    public ResourceInstanceModel checkin(IdentifierType id, IdentifierType localResourceID,
-            IdentifierType resourceProfileID) {
+    public ResourceInstanceModel checkin(IdentifierType id,
+                                         IdentifierType localResourceID,
+                                         IdentifierType resourceProfileID) {
 
         // Applications can check in with or without a profile. Checking in with a profile shows how
         // an application checks into UICDS to enable it to start receiving notifications. This
@@ -174,8 +176,7 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
         // continue to deliver notifications to the endpoint that will be stored on the server. One
         // issue here is that we may need set a limit on the notification queue size.
 
-        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id
-                .getStringValue());
+        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel == null) {
             resourceModel = this.createResourceInstanceModel();
             if ((localResourceID != null) && (localResourceID.getStringValue() != null)) {
@@ -227,8 +228,7 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
             r = this.createResourceInstanceModel();
 
             // Create a new endpoint
-            final EndpointReferenceType endpoint = this.notificationService.createPullPoint(id
-                    .getStringValue());
+            final EndpointReferenceType endpoint = this.notificationService.createPullPoint(id.getStringValue());
             r.getEndpoints().add(endpoint.getAddress().getStringValue());
 
             // fli added on 11/30/2011
@@ -281,13 +281,12 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
     @Override
     public ResourceInstance getResourceInstance(IdentifierType id) {
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id
-                .getStringValue());
+        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
 
         if (resourceModel != null) {
             // resourceModel.setNotMsgCount(notificationService.findMsgCountByEntityId(id.getStringValue()));
             return ResourceInstanceUtil.copyProperties(resourceModel,
-                    this.notificationService.findMsgCountByEntityId(id.getStringValue()));
+                this.notificationService.findMsgCountByEntityId(id.getStringValue()));
         } else {
             return null;
         }
@@ -320,9 +319,8 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
             int i = 0;
             for (final ResourceInstanceModel resourceInstance : resourceInstanceList) {
                 // resourceInstance.setNotMsgCount(notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
-                final ResourceInstance resource = ResourceInstanceUtil.copyProperties(
-                        resourceInstance, this.notificationService
-                                .findMsgCountByEntityId(resourceInstance.getIdentifier()));
+                final ResourceInstance resource = ResourceInstanceUtil.copyProperties(resourceInstance,
+                    this.notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
                 if (resource != null) {
                     resources[i++] = resource;
                 }
@@ -401,8 +399,10 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
      * @ssdd
      */
     @Override
-    public ResourceInstanceModel register(IdentifierType id, IdentifierType localResourceID,
-            IdentifierType resourceProfileID) throws ResourceProfileDoesNotExist {
+    public ResourceInstanceModel register(IdentifierType id,
+                                          IdentifierType localResourceID,
+                                          IdentifierType resourceProfileID)
+        throws ResourceProfileDoesNotExist {
 
         // Applications must have a Resource Profile created for them by an administrator and must
         // register with the core to begin to receive notifications. The following diagrams shows
@@ -416,8 +416,7 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
         // a notification endpoint created with its profile's interests is created
 
         // check if a resource instance already exists
-        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id
-                .getStringValue());
+        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel == null) {
             resourceModel = this.createResourceInstance(id);
             if ((localResourceID != null) && (localResourceID.getStringValue() != null)) {
@@ -465,12 +464,12 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
     @Override
     public void systemInitializedHandler(String messgae) {
 
-        final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory
-                .newInstance();
-        final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory
-                .newInstance();
+        final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
+        final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
         this.directoryService.registerUICDSService(NS_ResourceInstanceService,
-                RESOURCEINSTANCE_SERVICE_NAME, publishedProducts, subscribedProducts);
+            RESOURCEINSTANCE_SERVICE_NAME,
+            publishedProducts,
+            subscribedProducts);
         this.init();
     }
 
@@ -484,15 +483,14 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
     @Override
     public IdentifierType unregister(IdentifierType id) throws ResourceInstanceDoesNotExist {
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id
-                .getStringValue());
+        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel != null) {
             this.notificationService.destroyPullPoint(resourceModel.getResourceID());
             this.resourceInstanceDAO.makeTransient(resourceModel);
             return id;
         } else {
-            throw new ResourceInstanceDoesNotExist(id.getStringValue()
-                    + " resource instance does not exist");
+            throw new ResourceInstanceDoesNotExist(id.getStringValue() +
+                                                   " resource instance does not exist");
         }
     }
 
@@ -514,8 +512,7 @@ public class ResourceInstanceServiceImpl implements ResourceInstanceService, Ser
 
         boolean updated = false;
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id
-                .getStringValue());
+        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
 
         if (resourceModel != null) {
 

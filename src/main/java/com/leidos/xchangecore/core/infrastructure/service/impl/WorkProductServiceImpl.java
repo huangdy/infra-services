@@ -727,9 +727,7 @@ public class WorkProductServiceImpl
                                                              ProductToInterestGroupAssociationMessage.AssociationType associationType) {
 
         logger.debug("Notify Communication Service to " +
-                     (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Associate
-                                                                                                           ? "associate"
-                                                                                                           : "de-associate") +
+                     (associationType == ProductToInterestGroupAssociationMessage.AssociationType.Associate ? "associate" : "de-associate") +
                      " work product to incident");
 
         InterestGroup interestGroup = getInterestGroupDAO().findByInterestGroup(interestGroupID);

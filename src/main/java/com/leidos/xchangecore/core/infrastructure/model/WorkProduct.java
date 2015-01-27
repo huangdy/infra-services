@@ -240,8 +240,8 @@ public class WorkProduct
 
         if (associatedInterestGroupIDs.length() > 0) {
             int index = associatedInterestGroupIDs.indexOf(" ");
-            return index == -1 ? associatedInterestGroupIDs
-                              : associatedInterestGroupIDs.substring(0, index);
+            return index == -1 ? associatedInterestGroupIDs : associatedInterestGroupIDs.substring(0,
+                index);
         } else {
             return null;
         }

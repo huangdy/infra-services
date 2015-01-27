@@ -350,7 +350,8 @@ public class RuleEngine
     @Override
     public void onChange(File file, Change change) {
 
-        if (Change.DELETED.equals(change)) {} else if (Change.MODIFIED.equals(change)) {
+        if (Change.DELETED.equals(change)) {
+        } else if (Change.MODIFIED.equals(change)) {
             //            log.info("Rules File has been modified");
             setUpdated(true);
             initializeRules(file);

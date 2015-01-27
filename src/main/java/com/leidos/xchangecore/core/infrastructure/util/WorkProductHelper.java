@@ -504,9 +504,7 @@ public class WorkProductHelper
                 log.error("Payload was null for work product: " + wp.getProductID());
             }
             payload.addNewStructuredPayloadMetadata().setCommunityURI(wp.getProductType());
-            payload.getStructuredPayloadMetadata().setCommunityVersion(wp.getProductTypeVersion() != null
-                                                                                                         ? wp.getProductTypeVersion()
-                                                                                                         : "");
+            payload.getStructuredPayloadMetadata().setCommunityVersion(wp.getProductTypeVersion() != null ? wp.getProductTypeVersion() : "");
         }
 
         return wpd;

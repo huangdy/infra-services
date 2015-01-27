@@ -198,9 +198,7 @@ public class DirectoryServiceImpl
 
         for (String coreName : coreNames) {
 
-            CoreStatusType.Enum updatedStatus = coreStatusUpdateMap.get(coreName).equals("available")
-                                                                                                     ? CoreStatusType.ONLINE
-                                                                                                     : CoreStatusType.OFFLINE;
+            CoreStatusType.Enum updatedStatus = coreStatusUpdateMap.get(coreName).equals("available") ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
             logger.info("coreRosterHandler: [" + coreName + "," + updatedStatus.toString() + "]");
             addCoreToStatusMap(coreName, updatedStatus);
 
@@ -231,9 +229,7 @@ public class DirectoryServiceImpl
                         ", mutually agreed: " +
                         (getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? "true" : "false"));
             CoreStatusType.Enum updatedStatus = coreStatus.equals(CoreStatusUpdateMessage.Status_Available) &&
-                                                getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName)
-                                                                                                      ? CoreStatusType.ONLINE
-                                                                                                      : CoreStatusType.OFFLINE;
+                                                getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
 
             logger.info("coreStatusUpdate: [" + coreName + "," + updatedStatus.toString() + "]");
             if (!("".equals(message.getCoreLatitude()) || "".equals(message.getCoreLongitude()))) {

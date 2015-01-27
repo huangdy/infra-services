@@ -51,7 +51,9 @@ public class RegisteredService {
     private Set<PublishedProduct> publishedProducts = new HashSet<PublishedProduct>();
 
     @ManyToMany(cascade = {
-        CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE
+        CascadeType.PERSIST,
+        CascadeType.MERGE,
+        CascadeType.REMOVE
     })
     private Set<SubscribedProduct> subscribedProducts = new HashSet<SubscribedProduct>();
 

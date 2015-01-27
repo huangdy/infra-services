@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class WorkProductQueryBuilder
-implements WorkProductConstants {
+    implements WorkProductConstants {
 
     private final Logger logger = LoggerFactory.getLogger(WorkProductQueryBuilder.class);
 
@@ -151,7 +151,7 @@ implements WorkProductConstants {
                 }
             } else {
                 this.logger.warn("Unresolved parameter: [key/value]: [" + key + "/" + values[0] +
-                    "]");
+                                 "]");
             }
         }
     }

@@ -8,14 +8,16 @@ package com.leidos.xchangecore.core.infrastructure.messages;
  * 
  */
 public class ResourceNotificationMessage {
-	
+
     private String rmMessage;
 
     public String getRmMessage() {
-		return rmMessage;
-	}
 
-	public void setRmMessage(String rmMessage) {
-		this.rmMessage = rmMessage;
-	}
+        return rmMessage;
+    }
+
+    public void setRmMessage(String rmMessage) {
+
+        this.rmMessage = rmMessage;
+    }
 }

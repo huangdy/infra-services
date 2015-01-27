@@ -27,7 +27,8 @@ public class ProductChangeNotificationMessage {
     }
 
     public ProductChangeNotificationMessage(WorkProductIdentificationDocument identification,
-        WorkProductPropertiesDocument properties, ChangeIndicator changeIndicator) {
+                                            WorkProductPropertiesDocument properties,
+                                            ChangeIndicator changeIndicator) {
 
         super();
         this.identification = identification;
@@ -47,12 +48,11 @@ public class ProductChangeNotificationMessage {
 
     public String getInterestGroupID() {
 
-        if (this.properties != null
-            && this.properties.getWorkProductProperties() != null
-            && this.properties.getWorkProductProperties().getAssociatedGroups() != null
-            && this.properties.getWorkProductProperties().getAssociatedGroups().getIdentifierArray().length > 0) {
-            return this.properties.getWorkProductProperties().getAssociatedGroups().getIdentifierArray(
-                0).getStringValue();
+        if (this.properties != null &&
+            this.properties.getWorkProductProperties() != null &&
+            this.properties.getWorkProductProperties().getAssociatedGroups() != null &&
+            this.properties.getWorkProductProperties().getAssociatedGroups().getIdentifierArray().length > 0) {
+            return this.properties.getWorkProductProperties().getAssociatedGroups().getIdentifierArray(0).getStringValue();
         } else {
             return null;
         }
@@ -60,10 +60,9 @@ public class ProductChangeNotificationMessage {
 
     public String getProductID() {
 
-        if (identification != null
-            && identification.getWorkProductIdentification() != null
-            && identification.getWorkProductIdentification().getIdentifier() != null
-            && identification.getWorkProductIdentification().getIdentifier().getStringValue() != null) {
+        if (identification != null && identification.getWorkProductIdentification() != null &&
+            identification.getWorkProductIdentification().getIdentifier() != null &&
+            identification.getWorkProductIdentification().getIdentifier().getStringValue() != null) {
             return identification.getWorkProductIdentification().getIdentifier().getStringValue();
         } else {
             return null;
@@ -77,9 +76,9 @@ public class ProductChangeNotificationMessage {
 
     public String getType() {
 
-        if (identification != null && identification.getWorkProductIdentification() != null
-            && identification.getWorkProductIdentification().getType() != null
-            && identification.getWorkProductIdentification().getType().getStringValue() != null) {
+        if (identification != null && identification.getWorkProductIdentification() != null &&
+            identification.getWorkProductIdentification().getType() != null &&
+            identification.getWorkProductIdentification().getType().getStringValue() != null) {
             return identification.getWorkProductIdentification().getType().getStringValue();
         } else {
             return null;

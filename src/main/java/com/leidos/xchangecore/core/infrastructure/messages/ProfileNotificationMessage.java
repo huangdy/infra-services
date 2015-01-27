@@ -1,6 +1,7 @@
 package com.leidos.xchangecore.core.infrastructure.messages;
 
 public class ProfileNotificationMessage {
+
     public static enum NotificationState {
         CREATE, UPDATE, DELETE, RESTORE,
     }

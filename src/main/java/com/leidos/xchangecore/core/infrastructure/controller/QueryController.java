@@ -144,25 +144,21 @@ public class QueryController
     private String serviceName;
     private NodeRenderer nodeRenderer;
 
+    Logger log = LoggerFactory.getLogger(this.getClass());
+
     public NodeRenderer getNodeRenderer() {
 
-        return nodeRenderer;
+        return this.nodeRenderer;
     }
 
-    public void setNodeRenderer(NodeRenderer nodeRenderer) {
+    public ISearchService getService() {
 
-        this.nodeRenderer = nodeRenderer;
+        return this.service;
     }
-    Logger log = LoggerFactory.getLogger(getClass());
 
     public String getServiceName() {
 
-        return serviceName;
-    }
-
-    public void setServiceName(String serviceName) {
-
-        this.serviceName = serviceName;
+        return this.serviceName;
     }
 
     @SuppressWarnings("unchecked")
@@ -171,49 +167,59 @@ public class QueryController
                                                  HttpServletResponse response) throws Exception {
 
         // a copy must be made to avoid synchronization issues
-        HashMap<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
+        final HashMap<String, String[]> params = new HashMap<String, String[]>(request.getParameterMap());
 
-        // we're already adding the remoteuser (no need for principal object since 
+        // we're already adding the remoteuser (no need for principal object since
         // this is all we need to filter feeds objects.
         if (request.getRemoteUser() != null) {
-            String[] remoteUser = {
+            final String[] remoteUser = {
                 StringEscapeUtils.escapeXml(request.getRemoteUser())
             };
             params.put("req.remoteUser", remoteUser);
         }
 
         if (request.getPathInfo() != null) {
-            String[] resourcePath = {
+            final String[] resourcePath = {
                 StringEscapeUtils.escapeXml(request.getPathInfo())
             };
             params.put("req.resourcePath", resourcePath);
         }
 
         if (request.getQueryString() != null) {
-            String[] queryString = {
+            final String[] queryString = {
                 StringEscapeUtils.escapeXml(request.getQueryString())
             };
             params.put("req.queryString", queryString);
         }
 
-        Document workProductDoc = getService().searchAsDocument(params);
+        String format = request.getParameter("format");
+        if (format == null) {
+            format = "xml";
+        }
 
-        ModelAndView mav = new ModelAndView(new WorkProductView());
+        final Document workProductDoc = this.getService().searchAsDocument(params);
+
+        final ModelAndView mav = new ModelAndView(new WorkProductView());
         mav.getModel().put("output", workProductDoc);
-        mav.getModel().put("renderer", getNodeRenderer());
+        mav.getModel().put("renderer", this.getNodeRenderer());
         mav.getModel().put("propertiesMap", request.getParameterMap());
-        mav.getModel().put("format", request.getParameter("format"));
+        mav.getModel().put("format", format);
 
         return mav;
     }
 
-    public ISearchService getService() {
+    public void setNodeRenderer(NodeRenderer nodeRenderer) {
 
-        return service;
+        this.nodeRenderer = nodeRenderer;
     }
 
     public void setService(ISearchService service) {
 
         this.service = service;
+    }
+
+    public void setServiceName(String serviceName) {
+
+        this.serviceName = serviceName;
     }
 }

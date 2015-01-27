@@ -28,16 +28,23 @@ public interface NotificationProducer {
     public static final String WST_PREFIX = "wst";
     public static final String NOTIFY_NAMESPACE = "docs.oasis-open.org/wsn/b-2";
     public static final String TOPIC_NAMESPACE_URI = "http://docs.oasis-open.org/wsn/t-1";
-    public static final QName FIXED_SET_QNAME = new QName(WSN_NAMESPACE, "FixedTopicSet",
-            WST_PREFIX);
+    public static final QName FIXED_SET_QNAME = new QName(WSN_NAMESPACE,
+                                                          "FixedTopicSet",
+                                                          WST_PREFIX);
     public static final QName TOPIC_DIALECT_QNAME = new QName(WSN_NAMESPACE,
-            "TopicExpressionDialect", WSN_PREFIX);
-    public static final QName TOPIC_EXPRESSION_QNAME = new QName(WSN_NAMESPACE, "TopicExpression",
-            WSN_PREFIX);
+                                                              "TopicExpressionDialect",
+                                                              WSN_PREFIX);
+    public static final QName TOPIC_EXPRESSION_QNAME = new QName(WSN_NAMESPACE,
+                                                                 "TopicExpression",
+                                                                 WSN_PREFIX);
     public static final QName TOPIC_SET_QNAME = new QName(WST_NAMESPACE, "TopicSet", WST_PREFIX);
 
-    QName[] PROPERTIES = new QName[] { FIXED_SET_QNAME, TOPIC_DIALECT_QNAME,
-            TOPIC_EXPRESSION_QNAME, TOPIC_SET_QNAME };
+    QName[] PROPERTIES = new QName[] {
+        FIXED_SET_QNAME,
+        TOPIC_DIALECT_QNAME,
+        TOPIC_EXPRESSION_QNAME,
+        TOPIC_SET_QNAME
+    };
 
     /**
      * Retrieve the last message published for the topicName provided.
@@ -59,6 +66,6 @@ public interface NotificationProducer {
      * @ssdd
      */
     public void subscribe(EndpointReferenceType who, FilterType what)
-            throws InvalidProductTypeException, NullSubscriberException,
-            EmptySubscriberNameException, InvalidProductIDException;
+        throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException,
+        InvalidProductIDException;
 }

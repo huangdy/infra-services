@@ -20,12 +20,15 @@ import org.slf4j.LoggerFactory;
  * @created September 07, 2009
  */
 @SuppressWarnings("unchecked")
-public class XmlBeansUserType implements UserType {
+public class XmlBeansUserType
+    implements UserType {
 
     // This constant is referenced by Hibernate @Type annotations
     public final static String NAME = "com.leidos.xchangecore.core.infrastructure.model.XmlBeansUserType";
 
-    private static final int[] sqlTypes = new int[] { Types.CLOB };
+    private static final int[] sqlTypes = new int[] {
+        Types.CLOB
+    };
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -71,7 +74,7 @@ public class XmlBeansUserType implements UserType {
 
     @Override
     public Object nullSafeGet(ResultSet rset, String[] names, Object owner)
-            throws HibernateException, SQLException {
+        throws HibernateException, SQLException {
 
         Object result = null;
         String value = rset.getString(names[0]);
@@ -87,7 +90,7 @@ public class XmlBeansUserType implements UserType {
 
     @Override
     public void nullSafeSet(PreparedStatement stmt, Object value, int index)
-            throws HibernateException, SQLException {
+        throws HibernateException, SQLException {
 
         if (value instanceof XmlObject) {
             XmlObject xmlObject = (XmlObject) value;

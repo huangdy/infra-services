@@ -35,8 +35,8 @@ import com.vividsolutions.jts.geom.Polygon;
 
 @Transactional
 public class WorkProductDAOHibernate
-extends GenericHibernateDAO<WorkProduct, Integer>
-implements WorkProductDAO, WorkProductConstants {
+    extends GenericHibernateDAO<WorkProduct, Integer>
+    implements WorkProductDAO, WorkProductConstants {
 
     private final static Logger logger = LoggerFactory.getLogger(WorkProductDAOHibernate.class);
 
@@ -78,7 +78,7 @@ implements WorkProductDAO, WorkProductConstants {
 
         final List<WorkProduct> productList = this.findUniquProductList(isAscending ? SortByLastUpdated_Asc : SortByLastUpdated_Desc);
         logger.debug("findAll: " + (isAscending ? Order_Asc : Order_Desc) + ", found " +
-            (productList == null ? 0 : productList.size()) + " entries");
+                     (productList == null ? 0 : productList.size()) + " entries");
         return productList == null ? new ArrayList<WorkProduct>() : productList;
     }
 
@@ -119,7 +119,7 @@ implements WorkProductDAO, WorkProductConstants {
         logger.debug("findByInterestGroup: IGID: " + interestGroupID);
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.like(C_AssociatedInterestGroupIDs, "%" + interestGroupID +
-            "%"));
+                                                                          "%"));
         final List<Order> orderList = new ArrayList<Order>();
         orderList.add(SortByProductID_Desc);
         orderList.add(SortByVersion_Desc);
@@ -148,7 +148,7 @@ implements WorkProductDAO, WorkProductConstants {
     public List<WorkProduct> findByInterestGroupAndType(String interestGroupID, String productType) {
 
         logger.debug("findByInterestGroupAndType: IGID: " + interestGroupID + ", ProductType: " +
-            productType);
+                     productType);
         final List<WorkProduct> productList = this.findUniquProductList(null,
             Restrictions.eq(C_ProductType, productType));
         final List<WorkProduct> products = new ArrayList<WorkProduct>();
@@ -174,7 +174,7 @@ implements WorkProductDAO, WorkProductConstants {
         final List<WorkProduct> productList = this.findByCriteriaAndOrder(0, orders, criterions);
 
         logger.debug("findByProductID: " + productID + ", found " +
-            (productList == null ? 0 : productList.size()) + " entries");
+                     (productList == null ? 0 : productList.size()) + " entries");
         if ((productList == null) || (productList.size() == 0)) {
             return null;
         }
@@ -186,7 +186,7 @@ implements WorkProductDAO, WorkProductConstants {
     public WorkProduct findByProductIDAndVersion(String productID, Integer productVersion) {
 
         logger.debug("findByProductID: ProductID: " + productID + ", ProductVersion: " +
-            productVersion);
+                     productVersion);
 
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.eq(C_ProductID, productID));
@@ -211,7 +211,7 @@ implements WorkProductDAO, WorkProductConstants {
         final List<WorkProduct> productList = this.findUniquProductList(null,
             Restrictions.eq(C_ProductType, productType));
         logger.debug("findByProductType: " + productType + ", found " +
-            (productList != null ? productList.size() : 0) + " entries");
+                     (productList != null ? productList.size() : 0) + " entries");
 
         return productList;
     }
@@ -228,11 +228,11 @@ implements WorkProductDAO, WorkProductConstants {
     public WorkProduct findByWorkProductIdentification(IdentificationType pkgId) {
 
         logger.debug("findByWorkProductIdentification: productID: " +
-            pkgId.getIdentifier().getStringValue() + ", productType: " +
-            pkgId.getType().getStringValue() + ", productVersion: " +
-            pkgId.getVersion().getStringValue() + ", checksum: " +
-            pkgId.getChecksum().getStringValue() + ", state: " +
-            pkgId.getState().toString());
+                     pkgId.getIdentifier().getStringValue() + ", productType: " +
+                     pkgId.getType().getStringValue() + ", productVersion: " +
+                     pkgId.getVersion().getStringValue() + ", checksum: " +
+                     pkgId.getChecksum().getStringValue() + ", state: " +
+                     pkgId.getState().toString());
         final Criterion c1 = Restrictions.eq(C_ProductID, pkgId.getIdentifier().getStringValue());
         final Criterion c2 = Restrictions.eq(C_Checksum, pkgId.getChecksum().getStringValue());
         final Criterion c3 = Restrictions.eq(C_ProductType, pkgId.getType().getStringValue());
@@ -319,13 +319,13 @@ implements WorkProductDAO, WorkProductConstants {
                 } else {
                     productDocument = WorkProductHelper.toWorkProductSummary(product);
                 }
-                // logger.debug("insert product: " + productDocument.xmlText());
                 // filtered by the bounding box
                 if ((queryBuilder.getBoundingBox() != null) &&
                     (this.intersects(queryBuilder.getBoundingBox(),
                         DigestHelper.getFirstGeometry(WorkProductHelper.getDigestElement(productDocument))) == false)) {
                     continue;
                 }
+
                 final Node node = doc.importNode(productDocument.getDomNode(), true);
                 results.appendChild(node);
 
@@ -385,19 +385,20 @@ implements WorkProductDAO, WorkProductConstants {
 
     private boolean intersects(Double[][] boundingBox, Geometry geom) {
 
-        logger.debug("BoundingBox: ");
-        for (int i = 0; i < 4; i++) {
-            logger.debug("Coordinate: (" + boundingBox[i][0] + ", " + boundingBox[i][1] + ")");
+        logger.debug("intersects: ");
+        for (int i = 0; i < 5; i++) {
+            logger.debug("Coordinates: (" + boundingBox[i][0] + ", " + boundingBox[i][1] + ")");
         }
-
+        boolean found = false;
         if (geom instanceof Polygon) {
             logger.debug("geo type isIt's a Polygon: ");
-            return GeometryUtil.intersects(boundingBox, (Polygon) geom);
+            found = GeometryUtil.intersects(boundingBox, (Polygon) geom);
         } else if (geom instanceof Point) {
             logger.debug("geo type is a Point: [" + geom + "]");
-            return GeometryUtil.contains(boundingBox, (Point) geom);
+            found = GeometryUtil.contains(boundingBox, (Point) geom);
         }
-        return true;
+        logger.debug("intersects: " + (found ? "true" : "false"));
+        return found;
     }
 
     public void setUserInterestGroupDAO(UserInterestGroupDAO interestGroupDAO) {

@@ -32,7 +32,8 @@ import org.hibernate.search.annotations.Index;
 
 @Entity
 @Table(name = "RESOURCE_PROFILE")
-public class ResourceProfileModel implements Serializable {
+public class ResourceProfileModel
+    implements Serializable {
 
     private static final long serialVersionUID = 3631735818429898973L;
 
@@ -53,12 +54,16 @@ public class ResourceProfileModel implements Serializable {
     private String description;
 
     // key = codespace,label value =value>
-    @OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @OneToMany(cascade = {
+        CascadeType.ALL
+    }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
 
     @OneToMany(targetEntity = InterestElement.class, cascade = CascadeType.ALL)
-    @Cascade({ org.hibernate.annotations.CascadeType.DELETE_ORPHAN })
+    @Cascade({
+        org.hibernate.annotations.CascadeType.DELETE_ORPHAN
+    })
     @LazyCollection(value = LazyCollectionOption.FALSE)
     private Set<InterestElement> interests = new HashSet<InterestElement>();
 

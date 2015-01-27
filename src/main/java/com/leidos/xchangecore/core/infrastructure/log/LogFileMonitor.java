@@ -20,24 +20,27 @@ import org.apache.log4j.spi.LoggingEvent;
 
 import com.leidos.xchangecore.core.infrastructure.status.StatusEventMonitor;
 
-public class LogFileMonitor extends LogFilePatternReceiver {
+public class LogFileMonitor
+    extends LogFilePatternReceiver {
 
-    public class LogFileMonitorRunnable implements Runnable {
+    public class LogFileMonitorRunnable
+        implements Runnable {
 
         LogFileMonitor monitor;
 
         public LogFileMonitorRunnable(LogFileMonitor monitor) {
+
             this.monitor = monitor;
         }
 
         @Override
         public void run() {
+
             monitor.initialize();
             while (reader == null) {
                 getLogger().info("attempting to load file: " + getFileURL());
                 try {
-                    reader = new BufferedReader(new InputStreamReader(
-                            new URL(getFileURL()).openStream()));
+                    reader = new BufferedReader(new InputStreamReader(new URL(getFileURL()).openStream()));
                 } catch (FileNotFoundException fnfe) {
                     getLogger().error("file not available - will try again in 10 seconds");
                     synchronized (this) {
@@ -59,6 +62,7 @@ public class LogFileMonitor extends LogFilePatternReceiver {
         }
 
         public void stop() {
+
             setTailing(false);
             try {
                 Thread.sleep(2000);
@@ -90,6 +94,7 @@ public class LogFileMonitor extends LogFilePatternReceiver {
     }
 
     public LogFileMonitor(String name, String logPattern, boolean tailing, Level level, File logFile) {
+
         this.name = name;
         // Set LogFilePatternReceiver Properties
         if (name.equals("tomcat")) {
@@ -107,11 +112,13 @@ public class LogFileMonitor extends LogFilePatternReceiver {
     }
 
     public void addMonitors(StatusEventMonitor monitor) {
+
         this.monitors.add(monitor);
     }
 
     @Override
     public void doPost(LoggingEvent event) {
+
         // Receive Log events of log file
         if (!isAsSevereAsThreshold(event.getLevel())) {
             return;
@@ -130,6 +137,7 @@ public class LogFileMonitor extends LogFilePatternReceiver {
     }
 
     private Date getEventDate(LoggingEvent event) {
+
         // Parse timestamp from loggingevent
         Date date = new Date(event.getTimeStamp());
         String relTime = event.getProperty("RELATIVETIME");
@@ -160,10 +168,12 @@ public class LogFileMonitor extends LogFilePatternReceiver {
 
     @Override
     public String getName() {
+
         return name;
     }
 
     protected boolean isLatestEvent(LoggingEvent event) {
+
         // check if the event is latest
         if (name.equals("uicds")) {
             return true;
@@ -171,8 +181,8 @@ public class LogFileMonitor extends LogFilePatternReceiver {
         Date previousEventDate = getEventDate(lastEvents.get(name + "-" + getFileURL()));
         Date currentEventDate = getEventDate(event);
         if (currentEventDate != null && previousEventDate != null) {
-            if (currentEventDate.after(previousEventDate)
-                    || currentEventDate.equals(previousEventDate)) {
+            if (currentEventDate.after(previousEventDate) ||
+                currentEventDate.equals(previousEventDate)) {
                 return true;
             } else {
                 return false;
@@ -182,6 +192,7 @@ public class LogFileMonitor extends LogFilePatternReceiver {
     }
 
     private void processEvent(LoggingEvent event) {
+
         for (StatusEventMonitor monitor : monitors) {
             monitor.doPost(event);
         }
@@ -189,6 +200,7 @@ public class LogFileMonitor extends LogFilePatternReceiver {
 
     @Override
     public void setName(String name) {
+
         this.name = name;
     }
 
