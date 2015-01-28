@@ -2,6 +2,9 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
+    <import resource="CoreProperties.xml" />
+    <import resource="mssql-dataSource.xml" />
+
     <!-- -->
     <!-- TX MANAGER -->
     <!-- -->
@@ -30,7 +33,9 @@
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="showSql" value="false" />
                 <property name="generateDdl" value="true" />
-                <property name="databasePlatform" value="org.hibernate.dialect.SQLServerDialect" />
+                <property name="databasePlatform">
+                    <value>${hibernate.dialect}</value>
+                </property>
             </bean>
         </property>
         <property name="jpaProperties">
