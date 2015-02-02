@@ -3,7 +3,7 @@
     xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 
     <import resource="CoreProperties.xml" />
-    <import resource="mssql-dataSource.xml" />
+    <import resource="mysql-dataSource.xml" />
 
     <!-- -->
     <!-- TX MANAGER -->

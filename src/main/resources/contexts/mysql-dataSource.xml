@@ -8,7 +8,7 @@
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
         <property name="url" value="jdbc:mysql://localhost:3306/core" />
         <property name="username" value="sa" />
-        <property name="password" value="xchangecore.1549" />
+        <property name="password" value="xc.1549" />
     </bean>
 
 </beans> 
