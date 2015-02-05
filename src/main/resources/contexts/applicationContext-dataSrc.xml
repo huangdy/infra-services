@@ -4,7 +4,7 @@
 
     <import resource="CoreProperties.xml" />
     <import resource="dataSource.xml" />
-    
+
     <!-- -->
     <!-- TX MANAGER -->
     <!-- -->
@@ -29,15 +29,7 @@
         <!-- <property name="persistenceUnitName" value="services-test" /> -->
         <property name="persistenceUnitManager" ref="persistenceUnitManager" />
         <property name="dataSource" ref="dataSource" />
-        <property name="jpaVendorAdapter">
-            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <property name="showSql" value="false" />
-                <property name="generateDdl" value="true" />
-                <property name="databasePlatform">
-                    <value>${hibernate.dialect}</value>
-                </property>
-            </bean>
-        </property>
+        <property name="jpaVendorAdapter" ref="hibernateAdapter" />
         <property name="jpaProperties">
             <props>
                 <prop key="hibernate.hbm2ddl.auto">update</prop>
