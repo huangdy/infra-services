@@ -7,7 +7,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-    "file:src/main/resources/contexts/applicationContext-dataSrc.xml",
+    "classpath:contexts/applicationContext-dataSrc.xml",
     "file:src/test/resources/contexts/test-WorkProductDAOContext.xml"
 })
 public class DaoTest {
