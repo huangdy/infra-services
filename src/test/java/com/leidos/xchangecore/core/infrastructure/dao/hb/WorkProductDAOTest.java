@@ -32,11 +32,11 @@ public class WorkProductDAOTest {
     @Test
     public void testAll() {
 
-        final List<WorkProduct> productList = productDAO.findAll();
+        final List<WorkProduct> productList = this.productDAO.findAll();
         for (final WorkProduct product : productList) {
             System.out.println("+++++++++++++++++++++++++++++++++++++++");
             System.out.println(product.getMetadata());
-            final List<WorkProduct> products = productDAO.findAllClosedVersionOfProduct(product.getProductID());
+            final List<WorkProduct> products = this.productDAO.findAllClosedVersionOfProduct(product.getProductID());
             for (final WorkProduct p : products) {
                 System.out.println("----- closed version: " + p.getMetadata() + "\n-----");
             }
@@ -48,7 +48,7 @@ public class WorkProductDAOTest {
     public void testFindByInterestGroup() {
 
         final String igID = "IG-9f1d846c-6f3f-40e3-96ef-1dd12ab75103";
-        final List<WorkProduct> productList = productDAO.findByInterestGroup(igID);
+        final List<WorkProduct> productList = this.productDAO.findByInterestGroup(igID);
         for (final WorkProduct product : productList) {
             System.out.println(product.getMetadata());
         }
@@ -58,7 +58,7 @@ public class WorkProductDAOTest {
     public void testFindByProductType() {
 
         final String productType = "Incident";
-        final List<WorkProduct> products = productDAO.findByProductType(productType);
+        final List<WorkProduct> products = this.productDAO.findByProductType(productType);
         for (final WorkProduct product : products) {
             System.out.println("findByProductType(" + productType + "): " + product.getMetadata());
         }
@@ -93,7 +93,7 @@ public class WorkProductDAOTest {
             "rss",
             ""
         });
-        final Document doc = productDAO.findDocsBySearchCriteria(params);
+        final Document doc = this.productDAO.findDocsBySearchCriteria(params);
         if (doc != null) {
             System.out.println("Found:\n" + XmlUtil.getDOMString(doc));
         }

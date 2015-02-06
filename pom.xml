@@ -14,58 +14,30 @@
     <version>${infra-services.version}</version>
     <name>xChangeCore's Infrastructure's Services</name>
 
-    <profiles>
-
-        <profile>
-            <id>mysql</id>
-            <properties>
-                <data.source>mysql</data.source>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>mysql</groupId>
-                    <artifactId>mysql-connector-java</artifactId>
-                    <version>5.1.34</version>
-                </dependency>
-            </dependencies>
-        </profile>
-
-        <profile>
-            <id>mssql</id>
-            <dependencies>
-                <dependency>
-                    <groupId>net.sourceforge.jtds</groupId>
-                    <artifactId>jtds</artifactId>
-                    <version>1.2</version>
-                </dependency>
-                <dependency>
-                    <groupId>com.microsoft.sqlserver</groupId>
-                    <artifactId>sqljdbc</artifactId>
-                    <version>4.1</version>
-                </dependency>
-            </dependencies>
-        </profile>
-
-    </profiles>
-
-    <!-- this section filtered the proper core.properties to be used -->
+    <!-- this section will copy the proper core.properties to be used -->
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources/META-INF</directory>
-                <targetPath>META-INF</targetPath>
-            </resource>
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/main/resources/contexts</directory>
-                <targetPath>contexts</targetPath>
-            </resource>
-            <resource>
-                <filtering>true</filtering>
-                <directory>src/main/resources/datastore/${data.source}</directory>
-                <targetPath>contexts</targetPath>
-            </resource>
-        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-core_properties</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>src/main/resources/contexts</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/datastore/${data.source}</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 
     <dependencies>
