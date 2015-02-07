@@ -331,7 +331,7 @@
 
     <!-- RuleEngine -->
     <bean id="ruleEngine" class="com.leidos.xchangecore.core.infrastructure.rule.RuleEngine">
-        <property name="rulesFile" value="${install.home.dir}/ServerApps/uicds/config/rules.xml" />
+        <property name="rulesFile" value="${install.dir}/config/rules.xml" />
     </bean>
     <!-- -->
     <!-- Scheduled Tasks (temp cleanup, etc) -->
@@ -431,7 +431,7 @@
     </bean>
     <bean id="configurationService" class="com.leidos.xchangecore.core.infrastructure.service.impl.ConfigurationServiceImpl">
         <property name="coreJID">
-            <value>uicds@${xmpp.fqdn}</value>
+            <value>${xmpp.core.username}@${xmpp.fqdn}</value>
         </property>
         <property name="directoryService" ref="directoryService" />
     </bean>
