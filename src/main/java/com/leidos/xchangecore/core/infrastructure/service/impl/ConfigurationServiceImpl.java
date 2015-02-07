@@ -24,13 +24,13 @@ public class ConfigurationServiceImpl
     Logger logger = LoggerFactory.getLogger(ConfigurationServiceImpl.class);
 
     /** The Constant serviceUrnPrefix. */
-    static final String serviceUrnPrefix = "urn:uicds:service:";
+    static final String serviceUrnPrefix = "urn:xchangecore:service:";
 
     /** The base url. */
-    private static String baseURL = "https://localhost/uicds/core/ws/services";
+    private static String baseURL = "https://localhost/xchangecore/core/ws/service";
 
     /** The rest base url. */
-    private static String restBaseURL = "https://localhost/uicds/api/";
+    private static String restBaseURL = "https://localhost/xchangecore/api/";
 
     /** The configuration data */
     private XmlObject config;
@@ -40,7 +40,7 @@ public class ConfigurationServiceImpl
 
     // set to a default value for the JUnit test
     /** The core name. */
-    private String coreName = "uicds@localhost";
+    private String coreName = "xchangecore@localhost";
 
     private DirectoryService directoryService;
 
