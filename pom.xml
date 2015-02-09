@@ -14,31 +14,39 @@
     <version>${infra-services.version}</version>
     <name>xChangeCore's Infrastructure's Services</name>
 
-    <!-- this section will copy the proper core.properties to be used -->
+        <!-- this section will copy the proper core.properties to be used
     <build>
-        <plugins>
+        <resources>
+            <resource>
+                <filtering>true</filtering>
+                <directory>src/main/resources/contexts</directory>
+                <targetPath>contexts</targetPath>
+            </resource>
+        </resources>
+            <plugins>
             <plugin>
-                <artifactId>maven-resources-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>copy-core_properties</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>copy-resources</goal>
-                        </goals>
-                        <configuration>
-                            <outputDirectory>src/main/resources/contexts</outputDirectory>
-                            <resources>
-                                <resource>
-                                    <directory>src/main/resources/datastore/${data.source}</directory>
-                                </resource>
-                            </resources>
-                        </configuration>
-                    </execution>
-                </executions>
+            <artifactId>maven-resources-plugin</artifactId>
+            <executions>
+            <execution>
+            <id>copy-core_properties</id>
+            <phase>process-resources</phase>
+            <goals>
+            <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+            <outputDirectory>src/main/resources/contexts</outputDirectory>
+            <resources>
+            <resource>
+            <directory>src/main/resources/datastore/${data.source}</directory>
+            </resource>
+            </resources>
+            </configuration>
+            </execution>
+            </executions>
             </plugin>
-        </plugins>
+            </plugins>
     </build>
+        -->
 
     <dependencies>
 
