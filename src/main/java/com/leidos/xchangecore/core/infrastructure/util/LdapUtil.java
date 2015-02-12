@@ -28,17 +28,17 @@ import org.slf4j.LoggerFactory;
 public class LdapUtil {
 
     private static Logger logger = LoggerFactory.getLogger(LdapUtil.class);
+
     private static Hashtable<String, String> env = new Hashtable<String, String>();
 
-    public static String GroupName_UICDS_USERS = "uicds-users";
-
+    public static String GroupName_USERS = "users";
     // ldap connection parameters
     private static String S_SecurityPrincipal = "cn=\"Directory Manager\"";
+
     private static String S_ConnectionUrl = "ldap://localhost:389/dc=uicds,dc=us";
 
     // some useful regex
     private static Pattern commonNamePattern = Pattern.compile("cn=([^,]+)");
-
     static {
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
 
@@ -49,6 +49,8 @@ public class LdapUtil {
         env.put(Context.SECURITY_PRINCIPAL, S_SecurityPrincipal);
     }
 
+    private String ldapDomain;
+
     public LdapUtil() {
 
     }
@@ -58,8 +60,7 @@ public class LdapUtil {
         logger.debug("getCNLocation: Looking up lat/lon for cn=" + cn);
 
         String[] locationArray = new String[] {
-            "",
-            ""
+            "", ""
         };
 
         try {
@@ -71,8 +72,7 @@ public class LdapUtil {
             SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             String[] attrsFilter = {
-                "geoLatitude",
-                "geoLongitude"
+                "geoLatitude", "geoLongitude"
             };
             searchControls.setReturningAttributes(attrsFilter);
 
@@ -107,7 +107,9 @@ public class LdapUtil {
         return locationArray;
     }
 
-    public ArrayList<String> getGroupMembers(String group) {
+    public ArrayList<String> getGroupMembers(String groupName) {
+
+        String group = getLdapDomain() + "-" + groupName;
 
         logger.debug("Looking up members of group: " + group);
 
@@ -152,9 +154,14 @@ public class LdapUtil {
 
     }
 
+    public String getLdapDomain() {
+
+        return ldapDomain;
+    }
+
     public List<String> getMembersForUicdsUsersGroup() {
 
-        return getGroupMembers(GroupName_UICDS_USERS);
+        return getGroupMembers(GroupName_USERS);
     }
 
     public Boolean groupContainsMember(String group, String member) {
@@ -205,6 +212,11 @@ public class LdapUtil {
             logger.error("groupContainsMember: " + e.getMessage());
             return false;
         }
+    }
+
+    public void setLdapDomain(String ldapDomain) {
+
+        this.ldapDomain = ldapDomain;
     }
 
     public void setPassword(String password) {

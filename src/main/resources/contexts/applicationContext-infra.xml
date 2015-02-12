@@ -147,10 +147,10 @@
         ref="searchService" method="systemInitializedHandler" />
     <integration:service-activator input-channel="systemInitializedChannel"
         ref="notificationsService" method="systemInitializedHandler" />
-        <!-- 
-    <integration:service-activator input-channel="systemInitializedChannel"
+    <!--
+        <integration:service-activator input-channel="systemInitializedChannel"
         ref="loggingService" method="systemInitializedHandler" />
-         -->
+    -->
     <integration:service-activator input-channel="systemInitializedChannel"
         ref="agreementService" method="systemInitializedHandler" />
     <integration:service-activator input-channel="systemInitializedChannel"
@@ -203,7 +203,9 @@
         <property name="password">
             <value>${ldap.password}</value>
         </property>
-
+        <property name="ldapDomain">
+            <value>${ldap.domain}</value>
+        </property>
     </bean>
 
     <bean id="workProductDAO" class="com.leidos.xchangecore.core.infrastructure.dao.hb.WorkProductDAOHibernate">
@@ -462,7 +464,7 @@
         <property name="interestGroupManagementComponent" ref="interestGroupManagementComponent" />
     </bean>
     <!-- DDH
-    <bean id="loggingService" class="com.leidos.xchangecore.core.infrastructure.service.impl.LoggingServiceImpl">
+        <bean id="loggingService" class="com.leidos.xchangecore.core.infrastructure.service.impl.LoggingServiceImpl">
         <property name="dao" ref="loggerDAO" />
         <property name="directoryService" ref="directoryService" />
         <property name="communicationsService" ref="communicationsService" />
@@ -471,76 +473,76 @@
         <property name="eacUsersFile" value="%INSTALL_HOME%/ServerApps/uicds/config/eac_users.ini" />
 
         <property name="loggers">
-            <map>
-                <entry>
-                    <key>
-                        <value>exist</value>
-                    </key>
-                    <ref bean="existLogMonitor" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>opends</value>
-                    </key>
-                    <ref bean="opendsLogMonitor" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>tomcat</value>
-                    </key>
-                    <ref bean="tomcatLogMonitor" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>uicds</value>
-                    </key>
-                    <ref bean="uicdsLogMonitor" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>openfire</value>
-                    </key>
-                    <ref bean="openfireLogMonitor" />
-                </entry>
-            </map>
+        <map>
+        <entry>
+        <key>
+        <value>exist</value>
+        </key>
+        <ref bean="existLogMonitor" />
+        </entry>
+        <entry>
+        <key>
+        <value>opends</value>
+        </key>
+        <ref bean="opendsLogMonitor" />
+        </entry>
+        <entry>
+        <key>
+        <value>tomcat</value>
+        </key>
+        <ref bean="tomcatLogMonitor" />
+        </entry>
+        <entry>
+        <key>
+        <value>uicds</value>
+        </key>
+        <ref bean="uicdsLogMonitor" />
+        </entry>
+        <entry>
+        <key>
+        <value>openfire</value>
+        </key>
+        <ref bean="openfireLogMonitor" />
+        </entry>
+        </map>
         </property>
         <property name="componentStatusMap">
-            <map>
-                <entry>
-                    <key>
-                        <value>exist</value>
-                    </key>
-                    <ref bean="existStatus" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>opends</value>
-                    </key>
-                    <ref bean="opendsStatus" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>openfire</value>
-                    </key>
-                    <ref bean="openfireStatus" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>tomcat</value>
-                    </key>
-                    <ref bean="tomcatStatus" />
-                </entry>
-                <entry>
-                    <key>
-                        <value>uicds</value>
-                    </key>
-                    <ref bean="uicdsStatus" />
-                </entry>
-            </map>
+        <map>
+        <entry>
+        <key>
+        <value>exist</value>
+        </key>
+        <ref bean="existStatus" />
+        </entry>
+        <entry>
+        <key>
+        <value>opends</value>
+        </key>
+        <ref bean="opendsStatus" />
+        </entry>
+        <entry>
+        <key>
+        <value>openfire</value>
+        </key>
+        <ref bean="openfireStatus" />
+        </entry>
+        <entry>
+        <key>
+        <value>tomcat</value>
+        </key>
+        <ref bean="tomcatStatus" />
+        </entry>
+        <entry>
+        <key>
+        <value>uicds</value>
+        </key>
+        <ref bean="uicdsStatus" />
+        </entry>
+        </map>
         </property>
-    </bean>
-     -->
-     
+        </bean>
+    -->
+
     <bean id="resourceProfileService"
         class="com.leidos.xchangecore.core.infrastructure.service.impl.ResourceProfileServiceImpl">
         <property name="workProductService" ref="workProductService" />
