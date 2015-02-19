@@ -35,7 +35,7 @@ public class LdapUtil {
     // ldap connection parameters
     private static String S_SecurityPrincipal = "cn=\"Directory Manager\"";
 
-    private static String S_ConnectionUrl = "ldap://localhost:389/dc=uicds,dc=us";
+    private static String S_ConnectionUrl = "ldap://localhost:389/dc=domain,dc=us";
 
     // some useful regex
     private static Pattern commonNamePattern = Pattern.compile("cn=([^,]+)");
@@ -43,7 +43,7 @@ public class LdapUtil {
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
 
         // intialize connection string
-        env.put(Context.PROVIDER_URL, S_ConnectionUrl);
+        // env.put(Context.PROVIDER_URL, S_ConnectionUrl);
 
         // initialize lookup access (default Directory Manager)
         env.put(Context.SECURITY_PRINCIPAL, S_SecurityPrincipal);
@@ -217,6 +217,9 @@ public class LdapUtil {
     public void setLdapDomain(String ldapDomain) {
 
         this.ldapDomain = ldapDomain;
+        S_ConnectionUrl = S_ConnectionUrl.replaceAll("domain", ldapDomain);
+        env.put(Context.PROVIDER_URL, S_ConnectionUrl);
+        logger.debug("setLdapDomain: " + S_ConnectionUrl);
     }
 
     public void setPassword(String password) {
