@@ -35,8 +35,8 @@ import com.vividsolutions.jts.geom.Polygon;
 
 @Transactional
 public class WorkProductDAOHibernate
-    extends GenericHibernateDAO<WorkProduct, Integer>
-    implements WorkProductDAO, WorkProductConstants {
+extends GenericHibernateDAO<WorkProduct, Integer>
+implements WorkProductDAO, WorkProductConstants {
 
     private final static Logger logger = LoggerFactory.getLogger(WorkProductDAOHibernate.class);
 
@@ -78,7 +78,7 @@ public class WorkProductDAOHibernate
 
         final List<WorkProduct> productList = this.findUniquProductList(isAscending ? SortByLastUpdated_Asc : SortByLastUpdated_Desc);
         logger.debug("findAll: " + (isAscending ? Order_Asc : Order_Desc) + ", found " +
-                     (productList == null ? 0 : productList.size()) + " entries");
+            (productList == null ? 0 : productList.size()) + " entries");
         return productList == null ? new ArrayList<WorkProduct>() : productList;
     }
 
@@ -119,7 +119,7 @@ public class WorkProductDAOHibernate
         logger.debug("findByInterestGroup: IGID: " + interestGroupID);
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.like(C_AssociatedInterestGroupIDs, "%" + interestGroupID +
-                                                                          "%"));
+            "%"));
         final List<Order> orderList = new ArrayList<Order>();
         orderList.add(SortByProductID_Desc);
         orderList.add(SortByVersion_Desc);
@@ -148,7 +148,7 @@ public class WorkProductDAOHibernate
     public List<WorkProduct> findByInterestGroupAndType(String interestGroupID, String productType) {
 
         logger.debug("findByInterestGroupAndType: IGID: " + interestGroupID + ", ProductType: " +
-                     productType);
+            productType);
         final List<WorkProduct> productList = this.findUniquProductList(null,
             Restrictions.eq(C_ProductType, productType));
         final List<WorkProduct> products = new ArrayList<WorkProduct>();
@@ -174,7 +174,7 @@ public class WorkProductDAOHibernate
         final List<WorkProduct> productList = this.findByCriteriaAndOrder(0, orders, criterions);
 
         logger.debug("findByProductID: " + productID + ", found " +
-                     (productList == null ? 0 : productList.size()) + " entries");
+            (productList == null ? 0 : productList.size()) + " entries");
         if ((productList == null) || (productList.size() == 0)) {
             return null;
         }
@@ -186,7 +186,7 @@ public class WorkProductDAOHibernate
     public WorkProduct findByProductIDAndVersion(String productID, Integer productVersion) {
 
         logger.debug("findByProductID: ProductID: " + productID + ", ProductVersion: " +
-                     productVersion);
+            productVersion);
 
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.eq(C_ProductID, productID));
@@ -211,7 +211,7 @@ public class WorkProductDAOHibernate
         final List<WorkProduct> productList = this.findUniquProductList(null,
             Restrictions.eq(C_ProductType, productType));
         logger.debug("findByProductType: " + productType + ", found " +
-                     (productList != null ? productList.size() : 0) + " entries");
+            (productList != null ? productList.size() : 0) + " entries");
 
         return productList;
     }
@@ -228,11 +228,11 @@ public class WorkProductDAOHibernate
     public WorkProduct findByWorkProductIdentification(IdentificationType pkgId) {
 
         logger.debug("findByWorkProductIdentification: productID: " +
-                     pkgId.getIdentifier().getStringValue() + ", productType: " +
-                     pkgId.getType().getStringValue() + ", productVersion: " +
-                     pkgId.getVersion().getStringValue() + ", checksum: " +
-                     pkgId.getChecksum().getStringValue() + ", state: " +
-                     pkgId.getState().toString());
+            pkgId.getIdentifier().getStringValue() + ", productType: " +
+            pkgId.getType().getStringValue() + ", productVersion: " +
+            pkgId.getVersion().getStringValue() + ", checksum: " +
+            pkgId.getChecksum().getStringValue() + ", state: " +
+            pkgId.getState().toString());
         final Criterion c1 = Restrictions.eq(C_ProductID, pkgId.getIdentifier().getStringValue());
         final Criterion c2 = Restrictions.eq(C_Checksum, pkgId.getChecksum().getStringValue());
         final Criterion c3 = Restrictions.eq(C_ProductType, pkgId.getType().getStringValue());
@@ -253,8 +253,6 @@ public class WorkProductDAOHibernate
             logger.error("No user specfied");
             return null;
         }
-
-        logger.debug("findDocsBySearchCriteria: for " + username);
 
         // only find active product
         // c.add(Criterion_State_Active);
@@ -279,17 +277,19 @@ public class WorkProductDAOHibernate
         }
         productList = new ArrayList<WorkProduct>(productSet.values());
 
-        logger.debug("findDocsBySearchCriteria: found " + productList.size() + " entries");
-        if (productList.size() == 0) {
-            return null;
-        }
-
         try {
             final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             final DocumentBuilder builder = factory.newDocumentBuilder();
             final Document doc = builder.newDocument();
             final Element results = doc.createElement(N_WorkProductList);
             doc.appendChild(results);
+
+            logger.debug("findDocsBySearchCriteria: for: " + username + ": found: " +
+                         productList.size() + " entries");
+
+            if (productList.size() == 0) {
+                return doc;
+            }
 
             int cnt = 0;
             for (final WorkProduct product : productList) {
@@ -328,12 +328,12 @@ public class WorkProductDAOHibernate
 
                 final Node node = doc.importNode(productDocument.getDomNode(), true);
                 results.appendChild(node);
-
                 if ((queryBuilder.getCount() != -1) && (queryBuilder.getCount() == ++cnt)) {
                     break;
                 }
             }
 
+            // logger.debug("Document:\n" + XmlUtil.Document2String(doc) + "\n");
             return doc;
         } catch (final Exception e) {
             e.printStackTrace();

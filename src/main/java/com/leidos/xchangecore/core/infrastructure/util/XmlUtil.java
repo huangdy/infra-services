@@ -1,11 +1,16 @@
 package com.leidos.xchangecore.core.infrastructure.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 
 import javax.xml.namespace.QName;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -18,22 +23,34 @@ import org.w3c.dom.Document;
 
 public class XmlUtil {
 
-    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint().setLoadStripWhitespace();
+    public static String Document2String(Document doc) throws IOException, TransformerException {
 
-    public static final XmlOptions innerOnly = new XmlOptions().setSavePrettyPrint().setSaveInner();
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        final TransformerFactory tf = TransformerFactory.newInstance();
+        final Transformer transformer = tf.newTransformer();
+        transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+        transformer.setOutputProperty(OutputKeys.METHOD, "xml");
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+        transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+
+        transformer.transform(new DOMSource(doc), new StreamResult(new OutputStreamWriter(baos,
+            "UTF-8")));
+        return baos.toString("UTF-8");
+    }
 
     public static String getDOMString(Document doc) {
 
         String s = null;
-        TransformerFactory tfactory = TransformerFactory.newInstance();
+        final TransformerFactory tfactory = TransformerFactory.newInstance();
         try {
-            Transformer xform = tfactory.newTransformer();
-            Source src = new DOMSource(doc);
-            StringWriter writer = new StringWriter();
-            Result result = new StreamResult(writer);
+            final Transformer xform = tfactory.newTransformer();
+            final Source src = new DOMSource(doc);
+            final StringWriter writer = new StringWriter();
+            final Result result = new StreamResult(writer);
             xform.transform(src, result);
             s = writer.toString();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
@@ -42,8 +59,8 @@ public class XmlUtil {
 
     public static String getTextFromAny(XmlObject object) {
 
-        XmlCursor c = object.newCursor();
-        String text = c.getTextValue();
+        final XmlCursor c = object.newCursor();
+        final String text = c.getTextValue();
         c.dispose();
         return text;
     }
@@ -54,11 +71,15 @@ public class XmlUtil {
                                         SchemaType subSchemaType,
                                         XmlObject theObject) {
 
-        XmlObject subObject = parentObject.substitute(new QName(subNamespace, subTypeName),
+        final XmlObject subObject = parentObject.substitute(new QName(subNamespace, subTypeName),
             subSchemaType);
         if (subObject != parentObject) {
             subObject.set(theObject);
         }
     }
+
+    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint().setLoadStripWhitespace();
+
+    public static final XmlOptions innerOnly = new XmlOptions().setSavePrettyPrint().setSaveInner();
 
 }

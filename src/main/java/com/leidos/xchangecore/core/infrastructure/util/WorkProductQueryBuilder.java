@@ -32,7 +32,7 @@ public class WorkProductQueryBuilder
 
     public static HashMap<String, String[]> paramMap;
 
-    private Double[][] boundingBox = new Double[5][2];
+    private Double[][] boundingBox = null;
     private final List<Criterion> criterionList = new ArrayList<Criterion>();
     private Order order = Order.desc(C_UpdatedDate);
     private String username = null;
@@ -123,7 +123,9 @@ public class WorkProductQueryBuilder
                 final Double west = Double.valueOf(coordArray[1]);
                 final Double north = Double.valueOf(coordArray[2]);
                 final Double east = Double.valueOf(coordArray[3]);
+
                 // the boundingBox will be used by vividsolution as the format of (x, y)
+                this.boundingBox = new Double[5][2];
                 this.boundingBox[0][0] = west;
                 this.boundingBox[0][1] = south;
                 this.boundingBox[1][0] = west;
