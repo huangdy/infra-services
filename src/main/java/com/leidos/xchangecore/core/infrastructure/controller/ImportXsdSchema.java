@@ -40,9 +40,16 @@ public class ImportXsdSchema
 
     }
 
-    public XmlValidator createValidator() throws IOException {
+    @Override
+    public XmlValidator createValidator() {
 
-        return XmlValidatorFactory.createValidator(xsdResource, XmlValidatorFactory.SCHEMA_W3C_XML);
+        try {
+            return XmlValidatorFactory.createValidator(xsdResource,
+                XmlValidatorFactory.SCHEMA_W3C_XML);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public String getSchemaLocation() {
@@ -50,6 +57,7 @@ public class ImportXsdSchema
         return schemaLocation;
     }
 
+    @Override
     public Source getSource() {
 
         DOMSource result = new DOMSource();
@@ -73,6 +81,7 @@ public class ImportXsdSchema
         return result;
     }
 
+    @Override
     public String getTargetNamespace() {
 
         return targetNamespace;

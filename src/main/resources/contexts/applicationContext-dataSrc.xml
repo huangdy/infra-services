@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
 
     <import resource="CoreProperties.xml" />
     <import resource="dataSource.xml" />
@@ -26,7 +26,6 @@
     <!-- ENTITY MANAGER FACTORY -->
     <!-- -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <!-- <property name="persistenceUnitName" value="services-test" /> -->
         <property name="persistenceUnitManager" ref="persistenceUnitManager" />
         <property name="dataSource" ref="dataSource" />
         <property name="jpaVendorAdapter" ref="hibernateAdapter" />

@@ -10,8 +10,8 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.hibernate.HibernateException;
-import org.hibernate.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,7 +46,7 @@ import com.leidos.xchangecore.core.infrastructure.service.WorkProductService;
  *
  */
 public class PubSubServiceImpl
-    implements PubSubService {
+implements PubSubService {
 
     private final Logger logger = LoggerFactory.getLogger(PubSubServiceImpl.class);
 
@@ -83,7 +83,7 @@ public class PubSubServiceImpl
     @Override
     public void addAgreementListener(Integer agreementID,
                                      NotificationListener<AgreementRosterMessage> listener)
-        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
+                                         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         logger.debug("addAgreementListener: agreementID: " + agreementID);
         NotificationListenerCollection<AgreementRosterMessage> list = agreementListeners.get(agreementID);
@@ -111,7 +111,7 @@ public class PubSubServiceImpl
     @Override
     public void addProfileListener(String profileID,
                                    NotificationListener<ProfileNotificationMessage> listener)
-        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
+                                       throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         NotificationListenerCollection<ProfileNotificationMessage> list = profileListeners.get(profileID);
         if (list == null) {
@@ -163,21 +163,21 @@ public class PubSubServiceImpl
     public void deleteWorkProduct(ProductChangeNotificationMessage changedMessage) {
 
         logger.debug("deleteWorkProduct: prodID=" + changedMessage.getProductID() + " prodType=" +
-                     changedMessage.getType());
+            changedMessage.getType());
 
         // Get a list of subscriptions by ID from the DAO and notify all subscribers
         List<ProductSubscriptionByID> subscriptionsByID = productSubscriptionByIDDAO.findByProductID(changedMessage.getProductID());
 
         if (logger.isDebugEnabled()) {
             logger.debug("deleteWorkProduct: looking for subscriptionById - found " +
-                         subscriptionsByID.size());
+                subscriptionsByID.size());
         }
 
         for (ProductSubscriptionByID subscription : subscriptionsByID) {
 
             if (logger.isDebugEnabled()) {
                 logger.debug("deleteWorkProduct: getting subscriptionByID data for subscriber: " +
-                             subscription.getSubscriberName());
+                    subscription.getSubscriberName());
             }
 
             PubSubNotificationService service = subscriberMap.get(subscription.getSubscriberName());
@@ -185,9 +185,9 @@ public class PubSubServiceImpl
             // but never hurts to check first before using it
             if (service != null) {
                 logger.debug("deleteWorkProduct: notifying by ID subscriber " +
-                             service.getServiceName() + " interface=" + service + "prodId=" +
-                             changedMessage.getProductID() + " subID=" +
-                             subscription.getSubscriptionId());
+                    service.getServiceName() + " interface=" + service + "prodId=" +
+                    changedMessage.getProductID() + " subID=" +
+                    subscription.getSubscriptionId());
                 service.workProductDeleted(changedMessage, subscription.getSubscriptionId());
             }
 
@@ -200,20 +200,20 @@ public class PubSubServiceImpl
 
         if (logger.isDebugEnabled()) {
             logger.debug("deleteWorkProduct: looking for subscriptionByType - found " +
-                         subscriptionsByType.size());
+                subscriptionsByType.size());
         }
 
         for (ProductSubscriptionByType subscription : subscriptionsByType) {
 
             if (logger.isDebugEnabled()) {
                 logger.debug("deleteWorkProduct: getting subscriptionByType data for subscriber: " +
-                             subscription.getSubscriberName());
+                    subscription.getSubscriberName());
             }
 
             PubSubNotificationService service = subscriberMap.get(subscription.getSubscriberName());
 
             logger.debug("serviceName=" + subscription.getSubscriberName() + " interface=" +
-                         service);
+                service);
 
             // shouldn't be null here since it was checked when we added it to the map
             // but never hurts to check first before using it
@@ -225,25 +225,25 @@ public class PubSubServiceImpl
                 if (subscription.getXPath() == null || subscription.getXPath().isEmpty() ||
                     subscription.getNamespaceMap() == null) {
                     logger.debug("deleteWorkProduct: notifying by Type subscriber " +
-                                 service.getServiceName() + " interface=" + service + " prodId=" +
-                                 changedMessage.getProductID() + " subID=" +
-                                 subscription.getSubscriptionId());
+                        service.getServiceName() + " interface=" + service + " prodId=" +
+                        changedMessage.getProductID() + " subID=" +
+                        subscription.getSubscriptionId());
 
                     try {
                         service.workProductDeleted(changedMessage, subscription.getSubscriptionId());
                     } catch (HibernateException e) {
                         logger.error("deleteWorkProduct HibernateException notifying of delete: " +
-                                     e.getMessage());
+                            e.getMessage());
                         logger.error("Exception type:" + e.getClass().getName());
                         logger.error(ExceptionUtils.getFullStackTrace(e));
                     } catch (Exception e) {
                         logger.error("deleteWorkProduct Exception notifying of delete: " +
-                                     e.getMessage());
+                            e.getMessage());
                         logger.error("Exception type:" + e.getClass().getName());
                         logger.error(ExceptionUtils.getFullStackTrace(e));
                     } catch (Throwable e) {
                         logger.error("deleteWorkProduct Throwable notifying of delete: " +
-                                     e.getMessage());
+                            e.getMessage());
                     }
                 } else {
                     try {
@@ -251,29 +251,29 @@ public class PubSubServiceImpl
                             subscription.getXPath(),
                             subscription.getNamespaceMap())) {
                             logger.debug("===****===> deleteWorkProduct: notifying by Type subscriber " +
-                                         service.getServiceName() +
-                                         " interface=" +
-                                         service +
-                                         " prodId=" +
-                                         changedMessage.getProductID() +
-                                         " subID=" +
-                                         subscription.getSubscriptionId());
+                                service.getServiceName() +
+                                " interface=" +
+                                service +
+                                " prodId=" +
+                                changedMessage.getProductID() +
+                                " subID=" +
+                                subscription.getSubscriptionId());
                             try {
                                 service.workProductDeleted(changedMessage,
                                     subscription.getSubscriptionId());
                             } catch (HibernateException e) {
                                 logger.error("deleteWorkProduct HibernateException notifying of delete: " +
-                                             e.getMessage());
+                                    e.getMessage());
                                 logger.error("Exception type:" + e.getClass().getName());
                                 logger.error(ExceptionUtils.getFullStackTrace(e));
                             } catch (Exception e) {
                                 logger.error("deleteWorkProduct Exception notifying of delete: " +
-                                             e.getMessage());
+                                    e.getMessage());
                                 logger.error("Exception type:" + e.getClass().getName());
                                 logger.error(ExceptionUtils.getFullStackTrace(e));
                             } catch (Throwable e) {
                                 logger.error("deleteWorkProduct Throwable notifying of delete: " +
-                                             e.getMessage());
+                                    e.getMessage());
                             }
                         }
                     } catch (InvalidXpathException e) {
@@ -353,7 +353,7 @@ public class PubSubServiceImpl
                     bValid = true;
                 } else {
                     logger.debug("isInterestGroupCompliant: Failed-  workProduct is not associated with incidentID: " +
-                                 subscriptionInterestGroupID);
+                        subscriptionInterestGroupID);
                 }
             }
         }
@@ -387,7 +387,7 @@ public class PubSubServiceImpl
                 // add message.getProductID() to base topicName if message.getType()!=null (i.e
                 // alert/*)
                 logger.debug("newCurrentMessage: " + message.getType() + "/*" + ", " +
-                             message.getProductID());
+                    message.getProductID());
                 mapCurrentMessages.put(new String(message.getType() + "/*").toLowerCase(),
                     message.getProductID());
 
@@ -399,7 +399,7 @@ public class PubSubServiceImpl
                     // add message.getProductID() to incident/* subtopic if incident (i.e.
                     // <message.getType()>/incident/*)
                     logger.debug("newCurrentMessage: " + message.getType() + "/*" + ", " +
-                                 message.getProductID());
+                        message.getProductID());
                     mapCurrentMessages.put(new String(message.getType() + "/incident/*").toLowerCase(),
                         message.getProductID());
                     topicName = message.getType() + "/incident/" + message.getInterestGroupID();
@@ -434,14 +434,14 @@ public class PubSubServiceImpl
         }
 
         ProductSubscriptionByType subscription = new ProductSubscriptionByType(workProductType,
-                                                                               interestGroupID,
-                                                                               xPath,
-                                                                               subscriber.getServiceName(),
-                                                                               subscriptionId,
-                                                                               namespaces);
+            interestGroupID,
+            xPath,
+            subscriber.getServiceName(),
+            subscriptionId,
+            namespaces);
         logger.debug("persistProductSubscriptionByType: PERSIST: Type: " + workProductType +
-                     ", SubscriptionId: " + subscriptionId + ", Subscriber: " +
-                     subscriber.getServiceName());
+            ", SubscriptionId: " + subscriptionId + ", Subscriber: " +
+                subscriber.getServiceName());
         productSubscriptionByTypeDAO.makePersistent(subscription);
 
         return subscriptionId;
@@ -459,7 +459,7 @@ public class PubSubServiceImpl
     public void productChangeNotificationHandler(ProductChangeNotificationMessage message) {
 
         logger.debug("productChangeNotificationHandler: Receive productChangeNotification for wp ID: " +
-                     message.getProductID() + " changeIndicator=" + message.getChangeIndicator());
+            message.getProductID() + " changeIndicator=" + message.getChangeIndicator());
 
         if (message.getChangeIndicator() == ProductChangeNotificationMessage.ChangeIndicator.Publish) {
 
@@ -483,10 +483,10 @@ public class PubSubServiceImpl
             deleteWorkProduct(message);
         } else {
             logger.error("productChangeNotificationHandler: unkown change indicator ind=" +
-                         message.getChangeIndicator());
+                message.getChangeIndicator());
         }
         logger.debug("productChangeNotificationHandler: Receive productChangeNotification for wp ID: " +
-                     message.getProductID() + " ... done ...");
+            message.getProductID() + " ... done ...");
     }
 
     /**
@@ -529,21 +529,21 @@ public class PubSubServiceImpl
     public void publishWorkProduct(ProductChangeNotificationMessage message) {
 
         logger.debug("publishWorkProduct: prodID=" + message.getProductID() + " prodType=" +
-                     message.getType() + " interestGroupID=" + message.getInterestGroupID());
+            message.getType() + " interestGroupID=" + message.getInterestGroupID());
 
         // Get a list of subscriptions by ID from the DAO and notify all subscribers
         List<ProductSubscriptionByID> subscriptionsByID = productSubscriptionByIDDAO.findByProductID(message.getProductID());
 
         if (logger.isDebugEnabled()) {
             logger.debug("publishWorkProduct: looking for subscriptionById - found " +
-                         subscriptionsByID.size());
+                subscriptionsByID.size());
         }
 
         for (ProductSubscriptionByID subscription : subscriptionsByID) {
 
             if (logger.isDebugEnabled()) {
                 logger.debug("publishWorkProduct: getting subscriptionByID data for subscriber: " +
-                             subscription.getSubscriberName());
+                    subscription.getSubscriberName());
             }
 
             PubSubNotificationService service = subscriberMap.get(subscription.getSubscriberName());
@@ -551,24 +551,24 @@ public class PubSubServiceImpl
             // but never hurts to check first before using it
             if (service != null) {
                 logger.debug("publishWorkProduct: notifying by ID subscriber " +
-                             service.getServiceName() + " interface=" + service + "prodId=" +
-                             message.getProductID() + " subID=" + subscription.getSubscriptionId());
+                    service.getServiceName() + " interface=" + service + "prodId=" +
+                    message.getProductID() + " subID=" + subscription.getSubscriptionId());
                 try {
                     service.newWorkProductVersion(message.getProductID(),
                         subscription.getSubscriptionId());
                 } catch (HibernateException e) {
                     logger.error("publishWorkProduct HibernateException notifying of delete: " +
-                                 e.getMessage());
+                        e.getMessage());
                     logger.error("Exception type:" + e.getClass().getName());
                     logger.error(ExceptionUtils.getFullStackTrace(e));
                 } catch (Exception e) {
                     logger.error("publishWorkProductException notifying of delete: " +
-                                 e.getMessage());
+                        e.getMessage());
                     logger.error("Exception type:" + e.getClass().getName());
                     logger.error(ExceptionUtils.getFullStackTrace(e));
                 } catch (Throwable e) {
                     logger.error("publishWorkProductThrowable notifying of delete: " +
-                                 e.getMessage());
+                        e.getMessage());
                 }
 
             }
@@ -579,7 +579,7 @@ public class PubSubServiceImpl
 
         if (logger.isDebugEnabled()) {
             logger.debug("publishWorkProduct: looking for subscriptionByType - found " +
-                         subscriptionsByType.size());
+                subscriptionsByType.size());
         }
 
         for (ProductSubscriptionByType subscription : subscriptionsByType) {
@@ -591,13 +591,13 @@ public class PubSubServiceImpl
 
                 if (logger.isDebugEnabled()) {
                     logger.debug("publishWorkProduct: getting subscriptionByType data for subscriber: " +
-                                 subscription.getSubscriberName());
+                        subscription.getSubscriberName());
                 }
 
                 PubSubNotificationService service = subscriberMap.get(subscription.getSubscriberName());
 
                 logger.debug("serviceName=" + subscription.getSubscriberName() + " interface=" +
-                             service);
+                    service);
 
                 // shouldn't be null here since it was checked when we added it to the map
                 // but never hurts to check first before using it
@@ -609,27 +609,27 @@ public class PubSubServiceImpl
                     if (subscription.getXPath() == null || subscription.getXPath().isEmpty() ||
                         subscription.getNamespacemap() == null) {
                         logger.debug("publishWorkProduct: notifying by Type subscriber " +
-                                     service.getServiceName() + " interface=" +
-                                     service.getServiceName() + " prodId=" +
-                                     message.getProductID() + " subID=" +
-                                     subscription.getSubscriptionId());
+                            service.getServiceName() + " interface=" +
+                            service.getServiceName() + " prodId=" +
+                            message.getProductID() + " subID=" +
+                            subscription.getSubscriptionId());
 
                         try {
                             service.newWorkProductVersion(message.getProductID(),
                                 subscription.getSubscriptionId());
                         } catch (HibernateException e) {
                             logger.error("publishWorkProduct HibernateException notifying of delete: " +
-                                         e.getMessage());
+                                e.getMessage());
                             logger.error("Exception type:" + e.getClass().getName());
                             logger.error(ExceptionUtils.getFullStackTrace(e));
                         } catch (Exception e) {
                             logger.error("publishWorkProductException notifying of delete: " +
-                                         e.getMessage());
+                                e.getMessage());
                             logger.error("Exception type:" + e.getClass().getName());
                             logger.error(ExceptionUtils.getFullStackTrace(e));
                         } catch (Throwable e) {
                             logger.error("publishWorkProductThrowable notifying of delete: " +
-                                         e.getMessage());
+                                e.getMessage());
                         }
                     } else {
                         try {
@@ -637,29 +637,29 @@ public class PubSubServiceImpl
                                 subscription.getXPath(),
                                 subscription.getNamespaceMap())) {
                                 logger.debug("===****===> publishWorkProduct: notifying by Type subscriber " +
-                                             service.getServiceName() +
-                                             " interface=" +
-                                             service +
-                                             " prodId=" +
-                                             message.getProductID() +
-                                             " subID=" +
-                                             subscription.getSubscriptionId());
+                                    service.getServiceName() +
+                                    " interface=" +
+                                    service +
+                                    " prodId=" +
+                                    message.getProductID() +
+                                    " subID=" +
+                                    subscription.getSubscriptionId());
                                 try {
                                     service.newWorkProductVersion(message.getProductID(),
                                         subscription.getSubscriptionId());
                                 } catch (HibernateException e) {
                                     logger.error("publishWorkProduct HibernateException notifying of delete: " +
-                                                 e.getMessage());
+                                        e.getMessage());
                                     logger.error("Exception type:" + e.getClass().getName());
                                     logger.error(ExceptionUtils.getFullStackTrace(e));
                                 } catch (Exception e) {
                                     logger.error("publishWorkProductException notifying of delete: " +
-                                                 e.getMessage());
+                                        e.getMessage());
                                     logger.error("Exception type:" + e.getClass().getName());
                                     logger.error(ExceptionUtils.getFullStackTrace(e));
                                 } catch (Throwable e) {
                                     logger.error("publishWorkProductThrowable notifying of delete: " +
-                                                 e.getMessage());
+                                        e.getMessage());
                                 }
                             }
                         } catch (InvalidXpathException e) {
@@ -712,12 +712,12 @@ public class PubSubServiceImpl
                                                               String xPath,
                                                               Map<String, String> namespaceMap,
                                                               PubSubNotificationService subscriber)
-        throws NullSubscriberException, EmptySubscriberNameException {
+                                                                  throws NullSubscriberException, EmptySubscriberNameException {
 
         if (logger.isDebugEnabled()) {
             logger.debug("subscribeInterestGroupIdAndWorkProductType: prodType=" + workProductType +
-                         " for subscriber:" + subscriber.getServiceName() + " interface:" +
-                         subscriber);
+                " for subscriber:" + subscriber.getServiceName() + " interface:" +
+                subscriber);
             if (namespaceMap != null) {
                 Set<String> keys = namespaceMap.keySet();
                 for (String key : keys) {
@@ -744,7 +744,7 @@ public class PubSubServiceImpl
         // Add the subscriber-service info to the subscriber map - overwite if one exists
         if (logger.isDebugEnabled()) {
             logger.debug("===> subscribeInterestGroupIdAndWorkProductType: adding interface for subscriber " +
-                         subscriber.getServiceName() + " interface" + subscriber + " to map!");
+                subscriber.getServiceName() + " interface" + subscriber + " to map!");
         }
         subscriberMap.put(subscriber.getServiceName(), subscriber);
 
@@ -792,7 +792,7 @@ public class PubSubServiceImpl
     private Integer subscribeProductID(String workProductID,
                                        PubSubNotificationService subscriber,
                                        boolean newVersionsOnly) throws InvalidProductIDException,
-        NullSubscriberException, EmptySubscriberNameException {
+                                       NullSubscriberException, EmptySubscriberNameException {
 
         if (logger.isDebugEnabled()) {
             logger.debug("subscribeWorkProductID: prodID=" + workProductID);
@@ -815,14 +815,14 @@ public class PubSubServiceImpl
 
         // Create and persist the new subscription
         ProductSubscriptionByID subscription = new ProductSubscriptionByID(workProductID,
-                                                                           subscriber.getServiceName(),
-                                                                           subscriptionId);
+            subscriber.getServiceName(),
+            subscriptionId);
         productSubscriptionByIDDAO.makePersistent(subscription);
 
         // Add the subscriber-service info to the subscriber map
         if (logger.isDebugEnabled()) {
             logger.debug("===> subscribeWorkProductID: adding interface " + subscriber +
-                         "  for subscriber " + subscriber.getServiceName() + " to map!");
+                "  for subscriber " + subscriber.getServiceName() + " to map!");
         }
 
         subscriberMap.put(subscriber.getServiceName(), subscriber);
@@ -833,7 +833,7 @@ public class PubSubServiceImpl
                 subscriber.newWorkProductVersion(workProductID, subscriptionId);
             } catch (HibernateException e) {
                 logger.error("subscribeProductID HibernateException notifying at subscription: " +
-                             e.getMessage());
+                    e.getMessage());
                 logger.error("Exception type:" + e.getClass().getName());
                 logger.error(ExceptionUtils.getFullStackTrace(e));
             } catch (Exception e) {
@@ -853,7 +853,7 @@ public class PubSubServiceImpl
 
         if (logger.isDebugEnabled()) {
             logger.debug("===> subscriberInterface: adding interface for subscriber " +
-                         subscriber.getServiceName() + " interface" + subscriber + " to map!");
+                subscriber.getServiceName() + " interface" + subscriber + " to map!");
         }
         subscriberMap.put(subscriber.getServiceName(), subscriber);
     }
@@ -894,7 +894,7 @@ public class PubSubServiceImpl
     @Override
     public Integer subscribeWorkProductIDNewVersions(String workProductID,
                                                      PubSubNotificationService subscriber)
-        throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
+                                                         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         return subscribeProductID(workProductID, subscriber, true);
     }
@@ -918,7 +918,7 @@ public class PubSubServiceImpl
                                             String xPath,
                                             Map<String, String> namespaceMap,
                                             PubSubNotificationService subscriber)
-        throws NullSubscriberException, EmptySubscriberNameException {
+                                                throws NullSubscriberException, EmptySubscriberNameException {
 
         return subscribeInterestGroupIdAndWorkProductType(workProductType,
             null,
@@ -946,7 +946,7 @@ public class PubSubServiceImpl
             // remove subscription from database
             if (logger.isDebugEnabled()) {
                 logger.debug("unsubscribeWorkProduct: remove subscriptionbyID subID: " +
-                             subscriptionID + " from database");
+                    subscriptionID + " from database");
             }
             productSubscriptionByIDDAO.makeTransient(subscription);
 
@@ -961,7 +961,7 @@ public class PubSubServiceImpl
             // remove subscription from database
             if (logger.isDebugEnabled()) {
                 logger.debug("unsubscribeWorkProduct: remove subscriptionbyType subID: " +
-                             subscriptionID + " from database");
+                    subscriptionID + " from database");
             }
             productSubscriptionByTypeDAO.makeTransient(subscription);
 

@@ -53,7 +53,7 @@ public class ImportPathRewriteXsdSchema
 
     /**
      * Create a new instance of the {@link SimpleXsdSchema} class with the specified resource.
-     * 
+     *
      * @param xsdResource the XSD resource; must not be <code>null</code>
      * @throws IllegalArgumentException if the supplied <code>xsdResource</code> is
      *             <code>null</code>
@@ -64,47 +64,37 @@ public class ImportPathRewriteXsdSchema
         this.xsdResource = xsdResource;
     }
 
+    @Override
     public void afterPropertiesSet() throws ParserConfigurationException, IOException, SAXException {
 
         Assert.notNull(xsdResource, "'xsd' is required");
-        Assert.isTrue(this.xsdResource.exists(), "xsd '" + this.xsdResource + "' does not exit");
+        Assert.isTrue(xsdResource.exists(), "xsd '" + xsdResource + "' does not exit");
         DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
         loadSchema(documentBuilder);
     }
 
-    public XmlValidator createValidator() throws IOException {
+    @Override
+    public XmlValidator createValidator() {
 
-        return XmlValidatorFactory.createValidator(xsdResource, XmlValidatorFactory.SCHEMA_W3C_XML);
+        try {
+            return XmlValidatorFactory.createValidator(xsdResource,
+                XmlValidatorFactory.SCHEMA_W3C_XML);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
+    @Override
     public Source getSource() {
 
         return new DOMSource(schemaElement);
     }
 
+    @Override
     public String getTargetNamespace() {
 
         return schemaElement.getAttribute("targetNamespace");
-    }
-
-    /**
-     * Set the XSD resource to be exposed by calls to this instances' {@link #getSource()} method.
-     * 
-     * @param xsdResource the XSD resource
-     */
-    public void setXsd(Resource xsdResource) {
-
-        this.xsdResource = xsdResource;
-    }
-
-    @Override
-    public String toString() {
-
-        StringBuffer buffer = new StringBuffer("SimpleXsdSchema");
-        buffer.append('{');
-        buffer.append(getTargetNamespace());
-        buffer.append('}');
-        return buffer.toString();
     }
 
     private void loadSchema(DocumentBuilder documentBuilder) throws SAXException, IOException {
@@ -135,6 +125,26 @@ public class ImportPathRewriteXsdSchema
             }
             e.setAttribute("schemaLocation", schemaLocation);
         }
+    }
+
+    /**
+     * Set the XSD resource to be exposed by calls to this instances' {@link #getSource()} method.
+     *
+     * @param xsdResource the XSD resource
+     */
+    public void setXsd(Resource xsdResource) {
+
+        this.xsdResource = xsdResource;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuffer buffer = new StringBuffer("SimpleXsdSchema");
+        buffer.append('{');
+        buffer.append(getTargetNamespace());
+        buffer.append('}');
+        return buffer.toString();
     }
 
 }
