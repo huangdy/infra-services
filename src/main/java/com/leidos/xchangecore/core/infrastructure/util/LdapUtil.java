@@ -59,24 +59,28 @@ public class LdapUtil {
 
         logger.debug("getCNLocation: Looking up lat/lon for cn=" + cn);
 
-        String[] locationArray = new String[] {
-            "", ""
+        final String[] locationArray = new String[] {
+            "",
+            ""
         };
 
         try {
             // Create initial context
-            DirContext ctx = new InitialDirContext(env);
+            final DirContext ctx = new InitialDirContext(env);
 
-            String searchFilter = "(cn=" + cn + ")";
+            final String searchFilter = "(cn=" + cn + ")";
 
-            SearchControls searchControls = new SearchControls();
+            final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            String[] attrsFilter = {
-                "geoLatitude", "geoLongitude"
+            final String[] attrsFilter = {
+                "geoLatitude",
+                "geoLongitude"
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            NamingEnumeration<SearchResult> results = ctx.search("", searchFilter, searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             SearchResult searchResult;
 
@@ -100,7 +104,7 @@ public class LdapUtil {
                          "]");
             // Close the context when we're done
             ctx.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("getCNLocation: " + e.getMessage());
         }
 
@@ -109,33 +113,35 @@ public class LdapUtil {
 
     public ArrayList<String> getGroupMembers(String groupName) {
 
-        String group = getLdapDomain() + "-" + groupName;
+        final String group = getLdapDomain() + "-" + groupName;
 
         logger.debug("Looking up members of group: " + group);
 
-        ArrayList<String> membersArray = new ArrayList<String>();
+        final ArrayList<String> membersArray = new ArrayList<String>();
 
         try {
             // Create initial context
-            DirContext ctx = new InitialDirContext(env);
+            final DirContext ctx = new InitialDirContext(env);
 
-            String searchFilter = "(cn=" + group + ")";
+            final String searchFilter = "(cn=" + group + ")";
 
-            SearchControls searchControls = new SearchControls();
+            final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
-            String[] attrsFilter = {
+            final String[] attrsFilter = {
                 "uniqueMember"
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            NamingEnumeration<SearchResult> results = ctx.search("", searchFilter, searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             SearchResult searchResult;
 
             Matcher matcher;
             while (results.hasMoreElements()) {
                 searchResult = results.nextElement();
-                Attribute members = searchResult.getAttributes().get("uniqueMember");
+                final Attribute members = searchResult.getAttributes().get("uniqueMember");
                 for (int i = 0; i < members.size(); i++) {
                     matcher = LdapUtil.commonNamePattern.matcher(members.get(i).toString());
                     if (matcher.find()) {
@@ -146,7 +152,7 @@ public class LdapUtil {
 
             // Close the context when we're done
             ctx.close();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("getGroupMembers: " + e.getMessage());
         }
 
@@ -170,15 +176,17 @@ public class LdapUtil {
 
         try {
             // Create initial context
-            DirContext ctx = new InitialDirContext(env);
+            final DirContext ctx = new InitialDirContext(env);
 
-            String searchFilter = "(&(uniqueMember=cn=" + member +
-                                  ",dc=uicds,dc=us)(objectClass=groupOfUniqueNames))";
+            final String searchFilter = "(&(uniqueMember=cn=" + member + ",dc=" + getLdapDomain() +
+                                        ",dc=us)(objectClass=groupOfUniqueNames))";
 
-            SearchControls searchControls = new SearchControls();
+            final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            NamingEnumeration<SearchResult> results = ctx.search("", searchFilter, searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             // Close the context when we're done
             ctx.close();
@@ -186,7 +194,7 @@ public class LdapUtil {
             if (results.hasMoreElements()) {
                 //9/26/2014 Tom and Andrew - add logging and conditional logic to check if results contain group passed in
                 while (results.hasMoreElements()) {
-                    SearchResult result = results.nextElement();
+                    final SearchResult result = results.nextElement();
                     logger.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     logger.debug("Results: ");
                     logger.debug("Name: " + result.getName());
@@ -208,7 +216,7 @@ public class LdapUtil {
             }
             return isInGroup;
 
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("groupContainsMember: " + e.getMessage());
             return false;
         }
