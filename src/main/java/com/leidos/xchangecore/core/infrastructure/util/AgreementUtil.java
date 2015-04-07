@@ -11,6 +11,7 @@ import org.uicds.agreementService.ConditionType;
 import org.uicds.agreementService.ConditionType.RemoteCoreProximity;
 
 import com.leidos.xchangecore.core.infrastructure.model.Agreement;
+import com.leidos.xchangecore.core.infrastructure.model.ExtendedMetadata;
 import com.saic.precis.x2009.x06.base.CodespaceValueType;
 import com.saic.precis.x2009.x06.base.ExtendedMetadataType;
 import com.saic.precis.x2009.x06.base.IdentifierType;

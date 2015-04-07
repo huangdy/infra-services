@@ -23,12 +23,12 @@ import com.leidos.xchangecore.core.infrastructure.messages.AgreementRosterMessag
 import com.leidos.xchangecore.core.infrastructure.messages.DeleteInterestGroupForRemoteCoreMessage;
 import com.leidos.xchangecore.core.infrastructure.model.Agreement;
 import com.leidos.xchangecore.core.infrastructure.model.CodeSpaceValueType;
+import com.leidos.xchangecore.core.infrastructure.model.ExtendedMetadata;
 import com.leidos.xchangecore.core.infrastructure.model.ShareRule;
 import com.leidos.xchangecore.core.infrastructure.service.AgreementService;
 import com.leidos.xchangecore.core.infrastructure.service.ConfigurationService;
 import com.leidos.xchangecore.core.infrastructure.service.DirectoryService;
 import com.leidos.xchangecore.core.infrastructure.util.AgreementUtil;
-import com.leidos.xchangecore.core.infrastructure.util.ExtendedMetadata;
 import com.saic.precis.x2009.x06.base.CodespaceValueType;
 
 /**

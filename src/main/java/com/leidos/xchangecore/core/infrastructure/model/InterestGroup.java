@@ -15,25 +15,25 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.CollectionOfElements;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
-import com.leidos.xchangecore.core.infrastructure.util.ExtendedMetadata;
-
 /**
  * The InterestGroup data model.
  * @ssdd
  */
-@SuppressWarnings("serial")
 @Entity
-@Table(name = "INTEREST_GROUP")
+// @Table(name = "INTEREST_GROUP")
 public class InterestGroup
     implements Serializable {
 
-    @SuppressWarnings("unused")
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,7 +101,7 @@ public class InterestGroup
 
     /**
      * Instantiates a new interest group.
-     * 
+     *
      * @param interestGroupID the interest group id
      * @ssdd
      */
@@ -112,7 +112,7 @@ public class InterestGroup
 
     /**
      * Gets the description.
-     * 
+     *
      * @return the description
      * @ssdd
      */
@@ -122,7 +122,7 @@ public class InterestGroup
     }
 
     /**
-     * 
+     *
      * @return a Set of extended metadata
      */
     public Set<ExtendedMetadata> getExtendedMetadata() {
@@ -137,7 +137,7 @@ public class InterestGroup
 
     /**
      * Gets the interest group id.
-     * 
+     *
      * @return the interest group id
      * @ssdd
      */
@@ -148,7 +148,7 @@ public class InterestGroup
 
     /**
      * Gets the interest group subtype.
-     * 
+     *
      * @return the interest group subtype
      * @ssdd
      */
@@ -159,7 +159,7 @@ public class InterestGroup
 
     /**
      * Gets the interest group type.
-     * 
+     *
      * @return the interest group type
      * @ssdd
      */
@@ -170,7 +170,7 @@ public class InterestGroup
 
     /**
      * Gets the joined wp type list.
-     * 
+     *
      * @return the joined wp type list
      * @ssdd
      */
@@ -181,7 +181,7 @@ public class InterestGroup
 
     /**
      * Gets the name.
-     * 
+     *
      * @return the name
      * @ssdd
      */
@@ -192,7 +192,7 @@ public class InterestGroup
 
     /**
      * Gets the owner properties.
-     * 
+     *
      * @return the owner properties
      * @ssdd
      */
@@ -205,7 +205,7 @@ public class InterestGroup
 
     /**
      * Gets the owning core.
-     * 
+     *
      * @return the owning core
      * @ssdd
      */
@@ -216,7 +216,7 @@ public class InterestGroup
 
     /**
      * Gets the shared core list.
-     * 
+     *
      * @return the shared core list
      * @ssdd
      */
@@ -227,7 +227,7 @@ public class InterestGroup
 
     /**
      * Gets the sharing status.
-     * 
+     *
      * @return the sharing status
      * @ssdd
      */
@@ -238,7 +238,7 @@ public class InterestGroup
 
     /**
      * Checks if is active.
-     * 
+     *
      * @return true, if is active
      * @ssdd
      */
@@ -249,7 +249,7 @@ public class InterestGroup
 
     /**
      * Sets the active.
-     * 
+     *
      * @param active the new active
      * @ssdd
      */
@@ -260,7 +260,7 @@ public class InterestGroup
 
     /**
      * Sets the description.
-     * 
+     *
      * @param description the new description
      * @ssdd
      */
@@ -270,8 +270,8 @@ public class InterestGroup
     }
 
     /**
-     * 
-     * @param extendedMetadata 
+     *
+     * @param extendedMetadata
      */
     public void setExtendedMetadata(Set<ExtendedMetadata> extendedMetadata) {
 
@@ -285,7 +285,7 @@ public class InterestGroup
 
     /**
      * Sets the interest group id.
-     * 
+     *
      * @param interestGroupID the new interest group id
      * @ssdd
      */
@@ -296,7 +296,7 @@ public class InterestGroup
 
     /**
      * Sets the interest group subtype.
-     * 
+     *
      * @param interestGroupSubtype the new interest group subtype
      * @ssdd
      */
@@ -307,7 +307,7 @@ public class InterestGroup
 
     /**
      * Sets the interest group type.
-     * 
+     *
      * @param interestGroupType the new interest group type
      * @ssdd
      */
@@ -318,7 +318,7 @@ public class InterestGroup
 
     /**
      * Sets the joined wp type list.
-     * 
+     *
      * @param joinedWpTypeList the new joined wp type list
      * @ssdd
      */
@@ -329,7 +329,7 @@ public class InterestGroup
 
     /**
      * Sets the joined wp type list.
-     * 
+     *
      * @param joinedWpTypeList the new joined wp type list
      * @ssdd
      */
@@ -340,7 +340,7 @@ public class InterestGroup
 
     /**
      * Sets the name.
-     * 
+     *
      * @param name the new name
      * @ssdd
      */
@@ -351,7 +351,7 @@ public class InterestGroup
 
     /**
      * Sets the owner properties.
-     * 
+     *
      * @param ownerProperties the new owner properties
      * @ssdd
      */
@@ -362,7 +362,7 @@ public class InterestGroup
 
     /**
      * Sets the owner properties.
-     * 
+     *
      * @param ownerProperties the new owner properties
      * @ssdd
      */
@@ -375,7 +375,7 @@ public class InterestGroup
 
     /**
      * Sets the owning core.
-     * 
+     *
      * @param owningCore the new owning core
      * @ssdd
      */
@@ -386,7 +386,7 @@ public class InterestGroup
 
     /**
      * Sets the shared core list.
-     * 
+     *
      * @param sharedCoreList the new shared core list
      * @ssdd
      */
@@ -397,7 +397,7 @@ public class InterestGroup
 
     /**
      * Sets the sharing status.
-     * 
+     *
      * @param sharingStatus the new sharing status
      * @ssdd
      */
@@ -409,7 +409,7 @@ public class InterestGroup
     @Override
     public String toString() {
 
-        StringBuffer sb = new StringBuffer();
+        final StringBuffer sb = new StringBuffer();
         sb.append("[InterestGroup]:\n");
         sb.append("\tID: " + id + "\n");
         sb.append("\tinterestGroupID: " + interestGroupID + "\n");

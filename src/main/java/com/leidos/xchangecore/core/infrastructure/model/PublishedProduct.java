@@ -7,15 +7,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  * The PublishedProduct data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "PUBLISHED_PRODUCT")
+// @Table(name = "PUBLISHED_PRODUCT")
 public class PublishedProduct {
 
     @Id
@@ -36,7 +35,7 @@ public class PublishedProduct {
 
     /**
      * Instantiates a new published product.
-     * 
+     *
      * @param productType the product type
      */
     public PublishedProduct(String productType) {
@@ -44,12 +43,47 @@ public class PublishedProduct {
         this.productType = productType;
     }
 
+    @Override
     public boolean equals(Object obj) {
 
-        PublishedProduct pubObj = (PublishedProduct) obj;
+        final PublishedProduct pubObj = (PublishedProduct) obj;
         return productType.equals(pubObj.getProductType());
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * Gets the product type.
+     *
+     * @return the product type
+     * @ssdd
+     */
+    public String getProductType() {
+
+        return productType;
+    }
+
+    /**
+     * Gets the publisher.
+     *
+     * @return the publisher
+     * @ssdd
+     */
+    public RegisteredService getPublisher() {
+
+        return publisher;
+    }
+
+    @Override
     public int hashCode() {
 
         return productType.hashCode();
@@ -58,7 +92,7 @@ public class PublishedProduct {
 
     /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -68,19 +102,8 @@ public class PublishedProduct {
     }
 
     /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
-
-        return this.id;
-    }
-
-    /**
      * Sets the product type.
-     * 
+     *
      * @param productType the new product type
      * @ssdd
      */
@@ -90,35 +113,13 @@ public class PublishedProduct {
     }
 
     /**
-     * Gets the product type.
-     * 
-     * @return the product type
-     * @ssdd
-     */
-    public String getProductType() {
-
-        return this.productType;
-    }
-
-    /**
      * Sets the publisher.
-     * 
+     *
      * @param publisher the new publisher
      * @ssdd
      */
     public void setPublisher(RegisteredService publisher) {
 
         this.publisher = publisher;
-    }
-
-    /**
-     * Gets the publisher.
-     * 
-     * @return the publisher
-     * @ssdd
-     */
-    public RegisteredService getPublisher() {
-
-        return this.publisher;
     }
 }

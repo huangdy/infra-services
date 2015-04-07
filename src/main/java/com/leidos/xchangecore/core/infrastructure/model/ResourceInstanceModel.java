@@ -1,10 +1,7 @@
 package com.leidos.xchangecore.core.infrastructure.model;
 
 import java.io.Serializable;
-
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -14,27 +11,23 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.CollectionOfElements;
-import org.hibernate.annotations.MapKey;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
 /**
  * The ResourceInstance data model.
- * 
+ *
  * @ssdd
  */
 
 @Entity
-@Table(name = "RESOURCE_INSTANCE")
+// @Table(name = "RESOURCE_INSTANCE")
 public class ResourceInstanceModel
-    implements Serializable {
+implements Serializable {
 
     private static final long serialVersionUID = 4631735818419898973L;
 
@@ -80,10 +73,10 @@ public class ResourceInstanceModel
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
 
-    /* 
+    /*
     @CollectionOfElements
     private Map<String, String> keywords = new HashMap<String, String>();
-    */
+     */
 
     // TODO: need to store Description (what size of text field do we need to
     // store for this?)
@@ -95,75 +88,14 @@ public class ResourceInstanceModel
     //FLI added on 11/30/2011
     //private int notMsgCount;
 
-    /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
+    public Set<CodeSpaceValueType> getCvts() {
 
-        return id;
-    }
-
-    /**
-     * Sets the id.
-     * 
-     * @param id the new id
-     * @ssdd
-     */
-    public void setId(Integer id) {
-
-        this.id = id;
-    }
-
-    /**
-     * Gets the identifier.
-     * 
-     * @return the identifier
-     * @ssdd
-     */
-    public String getIdentifier() {
-
-        return identifier;
-    }
-
-    /**
-     * Sets the identifier.
-     * 
-     * @param identifier the new identifier
-     * @ssdd
-     */
-    public void setIdentifier(String identifier) {
-
-        this.identifier = identifier;
-    }
-
-    /**
-     * Gets the label.
-     * 
-     * @return the label
-     * @ssdd
-     */
-    public String getLabel() {
-
-        return label;
-    }
-
-    /**
-     * Sets the label.
-     * 
-     * @param label the new label
-     * @ssdd
-     */
-    public void setLabel(String label) {
-
-        this.label = label;
+        return cvts;
     }
 
     /**
      * Gets the description.
-     * 
+     *
      * @return the description
      * @ssdd
      */
@@ -173,19 +105,8 @@ public class ResourceInstanceModel
     }
 
     /**
-     * Sets the description.
-     * 
-     * @param description the new description
-     * @ssdd
-     */
-    public void setDescription(String description) {
-
-        this.description = description;
-    }
-
-    /**
      * Gets the endpoints.
-     * 
+     *
      * @return the endpoints
      * @ssdd
      */
@@ -195,85 +116,41 @@ public class ResourceInstanceModel
     }
 
     /**
-     * Sets the endpoints.
-     * 
-     * @param endpoints the new endpoints
+     * Gets the id.
+     *
+     * @return the id
      * @ssdd
      */
-    public void setEndpoints(Set<String> endpoints) {
+    public Integer getId() {
 
-        this.endpoints = endpoints;
+        return id;
     }
 
     /**
-     * Gets the profiles.
-     * 
-     * @return the profiles
+     * Gets the identifier.
+     *
+     * @return the identifier
      * @ssdd
      */
-    public Set<String> getProfiles() {
+    public String getIdentifier() {
 
-        return profiles;
+        return identifier;
     }
 
     /**
-     * Sets the profiles.
-     * 
-     * @param profiles the new profiles
+     * Gets the label.
+     *
+     * @return the label
      * @ssdd
      */
-    public void setProfiles(Set<String> profiles) {
+    public String getLabel() {
 
-        this.profiles = profiles;
-    }
-
-    /**
-     * Gets the owning core.
-     * 
-     * @return the owning core
-     * @ssdd
-     */
-    public String getOwningCore() {
-
-        return owningCore;
-    }
-
-    /**
-     * Sets the owning core.
-     * 
-     * @param owningCore the new owning core
-     * @ssdd
-     */
-    public void setOwningCore(String owningCore) {
-
-        this.owningCore = owningCore;
-    }
-
-    /**
-     * Gets the resource id.
-     * 
-     * @return the resource id
-     * @ssdd
-     */
-    public String getResourceID() {
-
-        return resourceID;
-    }
-
-    /**
-     * Sets the resource id.
-     * 
-     * @param resourceID the new resource id
-     * @ssdd
-     */
-    public void setResourceID(String resourceID) {
-
-        this.resourceID = resourceID;
+        return label;
     }
 
     /**
      * Gets the local resource id.
-     * 
+     *
      * @return the local resource id
      * @ssdd
      */
@@ -283,8 +160,101 @@ public class ResourceInstanceModel
     }
 
     /**
+     * Gets the owning core.
+     *
+     * @return the owning core
+     * @ssdd
+     */
+    public String getOwningCore() {
+
+        return owningCore;
+    }
+
+    /**
+     * Gets the profiles.
+     *
+     * @return the profiles
+     * @ssdd
+     */
+    public Set<String> getProfiles() {
+
+        return profiles;
+    }
+
+    /**
+     * Gets the resource id.
+     *
+     * @return the resource id
+     * @ssdd
+     */
+    public String getResourceID() {
+
+        return resourceID;
+    }
+
+    public void setCvts(Set<CodeSpaceValueType> cvts) {
+
+        this.cvts = cvts;
+    }
+
+    /**
+     * Sets the description.
+     *
+     * @param description the new description
+     * @ssdd
+     */
+    public void setDescription(String description) {
+
+        this.description = description;
+    }
+
+    /**
+     * Sets the endpoints.
+     *
+     * @param endpoints the new endpoints
+     * @ssdd
+     */
+    public void setEndpoints(Set<String> endpoints) {
+
+        this.endpoints = endpoints;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     * @ssdd
+     */
+    public void setId(Integer id) {
+
+        this.id = id;
+    }
+
+    /**
+     * Sets the identifier.
+     *
+     * @param identifier the new identifier
+     * @ssdd
+     */
+    public void setIdentifier(String identifier) {
+
+        this.identifier = identifier;
+    }
+
+    /**
+     * Sets the label.
+     *
+     * @param label the new label
+     * @ssdd
+     */
+    public void setLabel(String label) {
+
+        this.label = label;
+    }
+
+    /**
      * Sets the local resource id.
-     * 
+     *
      * @param localResourceID the new local resource id
      * @ssdd
      */
@@ -293,14 +263,37 @@ public class ResourceInstanceModel
         this.localResourceID = localResourceID;
     }
 
-    public Set<CodeSpaceValueType> getCvts() {
+    /**
+     * Sets the owning core.
+     *
+     * @param owningCore the new owning core
+     * @ssdd
+     */
+    public void setOwningCore(String owningCore) {
 
-        return cvts;
+        this.owningCore = owningCore;
     }
 
-    public void setCvts(Set<CodeSpaceValueType> cvts) {
+    /**
+     * Sets the profiles.
+     *
+     * @param profiles the new profiles
+     * @ssdd
+     */
+    public void setProfiles(Set<String> profiles) {
 
-        this.cvts = cvts;
+        this.profiles = profiles;
+    }
+
+    /**
+     * Sets the resource id.
+     *
+     * @param resourceID the new resource id
+     * @ssdd
+     */
+    public void setResourceID(String resourceID) {
+
+        this.resourceID = resourceID;
     }
 
     /* comment out for now
@@ -311,5 +304,5 @@ public class ResourceInstanceModel
     public void setNotMsgCount(int notMsgCount) {
     	this.notMsgCount = notMsgCount;
     }
-    */
+     */
 }

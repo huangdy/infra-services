@@ -9,18 +9,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
 /**
  * The NotificaionSubscription data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "NOTIFICATION_SUBSCRIPTION")
+// @Table(name = "NOTIFICATION_SUBSCRIPTION")
 public class NotificationSubscription
     implements Serializable {
 
@@ -42,21 +41,16 @@ public class NotificationSubscription
     // @CollectionOfElements
     // private Set<String> messages = new LinkedHashSet<String>();
 
+    @Override
     public boolean equals(Object obj) {
 
-        NotificationSubscription subObj = (NotificationSubscription) obj;
+        final NotificationSubscription subObj = (NotificationSubscription) obj;
         return (subscriptionID.compareTo(subObj.getSubscriptionID()) == 0);
-    }
-
-    public int hashCode() {
-
-        String hash = "" + subscriptionID;
-        return hash.hashCode();
     }
 
     /**
      * Gets the subscription id.
-     * 
+     *
      * @return the subscription id
      * @ssdd
      */
@@ -66,29 +60,8 @@ public class NotificationSubscription
     }
 
     /**
-     * Sets the subscription id.
-     * 
-     * @param subscriptionID the new subscription id
-     * @ssdd
-     */
-    public void setId(Integer id) {
-
-        this.id = id;
-    }
-
-    public Integer getSubscriptionID() {
-
-        return subscriptionID;
-    }
-
-    public void setSubscriptionID(Integer subscriptionID) {
-
-        this.subscriptionID = subscriptionID;
-    }
-
-    /**
      * Gets the notification.
-     * 
+     *
      * @return the notification
      * @ssdd
      */
@@ -97,9 +70,32 @@ public class NotificationSubscription
         return notification;
     }
 
+    public Integer getSubscriptionID() {
+
+        return subscriptionID;
+    }
+
+    @Override
+    public int hashCode() {
+
+        final String hash = "" + subscriptionID;
+        return hash.hashCode();
+    }
+
+    /**
+     * Sets the subscription id.
+     *
+     * @param subscriptionID the new subscription id
+     * @ssdd
+     */
+    public void setId(Integer id) {
+
+        this.id = id;
+    }
+
     /**
      * Sets the notification
-     * 
+     *
      * @param notification - the new notification
      * @ssdd
      */
@@ -108,6 +104,7 @@ public class NotificationSubscription
 
         this.notification = notification;
     }
+
     // public Set<String> getMessages() {
     // return messages;
     // }
@@ -124,5 +121,10 @@ public class NotificationSubscription
     // this.messages.clear();
     // this.messages = new LinkedHashSet<String>();
     // }
+
+    public void setSubscriptionID(Integer subscriptionID) {
+
+        this.subscriptionID = subscriptionID;
+    }
 
 }

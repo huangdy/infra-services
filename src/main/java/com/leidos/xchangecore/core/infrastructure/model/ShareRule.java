@@ -1,7 +1,6 @@
 package com.leidos.xchangecore.core.infrastructure.model;
 
 import com.leidos.xchangecore.core.infrastructure.util.AgreementUtil;
-import com.leidos.xchangecore.core.infrastructure.util.ExtendedMetadata;
 
 import java.util.HashSet;
 import java.util.Set;

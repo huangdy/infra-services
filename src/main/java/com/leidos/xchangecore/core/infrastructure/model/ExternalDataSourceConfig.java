@@ -5,15 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * The ExternalDataSourceConfig data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "EXTERNAL_DATASOURCE_CONFIG")
+// @Table(name = "EXTERNAL_DATASOURCE_CONFIG")
 public class ExternalDataSourceConfig {
 
     @Id
@@ -33,7 +32,7 @@ public class ExternalDataSourceConfig {
 
     /**
      * Instantiates a new external data source config.
-     * 
+     *
      * @param urn the urn
      * @param coreName the core name
      * @ssdd
@@ -45,52 +44,41 @@ public class ExternalDataSourceConfig {
     }
 
     /**
-     * Sets the id.
-     * 
-     * @param id the new id
+     * Gets the core name.
+     *
+     * @return the core name
      * @ssdd
      */
-    public void setId(Integer id) {
+    public String getCoreName() {
 
-        this.id = id;
+        return coreName;
     }
 
     /**
      * Gets the id.
-     * 
+     *
      * @return the id
      * @ssdd
      */
     public Integer getId() {
 
-        return this.id;
-    }
-
-    /**
-     * Sets the urn.
-     * 
-     * @param urn the new urn
-     * @ssdd
-     */
-    public void setUrn(String urn) {
-
-        this.urn = urn;
+        return id;
     }
 
     /**
      * Gets the urn.
-     * 
+     *
      * @return the urn
      * @ssdd
      */
     public String getUrn() {
 
-        return this.urn;
+        return urn;
     }
 
     /**
      * Sets the core name.
-     * 
+     *
      * @param coreName the new core name
      * @ssdd
      */
@@ -100,14 +88,25 @@ public class ExternalDataSourceConfig {
     }
 
     /**
-     * Gets the core name.
-     * 
-     * @return the core name
+     * Sets the id.
+     *
+     * @param id the new id
      * @ssdd
      */
-    public String getCoreName() {
+    public void setId(Integer id) {
 
-        return this.coreName;
+        this.id = id;
+    }
+
+    /**
+     * Sets the urn.
+     *
+     * @param urn the new urn
+     * @ssdd
+     */
+    public void setUrn(String urn) {
+
+        this.urn = urn;
     }
 
 }

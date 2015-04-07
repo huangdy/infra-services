@@ -2,7 +2,7 @@ package com.leidos.xchangecore.core.infrastructure.service.impl;
 
 import java.util.Set;
 
-import com.leidos.xchangecore.core.infrastructure.util.ExtendedMetadata;
+import com.leidos.xchangecore.core.infrastructure.model.ExtendedMetadata;
 
 /**
  * The InterestGroupInfo class provides methods for setting and getting interest group information.

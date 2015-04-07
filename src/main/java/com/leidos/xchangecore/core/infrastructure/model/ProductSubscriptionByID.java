@@ -5,18 +5,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
 /**
  * The ProductSubscriptionByID data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "PRODUCT_SUBSCRIPTION_BY_ID")
+// @Table(name = "PRODUCT_SUBSCRIPTION_BY_ID")
 public class ProductSubscriptionByID {
 
     @Id
@@ -43,7 +42,7 @@ public class ProductSubscriptionByID {
 
     /**
      * Instantiates a new product subscription by id.
-     * 
+     *
      * @param productId the product id
      * @param subscriberName the subscriber name
      * @param subscriptionId the subscription id
@@ -57,8 +56,52 @@ public class ProductSubscriptionByID {
     }
 
     /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * Gets the product id.
+     *
+     * @return the product id
+     * @ssdd
+     */
+    public String getProductId() {
+
+        return productId;
+    }
+
+    /**
+     * Gets the subscriber name.
+     *
+     * @return the subscriber name
+     * @ssdd
+     */
+    public String getSubscriberName() {
+
+        return subscriberName;
+    }
+
+    /**
+     * Gets the subscription id.
+     *
+     * @return the subscription id
+     * @ssdd
+     */
+    public Integer getSubscriptionId() {
+
+        return subscriptionId;
+    }
+
+    /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -68,19 +111,8 @@ public class ProductSubscriptionByID {
     }
 
     /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
-
-        return this.id;
-    }
-
-    /**
      * Sets the product id.
-     * 
+     *
      * @param productId the new product id
      * @ssdd
      */
@@ -90,19 +122,8 @@ public class ProductSubscriptionByID {
     }
 
     /**
-     * Gets the product id.
-     * 
-     * @return the product id
-     * @ssdd
-     */
-    public String getProductId() {
-
-        return this.productId;
-    }
-
-    /**
      * Sets the subscriber.
-     * 
+     *
      * @param subscriberName the new subscriber
      * @ssdd
      */
@@ -112,35 +133,13 @@ public class ProductSubscriptionByID {
     }
 
     /**
-     * Gets the subscriber name.
-     * 
-     * @return the subscriber name
-     * @ssdd
-     */
-    public String getSubscriberName() {
-
-        return this.subscriberName;
-    }
-
-    /**
      * Sets the subscription id.
-     * 
+     *
      * @param subscriptionId the new subscription id
      * @ssdd
      */
     public void setSubscriptionId(Integer subscriptionId) {
 
         this.subscriptionId = subscriptionId;
-    }
-
-    /**
-     * Gets the subscription id.
-     * 
-     * @return the subscription id
-     * @ssdd
-     */
-    public Integer getSubscriptionId() {
-
-        return this.subscriptionId;
     }
 }

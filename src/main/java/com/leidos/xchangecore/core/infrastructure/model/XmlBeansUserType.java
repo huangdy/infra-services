@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
  * @author Christopher Lakey
  * @created September 07, 2009
  */
-@SuppressWarnings("unchecked")
 public class XmlBeansUserType
     implements UserType {
 
@@ -53,10 +52,12 @@ public class XmlBeansUserType
     @Override
     public boolean equals(Object arg0, Object arg1) throws HibernateException {
 
-        if (arg0 == arg1)
+        if (arg0 == arg1) {
             return true;
-        if (arg0 == null || arg1 == null)
+        }
+        if ((arg0 == null) || (arg1 == null)) {
             return false;
+        }
         return arg0.equals(arg1);
     }
 
@@ -77,11 +78,11 @@ public class XmlBeansUserType
         throws HibernateException, SQLException {
 
         Object result = null;
-        String value = rset.getString(names[0]);
-        if (value != null && (value.length() > 0)) {
+        final String value = rset.getString(names[0]);
+        if ((value != null) && (value.length() > 0)) {
             try {
                 result = XmlObject.Factory.parse(value);
-            } catch (XmlException e) {
+            } catch (final XmlException e) {
                 logger.error("Error parsing xml", e);
             }
         }
@@ -93,7 +94,7 @@ public class XmlBeansUserType
         throws HibernateException, SQLException {
 
         if (value instanceof XmlObject) {
-            XmlObject xmlObject = (XmlObject) value;
+            final XmlObject xmlObject = (XmlObject) value;
             stmt.setString(index, xmlObject.xmlText());
         } else {
             stmt.setString(index, "");

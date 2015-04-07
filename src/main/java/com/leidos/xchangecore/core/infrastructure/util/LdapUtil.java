@@ -101,7 +101,7 @@ public class LdapUtil {
                 }
             }
             logger.debug("getCNLocation: [lat/lon]: [" + locationArray[0] + "/" + locationArray[1] +
-                         "]");
+                "]");
             // Close the context when we're done
             ctx.close();
         } catch (final Exception e) {
@@ -111,9 +111,9 @@ public class LdapUtil {
         return locationArray;
     }
 
-    public ArrayList<String> getGroupMembers(String groupName) {
+    public ArrayList<String> getGroupMembers(String group) {
 
-        final String group = getLdapDomain() + "-" + groupName;
+        // final String group = getLdapDomain() + "-" + groupName;
 
         logger.debug("Looking up members of group: " + group);
 
@@ -179,7 +179,7 @@ public class LdapUtil {
             final DirContext ctx = new InitialDirContext(env);
 
             final String searchFilter = "(&(uniqueMember=cn=" + member + ",dc=" + getLdapDomain() +
-                                        ",dc=us)(objectClass=groupOfUniqueNames))";
+                ",dc=us)(objectClass=groupOfUniqueNames))";
 
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);

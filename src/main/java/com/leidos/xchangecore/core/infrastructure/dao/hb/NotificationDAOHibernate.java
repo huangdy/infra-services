@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.leidos.xchangecore.core.infrastructure.dao.hb;
 
@@ -40,32 +40,34 @@ public class NotificationDAOHibernate
         final Criterion criterion = Restrictions.eq("entityID", entityID);
         final List<Notification> notifications = findByCriteria(criterion);
 
-        return notifications != null && notifications.size() != 0 ? notifications.get(0) : null;
+        return (notifications != null) && (notifications.size() != 0) ? notifications.get(0) : null;
     }
 
     @Override
     public List<Notification> findBySubscriptionId(final Integer SubID) {
 
         /* hibernate associate property query not work well this way, but leave here as a future reference.
-        List<Notification> nList = getSession().createCriteria(Notification.class)  //getPersistentClass()) 			
-        .createCriteria("subscriptions")  
-        	        .add(Restrictions.eq("subscriptionID", new Integer(SubID)))  
+        List<Notification> nList = getSession().createCriteria(Notification.class)  //getPersistentClass())
+        .createCriteria("subscriptions")
+        	        .add(Restrictions.eq("subscriptionID", new Integer(SubID)))
         	    //    .setResultTransformer(Criteria.ALIAS_TO_ENTITY_MAP)
         	       .list();
-        */
+         */
 
         //we use hibernate root sql call and do this way.
 
-        final String sql_query = "SELECT ENTITY_ID FROM notification,notification_subscription " +
-                                 "WHERE notification.NOTIFICATION_ID = notification_subscription.NOTIFICATION_ID " +
-                                 "and notification_subscription.SUBSCRIPTION_ID=" + SubID;
+        final String sql_query = "SELECT ENTITY_ID FROM Notification, NotificationSubscription " +
+                                 "WHERE Notification.NOTIFICATION_ID = NotificationSubscription.NOTIFICATION_ID " +
+                                 "and NotificationSubscription.SUBSCRIPTION_ID=" + SubID;
+
+        logger.debug("findBySubscriptionId: Query: " + sql_query);
 
         final Query query = getSession().createSQLQuery(sql_query);
         @SuppressWarnings("unchecked")
         final List<String> nList = query.list();
 
         //see we got or not
-        //System.out.println("Size= " + nList.size());     	
+        //System.out.println("Size= " + nList.size());
 
         final List<Notification> list = new ArrayList<Notification>();
         final Iterator<String> it = nList.iterator();
@@ -73,10 +75,11 @@ public class NotificationDAOHibernate
             final String obj = it.next();
 
             //  see we got the right one or not
-            //  System.out.println("Obj id= " + obj); 
+            //  System.out.println("Obj id= " + obj);
             final Notification not = findByEntityId(obj);
-            if (not != null)
+            if (not != null) {
                 list.add(not);
+            }
 
         }
 

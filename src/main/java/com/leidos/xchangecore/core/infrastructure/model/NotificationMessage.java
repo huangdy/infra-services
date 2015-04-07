@@ -10,25 +10,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
 /**
  * The NotificationMessage data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "NotificationMessage")
 public class NotificationMessage
     implements Serializable {
 
     private static final long serialVersionUID = 6530136814536038579L;
 
     /**
-     * 
+     *
      */
     @Id
     @Column(name = "NOTIFICATION_MESSAGE_ID")
@@ -65,7 +63,7 @@ public class NotificationMessage
 
     /**
      * Gets the message id.
-     * 
+     *
      * @return the message id
      * @ssdd
      */
@@ -75,41 +73,8 @@ public class NotificationMessage
     }
 
     /**
-     * Sets the message id.
-     * 
-     * @param messageID the new message id
-     * @ssdd
-     */
-    public void seId(Integer id) {
-
-        this.id = id;
-    }
-
-    /**
-     * Gets the subscription id.
-     * 
-     * @return the subscription id
-     * @ssdd
-     */
-    public Integer getSubscriptionID() {
-
-        return subscriptionID;
-    }
-
-    /**
-     * Sets the subscription id.
-     * 
-     * @param subscriptionID the new subscription id
-     * @ssdd
-     */
-    public void setSubscriptionID(Integer subscriptionID) {
-
-        this.subscriptionID = subscriptionID;
-    }
-
-    /**
      * Gets the message.
-     * 
+     *
      * @return the message
      * @ssdd
      */
@@ -119,41 +84,8 @@ public class NotificationMessage
     }
 
     /**
-     * Sets the message.
-     * 
-     * @param message the new message
-     * @ssdd
-     */
-    public void setMessage(byte[] message) {
-
-        this.message = message;
-    }
-
-    /**
-     * Sets the type.
-     * 
-     * @param type the new type
-     * @ssdd
-     */
-    public void setType(String type) {
-
-        this.type = type;
-    }
-
-    /**
-     * Gets the type.
-     * 
-     * @return the type
-     * @ssdd
-     */
-    public String getType() {
-
-        return type;
-    }
-
-    /**
      * Gets the notification.
-     * 
+     *
      * @return the notification
      * @ssdd
      */
@@ -163,8 +95,52 @@ public class NotificationMessage
     }
 
     /**
+     * Gets the subscription id.
+     *
+     * @return the subscription id
+     * @ssdd
+     */
+    public Integer getSubscriptionID() {
+
+        return subscriptionID;
+    }
+
+    /**
+     * Gets the type.
+     *
+     * @return the type
+     * @ssdd
+     */
+    public String getType() {
+
+        return type;
+    }
+
+    /**
+     * Sets the message id.
+     *
+     * @param messageID the new message id
+     * @ssdd
+     */
+    public void seId(Integer id) {
+
+        this.id = id;
+    }
+
+    /**
+     * Sets the message.
+     *
+     * @param message the new message
+     * @ssdd
+     */
+    public void setMessage(byte[] message) {
+
+        this.message = message;
+    }
+
+    /**
      * Sets the notification
-     * 
+     *
      * @param notification - the new notification
      * @ssdd
      */
@@ -172,6 +148,28 @@ public class NotificationMessage
     public void setNotification(Notification notification) {
 
         this.notification = notification;
+    }
+
+    /**
+     * Sets the subscription id.
+     *
+     * @param subscriptionID the new subscription id
+     * @ssdd
+     */
+    public void setSubscriptionID(Integer subscriptionID) {
+
+        this.subscriptionID = subscriptionID;
+    }
+
+    /**
+     * Sets the type.
+     *
+     * @param type the new type
+     * @ssdd
+     */
+    public void setType(String type) {
+
+        this.type = type;
     }
 
 }

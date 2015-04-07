@@ -14,21 +14,24 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
 /**
  * The ProductSubscriptionByType data model.
- * 
+ *
  * @ssdd
  */
-@SuppressWarnings("serial")
 @Entity
-@Table(name = "PRODUCT_SUBSCRIPTION_BY_TYPE")
+// @Table(name = "PRODUCT_SUBSCRIPTION_BY_TYPE")
 public class ProductSubscriptionByType
     implements Serializable {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "ID")
@@ -72,7 +75,7 @@ public class ProductSubscriptionByType
 
     /**
      * Instantiates a new product subscription by type.
-     * 
+     *
      * @param productType the product type
      * @param interestGroupID the interest group id
      * @param xPath the x path
@@ -94,8 +97,88 @@ public class ProductSubscriptionByType
     }
 
     /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * Gets the interest group id.
+     *
+     * @return the interest group id
+     * @ssdd
+     */
+    public String getInterestGroupID() {
+
+        return interestGroupID;
+    }
+
+    public Set<NamespaceMap> getNamespacemap() {
+
+        return namespacemap;
+    }
+
+    public Map<String, String> getNamespaceMap() {
+
+        final HashMap<String, String> map = new HashMap<String, String>();
+        for (final NamespaceMap namespace : namespacemap) {
+            map.put(namespace.getPrefix(), namespace.getUri());
+        }
+        return map;
+    }
+
+    /**
+     * Gets the product type.
+     *
+     * @return the product type
+     * @ssdd
+     */
+    public String getProductType() {
+
+        return productType;
+    }
+
+    /**
+     * Gets the subscriber name.
+     *
+     * @return the subscriber name
+     * @ssdd
+     */
+    public String getSubscriberName() {
+
+        return subscriberName;
+    }
+
+    /**
+     * Gets the subscription id.
+     *
+     * @return the subscription id
+     * @ssdd
+     */
+    public Integer getSubscriptionId() {
+
+        return subscriptionId;
+    }
+
+    /**
+     * Gets the x path.
+     *
+     * @return the x path
+     * @ssdd
+     */
+    public String getXPath() {
+
+        return xPath;
+    }
+
+    /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -105,41 +188,8 @@ public class ProductSubscriptionByType
     }
 
     /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
-
-        return this.id;
-    }
-
-    /**
-     * Sets the product type.
-     * 
-     * @param type the new product type
-     * @ssdd
-     */
-    public void setProductType(String type) {
-
-        this.productType = type;
-    }
-
-    /**
-     * Gets the product type.
-     * 
-     * @return the product type
-     * @ssdd
-     */
-    public String getProductType() {
-
-        return this.productType;
-    }
-
-    /**
      * Sets the interest group id.
-     * 
+     *
      * @param interestGroupID the new interest group id
      * @ssdd
      */
@@ -148,42 +198,25 @@ public class ProductSubscriptionByType
         this.interestGroupID = interestGroupID;
     }
 
-    /**
-     * Gets the interest group id.
-     * 
-     * @return the interest group id
-     * @ssdd
-     */
-    public String getInterestGroupID() {
+    public void setNamespacemap(Set<NamespaceMap> namespacemap) {
 
-        return this.interestGroupID;
+        this.namespacemap = namespacemap;
     }
 
     /**
-     * Sets the x path.
-     * 
-     * @param xPath the new x path
+     * Sets the product type.
+     *
+     * @param type the new product type
      * @ssdd
      */
-    public void setXPath(String xPath) {
+    public void setProductType(String type) {
 
-        this.xPath = xPath;
-    }
-
-    /**
-     * Gets the x path.
-     * 
-     * @return the x path
-     * @ssdd
-     */
-    public String getXPath() {
-
-        return this.xPath;
+        productType = type;
     }
 
     /**
      * Sets the subscriber name.
-     * 
+     *
      * @param subscriberName the new subscriber name
      * @ssdd
      */
@@ -193,19 +226,8 @@ public class ProductSubscriptionByType
     }
 
     /**
-     * Gets the subscriber name.
-     * 
-     * @return the subscriber name
-     * @ssdd
-     */
-    public String getSubscriberName() {
-
-        return this.subscriberName;
-    }
-
-    /**
      * Sets the subscription id.
-     * 
+     *
      * @param subscriptionId the new subscription id
      * @ssdd
      */
@@ -215,32 +237,13 @@ public class ProductSubscriptionByType
     }
 
     /**
-     * Gets the subscription id.
-     * 
-     * @return the subscription id
+     * Sets the x path.
+     *
+     * @param xPath the new x path
      * @ssdd
      */
-    public Integer getSubscriptionId() {
+    public void setXPath(String xPath) {
 
-        return this.subscriptionId;
-    }
-
-    public Map<String, String> getNamespaceMap() {
-
-        HashMap<String, String> map = new HashMap<String, String>();
-        for (NamespaceMap namespace : namespacemap) {
-            map.put(namespace.getPrefix(), namespace.getUri());
-        }
-        return map;
-    }
-
-    public Set<NamespaceMap> getNamespacemap() {
-
-        return this.namespacemap;
-    }
-
-    public void setNamespacemap(Set<NamespaceMap> namespacemap) {
-
-        this.namespacemap = namespacemap;
+        this.xPath = xPath;
     }
 }

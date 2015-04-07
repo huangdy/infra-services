@@ -11,14 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.Table;
 
 /**
  * The Subscribed Product data model.
  * @ssdd
  */
 @Entity
-@Table(name = "SUBSCRIBED_PRODUCT")
+// @Table(name = "SUBSCRIBED_PRODUCT")
 public class SubscribedProduct {
 
     @Id
@@ -43,21 +42,56 @@ public class SubscribedProduct {
 
     /**
      * Instantiates a new subscribed product.
-     * 
+     *
      * @param productType the product type
      * @ssdd
      */
     public SubscribedProduct(String productType) {
 
-        this.setProductType(productType);
+        setProductType(productType);
     }
 
+    @Override
     public boolean equals(Object obj) {
 
-        SubscribedProduct subObj = (SubscribedProduct) obj;
+        final SubscribedProduct subObj = (SubscribedProduct) obj;
         return productType.equals(subObj.getProductType());
     }
 
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * Gets the product type.
+     *
+     * @return the product type
+     * @ssdd
+     */
+    public String getProductType() {
+
+        return productType;
+    }
+
+    /**
+     * Gets the subscribers.
+     *
+     * @return the subscribers
+     * @ssdd
+     */
+    public Set<RegisteredService> getSubscribers() {
+
+        return subscribers;
+    }
+
+    @Override
     public int hashCode() {
 
         return productType.hashCode();
@@ -67,7 +101,7 @@ public class SubscribedProduct {
 
     /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -77,19 +111,8 @@ public class SubscribedProduct {
     }
 
     /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
-
-        return this.id;
-    }
-
-    /**
      * Sets the product type.
-     * 
+     *
      * @param productType the new product type
      * @ssdd
      */
@@ -99,36 +122,14 @@ public class SubscribedProduct {
     }
 
     /**
-     * Gets the product type.
-     * 
-     * @return the product type
-     * @ssdd
-     */
-    public String getProductType() {
-
-        return this.productType;
-    }
-
-    /**
      * Sets the subscribers.
-     * 
+     *
      * @param subscribers the new subscribers
      * @ssdd
      */
     public void setSubscribers(Set<RegisteredService> subscribers) {
 
         this.subscribers = subscribers;
-    }
-
-    /**
-     * Gets the subscribers.
-     * 
-     * @return the subscribers
-     * @ssdd
-     */
-    public Set<RegisteredService> getSubscribers() {
-
-        return this.subscribers;
     }
 
 }

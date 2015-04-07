@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
@@ -31,7 +30,7 @@ import org.hibernate.search.annotations.Index;
  */
 
 @Entity
-@Table(name = "RESOURCE_PROFILE")
+// @Table(name = "RESOURCE_PROFILE")
 public class ResourceProfileModel
     implements Serializable {
 
@@ -69,7 +68,7 @@ public class ResourceProfileModel
 
     public void addCVT(String cs, String label, String value) {
 
-        CodeSpaceValueType cvt = new CodeSpaceValueType();
+        final CodeSpaceValueType cvt = new CodeSpaceValueType();
         cvt.setCodeSpace(cs);
         cvt.setLabel(label);
         cvt.setValue(value);
@@ -87,34 +86,43 @@ public class ResourceProfileModel
      */
     public boolean addInterest(InterestElement interest) {
 
-        return this.interests.add(interest);
+        return interests.add(interest);
     }
 
     @Override
     public boolean equals(Object obj) {
 
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        ResourceProfileModel other = (ResourceProfileModel) obj;
+        }
+        final ResourceProfileModel other = (ResourceProfileModel) obj;
         if (description == null) {
-            if (other.description != null)
+            if (other.description != null) {
                 return false;
-        } else if (!description.equals(other.description))
+            }
+        } else if (!description.equals(other.description)) {
             return false;
+        }
         if (interests == null) {
-            if (other.interests != null)
+            if (other.interests != null) {
                 return false;
-        } else if (!interests.equals(other.interests))
+            }
+        } else if (!interests.equals(other.interests)) {
             return false;
+        }
         if (label == null) {
-            if (other.label != null)
+            if (other.label != null) {
                 return false;
-        } else if (!label.equals(other.label))
+            }
+        } else if (!label.equals(other.label)) {
             return false;
+        }
         return true;
     }
 
@@ -183,9 +191,9 @@ public class ResourceProfileModel
 
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((interests == null) ? 0 : interests.hashCode());
-        result = prime * result + ((label == null) ? 0 : label.hashCode());
+        result = (prime * result) + ((description == null) ? 0 : description.hashCode());
+        result = (prime * result) + ((interests == null) ? 0 : interests.hashCode());
+        result = (prime * result) + ((label == null) ? 0 : label.hashCode());
         return result;
     }
 
@@ -200,7 +208,7 @@ public class ResourceProfileModel
      */
     public boolean removeInterest(InterestElement interest) {
 
-        return this.interests.remove(interest);
+        return interests.remove(interest);
     }
 
     public void setCvts(Set<CodeSpaceValueType> cvts) {
@@ -275,10 +283,10 @@ public class ResourceProfileModel
 
         profile += label + "\n";
         profile += description + "\n";
-        for (InterestElement intEle : interests) {
+        for (final InterestElement intEle : interests) {
             profile += intEle.getMessageContent() + "\n";
             profile += intEle.getTopicExpression() + "\n";
-            for (InterestNamespaceType ns : intEle.getNamespaces()) {
+            for (final InterestNamespaceType ns : intEle.getNamespaces()) {
                 profile += ns.getPrefix() + "\n";
                 profile += ns.getUri() + "\n";
             }

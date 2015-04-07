@@ -5,15 +5,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 /**
  * The CoreConfig data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "CORE_CONFIG")
+// @Table(name = "CORE_CONFIG")
 public class CoreConfig {
 
     @Id
@@ -39,9 +38,13 @@ public class CoreConfig {
     @Column(name = "LONGITUDE")
     private String longitude;
 
+    public CoreConfig() {
+
+    }
+
     /**
      * Instantiates a new core config.
-     * 
+     *
      * @param name the name
      * @param url the url
      * @param onlineStatus the online status
@@ -55,8 +58,73 @@ public class CoreConfig {
     }
 
     /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    public String getLatitude() {
+
+        return latitude;
+    }
+
+    /**
+     * Gets the local core.
+     *
+     * @return the local core
+     * @ssdd
+     */
+    public boolean getLocalCore() {
+
+        return localCore;
+    }
+
+    public String getLongitude() {
+
+        return longitude;
+    }
+
+    /**
+     * Gets the name.
+     *
+     * @return the name
+     * @ssdd
+     */
+    public String getName() {
+
+        return name;
+    }
+
+    /**
+     * Gets the online status.
+     *
+     * @return the online status
+     * @ssdd
+     */
+    public String getOnlineStatus() {
+
+        return onlineStatus;
+    }
+
+    /**
+     * Gets the url.
+     *
+     * @return the url
+     * @ssdd
+     */
+    public String getUrl() {
+
+        return url;
+    }
+
+    /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -65,20 +133,30 @@ public class CoreConfig {
         this.id = id;
     }
 
+    public void setLatitude(String latitude) {
+
+        this.latitude = latitude;
+    }
+
     /**
-     * Gets the id.
-     * 
-     * @return the id
+     * Sets the local core.
+     *
+     * @param localCore the new local core
      * @ssdd
      */
-    public Integer getId() {
+    public void setLocalCore(boolean localCore) {
 
-        return this.id;
+        this.localCore = localCore;
+    }
+
+    public void setLongitude(String longitude) {
+
+        this.longitude = longitude;
     }
 
     /**
      * Sets the name.
-     * 
+     *
      * @param name the new name
      * @ssdd
      */
@@ -88,41 +166,8 @@ public class CoreConfig {
     }
 
     /**
-     * Gets the name.
-     * 
-     * @return the name
-     * @ssdd
-     */
-    public String getName() {
-
-        return this.name;
-    }
-
-    /**
-     * Sets the url.
-     * 
-     * @param url the new url
-     * @ssdd
-     */
-    public void setUrl(String url) {
-
-        this.url = url;
-    }
-
-    /**
-     * Gets the url.
-     * 
-     * @return the url
-     * @ssdd
-     */
-    public String getUrl() {
-
-        return this.url;
-    }
-
-    /**
      * Sets the online status.
-     * 
+     *
      * @param onlineStatus the new online status
      * @ssdd
      */
@@ -132,60 +177,14 @@ public class CoreConfig {
     }
 
     /**
-     * Gets the online status.
-     * 
-     * @return the online status
+     * Sets the url.
+     *
+     * @param url the new url
      * @ssdd
      */
-    public String getOnlineStatus() {
+    public void setUrl(String url) {
 
-        return this.onlineStatus;
-    }
-
-    /**
-     * Sets the local core.
-     * 
-     * @param localCore the new local core
-     * @ssdd
-     */
-    public void setLocalCore(boolean localCore) {
-
-        this.localCore = localCore;
-    }
-
-    /**
-     * Gets the local core.
-     * 
-     * @return the local core
-     * @ssdd
-     */
-    public boolean getLocalCore() {
-
-        return this.localCore;
-    }
-
-    public String getLatitude() {
-
-        return latitude;
-    }
-
-    public void setLatitude(String latitude) {
-
-        this.latitude = latitude;
-    }
-
-    public String getLongitude() {
-
-        return longitude;
-    }
-
-    public void setLongitude(String longitude) {
-
-        this.longitude = longitude;
-    }
-
-    public CoreConfig() {
-
+        this.url = url;
     }
 
 }

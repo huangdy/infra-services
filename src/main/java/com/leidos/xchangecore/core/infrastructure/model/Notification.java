@@ -13,7 +13,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.apache.log4j.Logger;
 import org.hibernate.search.annotations.Field;
@@ -23,11 +22,11 @@ import com.leidos.xchangecore.core.infrastructure.dao.hb.NotificationMessageDAOH
 
 /**
  * The Notification data model.
- * 
+ *
  * @ssdd
  */
 @Entity
-@Table(name = "NOTIFICATION")
+// @Table(name = "NOTIFICATION")
 public class Notification
     implements Serializable {
 
@@ -68,7 +67,7 @@ public class Notification
 
     /**
      * Adds the message.
-     * 
+     *
      * @param subscriptionID
      *            the subscription id
      * @param msgType
@@ -80,7 +79,7 @@ public class Notification
     public void addMessage(Integer subscriptionID, String msgType, String message) {
 
         logger.debug("addMessage: msgType: " + msgType);
-        NotificationMessage msg = new NotificationMessage();
+        final NotificationMessage msg = new NotificationMessage();
         msg.setNotification(this);
         msg.setMessage(message.getBytes());
         msg.setType(msgType);
@@ -91,7 +90,7 @@ public class Notification
 
     /**
      * Adds the subscription.
-     * 
+     *
      * @param subscription
      *            the subscription
      * @ssdd
@@ -115,29 +114,29 @@ public class Notification
 
     /**
      * Clear messages.
-     * 
+     *
      * @ssdd
      */
     public void clearMessages() {
 
         // removes all associated notifMessages
-        Set<NotificationMessage> messageSet = new HashSet<NotificationMessage>(messages);
-        for (NotificationMessage message : messageSet) {
+        final Set<NotificationMessage> messageSet = new HashSet<NotificationMessage>(messages);
+        for (final NotificationMessage message : messageSet) {
             clearMessage(message);
         }
     }
 
     /**
      * Clear messages of old product versions.
-     * 
+     *
      * @ssdd
      */
     public void clearoldMessage(String messageType) {
 
         if (!"WorkProductDeleted".equals(messageType)) {
-            Set<NotificationMessage> messages = getMessages();
+            final Set<NotificationMessage> messages = getMessages();
             if (!messages.isEmpty()) {
-                for (NotificationMessage message : messages) {
+                for (final NotificationMessage message : messages) {
                     if (messageType.equals(message.getType())) {
                         clearMessage(message);
                         break;
@@ -152,13 +151,13 @@ public class Notification
     @Override
     public boolean equals(Object obj) {
 
-        Notification notificationObj = (Notification) obj;
+        final Notification notificationObj = (Notification) obj;
         return entityID.equals(notificationObj.getEntityID());
     }
 
     /**
      * Gets the endpoint url.
-     * 
+     *
      * @return the endpoint url
      * @ssdd
      */
@@ -169,7 +168,7 @@ public class Notification
 
     /**
      * Gets the entity id.
-     * 
+     *
      * @return the entity id
      * @ssdd
      */
@@ -180,7 +179,7 @@ public class Notification
 
     /**
      * Gets the id.
-     * 
+     *
      * @return the id
      * @ssdd
      */
@@ -191,7 +190,7 @@ public class Notification
 
     /**
      * Gets the messages set.
-     * 
+     *
      * @return the messages set
      * @ssdd
      */
@@ -202,14 +201,14 @@ public class Notification
 
     /**
      * Gets the messages.
-     * 
+     *
      * @return the messages
      * @ssdd
      */
     public Set<String> getMessagesAsString() {
 
-        Set<String> msgSet = new LinkedHashSet<String>();
-        for (NotificationMessage msg : messages) {
+        final Set<String> msgSet = new LinkedHashSet<String>();
+        for (final NotificationMessage msg : messages) {
             msgSet.add(new String(msg.getMessage()));
         }
         return msgSet;
@@ -224,7 +223,7 @@ public class Notification
 
     /**
      * Gets the subscriptions.
-     * 
+     *
      * @return the subscriptions
      * @ssdd
      */
@@ -241,7 +240,7 @@ public class Notification
 
     /**
      * Checks if is endpoint ws.
-     * 
+     *
      * @return true, if is endpoint ws
      * @ssdd
      */
@@ -252,7 +251,7 @@ public class Notification
 
     /**
      * Sets the endpoint url.
-     * 
+     *
      * @param endpointURL
      *            the new endpoint url
      * @ssdd
@@ -264,7 +263,7 @@ public class Notification
 
     /**
      * Sets the endpoint ws.
-     * 
+     *
      * @param endpointWS
      *            the new endpoint ws
      * @ssdd
@@ -276,7 +275,7 @@ public class Notification
 
     /**
      * Sets the entity id.
-     * 
+     *
      * @param entityID
      *            the new entity id
      * @ssdd
@@ -288,7 +287,7 @@ public class Notification
 
     /**
      * Sets the id.
-     * 
+     *
      * @param id
      *            the new id
      * @ssdd
@@ -300,7 +299,7 @@ public class Notification
 
     /**
      * Sets the messages.
-     * 
+     *
      * @param messages
      *            the new messages
      * @ssdd
@@ -308,7 +307,7 @@ public class Notification
     public void setMessages(Set<NotificationMessage> messages) {
 
         this.messages.clear();
-        for (NotificationMessage message : messages) {
+        for (final NotificationMessage message : messages) {
             message.setNotification(this);
             this.messages.add(message);
         }
@@ -322,16 +321,16 @@ public class Notification
     }
 
     /**
-       * Sets the subscriptions.
-       * 
-       * @param subscriptions
-       *            the new subscriptions
-       * @ssdd
-       */
+     * Sets the subscriptions.
+     *
+     * @param subscriptions
+     *            the new subscriptions
+     * @ssdd
+     */
     public void setSubscriptions(Set<NotificationSubscription> subscriptions) {
 
         this.subscriptions.clear();
-        for (NotificationSubscription subscription : subscriptions) {
+        for (final NotificationSubscription subscription : subscriptions) {
             subscription.setNotification(this);
             this.subscriptions.add(subscription);
         }
@@ -343,7 +342,7 @@ public class Notification
         String sNotf = "";
         sNotf += "EntityID: " + entityID + "##";
         sNotf += "EndpointURL: " + endpointURL + "##";
-        for (NotificationSubscription sub : subscriptions) {
+        for (final NotificationSubscription sub : subscriptions) {
             sNotf += "SubID: " + String.valueOf(sub.getSubscriptionID()) + "##";
         }
         sNotf += "Message list size: " + messages.size() + "##";

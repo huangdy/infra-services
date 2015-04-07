@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.search.annotations.Field;
@@ -19,12 +18,12 @@ import org.hibernate.search.annotations.Index;
 
 /**
  * The InterestElement data model.
- * 
+ *
  * @ssdd
  */
 
 @Entity
-@Table(name = "INTEREST")
+// @Table(name = "INTEREST")
 public class InterestElement
     implements Serializable {
 
@@ -54,9 +53,46 @@ public class InterestElement
         // No arg constructor
     }
 
+    @Override
+    public boolean equals(Object obj) {
+
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final InterestElement other = (InterestElement) obj;
+        if (messageContent == null) {
+            if (other.messageContent != null) {
+                return false;
+            }
+        } else if (!messageContent.equals(other.messageContent)) {
+            return false;
+        }
+        if (namespaces == null) {
+            if (other.namespaces != null) {
+                return false;
+            }
+        } else if (!namespaces.equals(other.namespaces)) {
+            return false;
+        }
+        if (topicExpression == null) {
+            if (other.topicExpression != null) {
+                return false;
+            }
+        } else if (!topicExpression.equals(other.topicExpression)) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * Gets the id.
-     * 
+     *
      * @return the id
      * @ssdd
      */
@@ -66,41 +102,8 @@ public class InterestElement
     }
 
     /**
-     * Sets the id.
-     * 
-     * @param id the new id
-     * @ssdd
-     */
-    public void setId(Integer id) {
-
-        this.id = id;
-    }
-
-    /**
-     * Gets the topic expression.
-     * 
-     * @return the topic expression
-     * @ssdd
-     */
-    public String getTopicExpression() {
-
-        return topicExpression;
-    }
-
-    /**
-     * Sets the topic expression.
-     * 
-     * @param topicExpression the new topic expression
-     * @ssdd
-     */
-    public void setTopicExpression(String topicExpression) {
-
-        this.topicExpression = topicExpression;
-    }
-
-    /**
      * Gets the message content.
-     * 
+     *
      * @return the message content
      * @ssdd
      */
@@ -110,19 +113,8 @@ public class InterestElement
     }
 
     /**
-     * Sets the message content.
-     * 
-     * @param messageContent the new message content
-     * @ssdd
-     */
-    public void setMessageContent(String messageContent) {
-
-        this.messageContent = messageContent;
-    }
-
-    /**
      * Gets the namespaces.
-     * 
+     *
      * @return the namespaces
      * @ssdd
      */
@@ -132,8 +124,52 @@ public class InterestElement
     }
 
     /**
+     * Gets the topic expression.
+     *
+     * @return the topic expression
+     * @ssdd
+     */
+    public String getTopicExpression() {
+
+        return topicExpression;
+    }
+
+    @Override
+    public int hashCode() {
+
+        final int prime = 31;
+        int result = 1;
+        result = (prime * result) + ((messageContent == null) ? 0 : messageContent.hashCode());
+        result = (prime * result) + ((namespaces == null) ? 0 : namespaces.hashCode());
+        result = (prime * result) + ((topicExpression == null) ? 0 : topicExpression.hashCode());
+        return result;
+    }
+
+    /**
+     * Sets the id.
+     *
+     * @param id the new id
+     * @ssdd
+     */
+    public void setId(Integer id) {
+
+        this.id = id;
+    }
+
+    /**
+     * Sets the message content.
+     *
+     * @param messageContent the new message content
+     * @ssdd
+     */
+    public void setMessageContent(String messageContent) {
+
+        this.messageContent = messageContent;
+    }
+
+    /**
      * Sets the namespaces.
-     * 
+     *
      * @param namespaces the new namespaces
      * @ssdd
      */
@@ -142,42 +178,14 @@ public class InterestElement
         this.namespaces = namespaces;
     }
 
-    @Override
-    public int hashCode() {
+    /**
+     * Sets the topic expression.
+     *
+     * @param topicExpression the new topic expression
+     * @ssdd
+     */
+    public void setTopicExpression(String topicExpression) {
 
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((messageContent == null) ? 0 : messageContent.hashCode());
-        result = prime * result + ((namespaces == null) ? 0 : namespaces.hashCode());
-        result = prime * result + ((topicExpression == null) ? 0 : topicExpression.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        InterestElement other = (InterestElement) obj;
-        if (messageContent == null) {
-            if (other.messageContent != null)
-                return false;
-        } else if (!messageContent.equals(other.messageContent))
-            return false;
-        if (namespaces == null) {
-            if (other.namespaces != null)
-                return false;
-        } else if (!namespaces.equals(other.namespaces))
-            return false;
-        if (topicExpression == null) {
-            if (other.topicExpression != null)
-                return false;
-        } else if (!topicExpression.equals(other.topicExpression))
-            return false;
-        return true;
+        this.topicExpression = topicExpression;
     }
 }

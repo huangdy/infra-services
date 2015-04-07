@@ -2,15 +2,16 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.leidos.xchangecore.core.infrastructure.util;
+package com.leidos.xchangecore.core.infrastructure.model;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Table;
+
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Index;
 
@@ -20,11 +21,15 @@ import org.hibernate.search.annotations.Index;
  */
 
 @Entity
-@Table(name = "EXTENDED_METADATA")
+// @Table(name = "EXTENDED_METADATA")
 public class ExtendedMetadata
     implements Serializable {
 
-    @SuppressWarnings("unused")
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
+
     @Id
     @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,14 +51,12 @@ public class ExtendedMetadata
     @Field(index = Index.TOKENIZED)
     private String value;
 
-    public String getCodespace() {
+    public void ExtendedMetadata() {
 
-        return codespace;
-    }
-
-    public void setCodespace(String codespace) {
-
-        this.codespace = codespace;
+        codespace = "";
+        code = "";
+        label = "";
+        value = "";
     }
 
     public String getCode() {
@@ -61,9 +64,9 @@ public class ExtendedMetadata
         return code;
     }
 
-    public void setCode(String code) {
+    public String getCodespace() {
 
-        this.code = code;
+        return codespace;
     }
 
     public String getLabel() {
@@ -71,26 +74,28 @@ public class ExtendedMetadata
         return label;
     }
 
-    public void setLabel(String label) {
-
-        this.label = label;
-    }
-
     public String getValue() {
 
         return value;
     }
 
+    public void setCode(String code) {
+
+        this.code = code;
+    }
+
+    public void setCodespace(String codespace) {
+
+        this.codespace = codespace;
+    }
+
+    public void setLabel(String label) {
+
+        this.label = label;
+    }
+
     public void setValue(String value) {
 
         this.value = value;
-    }
-
-    public void ExtendedMetadata() {
-
-        this.codespace = "";
-        this.code = "";
-        this.label = "";
-        this.value = "";
     }
 }
