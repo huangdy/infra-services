@@ -1,5 +1,7 @@
 package com.leidos.xchangecore.core.infrastructure.dao.hb;
 
+import gov.ucore.ucore.x20.DigestDocument;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -35,12 +37,11 @@ import com.vividsolutions.jts.geom.Polygon;
 
 @Transactional
 public class WorkProductDAOHibernate
-extends GenericHibernateDAO<WorkProduct, Integer>
-implements WorkProductDAO, WorkProductConstants {
+    extends GenericHibernateDAO<WorkProduct, Integer>
+    implements WorkProductDAO, WorkProductConstants {
 
     private final static Logger logger = LoggerFactory.getLogger(WorkProductDAOHibernate.class);
 
-    private UserInterestGroupDAO userInterestGroupDAO;
     private final static String N_WorkProductList = "WorkProductList";
     private final static Order SortByVersion_Desc = Order.desc(C_ProductVersion);
     private final static Order SortByVersion_Asc = Order.asc(C_ProductVersion);
@@ -49,6 +50,7 @@ implements WorkProductDAO, WorkProductConstants {
     private final static Order SortByProductID_Desc = Order.desc(C_ProductID);
     private final static Order SortByProductID_Asc = Order.asc(C_ProductID);
     private final static Criterion Criterion_State_Active = Restrictions.eq(C_State, State_Active);
+    private UserInterestGroupDAO userInterestGroupDAO;
 
     /*
      * @Override public void delete(Integer id) {
@@ -63,7 +65,7 @@ implements WorkProductDAO, WorkProductConstants {
 
         final WorkProduct product = this.findById(id);
         if (product != null) {
-            this.makeTransient(product);
+            makeTransient(product);
         }
     }
 
@@ -76,9 +78,9 @@ implements WorkProductDAO, WorkProductConstants {
     @Override
     public List<WorkProduct> findAll(boolean isAscending) {
 
-        final List<WorkProduct> productList = this.findUniquProductList(isAscending ? SortByLastUpdated_Asc : SortByLastUpdated_Desc);
+        final List<WorkProduct> productList = findUniquProductList(isAscending ? SortByLastUpdated_Asc : SortByLastUpdated_Desc);
         logger.debug("findAll: " + (isAscending ? Order_Asc : Order_Desc) + ", found " +
-            (productList == null ? 0 : productList.size()) + " entries");
+                     (productList == null ? 0 : productList.size()) + " entries");
         return productList == null ? new ArrayList<WorkProduct>() : productList;
     }
 
@@ -92,9 +94,7 @@ implements WorkProductDAO, WorkProductConstants {
         final List<Order> orderList = new ArrayList<Order>();
         orderList.add(SortByVersion_Desc);
 
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0,
-            orderList,
-            criterionList);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orderList, criterionList);
         return productList;
     }
 
@@ -107,9 +107,7 @@ implements WorkProductDAO, WorkProductConstants {
         criterionList.add(Restrictions.eq(C_ProductID, productID));
         final List<Order> orderList = new ArrayList<Order>();
 
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0,
-            orderList,
-            criterionList);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orderList, criterionList);
         return productList;
     }
 
@@ -119,13 +117,11 @@ implements WorkProductDAO, WorkProductConstants {
         logger.debug("findByInterestGroup: IGID: " + interestGroupID);
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.like(C_AssociatedInterestGroupIDs, "%" + interestGroupID +
-            "%"));
+                                                                          "%"));
         final List<Order> orderList = new ArrayList<Order>();
         orderList.add(SortByProductID_Desc);
         orderList.add(SortByVersion_Desc);
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0,
-            orderList,
-            criterionList);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orderList, criterionList);
         if ((productList != null) && (productList.size() > 0)) {
             final Hashtable<String, WorkProduct> productHash = new Hashtable<String, WorkProduct>();
             for (final WorkProduct product : productList) {
@@ -148,9 +144,10 @@ implements WorkProductDAO, WorkProductConstants {
     public List<WorkProduct> findByInterestGroupAndType(String interestGroupID, String productType) {
 
         logger.debug("findByInterestGroupAndType: IGID: " + interestGroupID + ", ProductType: " +
-            productType);
-        final List<WorkProduct> productList = this.findUniquProductList(null,
-            Restrictions.eq(C_ProductType, productType));
+                     productType);
+        final List<WorkProduct> productList = findUniquProductList(null,
+                                                                   Restrictions.eq(C_ProductType,
+                                                                                   productType));
         final List<WorkProduct> products = new ArrayList<WorkProduct>();
         for (final WorkProduct product : productList) {
             if (product.getAssociatedInterestGroupIDs().contains(interestGroupID)) {
@@ -171,10 +168,10 @@ implements WorkProductDAO, WorkProductConstants {
         final List<Criterion> criterions = new ArrayList<Criterion>();
         criterions.add(Restrictions.eq(C_ProductID, productID));
 
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0, orders, criterions);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orders, criterions);
 
         logger.debug("findByProductID: " + productID + ", found " +
-            (productList == null ? 0 : productList.size()) + " entries");
+                     (productList == null ? 0 : productList.size()) + " entries");
         if ((productList == null) || (productList.size() == 0)) {
             return null;
         }
@@ -186,16 +183,14 @@ implements WorkProductDAO, WorkProductConstants {
     public WorkProduct findByProductIDAndVersion(String productID, Integer productVersion) {
 
         logger.debug("findByProductID: ProductID: " + productID + ", ProductVersion: " +
-            productVersion);
+                     productVersion);
 
         final List<Criterion> criterionList = new ArrayList<Criterion>();
         criterionList.add(Restrictions.eq(C_ProductID, productID));
         criterionList.add(Restrictions.eq(C_ProductVersion, productVersion));
         final List<Order> orderList = new ArrayList<Order>();
 
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0,
-            orderList,
-            criterionList);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orderList, criterionList);
         if ((productList == null) || (productList.size() == 0)) {
             return null;
         }
@@ -208,10 +203,11 @@ implements WorkProductDAO, WorkProductConstants {
 
         logger.debug("findByProductType: ProductType: " + productType);
 
-        final List<WorkProduct> productList = this.findUniquProductList(null,
-            Restrictions.eq(C_ProductType, productType));
+        final List<WorkProduct> productList = findUniquProductList(null,
+                                                                   Restrictions.eq(C_ProductType,
+                                                                                   productType));
         logger.debug("findByProductType: " + productType + ", found " +
-            (productList != null ? productList.size() : 0) + " entries");
+                     (productList != null ? productList.size() : 0) + " entries");
 
         return productList;
     }
@@ -228,18 +224,18 @@ implements WorkProductDAO, WorkProductConstants {
     public WorkProduct findByWorkProductIdentification(IdentificationType pkgId) {
 
         logger.debug("findByWorkProductIdentification: productID: " +
-            pkgId.getIdentifier().getStringValue() + ", productType: " +
-            pkgId.getType().getStringValue() + ", productVersion: " +
-            pkgId.getVersion().getStringValue() + ", checksum: " +
-            pkgId.getChecksum().getStringValue() + ", state: " +
-            pkgId.getState().toString());
+                     pkgId.getIdentifier().getStringValue() + ", productType: " +
+                     pkgId.getType().getStringValue() + ", productVersion: " +
+                     pkgId.getVersion().getStringValue() + ", checksum: " +
+                     pkgId.getChecksum().getStringValue() + ", state: " +
+                     pkgId.getState().toString());
         final Criterion c1 = Restrictions.eq(C_ProductID, pkgId.getIdentifier().getStringValue());
         final Criterion c2 = Restrictions.eq(C_Checksum, pkgId.getChecksum().getStringValue());
         final Criterion c3 = Restrictions.eq(C_ProductType, pkgId.getType().getStringValue());
         final Criterion c4 = Restrictions.eq(C_State, pkgId.getState().toString());
         final Criterion c5 = Restrictions.eq(C_ProductVersion,
-            Integer.parseInt(pkgId.getVersion().getStringValue()));
-        final List<WorkProduct> productList = this.findUniquProductList(null, c1, c2, c3, c4, c5);
+                                             Integer.parseInt(pkgId.getVersion().getStringValue()));
+        final List<WorkProduct> productList = findUniquProductList(null, c1, c2, c3, c4, c5);
         logger.debug("findByWorkProductIdentification found: " + productList.size() + " entries");
         return productList != null ? productList.get(0) : null;
     }
@@ -262,9 +258,9 @@ implements WorkProductDAO, WorkProductConstants {
         orderList.add(SortByProductID_Desc);
         orderList.add(queryBuilder.getOrder());
 
-        final List<WorkProduct> products = this.findByCriteriaAndOrder(queryBuilder.getStartIndex(),
-            orderList,
-            queryBuilder.getCriterionList());
+        final List<WorkProduct> products = findByCriteriaAndOrder(queryBuilder.getStartIndex(),
+                                                                  orderList,
+                                                                  queryBuilder.getCriterionList());
 
         final Hashtable<String, WorkProduct> productSet = new Hashtable<String, WorkProduct>();
         List<WorkProduct> productList = new ArrayList<WorkProduct>();
@@ -295,6 +291,14 @@ implements WorkProductDAO, WorkProductConstants {
             for (final WorkProduct product : productList) {
                 // logger.debug("findDocsBySearchCriteria: found: " + product.getMetadata());
                 // filtered by access permission
+                if (queryBuilder.getWhatClause() != null) {
+                    final DigestDocument digest = product.getDigest();
+                    if ((digest != null) &&
+                        (DigestHelper.containWhatClause(digest.getDigest(),
+                                                        queryBuilder.getWhatClause()) == false)) {
+                        continue;
+                    }
+                }
                 final String IGID = product.getFirstAssociatedInterestGroupID();
                 if ((IGID == null) && (queryBuilder.getIGIDSet() != null)) {
                     continue;
@@ -308,7 +312,7 @@ implements WorkProductDAO, WorkProductConstants {
                 // if the product has IGID and query string contains IGID the we need to match for
                 // eligibilty
                 if ((IGID != null) &&
-                    (this.getUserInterestGroupDAO().isEligible(username, IGID) == false)) {
+                    (getUserInterestGroupDAO().isEligible(username, IGID) == false)) {
                     // logger.warn(username + " cannot access " + IGID + " skip product: " +
                     // product.getProductID());
                     continue;
@@ -321,8 +325,8 @@ implements WorkProductDAO, WorkProductConstants {
                 }
                 // filtered by the bounding box
                 if ((queryBuilder.getBoundingBox() != null) &&
-                    (this.intersects(queryBuilder.getBoundingBox(),
-                        DigestHelper.getFirstGeometry(WorkProductHelper.getDigestElement(productDocument))) == false)) {
+                    (intersects(queryBuilder.getBoundingBox(),
+                                DigestHelper.getFirstGeometry(WorkProductHelper.getDigestElement(productDocument))) == false)) {
                     continue;
                 }
 
@@ -363,9 +367,7 @@ implements WorkProductDAO, WorkProductConstants {
             orderList.add(SortByProductID_Desc); // criteria.addOrder(SortByProductID_Desc);
         }
 
-        final List<WorkProduct> productList = this.findByCriteriaAndOrder(0,
-            orderList,
-            criterionList);
+        final List<WorkProduct> productList = findByCriteriaAndOrder(0, orderList, criterionList);
 
         final List<WorkProduct> products = new ArrayList<WorkProduct>();
         String productID = null;
@@ -380,7 +382,7 @@ implements WorkProductDAO, WorkProductConstants {
 
     public UserInterestGroupDAO getUserInterestGroupDAO() {
 
-        return this.userInterestGroupDAO;
+        return userInterestGroupDAO;
     }
 
     private boolean intersects(Double[][] boundingBox, Geometry geom) {
@@ -403,6 +405,6 @@ implements WorkProductDAO, WorkProductConstants {
 
     public void setUserInterestGroupDAO(UserInterestGroupDAO interestGroupDAO) {
 
-        this.userInterestGroupDAO = interestGroupDAO;
+        userInterestGroupDAO = interestGroupDAO;
     }
 }

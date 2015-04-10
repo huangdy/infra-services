@@ -68,31 +68,49 @@ public class WorkProductDAOTest {
     public void testFindDocBySearchCriteria() throws Exception {
 
         final Map<String, String[]> params = new HashMap<String, String[]>();
-        params.put("req.remoteUser", new String[] {
-            "admin",
-            ""
-        });
+
         params.put("full", new String[] {
             "true",
             ""
         });
+        params.put("format", new String[] {
+            "xml"
+        });
+        params.put("what", new String[] {
+            "Fire"
+        });
+        params.put("req.remoteUser", new String[] {
+            "admin",
+        });
+
+        /*
         params.put("productType", new String[] {
             "incident",
             ""
         });
-        // params.put("productType", new String[] { "alert", "" });
-        // params.put("startIndex", new String[] { "1", "" });
-        // params.put("count", new String[] { "3", "" });
+        params.put("productType", new String[] {
+            "alert",
+        });
+        params.put("startIndex", new String[] {
+            "1",
+        });
+        params.put("count", new String[] {
+            "3",
+        });
+
         params.put("bbox", new String[] {
             "-120,30,-80,50",
             ""
         });
-        // params.put("productVersion", new String[] { "1", "" });
-        // params.put("productID", new String[] { "Alert-afcb54aa-ea1b-41e2-8824-92134a11aead", "" });
-        params.put("format", new String[] {
-            "rss",
-            ""
+        params.put("productVersion", new String[] {
+            "1",
         });
+        params.put("productID", new String[] {
+            "Alert-afcb54aa-ea1b-41e2-8824-92134a11aead",
+        });
+
+         */
+
         final Document doc = productDAO.findDocsBySearchCriteria(params);
         if (doc != null) {
             System.out.println("Found:\n" + XmlUtil.getDOMString(doc));

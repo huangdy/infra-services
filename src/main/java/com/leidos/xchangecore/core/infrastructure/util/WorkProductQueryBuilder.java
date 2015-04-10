@@ -17,9 +17,8 @@ import org.slf4j.LoggerFactory;
 public class WorkProductQueryBuilder
 implements WorkProductConstants {
 
-    private final Logger logger = LoggerFactory.getLogger(WorkProductQueryBuilder.class);
-
     private static final String Key_InterestGroup = "interestGroup";
+    private static final String Key_What = "what";
     private static final String Key_Username = "req.remoteUser";
     private static final String Key_Full = "full";
     private static final String Key_BBox = "bbox";
@@ -29,17 +28,7 @@ implements WorkProductConstants {
     private static final String OP_LE = "<=";
     private static final String OP_GE = ">=";
     private static final String OP_LIKE = "like";
-
     public static HashMap<String, String[]> paramMap;
-
-    private Double[][] boundingBox = null;
-    private final List<Criterion> criterionList = new ArrayList<Criterion>();
-    private Order order = Order.desc(C_UpdatedDate);
-    private String username = null;
-    private int startIndex = 0;
-    private int count = -1;
-    private boolean full = false;
-    private Set<String> iGIDSet = null;
 
     static {
         paramMap = new HashMap<String, String[]>();
@@ -90,6 +79,18 @@ implements WorkProductConstants {
          */
     }
 
+    private final Logger logger = LoggerFactory.getLogger(WorkProductQueryBuilder.class);
+    private Double[][] boundingBox = null;
+    private final List<Criterion> criterionList = new ArrayList<Criterion>();
+    private Order order = Order.desc(C_UpdatedDate);
+    private String username = null;
+    private int startIndex = 0;
+    private int count = -1;
+    private boolean full = false;
+    private String whatClause = null;
+
+    private Set<String> iGIDSet = null;
+
     public WorkProductQueryBuilder() {
 
     }
@@ -100,22 +101,22 @@ implements WorkProductConstants {
         for (final String key : keys) {
             final String[] values = params.get(key);
             if (key.equalsIgnoreCase(Key_InterestGroup)) {
-                this.setIGIDSet(values);
-                this.logger.debug("\tsetInterestGroupID: " + values.length + " entries");
+                setIGIDSet(values);
+                logger.debug("\tsetInterestGroupID: " + values.length + " entries");
             } else if (key.equalsIgnoreCase(Key_Username)) {
-                this.setUsername(values[0]);
-                this.logger.debug("\tsetUsername: " + this.getUsername());
+                setUsername(values[0]);
+                logger.debug("\tsetUsername: " + getUsername());
             } else if (key.equalsIgnoreCase(Key_Full)) {
                 if ((values != null) && values[0].equalsIgnoreCase("true")) {
-                    this.setFull(true);
-                    this.logger.debug("\tfull: true");
+                    setFull(true);
+                    logger.debug("\tfull: true");
                 }
             } else if (key.equalsIgnoreCase(Key_StartIndex)) {
-                this.setStartIndex(this.getIntegerValue(values[0]));
-                this.logger.debug("\tstartIndex: " + this.getStartIndex());
+                setStartIndex(getIntegerValue(values[0]));
+                logger.debug("\tstartIndex: " + getStartIndex());
             } else if (key.equalsIgnoreCase(Key_Count)) {
-                this.setCount(this.getIntegerValue(values[0]));
-                this.logger.debug("\tcount: " + this.getCount());
+                setCount(getIntegerValue(values[0]));
+                logger.debug("\tcount: " + getCount());
             } else if (key.equalsIgnoreCase(Key_BBox)) {
                 // the coordinates are lon/lat or x/y based on the JTS
                 final String[] coordArray = values[0].split(",", -1);
@@ -125,35 +126,36 @@ implements WorkProductConstants {
                 final Double east = Double.valueOf(coordArray[3]);
 
                 // the boundingBox will be used by vividsolution as the format of (x, y)
-                this.boundingBox = new Double[5][2];
-                this.boundingBox[0][0] = west;
-                this.boundingBox[0][1] = south;
-                this.boundingBox[1][0] = west;
-                this.boundingBox[1][1] = north;
-                this.boundingBox[2][0] = east;
-                this.boundingBox[2][1] = north;
-                this.boundingBox[3][0] = east;
-                this.boundingBox[3][1] = south;
-                this.boundingBox[4][0] = west;
-                this.boundingBox[4][1] = south;
-                this.logger.debug("\tBoundingBox: " + values[0]);
+                boundingBox = new Double[5][2];
+                boundingBox[0][0] = west;
+                boundingBox[0][1] = south;
+                boundingBox[1][0] = west;
+                boundingBox[1][1] = north;
+                boundingBox[2][0] = east;
+                boundingBox[2][1] = north;
+                boundingBox[3][0] = east;
+                boundingBox[3][1] = south;
+                boundingBox[4][0] = west;
+                boundingBox[4][1] = south;
+                logger.debug("\tBoundingBox: " + values[0]);
             } else if (key.endsWith(Key_OrderBy) && (values.length == 2)) {
-                this.setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0]) : Order.asc(values[0]));
-                this.logger.debug("\t" + values[0] + "orderBy: " + values[1]);
+                setOrder(values[1].equalsIgnoreCase(Order_Desc) ? Order.desc(values[0]) : Order.asc(values[0]));
+                logger.debug("\t" + values[0] + "orderBy: " + values[1]);
             } else if (paramMap.containsKey(key.toLowerCase())) {
-                final List<Criterion> cList = this.createCriterionList(key, values);
+                final List<Criterion> cList = createCriterionList(key, values);
                 if (cList.size() == 1) {
-                    this.criterionList.add(cList.get(0));
+                    criterionList.add(cList.get(0));
                 } else {
                     final Disjunction or = Restrictions.disjunction();
                     for (final Criterion c : cList) {
                         or.add(c);
                     }
-                    this.criterionList.add(or);
+                    criterionList.add(or);
                 }
+            } else if (key.equalsIgnoreCase(Key_What)) {
+                setWhatClause(values[0]);
             } else {
-                this.logger.warn("Unresolved parameter: [key/value]: [" + key + "/" + values[0] +
-                                 "]");
+                logger.warn("Unresolved parameter: [key/value]: [" + key + "/" + values[0] + "]");
             }
         }
     }
@@ -168,19 +170,19 @@ implements WorkProductConstants {
             }
             if (ops[1].equalsIgnoreCase(OP_EQUAL)) {
                 cList.add(Restrictions.eq(ops[0],
-                    ops[0].equalsIgnoreCase(C_ProductVersion) ? new Integer(value) : value));
-                this.logger.debug("\t" + ops[0] + " = " + value);
+                                          ops[0].equalsIgnoreCase(C_ProductVersion) ? new Integer(value) : value));
+                logger.debug("\t" + ops[0] + " = " + value);
             } else if (ops[1].equalsIgnoreCase(OP_LIKE)) {
                 cList.add(Restrictions.like(ops[0], value));
-                this.logger.debug("\t" + ops[0] + " like " + value);
+                logger.debug("\t" + ops[0] + " like " + value);
             } else if (ops[1].equalsIgnoreCase(OP_LE)) {
                 cList.add(Restrictions.le(ops[0], value));
-                this.logger.debug("\t" + ops[0] + " <= " + value);
+                logger.debug("\t" + ops[0] + " <= " + value);
             } else if (ops[1].equalsIgnoreCase(OP_GE)) {
                 cList.add(Restrictions.ge(ops[0], value));
-                this.logger.debug("\t" + ops[0] + " >= " + value);
+                logger.debug("\t" + ops[0] + " >= " + value);
             } else {
-                this.logger.error("non-processed operation: " + ops[1] + " for " + ops[0]);
+                logger.error("non-processed operation: " + ops[1] + " for " + ops[0]);
             }
         }
 
@@ -189,22 +191,22 @@ implements WorkProductConstants {
 
     public Double[][] getBoundingBox() {
 
-        return this.boundingBox;
+        return boundingBox;
     }
 
     public int getCount() {
 
-        return this.count;
+        return count;
     }
 
     public List<Criterion> getCriterionList() {
 
-        return this.criterionList;
+        return criterionList;
     }
 
     public Set<String> getIGIDSet() {
 
-        return this.iGIDSet;
+        return iGIDSet;
     }
 
     private Integer getIntegerValue(String intString) {
@@ -212,29 +214,34 @@ implements WorkProductConstants {
         try {
             return new Integer(Integer.parseInt(intString));
         } catch (final Exception e) {
-            this.logger.error(intString + " is invalide integer");
+            logger.error(intString + " is invalide integer");
             return new Integer(1);
         }
     }
 
     public Order getOrder() {
 
-        return this.order;
+        return order;
     }
 
     public int getStartIndex() {
 
-        return this.startIndex;
+        return startIndex;
     }
 
     public String getUsername() {
 
-        return this.username;
+        return username;
+    }
+
+    public String getWhatClause() {
+
+        return whatClause;
     }
 
     public boolean isFull() {
 
-        return this.full;
+        return full;
     }
 
     public void setBoundingBox(Double[][] boundingBox) {
@@ -254,9 +261,9 @@ implements WorkProductConstants {
 
     public void setIGIDSet(String[] iGIDs) {
 
-        this.iGIDSet = new HashSet<String>();
+        iGIDSet = new HashSet<String>();
         for (final String iGID : iGIDs) {
-            this.iGIDSet.add(iGID);
+            iGIDSet.add(iGID);
         }
     }
 
@@ -273,5 +280,10 @@ implements WorkProductConstants {
     public void setUsername(String username) {
 
         this.username = username;
+    }
+
+    public void setWhatClause(String whatClause) {
+
+        this.whatClause = whatClause;
     }
 }
