@@ -16,12 +16,16 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.XmlCursor;
+import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.w3c.dom.Document;
 
 public class XmlUtil {
+
+    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint().setLoadStripWhitespace();
+
+    public static final XmlOptions innerOnly = new XmlOptions().setSavePrettyPrint().setSaveInner();
 
     public static String Document2String(Document doc) throws IOException, TransformerException {
 
@@ -59,10 +63,14 @@ public class XmlUtil {
 
     public static String getTextFromAny(XmlObject object) {
 
+        return ((SimpleValue) object).getStringValue();
+
+        /* ddh 04/13/2015
         final XmlCursor c = object.newCursor();
         final String text = c.getTextValue();
         c.dispose();
         return text;
+         */
     }
 
     public static final void substitute(XmlObject parentObject,
@@ -72,14 +80,9 @@ public class XmlUtil {
                                         XmlObject theObject) {
 
         final XmlObject subObject = parentObject.substitute(new QName(subNamespace, subTypeName),
-            subSchemaType);
-        if (subObject != parentObject) {
+                                                            subSchemaType);
+        if (subObject != parentObject)
             subObject.set(theObject);
-        }
     }
-
-    public static final XmlOptions normal = new XmlOptions().setSavePrettyPrint().setLoadStripWhitespace();
-
-    public static final XmlOptions innerOnly = new XmlOptions().setSavePrettyPrint().setSaveInner();
 
 }

@@ -40,6 +40,7 @@ import java.util.Set;
 import net.opengis.gml.x32.DirectPositionType;
 import net.opengis.gml.x32.LinearRingType;
 
+import org.apache.xmlbeans.SimpleValue;
 import org.apache.xmlbeans.XmlObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,7 +52,7 @@ import com.usersmarts.xmf2.MarshalContext;
 import com.vividsolutions.jts.geom.Geometry;
 
 public class DigestHelper
-implements InfrastructureNamespaces, DigestConstant {
+    implements InfrastructureNamespaces, DigestConstant {
 
     private static Configuration gmlParseCfg = new Configuration(GMLDomModule.class);
 
@@ -66,52 +67,44 @@ implements InfrastructureNamespaces, DigestConstant {
     public static CauseOfRelationshipType getCauseByEffectID(DigestType digest, String effectID) {
 
         final RelationshipType[] relationships = digest.getRelationshipAbstractArray();
-        for (final RelationshipType relationship : relationships) {
+        for (final RelationshipType relationship : relationships)
             if (relationship instanceof CauseOfRelationshipType) {
                 final CauseOfRelationshipType causeOf = (CauseOfRelationshipType) relationship;
                 if (causeOf.getEffect().getRef().size() > 0) {
                     final String effectValue = (String) causeOf.getEffect().getRef().get(0);
-                    if (effectValue.equals(effectID)) {
+                    if (effectValue.equals(effectID))
                         return causeOf;
-                    }
                 }
             }
-        }
         return null;
     }
 
     public static EventType getFirstEventWithActivityNameIdentifier(DigestType digest) {
 
         final ThingType[] things = digest.getThingAbstractArray();
-        for (final ThingType thing : things) {
+        for (final ThingType thing : things)
             if (thing instanceof EventType) {
                 final XmlObject[] ids = thing.selectChildren(IdentifierType.type.getName().getNamespaceURI(),
-                                                             "Identifier");
-                if (ids.length != 0) {
-                    for (final XmlObject object : ids) {
-                        if (((IdentifierType) object).getCode().equals("ActivityName")) {
+                    "Identifier");
+                if (ids.length != 0)
+                    for (final XmlObject object : ids)
+                        if (((IdentifierType) object).getCode().equals("ActivityName"))
                             return (EventType) thing;
-                        }
-                    }
-                }
             }
-        }
         return null;
     }
 
     public static Geometry getFirstGeometry(DigestType digest) {
 
-        for (final ThingType thing : digest.getThingAbstractArray()) {
+        for (final ThingType thing : digest.getThingAbstractArray())
             if (thing instanceof LocationType) {
                 final LocationType location = (LocationType) thing;
                 for (final GeoLocationType geo : location.getGeoLocationArray()) {
                     final Geometry geometry = getGeometry(geo);
-                    if (geometry != null) {
+                    if (geometry != null)
                         return geometry;
-                    }
                 }
             }
-        }
         return null;
     }
 
@@ -144,21 +137,17 @@ implements InfrastructureNamespaces, DigestConstant {
     public static Geometry getGeometryFromLocationByID(DigestType digest, String id) {
 
         final XmlObject[] elements = digest.selectChildren(NS_UCORE, "Location");
-        if ((elements != null) && (elements.length > 0)) {
-            for (final XmlObject element : elements) {
+        if (elements != null && elements.length > 0)
+            for (final XmlObject element : elements)
                 if (element instanceof LocationType) {
                     final LocationType location = (LocationType) element;
-                    if (location.getId().equals(id)) {
+                    if (location.getId().equals(id))
                         for (final GeoLocationType geo : location.getGeoLocationArray()) {
                             final Geometry geometry = getGeometry(geo);
-                            if (geometry != null) {
+                            if (geometry != null)
                                 return geometry;
-                            }
                         }
-                    }
                 }
-            }
-        }
         return null;
     }
 
@@ -167,12 +156,11 @@ implements InfrastructureNamespaces, DigestConstant {
         final ArrayList<LocationType> list = new ArrayList<LocationType>();
         final XmlObject[] locations = digest.selectChildren(gov.ucore.ucore.x20.LocationType.type.getName().getNamespaceURI(),
                                                             "Location");
-        if (locations.length > 0) {
+        if (locations.length > 0)
             for (final XmlObject object : locations) {
                 final LocationType location = (LocationType) object;
                 list.add(location);
             }
-        }
         return list;
     }
 
@@ -184,9 +172,8 @@ implements InfrastructureNamespaces, DigestConstant {
                                                                 type);
         for (final XmlObject relationship : relationships) {
             final EventLocationRelationshipType elRelationship = (EventLocationRelationshipType) relationship;
-            if (elRelationship.getEventRef().getRef().get(0).equals(eventID.getRef().get(0))) {
+            if (elRelationship.getEventRef().getRef().get(0).equals(eventID.getRef().get(0)))
                 return elRelationship;
-            }
         }
         return null;
     }
@@ -197,9 +184,8 @@ implements InfrastructureNamespaces, DigestConstant {
                                                                 String label,
                                                                 String value) {
 
-        if (thing == null) {
+        if (thing == null)
             return null;
-        }
 
         SimplePropertyType result = null;
         final XmlObject[] props = thing.selectChildren(SimplePropertyType.type.getName().getNamespaceURI(),
@@ -220,11 +206,9 @@ implements InfrastructureNamespaces, DigestConstant {
 
         final ThingType[] things = digest.getThingAbstractArray();
         final Set<ThingType> results = new HashSet<ThingType>();
-        for (final ThingType thing : things) {
-            if (objectHasWhatType(codespace, code, null, null, thing)) {
+        for (final ThingType thing : things)
+            if (objectHasWhatType(codespace, code, null, null, thing))
                 results.add(thing);
-            }
-        }
         return results;
     }
 
@@ -239,67 +223,52 @@ implements InfrastructureNamespaces, DigestConstant {
                                             String value,
                                             XmlObject event) {
 
-        boolean codespaceOk = false;
-        boolean codeOk = false;
-        boolean labelOk = false;
-        boolean valueOk = false;
-        boolean ok = false;
         final XmlObject[] props = event.selectChildren(WhatType.type.getName().getNamespaceURI(),
                                                        "What");
-        for (final XmlObject prop : props) {
-            // System.out.println(prop);
-            // Find the SimpleProperty with the correct codespace (there may be
-            // more than one)
-            final XmlObject codespaceAttr = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                                                                 "codespace");
-            if (codespaceAttr != null) {
-                // System.out.println(getTextFromAny(codespaceAttr) + " " +
-                // codespace);
-                if (XmlUtil.getTextFromAny(codespaceAttr).equals(codespace)) {
-                    codespaceOk = true;
-                    // Check if it has the correct code value
-                    if (code != null) {
-                        final XmlObject codeAttr = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                                                                        "code");
-                        if ((codeAttr != null) && XmlUtil.getTextFromAny(codeAttr).equals(code)) {
-                            codeOk = true;
-                        }
-                    } else {
-                        codeOk = true;
-                    }
-                    // Check if it has the correct label
-                    if (label != null) {
-                        final XmlObject labelAttr = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                                                                         "label");
-                        if ((labelAttr != null) && XmlUtil.getTextFromAny(labelAttr).equals(label)) {
-                            labelOk = true;
-                        }
-                    } else {
-                        labelOk = true;
-                    }
 
-                    // Check if it has the correct value
-                    if (value != null) {
-                        if (XmlUtil.getTextFromAny(prop).equals(value)) {
-                            valueOk = true;
-                        }
-                    } else {
-                        valueOk = true;
-                    }
-                }
+        for (final XmlObject prop : props) {
+
+            XmlObject xmlObject = null;
+            String stringValue = null;
+            if (codespace != null) {
+                // Find the SimpleProperty with the correct codespace (there may be more than one)
+                if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
+                                                      "codespace")) == null)
+                    continue;
+                stringValue = ((SimpleValue) xmlObject).getStringValue();
+                if (stringValue != null && stringValue.equalsIgnoreCase(codespace) == false)
+                    continue;
             }
-            ok = codespaceOk && codeOk && labelOk && valueOk;
-            if (ok) {
-                break;
-            } else {
-                // System.out.println(codespaceOk);
-                // System.out.println(codeOk);
-                // System.out.println(labelOk);
-                // System.out.println(valueOk);
-                ok = codespaceOk = codeOk = labelOk = valueOk = false;
+
+            if (code != null) {
+                if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
+                                                      "code")) == null)
+                    continue;
+
+                stringValue = ((SimpleValue) xmlObject).getStringValue();
+                if (stringValue != null && stringValue.equalsIgnoreCase(code) == false)
+                    continue;
             }
+
+            if (label != null) {
+                if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
+                    "label")) == null)
+                    continue;
+
+                stringValue = ((SimpleValue) xmlObject).getStringValue();
+                if (stringValue != null && stringValue.equalsIgnoreCase(label) == false)
+                    continue;
+            }
+
+            if (value != null) {
+                stringValue = ((SimpleValue) xmlObject).getStringValue();
+                if (stringValue != null && stringValue.equalsIgnoreCase(value) == false)
+                    continue;
+            }
+            return true;
         }
-        return ok;
+
+        return false;
     }
 
     protected static boolean simplePropertyMatches(SimplePropertyType property,
@@ -309,35 +278,28 @@ implements InfrastructureNamespaces, DigestConstant {
                                                    String value) {
 
         // must have at least a label
-        if (label == null) {
+        if (label == null)
             return false;
-        }
 
         if (property.getLabel().getStringValue().equals(label)) {
             boolean codespaceOK = false;
             boolean codeOK = false;
             boolean valueOK = false;
             if (codespace != null) {
-                if (property.getCodespace().equals(codespace)) {
+                if (property.getCodespace().equals(codespace))
                     codespaceOK = true;
-                }
-            } else {
+            } else
                 codespaceOK = true;
-            }
             if (code != null) {
-                if (property.getCode().equals(code)) {
+                if (property.getCode().equals(code))
                     codeOK = true;
-                }
-            } else {
+            } else
                 codeOK = true;
-            }
             if (value != null) {
-                if (property.getStringValue().equals(value)) {
+                if (property.getStringValue().equals(value))
                     valueOK = true;
-                }
-            } else {
+            } else
                 valueOK = true;
-            }
             return codespaceOK && codeOK && valueOK;
         }
         return false;
@@ -396,9 +358,8 @@ implements InfrastructureNamespaces, DigestConstant {
         polygon.setSrsName(GeoUtil.EPSG4326);
         if (polygon.getExterior().getAbstractRing() instanceof LinearRingType) {
             final LinearRingType ring = (LinearRingType) polygon.getExterior().getAbstractRing();
-            for (final DirectPositionType pos : ring.getPosArray()) {
+            for (final DirectPositionType pos : ring.getPosArray())
                 pos.setSrsName(GeoUtil.EPSG4326);
-            }
         }
         final PolygonType uPolygon = PolygonType.Factory.newInstance();
         uPolygon.addNewPolygon().set(polygon);
@@ -416,18 +377,14 @@ implements InfrastructureNamespaces, DigestConstant {
                                          String value) {
 
         final SimplePropertyType property = SimplePropertyType.Factory.newInstance();
-        if (codespace != null) {
+        if (codespace != null)
             property.setCodespace(codespace);
-        }
-        if (code != null) {
+        if (code != null)
             property.setCode(code);
-        }
-        if (label != null) {
+        if (label != null)
             property.addNewLabel().setStringValue(label);
-        }
-        if (value != null) {
+        if (value != null)
             property.setStringValue(value);
-        }
         thing.addNewSimpleProperty().set(property);
     }
 
@@ -444,11 +401,9 @@ implements InfrastructureNamespaces, DigestConstant {
     public EventType getEvent(String eventId) {
 
         final ThingType[] things = digest.getDigest().getThingAbstractArray();
-        for (final ThingType thing : things) {
-            if (thing.getId().equalsIgnoreCase(eventId.trim()) && (thing instanceof EventType)) {
+        for (final ThingType thing : things)
+            if (thing.getId().equalsIgnoreCase(eventId.trim()) && thing instanceof EventType)
                 return (EventType) thing;
-            }
-        }
         return null;
     }
 
@@ -531,20 +486,16 @@ implements InfrastructureNamespaces, DigestConstant {
                 id.setCodespace(codespace[0]);
                 id.setCode(codespace[1]);
                 id.addNewLabel().setStringValue(codespace[2]);
-            } else {
+            } else
                 id.addNewLabel().setStringValue("label");
-            }
         }
 
-        if (descriptor != null) {
+        if (descriptor != null)
             event.addNewDescriptor().setStringValue(descriptor);
-        }
-        if (metadata != null) {
+        if (metadata != null)
             event.setMetadata(metadata);
-        }
-        if (property != null) {
+        if (property != null)
             event.addNewSimpleProperty().set(property);
-        }
 
         this.setEvent(event);
     }
@@ -668,39 +619,32 @@ implements InfrastructureNamespaces, DigestConstant {
             TimeInstantType time = TimeInstantType.Factory.newInstance();
             try {
                 // check yyyy
-                if (!cal.isSet(Calendar.YEAR)) {
+                if (!cal.isSet(Calendar.YEAR))
                     cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
-                }
 
                 // check MM
-                if (!cal.isSet(Calendar.MONTH)) {
+                if (!cal.isSet(Calendar.MONTH))
                     cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
-                }
 
                 // check dd
-                if (!cal.isSet(Calendar.DAY_OF_MONTH)) {
+                if (!cal.isSet(Calendar.DAY_OF_MONTH))
                     cal.set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH));
-                }
 
                 // check HH
-                if (!cal.isSet(Calendar.HOUR_OF_DAY)) {
+                if (!cal.isSet(Calendar.HOUR_OF_DAY))
                     cal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY));
-                }
 
                 // check mm
-                if (!cal.isSet(Calendar.MINUTE)) {
+                if (!cal.isSet(Calendar.MINUTE))
                     cal.set(Calendar.MINUTE, now.get(Calendar.MINUTE));
-                }
 
                 // check ss
-                if (!cal.isSet(Calendar.SECOND)) {
+                if (!cal.isSet(Calendar.SECOND))
                     cal.set(Calendar.SECOND, now.get(Calendar.SECOND));
-                }
 
                 // check timezone
-                if (cal.getTimeZone() == null) {
+                if (cal.getTimeZone() == null)
                     cal.setTimeZone(now.getTimeZone());
-                }
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
@@ -782,39 +726,32 @@ implements InfrastructureNamespaces, DigestConstant {
             TimeInstantType time = TimeInstantType.Factory.newInstance();
             try {
                 // check yyyy
-                if (!cal.isSet(Calendar.YEAR)) {
+                if (!cal.isSet(Calendar.YEAR))
                     cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
-                }
 
                 // check MM
-                if (!cal.isSet(Calendar.MONTH)) {
+                if (!cal.isSet(Calendar.MONTH))
                     cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
-                }
 
                 // check dd
-                if (!cal.isSet(Calendar.DAY_OF_MONTH)) {
+                if (!cal.isSet(Calendar.DAY_OF_MONTH))
                     cal.set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH));
-                }
 
                 // check HH
-                if (!cal.isSet(Calendar.HOUR_OF_DAY)) {
+                if (!cal.isSet(Calendar.HOUR_OF_DAY))
                     cal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY));
-                }
 
                 // check mm
-                if (!cal.isSet(Calendar.MINUTE)) {
+                if (!cal.isSet(Calendar.MINUTE))
                     cal.set(Calendar.MINUTE, now.get(Calendar.MINUTE));
-                }
 
                 // check ss
-                if (!cal.isSet(Calendar.SECOND)) {
+                if (!cal.isSet(Calendar.SECOND))
                     cal.set(Calendar.SECOND, now.get(Calendar.SECOND));
-                }
 
                 // check timezone
-                if (cal.getTimeZone() == null) {
+                if (cal.getTimeZone() == null)
                     cal.setTimeZone(now.getTimeZone());
-                }
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
@@ -877,35 +814,30 @@ implements InfrastructureNamespaces, DigestConstant {
     public void setWhatForEvent(WhatType theWhat, String eventId) {
 
         final ThingType[] things = digest.getDigest().getThingAbstractArray();
-        for (final ThingType thing : things) {
+        for (final ThingType thing : things)
             if (thing.getId().equals(eventId)) {
 
                 WhatType[] whats = null;
-                if (thing instanceof EventType) {
+                if (thing instanceof EventType)
                     whats = ((EventType) thing).getWhatArray();
-                } else if (thing instanceof EntityType) {
+                else if (thing instanceof EntityType)
                     whats = ((EntityType) thing).getWhatArray();
-                } else if (thing instanceof CollectionType) {
+                else if (thing instanceof CollectionType)
                     whats = ((CollectionType) thing).getWhatArray();
-                }
                 boolean found = false;
-                for (final WhatType what : whats) {
+                for (final WhatType what : whats)
                     if (what.equals(theWhat)) {
                         found = true;
                         break;
                     }
-                }
-                if (!found) {
-                    if (thing instanceof EventType) {
+                if (!found)
+                    if (thing instanceof EventType)
                         ((EventType) thing).addNewWhat().set(theWhat);
-                    } else if (thing instanceof EntityType) {
+                    else if (thing instanceof EntityType)
                         ((EntityType) thing).addNewWhat().set(theWhat);
-                    } else if (thing instanceof CollectionType) {
+                    else if (thing instanceof CollectionType)
                         ((CollectionType) thing).addNewWhat().set(theWhat);
-                    }
-                }
             }
-        }
     }
 
     @Override
