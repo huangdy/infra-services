@@ -82,4 +82,5 @@ public interface DigestConstant {
     public static final String S_TransportationEvent = "TransportationEvent";
     public static final String S_WeatherEvent = "WeatherEvent";
 
+    public static final String S_MetaCharacter = "*";
 }

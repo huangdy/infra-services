@@ -51,16 +51,16 @@ import com.usersmarts.xmf2.Configuration;
 import com.usersmarts.xmf2.MarshalContext;
 import com.vividsolutions.jts.geom.Geometry;
 
-public class DigestHelper
-    implements InfrastructureNamespaces, DigestConstant {
+public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
 
     private static Configuration gmlParseCfg = new Configuration(GMLDomModule.class);
+
+    private static Logger log = LoggerFactory.getLogger(DigestHelper.class);
 
     public static boolean containWhatClause(DigestType digest, String whatClause) {
 
         final Set<ThingType> whats = getThingsByWhatType(digest,
-                                                         InfrastructureNamespaces.NS_UCORE_CODESPACE,
-                                                         whatClause);
+                InfrastructureNamespaces.NS_UCORE_CODESPACE, whatClause);
         return whats.size() > 0;
     }
 
@@ -84,8 +84,8 @@ public class DigestHelper
         final ThingType[] things = digest.getThingAbstractArray();
         for (final ThingType thing : things)
             if (thing instanceof EventType) {
-                final XmlObject[] ids = thing.selectChildren(IdentifierType.type.getName().getNamespaceURI(),
-                    "Identifier");
+                final XmlObject[] ids = thing.selectChildren(IdentifierType.type.getName()
+                        .getNamespaceURI(), "Identifier");
                 if (ids.length != 0)
                     for (final XmlObject object : ids)
                         if (((IdentifierType) object).getCode().equals("ActivityName"))
@@ -120,7 +120,8 @@ public class DigestHelper
             result = getGeometry(node);
         } else if (abstr instanceof CircleByCenterPointType) {
             final PointType point = PointType.Factory.newInstance();
-            point.addNewPoint().setPos(((CircleByCenterPointType) abstr).getCircleByCenterPoint().getPos());
+            point.addNewPoint().setPos(
+                    ((CircleByCenterPointType) abstr).getCircleByCenterPoint().getPos());
             final Node node = point.getPoint().getDomNode();
             result = getGeometry(node);
         }
@@ -154,8 +155,8 @@ public class DigestHelper
     public static List<LocationType> getLocationElements(DigestType digest) {
 
         final ArrayList<LocationType> list = new ArrayList<LocationType>();
-        final XmlObject[] locations = digest.selectChildren(gov.ucore.ucore.x20.LocationType.type.getName().getNamespaceURI(),
-                                                            "Location");
+        final XmlObject[] locations = digest.selectChildren(gov.ucore.ucore.x20.LocationType.type
+                .getName().getNamespaceURI(), "Location");
         if (locations.length > 0)
             for (final XmlObject object : locations) {
                 final LocationType location = (LocationType) object;
@@ -164,12 +165,11 @@ public class DigestHelper
         return list;
     }
 
-    public static EventLocationRelationshipType getLocationRelationshipByTypeAndEventID(DigestType digest,
-                                                                                        String type,
-                                                                                        ThingRefType eventID) {
+    public static EventLocationRelationshipType getLocationRelationshipByTypeAndEventID(
+            DigestType digest, String type, ThingRefType eventID) {
 
-        final XmlObject[] relationships = digest.selectChildren(EventLocationRelationshipType.type.getName().getNamespaceURI(),
-                                                                type);
+        final XmlObject[] relationships = digest.selectChildren(EventLocationRelationshipType.type
+                .getName().getNamespaceURI(), type);
         for (final XmlObject relationship : relationships) {
             final EventLocationRelationshipType elRelationship = (EventLocationRelationshipType) relationship;
             if (elRelationship.getEventRef().getRef().get(0).equals(eventID.getRef().get(0)))
@@ -178,18 +178,15 @@ public class DigestHelper
         return null;
     }
 
-    public static SimplePropertyType getSimplePropertyFromThing(ThingType thing,
-                                                                String codespace,
-                                                                String code,
-                                                                String label,
-                                                                String value) {
+    public static SimplePropertyType getSimplePropertyFromThing(ThingType thing, String codespace,
+            String code, String label, String value) {
 
         if (thing == null)
             return null;
 
         SimplePropertyType result = null;
-        final XmlObject[] props = thing.selectChildren(SimplePropertyType.type.getName().getNamespaceURI(),
-                                                       "SimpleProperty");
+        final XmlObject[] props = thing.selectChildren(SimplePropertyType.type.getName()
+                .getNamespaceURI(), "SimpleProperty");
         for (final XmlObject prop : props) {
             final SimplePropertyType property = (SimplePropertyType) prop;
             if (simplePropertyMatches(property, codespace, code, label, value)) {
@@ -200,9 +197,8 @@ public class DigestHelper
         return result;
     }
 
-    public static Set<ThingType> getThingsByWhatType(DigestType digest,
-                                                     String codespace,
-                                                     String code) {
+    public static Set<ThingType> getThingsByWhatType(DigestType digest, String codespace,
+            String code) {
 
         final ThingType[] things = digest.getThingAbstractArray();
         final Set<ThingType> results = new HashSet<ThingType>();
@@ -217,14 +213,25 @@ public class DigestHelper
         return "Event";
     }
 
-    public static boolean objectHasWhatType(String codespace,
-                                            String code,
-                                            String label,
-                                            String value,
-                                            XmlObject event) {
+    private static boolean isMatched(String regexp, String content) {
+
+        regexp = regexp.toLowerCase();
+        content = content.toLowerCase();
+
+        if (regexp.contains(S_MetaCharacter) == false)
+            return regexp.equals(content);
+
+        final String theRegExp = regexp.replaceAll("\\*", ".\\*");
+        final String filteredContent = regexp.replaceAll("\\*", "");
+        final String matchedContent = content.replaceAll(theRegExp, filteredContent);
+        return matchedContent.equals(filteredContent);
+    }
+
+    public static boolean objectHasWhatType(String codespace, String code, String label,
+            String value, XmlObject event) {
 
         final XmlObject[] props = event.selectChildren(WhatType.type.getName().getNamespaceURI(),
-                                                       "What");
+                "What");
 
         for (final XmlObject prop : props) {
 
@@ -233,7 +240,7 @@ public class DigestHelper
             if (codespace != null) {
                 // Find the SimpleProperty with the correct codespace (there may be more than one)
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                                                      "codespace")) == null)
+                        "codespace")) == null)
                     continue;
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
                 if (stringValue != null && stringValue.equalsIgnoreCase(codespace) == false)
@@ -242,17 +249,16 @@ public class DigestHelper
 
             if (code != null) {
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                                                      "code")) == null)
+                        "code")) == null)
                     continue;
-
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
-                if (stringValue != null && stringValue.equalsIgnoreCase(code) == false)
+                if (isMatched(code, stringValue) == false)
                     continue;
             }
 
             if (label != null) {
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                    "label")) == null)
+                        "label")) == null)
                     continue;
 
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
@@ -271,11 +277,8 @@ public class DigestHelper
         return false;
     }
 
-    protected static boolean simplePropertyMatches(SimplePropertyType property,
-                                                   String codespace,
-                                                   String code,
-                                                   String label,
-                                                   String value) {
+    protected static boolean simplePropertyMatches(SimplePropertyType property, String codespace,
+            String code, String label, String value) {
 
         // must have at least a label
         if (label == null)
@@ -307,8 +310,6 @@ public class DigestHelper
 
     protected DigestDocument digest;
 
-    Logger log = LoggerFactory.getLogger(this.getClass());
-
     public DigestHelper() {
 
         super();
@@ -317,40 +318,31 @@ public class DigestHelper
     }
 
     protected void addCircleToLocation(LocationType location,
-                                       net.opengis.gml.x32.CircleByCenterPointType circle) {
+            net.opengis.gml.x32.CircleByCenterPointType circle) {
 
         circle.getPos().setSrsName(GeoUtil.EPSG4326);
         final CircleByCenterPointType uCircle = CircleByCenterPointType.Factory.newInstance();
         uCircle.addNewCircleByCenterPoint().set(circle);
-        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(),
-                           NS_UCORE,
-                           S_CircleByCenterPoint,
-                           CircleByCenterPointType.type,
-                           uCircle);
+        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
+                S_CircleByCenterPoint, CircleByCenterPointType.type, uCircle);
     }
 
     public void addLineStringToLocation(LocationType location,
-                                        net.opengis.gml.x32.LineStringType line) {
+            net.opengis.gml.x32.LineStringType line) {
 
         line.setSrsName(GeoUtil.EPSG4326);
         final LineStringType uLine = LineStringType.Factory.newInstance();
         uLine.addNewLineString().set(line);
-        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(),
-                           NS_UCORE,
-                           "LineString",
-                           LineStringType.type,
-                           uLine);
+        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
+                "LineString", LineStringType.type, uLine);
     }
 
     public void addPointToLocation(LocationType location, net.opengis.gml.x32.PointType point) {
 
         final PointType uPoint = PointType.Factory.newInstance();
         uPoint.addNewPoint().set(point);
-        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(),
-                           NS_UCORE,
-                           S_Point,
-                           PointType.type,
-                           uPoint);
+        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
+                S_Point, PointType.type, uPoint);
     }
 
     public void addPolygonToLocation(LocationType location, net.opengis.gml.x32.PolygonType polygon) {
@@ -363,18 +355,12 @@ public class DigestHelper
         }
         final PolygonType uPolygon = PolygonType.Factory.newInstance();
         uPolygon.addNewPolygon().set(polygon);
-        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(),
-                           NS_UCORE,
-                           S_Polygon,
-                           PolygonType.type,
-                           uPolygon);
+        XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
+                S_Polygon, PolygonType.type, uPolygon);
     }
 
-    public void addSimplePropertyToThing(ThingType thing,
-                                         String codespace,
-                                         String code,
-                                         String label,
-                                         String value) {
+    public void addSimplePropertyToThing(ThingType thing, String codespace, String code,
+            String label, String value) {
 
         final SimplePropertyType property = SimplePropertyType.Factory.newInstance();
         if (codespace != null)
@@ -431,11 +417,8 @@ public class DigestHelper
         effectRef.setRef(theList);
         causeOf.setEffect(effectRef);
 
-        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(),
-                           NS_UCORE,
-                           S_CauseOf,
-                           CauseOfRelationshipType.type,
-                           causeOf);
+        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_CauseOf,
+                CauseOfRelationshipType.type, causeOf);
     }
 
     public void setCircle(LocationType location, net.opengis.gml.x32.CircleByCenterPointType circle) {
@@ -447,29 +430,19 @@ public class DigestHelper
     public void setEntity(EntityType entity) {
 
         // add an Entity
-        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(),
-                           NS_UCORE,
-                           S_Entity,
-                           EntityType.type,
-                           entity);
+        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Entity,
+                EntityType.type, entity);
     }
 
     public void setEvent(EventType event) {
 
         // add an Event
-        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(),
-                           NS_UCORE,
-                           S_Event,
-                           EventType.type,
-                           event);
+        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Event,
+                EventType.type, event);
     }
 
-    public void setEvent(String eventId,
-                         String descriptor,
-                         String identifier,
-                         String[] codespace,
-                         ContentMetadataType metadata,
-                         SimplePropertyType property) {
+    public void setEvent(String eventId, String descriptor, String identifier, String[] codespace,
+            ContentMetadataType metadata, SimplePropertyType property) {
 
         final EventType event = EventType.Factory.newInstance();
         event.setId(eventId);
@@ -506,18 +479,16 @@ public class DigestHelper
     // to)
     public void setHasDestinationOf(String eventId, String locationId, Calendar cal) {
 
-        final EntityLocationRelationshipType hasDestinationOf = EntityLocationRelationshipType.Factory.newInstance();
+        final EntityLocationRelationshipType hasDestinationOf = EntityLocationRelationshipType.Factory
+                .newInstance();
         hasDestinationOf.setId(UUIDUtil.getID(S_HasDestionationOf));
 
         // add a time instant
         final TimeInstantType time = TimeInstantType.Factory.newInstance();
         time.setValue(cal);
 
-        XmlUtil.substitute(hasDestinationOf.addNewTime().addNewTimeAbstract(),
-                           NS_UCORE,
-                           S_TimeInstant,
-                           TimeInstantType.type,
-                           time);
+        XmlUtil.substitute(hasDestinationOf.addNewTime().addNewTimeAbstract(), NS_UCORE,
+                S_TimeInstant, TimeInstantType.type, time);
 
         // set the event reference
         final EntityRefType eventRef = EntityRefType.Factory.newInstance();
@@ -534,27 +505,22 @@ public class DigestHelper
         hasDestinationOf.setLocationRef(locationRef);
 
         // System.out.println(hasDestinationOf);
-        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(),
-                           NS_UCORE,
-                           S_HasDestionationOf,
-                           EntityLocationRelationshipType.type,
-                           hasDestinationOf);
+        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE,
+                S_HasDestionationOf, EntityLocationRelationshipType.type, hasDestinationOf);
     }
 
     // The InvolvedIn relationship is used to associate an Agent with an Event
     public void setInvolvedIn(String agentId, String eventId, Calendar cal) {
 
-        final AgentEventRelationshipType involvedIn = AgentEventRelationshipType.Factory.newInstance();
+        final AgentEventRelationshipType involvedIn = AgentEventRelationshipType.Factory
+                .newInstance();
         involvedIn.setId(UUIDUtil.getID(S_InvolvedIn));
 
         // add a time instant
         final TimeInstantType time = TimeInstantType.Factory.newInstance();
         time.setValue(cal);
-        XmlUtil.substitute(involvedIn.addNewTime().addNewTimeAbstract(),
-                           NS_UCORE,
-                           S_TimeInstant,
-                           TimeInstantType.type,
-                           time);
+        XmlUtil.substitute(involvedIn.addNewTime().addNewTimeAbstract(), NS_UCORE, S_TimeInstant,
+                TimeInstantType.type, time);
 
         // set the event reference
         final EventRefType eventRef = EventRefType.Factory.newInstance();
@@ -571,11 +537,8 @@ public class DigestHelper
         involvedIn.setAgentRef(locationRef);
 
         // System.out.println(hasDestinationOf);
-        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(),
-                           NS_UCORE,
-                           S_InvolvedIn,
-                           AgentEventRelationshipType.type,
-                           involvedIn);
+        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_InvolvedIn,
+                AgentEventRelationshipType.type, involvedIn);
     }
 
     public void setLineString(LocationType location, net.opengis.gml.x32.LineStringType line) {
@@ -588,7 +551,8 @@ public class DigestHelper
     // a place.
     public void setLocatedAt(String entityId, String locationId, Calendar cal) {
 
-        final EntityLocationExtendedRelationshipType locatedAt = EntityLocationExtendedRelationshipType.Factory.newInstance();
+        final EntityLocationExtendedRelationshipType locatedAt = EntityLocationExtendedRelationshipType.Factory
+                .newInstance();
         locatedAt.setId(UUIDUtil.getID(S_LocatedAt));
 
         if (cal != null) {
@@ -648,18 +612,14 @@ public class DigestHelper
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
-                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">" +
-                                                         buf.toString() + "</Value>",
-                                                     null);
+                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">"
+                        + buf.toString() + "</Value>", null);
             } catch (final Exception e) {
                 time.setValue(now);
             }
 
-            XmlUtil.substitute(locatedAt.addNewTime().addNewTimeAbstract(),
-                               NS_UCORE,
-                               S_TimeInstant,
-                               TimeInstantType.type,
-                               time);
+            XmlUtil.substitute(locatedAt.addNewTime().addNewTimeAbstract(), NS_UCORE,
+                    S_TimeInstant, TimeInstantType.type, time);
         }
 
         final EntityRefType entityRef = EntityRefType.Factory.newInstance();
@@ -674,20 +634,14 @@ public class DigestHelper
         locationRef.setRef(theList);
         locatedAt.setLocationRef(locationRef);
 
-        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(),
-                           NS_UCORE,
-                           S_LocatedAt,
-                           EntityLocationExtendedRelationshipType.type,
-                           locatedAt);
+        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_LocatedAt,
+                EntityLocationExtendedRelationshipType.type, locatedAt);
     }
 
     public void setLocation(LocationType location) {
 
-        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(),
-                           NS_UCORE,
-                           S_Location,
-                           LocationType.type,
-                           location);
+        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Location,
+                LocationType.type, location);
     }
 
     // The OccursAt Relationship is used to associate an Event (like the forest
@@ -695,7 +649,8 @@ public class DigestHelper
     // and place.
     public void setOccursAt(String eventId, String locationId, Calendar cal) {
 
-        final EventLocationRelationshipType occursAt = EventLocationRelationshipType.Factory.newInstance();
+        final EventLocationRelationshipType occursAt = EventLocationRelationshipType.Factory
+                .newInstance();
         occursAt.setId(UUIDUtil.getID(S_OccursAt));
 
         if (cal != null) {
@@ -755,18 +710,14 @@ public class DigestHelper
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
-                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">" +
-                                                         buf.toString() + "</Value>",
-                                                     null);
+                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">"
+                        + buf.toString() + "</Value>", null);
             } catch (final Exception e) {
                 time.setValue(now);
             }
 
-            XmlUtil.substitute(occursAt.addNewTime().addNewTimeAbstract(),
-                               NS_UCORE,
-                               S_TimeInstant,
-                               TimeInstantType.type,
-                               time);
+            XmlUtil.substitute(occursAt.addNewTime().addNewTimeAbstract(), NS_UCORE, S_TimeInstant,
+                    TimeInstantType.type, time);
         }
 
         // set the event reference
@@ -783,20 +734,14 @@ public class DigestHelper
         locationRef.setRef(theList);
         occursAt.setLocationRef(locationRef);
 
-        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(),
-                           NS_UCORE,
-                           S_OccursAt,
-                           EventLocationRelationshipType.type,
-                           occursAt);
+        XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_OccursAt,
+                EventLocationRelationshipType.type, occursAt);
     }
 
     public void setOrganization(OrganizationType org) {
 
-        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(),
-                           NS_UCORE,
-                           S_Organization,
-                           OrganizationType.type,
-                           org);
+        XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Organization,
+                OrganizationType.type, org);
     }
 
     public void setPoint(LocationType location, net.opengis.gml.x32.PointType point) {
