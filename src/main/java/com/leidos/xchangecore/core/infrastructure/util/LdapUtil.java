@@ -6,7 +6,6 @@ package com.leidos.xchangecore.core.infrastructure.util;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,7 +30,9 @@ public class LdapUtil {
 
     private static Hashtable<String, String> env = new Hashtable<String, String>();
 
-    public static String GroupName_USERS = "users";
+    private static final String GroupName_USERS = "users";
+    private static final String GroupName_ADMINS = "admins";
+
     // ldap connection parameters
     private static String S_SecurityPrincipal = "cn=\"Directory Manager\"";
 
@@ -101,7 +102,7 @@ public class LdapUtil {
                 }
             }
             logger.debug("getCNLocation: [lat/lon]: [" + locationArray[0] + "/" + locationArray[1] +
-                "]");
+                         "]");
             // Close the context when we're done
             ctx.close();
         } catch (final Exception e) {
@@ -160,14 +161,19 @@ public class LdapUtil {
 
     }
 
+    public ArrayList<String> getGroupMembersForAdmins() {
+
+        return getGroupMembers(GroupName_ADMINS);
+    }
+
+    public ArrayList<String> getGroupMembersForUsers() {
+
+        return getGroupMembers(GroupName_USERS);
+    }
+
     public String getLdapDomain() {
 
         return ldapDomain;
-    }
-
-    public List<String> getMembersForUicdsUsersGroup() {
-
-        return getGroupMembers(GroupName_USERS);
     }
 
     public Boolean groupContainsMember(String group, String member) {
@@ -179,7 +185,7 @@ public class LdapUtil {
             final DirContext ctx = new InitialDirContext(env);
 
             final String searchFilter = "(&(uniqueMember=cn=" + member + ",dc=" + getLdapDomain() +
-                ",dc=us)(objectClass=groupOfUniqueNames))";
+                                        ",dc=us)(objectClass=groupOfUniqueNames))";
 
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);

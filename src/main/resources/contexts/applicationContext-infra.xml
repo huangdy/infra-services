@@ -131,7 +131,6 @@
 
     <!-- Autoshare to Dissemination Manager -->
     <!-- Not sure we need the channel def here since it is defined in em -->
-    <!-- <integration:publish-subscribe-channel id="disseminationManagerChannel"/> -->
     <integration:service-activator input-channel="disseminationManagerChannel"
         ref="disseminationManagerComponent" method="disseminationManagerMessageHandler" />
 
