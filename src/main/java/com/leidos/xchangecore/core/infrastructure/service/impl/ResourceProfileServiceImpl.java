@@ -37,12 +37,10 @@ import com.saic.precis.x2009.x06.base.IdentifierType;
 public class ResourceProfileServiceImpl
     implements ResourceProfileService, ServiceNamespaces {
 
-    Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private WorkProductService workProductService;
-
     private ResourceProfileDAO resourceProfileDAO;
-
     private DirectoryService directoryService;
 
     /**
@@ -59,14 +57,13 @@ public class ResourceProfileServiceImpl
 
         boolean added = false;
         // Get the profile
-        ResourceProfileModel profile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
-        if (profile != null) {
+        final ResourceProfileModel profile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
+        if (profile != null)
             // if this returns true, then persist the profile
             if (profile.addInterest(ResourceProfileUtil.copyProperties(interest))) {
                 added = true;
                 resourceProfileDAO.makePersistent(profile);
             }
-        }
 
         return added;
     }
@@ -83,7 +80,7 @@ public class ResourceProfileServiceImpl
     public ResourceProfileModel createProfile(ResourceProfile profile) {
 
         if (profile == null) {
-            log.error("Problem with profile in the request: no profile");
+            logger.error("Problem with profile in the request: no profile");
             return null;
         }
         // Create ResourceProfile model and create subscriptions
@@ -105,32 +102,29 @@ public class ResourceProfileServiceImpl
     public void deleteProfile(IdentifierType profileID) {
 
         // Find the right object
-        ResourceProfileModel currentProfile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
-        if (currentProfile == null) {
-            log.error("ERROR: profile: " + profileID + " doesn't exist in database");
-        } else {
+        final ResourceProfileModel currentProfile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
+        if (currentProfile == null)
+            logger.error("ERROR: profile: " + profileID + " doesn't exist in database");
+        else
             resourceProfileDAO.makeTransient(currentProfile);
-        }
     }
 
     private List<String> getAllProfileNames() {
 
-        List<ResourceProfileModel> profiles = resourceProfileDAO.findAll();
-        List<String> ids = new ArrayList<String>();
-        if (profiles != null && profiles.size() > 0) {
-            for (ResourceProfileModel profile : profiles) {
+        final List<ResourceProfileModel> profiles = resourceProfileDAO.findAll();
+        final List<String> ids = new ArrayList<String>();
+        if (profiles != null && profiles.size() > 0)
+            for (final ResourceProfileModel profile : profiles)
                 ids.add(profile.getIdentifier());
-            }
-        }
         return ids;
     }
 
     private FilterType getFilterFromInterest(Interest interest) throws XmlException {
 
-        XmlOptions xo = new XmlOptions();
+        final XmlOptions xo = new XmlOptions();
         xo.setSaveInner();
-        XmlCursor ic = interest.newCursor();
-        FilterType filter = FilterType.Factory.parse(ic.xmlText(xo));
+        final XmlCursor ic = interest.newCursor();
+        final FilterType filter = FilterType.Factory.parse(ic.xmlText(xo));
         ic.dispose();
         return filter;
     }
@@ -146,8 +140,8 @@ public class ResourceProfileServiceImpl
     @Override
     public ResourceProfileModel getProfile(IdentifierType profileID) {
 
-        log.debug("Get Profile: " + profileID);
-        ResourceProfileModel profileModel = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
+        logger.debug("Get Profile: " + profileID);
+        final ResourceProfileModel profileModel = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
 
         return profileModel;
     }
@@ -165,25 +159,23 @@ public class ResourceProfileServiceImpl
 
         // TODO: use the queryString for finding profiles
         // ignore the queryString and get all the profiles
-        ResourceProfileListType response = ResourceProfileListType.Factory.newInstance();
+        final ResourceProfileListType response = ResourceProfileListType.Factory.newInstance();
 
         // List<String> profileIDList = getAllProfileNames();
-        List<ResourceProfileModel> profileList = resourceProfileDAO.findAll();
-        if (profileList != null) {
+        final List<ResourceProfileModel> profileList = resourceProfileDAO.findAll();
+        if (profileList != null)
             if (profileList != null && profileList.size() > 0) {
-                ResourceProfile[] profiles = new ResourceProfile[profileList.size()];
+                final ResourceProfile[] profiles = new ResourceProfile[profileList.size()];
                 int i = 0;
-                for (ResourceProfileModel profileModel : profileList) {
-                    ResourceProfile profile = ResourceProfileUtil.copyProperties(profileModel);
-                    if (profile != null) {
+                for (final ResourceProfileModel profileModel : profileList) {
+                    final ResourceProfile profile = ResourceProfileUtil.copyProperties(profileModel);
+                    if (profile != null)
                         // log.debug("getProfileList, ProfileName: "
                         // + profile.getID().getStringValue());
                         profiles[i++] = profile;
-                    }
                 }
                 response.setResourceProfileArray(profiles);
             }
-        }
         return response;
 
     }
@@ -195,13 +187,12 @@ public class ResourceProfileServiceImpl
 
     private void init() {
 
-        List<ResourceProfileModel> profiles = resourceProfileDAO.findAll();
-        if (profiles != null && profiles.size() > 0) {
-            for (ResourceProfileModel profile : profiles) {
+        final List<ResourceProfileModel> profiles = resourceProfileDAO.findAll();
+        if (profiles != null && profiles.size() > 0)
+            for (final ResourceProfileModel profile : profiles) {
                 ResourceProfileUtil.copyProperties(profile);
-                log.debug("init: send [ " + profile.getId() + " ] to directory service");
+                logger.debug("init: send [ " + profile.getId() + " ] to directory service");
             }
-        }
     }
 
     /**
@@ -218,22 +209,21 @@ public class ResourceProfileServiceImpl
 
         boolean removed = false;
         // Get profile
-        ResourceProfileModel profile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
-        if (profile != null) {
+        final ResourceProfileModel profile = resourceProfileDAO.findByIdentifier(profileID.getStringValue());
+        if (profile != null)
             if (profile.removeInterest(ResourceProfileUtil.copyProperties(it))) {
-                log.debug("Interest removed from profile: " + it.getTopicExpression());
+                logger.debug("Interest removed from profile: " + it.getTopicExpression());
                 removed = true;
                 resourceProfileDAO.makePersistent(profile);
             }
-            // Interests interests = Interests.Factory.newInstance();
-            // interests.getInterestArray()[0] = it;
-            // Set<InterestElement> list = new HashSet<InterestElement>();
-            // ResourceProfileUtil.merge(interests, list);
-            // if (profile.removeInterest((InterestElement) list.toArray()[0])) {
-            // removed = true;
-            // resourceProfileDAO.makePersistent(profile);
-            // }
-        }
+        // Interests interests = Interests.Factory.newInstance();
+        // interests.getInterestArray()[0] = it;
+        // Set<InterestElement> list = new HashSet<InterestElement>();
+        // ResourceProfileUtil.merge(interests, list);
+        // if (profile.removeInterest((InterestElement) list.toArray()[0])) {
+        // removed = true;
+        // resourceProfileDAO.makePersistent(profile);
+        // }
         return removed;
     }
 
@@ -265,13 +255,13 @@ public class ResourceProfileServiceImpl
     @Override
     public void systemInitializedHandler(String messgae) {
 
-        WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
-        WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
+        logger.debug("systemInitializedHandler: ... start ...");
+        final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
+        final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
         directoryService.registerUICDSService(NS_ResourceProfileService,
-            RESOURCEPROFILE_SERVICE_NAME,
-            publishedProducts,
-            subscribedProducts);
+            RESOURCEPROFILE_SERVICE_NAME, publishedProducts, subscribedProducts);
         init();
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 
     /**
@@ -285,7 +275,7 @@ public class ResourceProfileServiceImpl
     @Override
     public ResourceProfileModel updateProfile(ResourceProfile request) {
 
-        ResourceProfileModel currentModel = resourceProfileDAO.findByIdentifier(request.getID().getStringValue());
+        final ResourceProfileModel currentModel = resourceProfileDAO.findByIdentifier(request.getID().getStringValue());
         ResourceProfileModel updatedModel = null;
         if (currentModel != null) {
             // currently only allow user to update Description and Resource Typing
@@ -295,10 +285,10 @@ public class ResourceProfileServiceImpl
             if (request.getResourceTyping() != null &&
                 request.getResourceTyping().sizeOfTypeArray() > 0) {
                 //   Map<String, String> mapTyping = new HashMap<String, String>();
-                Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
+                final Set<CodeSpaceValueType> cvts = new HashSet<CodeSpaceValueType>();
 
-                for (CodespaceValueType type : request.getResourceTyping().getTypeArray()) {
-                    CodeSpaceValueType newType = new CodeSpaceValueType();
+                for (final CodespaceValueType type : request.getResourceTyping().getTypeArray()) {
+                    final CodeSpaceValueType newType = new CodeSpaceValueType();
                     newType.setCodeSpace(type.getCodespace());
                     newType.setLabel(type.getLabel());
                     newType.setValue(type.getStringValue());

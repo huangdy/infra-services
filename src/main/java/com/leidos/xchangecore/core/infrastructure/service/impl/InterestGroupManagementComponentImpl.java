@@ -53,7 +53,7 @@ import com.saic.precis.x2009.x06.base.CodespaceValueType;
  */
 // @Transactional
 public class InterestGroupManagementComponentImpl
-implements InterestGroupManagementComponent {
+    implements InterestGroupManagementComponent {
 
     Logger logger = LoggerFactory.getLogger(InterestGroupManagementComponentImpl.class);
 
@@ -72,23 +72,21 @@ implements InterestGroupManagementComponent {
 
         String remoteJID = message.getCoreName();
 
-        if (remoteJID.endsWith("/CoreConnection")) {
+        if (remoteJID.endsWith("/CoreConnection"))
             remoteJID = remoteJID.substring(0, remoteJID.indexOf("/CoreConnection"));
-        }
         logger.debug("coreStatusUpdateHandler: [" + remoteJID + "]" + message.getCoreStatus());
 
         if (message.getCoreStatus().equalsIgnoreCase(CoreStatusUpdateMessage.Status_Available) &&
             getAgreementDAO().isRemoteCoreMutuallyAgreed(remoteJID)) {
-            List<InterestGroup> interestGroupList = interestGroupDAO.findAll();
+            final List<InterestGroup> interestGroupList = interestGroupDAO.findAll();
             logger.debug("coreStatusUpdateHandler: found " + interestGroupList.size() +
-                " interest groups in database");
-            for (InterestGroup interestGroup : interestGroupList) {
+                         " interest groups in database");
+            for (final InterestGroup interestGroup : interestGroupList)
                 if (interestGroup.getOwningCore().equalsIgnoreCase(remoteJID)) {
                     logger.debug("coreStatusUpdateHandler: restore interestGroup owned by remoteJID: " +
-                        remoteJID);
+                                 remoteJID);
                     sendInterestGroupStateNotificationMessage(interestGroup);
                 }
-            }
         }
         logger.debug("coreStatusUpdateHandler: ... exit ...");
     }
@@ -105,8 +103,8 @@ implements InterestGroupManagementComponent {
     public String createInterestGroup(InterestGroupInfo interestGroupInfo) {
 
         logger.debug("createInterestGroup: name=" + interestGroupInfo.getName() + " owningCore=" +
-            interestGroupInfo.getOwningCore());
-        String interestGroupID = "IG-" + UUID.randomUUID().toString();
+                     interestGroupInfo.getOwningCore());
+        final String interestGroupID = "IG-" + UUID.randomUUID().toString();
 
         logger.debug("Creating interest group id=" + interestGroupID);
 
@@ -121,11 +119,11 @@ implements InterestGroupManagementComponent {
         interestGroup.setSharingStatus(InterestGroupStateNotificationMessage.SharingStatus.None.toString());
 
         logger.debug("createInterestGroup: persist the created interest group id=" +
-            interestGroupID);
+                     interestGroupID);
 
         try {
             interestGroup = interestGroupDAO.makePersistent(interestGroup);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("createInterestGroup: " + e.getMessage());
         }
 
@@ -137,7 +135,7 @@ implements InterestGroupManagementComponent {
 
         // send interest group state change to Comms
         logger.debug("===> notify Comms of new interest group");
-        InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
+        final InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
         mesg.setState(InterestGroupStateNotificationMessage.State.NEW);
         mesg.setInterestGroupID(interestGroupID);
         mesg.setInterestGroupType(interestGroupInfo.getInterestGroupType());
@@ -146,7 +144,7 @@ implements InterestGroupManagementComponent {
         mesg.setExtendedMetadata(interestGroupInfo.getExtendedMetadata());
         // set to null those values not relevant when state=NEW
         mesg.setInterestGroupInfo(null);
-        Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
+        final Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
         interestGroupStateNotificationChannel.send(notification);
 
         return interestGroupID;
@@ -164,12 +162,12 @@ implements InterestGroupManagementComponent {
     public void deleteInterestGroup(String interestGroupID) throws InvalidInterestGroupIDException {
 
         logger.debug("deleteInterestGroup: IGID: " + interestGroupID);
-        InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupID);
-        if (interestGroup == null) {
+        final InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupID);
+        if (interestGroup == null)
             throw new InvalidInterestGroupIDException(interestGroupID);
-        } else {
+        else {
             logger.debug("deleteInterestGroup: notify Comms of deleted  interest group");
-            InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
+            final InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
             mesg.setState(InterestGroupStateNotificationMessage.State.DELETE);
             mesg.setInterestGroupID(interestGroupID);
             // set to null those values not relevant when state=NEW
@@ -178,19 +176,19 @@ implements InterestGroupManagementComponent {
             mesg.setSharingStatus(null);
             mesg.setInterestGroupInfo(null);
             mesg.setExtendedMetadata(null);
-            Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
+            final Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
             interestGroupStateNotificationChannel.send(notification);
 
             logger.debug("deleteInterestGroup: remove interest group; ID=" + interestGroupID +
-                " from DB");
+                         " from DB");
             try {
                 interestGroupDAO.delete(interestGroupID, true);
-            } catch (HibernateException e) {
+            } catch (final HibernateException e) {
                 logger.error("deleteInterestGroup: HibernateException makeTransient interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
-            } catch (Exception e) {
+                             e.getMessage() + " from " + e.toString());
+            } catch (final Exception e) {
                 logger.error("deleteInterestGroup: Exception makeTransient interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
+                             e.getMessage() + " from " + e.toString());
             }
         }
     }
@@ -199,17 +197,16 @@ implements InterestGroupManagementComponent {
     public void deleteInterestGroupSharedFromRemoteCoreHandler(DeleteInterestGroupForRemoteCoreMessage msg) {
 
         logger.debug("deleteInterestGroupFromRemoteCoreHandler: remoteCore: " +
-            msg.getRemoteCoreName());
+                     msg.getRemoteCoreName());
 
         if (msg.getInterestGroupID() != null) {
             logger.debug("deleteInterestGroupFromRemoteCoreHandler: for remote site's IGID: " +
-                msg.getInterestGroupID());
+                         msg.getInterestGroupID());
             doDeleteInterestGroup(msg.getRemoteCoreName(), msg.getInterestGroupID());
         } else {
-            List<InterestGroup> interestGroupList = interestGroupDAO.findByOwningCore(msg.getRemoteCoreName());
-            for (InterestGroup interestGroup : interestGroupList) {
+            final List<InterestGroup> interestGroupList = interestGroupDAO.findByOwningCore(msg.getRemoteCoreName());
+            for (final InterestGroup interestGroup : interestGroupList)
                 doDeleteInterestGroup(msg.getRemoteCoreName(), interestGroup.getInterestGroupID());
-            }
         }
     }
 
@@ -224,12 +221,12 @@ implements InterestGroupManagementComponent {
 
         try {
             interestGroupDAO.delete(message.getInterestGroupID(), true);
-        } catch (HibernateException e) {
+        } catch (final HibernateException e) {
             logger.error("deleteJoinedInterestGroup: HibernateException makeTransient interestGroupDAO: " +
-                e.getMessage() + " from " + e.toString());
-        } catch (Exception e) {
+                         e.getMessage() + " from " + e.toString());
+        } catch (final Exception e) {
             logger.error("deleteJoinedInterestGroup: Exception makeTransient interestGroupDAO: " +
-                e.getMessage() + " from " + e.toString());
+                         e.getMessage() + " from " + e.toString());
         }
 
         // notify IMS of the deletion of the restored interest group
@@ -240,12 +237,12 @@ implements InterestGroupManagementComponent {
     private void doDeleteInterestGroup(String remoteJID, String IGID) {
 
         logger.debug("doDeleteInterestGroup: delete IGID: " + IGID + " and unsubscribe from JID: " +
-            remoteJID);
-        DeleteJoinedInterestGroupMessage message = new DeleteJoinedInterestGroupMessage();
+                     remoteJID);
+        final DeleteJoinedInterestGroupMessage message = new DeleteJoinedInterestGroupMessage();
         logger.debug("deleteInterestGroupFromRemoteCoreHandler: delete IGID: " + IGID);
         message.setInterestGroupID(IGID);
         deleteJoinedInterestGroup(message);
-        UnSubscribeMessage unSubScribeMessage = new UnSubscribeMessage(remoteJID, IGID);
+        final UnSubscribeMessage unSubScribeMessage = new UnSubscribeMessage(remoteJID, IGID);
         unSubscribeChannel.send(new GenericMessage<UnSubscribeMessage>(unSubScribeMessage));
     }
 
@@ -276,22 +273,21 @@ implements InterestGroupManagementComponent {
     public InterestGroupInfo getInterestGroup(String interestGroupID) {
 
         // log.debug("getInterestGroup: id=" + interestGroupID);
-        InterestGroup ig = interestGroupDAO.findByInterestGroup(interestGroupID);
+        final InterestGroup ig = interestGroupDAO.findByInterestGroup(interestGroupID);
         return toInterestGroupInfo(ig);
     }
 
     @Override
     public List<InterestGroupInfo> getInterestGroupList() {
 
-        List<InterestGroupInfo> igInfoList = new ArrayList<InterestGroupInfo>();
-        List<InterestGroup> igList = interestGroupDAO.findAll();
+        final List<InterestGroupInfo> igInfoList = new ArrayList<InterestGroupInfo>();
+        final List<InterestGroup> igList = interestGroupDAO.findAll();
 
-        for (InterestGroup ig : igList) {
+        for (final InterestGroup ig : igList) {
 
-            InterestGroupInfo igInfo = toInterestGroupInfo(ig);
-            if (igInfo != null) {
+            final InterestGroupInfo igInfo = toInterestGroupInfo(ig);
+            if (igInfo != null)
                 igInfoList.add(igInfo);
-            }
         }
 
         logger.debug("getInterestGroupList: " + igInfoList.size() + " entries");
@@ -307,9 +303,9 @@ implements InterestGroupManagementComponent {
 
         logger.debug("getShareAgreement - interestGroupID=" + interestGroup.getInterestGroupID());
 
-        List<String> workProductTypesToShare = new ArrayList<String>();
-        String igCodespace = InterestGroupManagementComponent.CodeSpace +
-            interestGroup.getInterestGroupType();
+        final List<String> workProductTypesToShare = new ArrayList<String>();
+        final String igCodespace = InterestGroupManagementComponent.CodeSpace +
+                                   interestGroup.getInterestGroupType();
 
         // TODO: ticket #248
         // since agreement is stored by coreJID and share incident is by host name (for now)
@@ -321,62 +317,49 @@ implements InterestGroupManagementComponent {
         boolean shareRuleMatched = false;
         boolean shareRuleFound = false;
 
-        AgreementListType agreementList = agreementService.getAgreementList();
-        for (AgreementType agreement : agreementList.getAgreementArray()) {
-
+        final AgreementListType agreementList = agreementService.getAgreementList();
+        for (final AgreementType agreement : agreementList.getAgreementArray())
             // If there's no active agreement with this core, we share all types
             if (agreement != null &&
-                agreement.getPrincipals().getRemoteCore().getStringValue().contains(targetCore)) {
+            agreement.getPrincipals().getRemoteCore().getStringValue().contains(targetCore)) {
                 agreementFound = true;
-                ShareRules shareRules = agreement.getShareRules();
-                if (shareRules != null) {
+                final ShareRules shareRules = agreement.getShareRules();
+                if (shareRules != null)
                     // if share rules exist, there must be an exact rule match (interestGroup's
                     // codepsace/subtype)
                     // or there will be no sharing
                     if (shareRules.getEnabled()) {
                         shareRulesEnabled = true;
-                        ShareRule[] shareRuleArray = shareRules.getShareRuleArray();
-                        if (shareRules.sizeOfShareRuleArray() > 0) {
-                            for (ShareRule shareRule : shareRuleArray) {
+                        final ShareRule[] shareRuleArray = shareRules.getShareRuleArray();
+                        if (shareRules.sizeOfShareRuleArray() > 0)
+                            for (final ShareRule shareRule : shareRuleArray)
                                 if (shareRule.getEnabled() && shareRule.getCondition() != null) {
                                     shareRuleFound = true;
-                                    CodespaceValueType cs = shareRule.getCondition().getInterestGroup();
-                                    String codeSpace = cs.getCodespace();
+                                    final CodespaceValueType cs = shareRule.getCondition().getInterestGroup();
+                                    final String codeSpace = cs.getCodespace();
                                     logger.debug("===> codespace=[" + codeSpace + "]");
                                     logger.debug("===> igCodspce=[" + igCodespace + "]");
-                                    String codespaceValue = cs.getStringValue();
+                                    final String codespaceValue = cs.getStringValue();
                                     if (codeSpace.equals(igCodespace) &&
-                                        codespaceValue.equalsIgnoreCase(interestGroup.getInterestGroupSubtype())) {
+                                        codespaceValue.equalsIgnoreCase(interestGroup.getInterestGroupSubtype()))
                                         shareRuleMatched = true;
-                                        // for now: share everything - in the future add the work
-                                        // product type to workProductTypesToShare
-                                    } else if (codeSpace.equals(InterestGroupManagementComponent.MANUAL_CODE_SPACE) &&
-                                        codespaceValue.equalsIgnoreCase(Boolean.TRUE.toString())) {
+                                    // for now: share everything - in the future add the work
+                                    // product type to workProductTypesToShare
+                                    else if (codeSpace.equals(InterestGroupManagementComponent.MANUAL_CODE_SPACE) &&
+                                             codespaceValue.equalsIgnoreCase(Boolean.TRUE.toString()))
                                         shareRuleMatched = true;
-                                    }
                                 }
-                            }
-                        }
                     } // end if shareRule enabled
-                } // end if shareRules not null
             } // end of agreement not null
-        }
 
-        if (!agreementFound) {
+        if (!agreementFound)
             // no agreement between the core and the target core
             throw new NoShareAgreementException(interestGroup.getOwningCore(), targetCore);
-        } else if (!shareRulesEnabled || shareRuleFound && !shareRuleMatched) {
-            // One of the following:
-            // - shareRules is not enabled, or
-            // - shareRules is enabled and at least one rule is defined but no rule match was found
-            // Important: the order of the above conditional statement is important and should NOT
-            // be altered!!!
-
+        else if (!shareRulesEnabled || shareRuleFound && !shareRuleMatched)
             throw new NoShareRuleInAgreementException(interestGroup.getOwningCore(),
-                targetCore,
-                interestGroup.getInterestGroupType(),
-                interestGroup.getInterestGroupSubtype());
-        }
+                                                      targetCore,
+                                                      interestGroup.getInterestGroupType(),
+                                                      interestGroup.getInterestGroupSubtype());
 
         return workProductTypesToShare;
     }
@@ -396,44 +379,44 @@ implements InterestGroupManagementComponent {
     public void receivedJoinedInterestGroup(JoinedInterestGroupNotificationMessage message) {
 
         logger.debug("receivedJoinedInterestGroup - received notification of joined interest group id=" +
-            message.interestGroupID +
-            " owner=" +
-            message.owner +
-            " ownerProps=" +
-            message.ownerProperties);
+                     message.interestGroupID +
+                     " owner=" +
+                     message.owner +
+                     " ownerProps=" +
+                     message.ownerProperties);
 
         InterestGroup interestGroup = null;
 
         try {
             // persist the new interest group
             logger.debug("receivedJoinedInterestGroup - persist the joined interest group id=" +
-                message.interestGroupID);
+                         message.interestGroupID);
             interestGroup = InterestGroupInfoUtil.toInterestGroup(message.getInterestGroupInfo());
             interestGroup.setSharingStatus(InterestGroupStateNotificationMessage.SharingStatus.Joined.toString());
             logger.debug("receivedJoinedInterestGroup:  ==> sharing status=" +
-                interestGroup.getSharingStatus());
+                         interestGroup.getSharingStatus());
             interestGroup.setOwnerProperties(message.ownerProperties);
             interestGroup.setJoinedWpTypeList(message.joinedWPTypes);
             try {
                 interestGroupDAO.makePersistent(interestGroup);
-            } catch (HibernateException e) {
+            } catch (final HibernateException e) {
                 logger.error("receivedJoinedInterestGroup: HibernateException makePersistent interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
-            } catch (Exception e) {
+                             e.getMessage() + " from " + e.toString());
+            } catch (final Exception e) {
                 logger.error("receivedJoinedInterestGroup: Exception makePersistent interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
+                             e.getMessage() + " from " + e.toString());
             }
 
             // send upstream to the domain services that manage interest groups
             // Replace the interest group info with detailed info specific to the domain
             // interest group management services,
             // e.g. incident data for IMS
-            String detailedInfo = InterestGroupInfoUtil.toInterestDetailedInfoString(message.getInterestGroupInfo());
+            final String detailedInfo = InterestGroupInfoUtil.toInterestDetailedInfoString(message.getInterestGroupInfo());
             message.setInterestGroupInfo(detailedInfo);
-            Message<JoinedInterestGroupNotificationMessage> notification = new GenericMessage<JoinedInterestGroupNotificationMessage>(message);
+            final Message<JoinedInterestGroupNotificationMessage> notification = new GenericMessage<JoinedInterestGroupNotificationMessage>(message);
             newJoinedInterestGroupChannel.send(notification);
 
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             logger.error("receivedJoinedInterestGroupHandler: error parsing received incident info");
             e.printStackTrace();
         }
@@ -443,9 +426,9 @@ implements InterestGroupManagementComponent {
     private void sendInterestGroupStateNotificationMessage(InterestGroup interestGroup) {
 
         logger.debug("sendInterestGroupStateNotificationMessage: IGID: " +
-            interestGroup.getInterestGroupID());
+                     interestGroup.getInterestGroupID());
 
-        InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
+        final InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
         mesg.setState(InterestGroupStateNotificationMessage.State.RESTORE);
         mesg.setInterestGroupID(interestGroup.getInterestGroupID());
         mesg.setInterestGroupType(interestGroup.getInterestGroupType());
@@ -458,7 +441,7 @@ implements InterestGroupManagementComponent {
 
         // set to null those values not relevant when state=RESTORE
         mesg.setInterestGroupInfo(null);
-        Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
+        final Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
         interestGroupStateNotificationChannel.send(notification);
     }
 
@@ -523,16 +506,15 @@ implements InterestGroupManagementComponent {
                                    String targetCore,
                                    String detailedInfo,
                                    boolean agreementChecked)
-                                       throws InvalidInterestGroupIDException, LocalCoreNotOnlineException,
-                                       RemoteCoreUnavailableException, RemoteCoreUnknownException, XMPPComponentException,
-                                       NoShareAgreementException, NoShareRuleInAgreementException {
+        throws InvalidInterestGroupIDException, LocalCoreNotOnlineException,
+        RemoteCoreUnavailableException, RemoteCoreUnknownException, XMPPComponentException,
+        NoShareAgreementException, NoShareRuleInAgreementException {
 
         logger.debug("shareInterestGroup: igID=" + interestGroupID + " targetCore=" + targetCore +
-            " detailedInfo=[" + detailedInfo + "]");
-        InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupID);
-        if (interestGroup == null) {
+                     " detailedInfo=[" + detailedInfo + "]");
+        final InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupID);
+        if (interestGroup == null)
             throw new InvalidInterestGroupIDException(interestGroupID);
-        }
 
         // to let XMPP to handle the remote core is offline
         /*
@@ -551,16 +533,14 @@ implements InterestGroupManagementComponent {
 
         // NULL workProductTypesToShare list means agreement indicates no sharing
         List<String> workProductTypesToShare = new ArrayList<String>();
-        if (!agreementChecked) {
+        if (!agreementChecked)
             workProductTypesToShare = getShareAgreement(interestGroup, targetCore);
-        }
-        if (workProductTypesToShare == null) {
+        if (workProductTypesToShare == null)
             return;
-        }
         try {
 
             // send interest group state change to Comms
-            InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
+            final InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
             mesg.setState(InterestGroupStateNotificationMessage.State.SHARE);
             mesg.setInterestGroupID(interestGroup.getInterestGroupID());
             mesg.setInterestGroupType(interestGroup.getInterestGroupType());
@@ -570,11 +550,11 @@ implements InterestGroupManagementComponent {
             mesg.setWorkProductTypesToShare(workProductTypesToShare);
             mesg.setInterestGroupInfo(InterestGroupInfoUtil.toXMLString(interestGroup, detailedInfo));
             mesg.setSharingStatus(interestGroup.getSharingStatus());
-            Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
+            final Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
             interestGroupStateNotificationChannel.send(notification);
-        } catch (IllegalStateException e) {
+        } catch (final IllegalStateException e) {
             throw new RemoteCoreUnavailableException("core unavailable");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("shareInterestGroup - exception caught from the XMPP component");
             e.printStackTrace();
             throw new XMPPComponentException(e.getMessage());
@@ -586,17 +566,17 @@ implements InterestGroupManagementComponent {
         interestGroup.getSharedCoreList().add(targetCore);
 
         logger.debug("shareInterestGroup: update sharingStatus [" +
-            InterestGroupStateNotificationMessage.SharingStatus.Shared.toString() +
-            "] and persist the shared interest group id=" +
-            interestGroup.getInterestGroupID());
+                     InterestGroupStateNotificationMessage.SharingStatus.Shared.toString() +
+                     "] and persist the shared interest group id=" +
+                     interestGroup.getInterestGroupID());
         try {
             interestGroupDAO.makePersistent(interestGroup);
-        } catch (HibernateException e) {
+        } catch (final HibernateException e) {
             logger.error("shareInterestGroup: HibernateException makePersistent interestGroupDAO: " +
-                e.getMessage() + " from " + e.toString());
-        } catch (Exception e) {
+                         e.getMessage() + " from " + e.toString());
+        } catch (final Exception e) {
             logger.error("shareInterestGroup: Exception makePersistent interestGroupDAO: " +
-                e.getMessage() + " from " + e.toString());
+                         e.getMessage() + " from " + e.toString());
         }
         /* TODO - to let XMPP to handle remote core is offline }
         }
@@ -613,15 +593,15 @@ implements InterestGroupManagementComponent {
 
         logger.debug("systemInitializedHandler: ... start ...");
 
-        List<InterestGroup> igList = interestGroupDAO.findAll();
+        final List<InterestGroup> igList = interestGroupDAO.findAll();
         logger.debug("systemInitializedHandler: found " + igList.size() +
-            " interest groups in database");
-        for (InterestGroup ig : igList) {
+                     " interest groups in database");
+        for (final InterestGroup ig : igList) {
             logger.debug("systemInitializedHandler: owningCoreJID: " + ig.getOwningCore() +
-                ", local coreJID: " + getDirectoryService().getLocalCoreJid());
+                         ", local coreJID: " + getDirectoryService().getLocalCoreJid());
             if (!ig.getOwningCore().equalsIgnoreCase(getDirectoryService().getLocalCoreJid())) {
                 logger.debug("systemInitializedHandler: not to restore till the remote core: " +
-                    ig.getOwningCore() + " is online");
+                             ig.getOwningCore() + " is online");
                 continue;
             }
             logger.debug("systemInitializedHandler: restore IGID: " + ig.getInterestGroupID());
@@ -666,10 +646,10 @@ implements InterestGroupManagementComponent {
     public void updateInterestGroup(InterestGroupInfo interestGroupInfo)
         throws InvalidInterestGroupIDException {
 
-        InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupInfo.getInterestGroupID());
-        if (interestGroup == null) {
+        final InterestGroup interestGroup = interestGroupDAO.findByInterestGroup(interestGroupInfo.getInterestGroupID());
+        if (interestGroup == null)
             throw new InvalidInterestGroupIDException(interestGroupInfo.getInterestGroupID());
-        } else {
+        else {
             interestGroup.setInterestGroupSubtype(interestGroupInfo.getInterestGroupSubType());
             interestGroup.setDescription(interestGroupInfo.getDescription());
             interestGroup.setName(interestGroupInfo.getName());
@@ -678,18 +658,18 @@ implements InterestGroupManagementComponent {
             logger.debug("updateInterestGroup: " + interestGroupInfo.toString());
             try {
                 interestGroupDAO.makePersistent(interestGroup);
-            } catch (HibernateException e) {
+            } catch (final HibernateException e) {
                 logger.error("updateInterestGroup: HibernateException makePersistent interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
-            } catch (Exception e) {
+                             e.getMessage() + " from " + e.toString());
+            } catch (final Exception e) {
                 logger.error("updateInterestGroup: Exception makePersistent interestGroupDAO: " +
-                    e.getMessage() + " from " + e.toString());
+                             e.getMessage() + " from " + e.toString());
             }
 
             // send interest group state change to Comms
             // Note: although comms does not take any action when receiving this state change, we
             // send it anyway in case this needs to be handled differently in the future.
-            InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
+            final InterestGroupStateNotificationMessage mesg = new InterestGroupStateNotificationMessage();
             mesg.setState(InterestGroupStateNotificationMessage.State.UPDATE);
             mesg.setInterestGroupID(interestGroupInfo.getInterestGroupID());
             mesg.setInterestGroupType(interestGroupInfo.getInterestGroupType());
@@ -698,7 +678,7 @@ implements InterestGroupManagementComponent {
             mesg.setExtendedMetadata(interestGroupInfo.getExtendedMetadata());
             // set to null those values not relevant when state=UPDATE
             mesg.setInterestGroupInfo(null);
-            Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
+            final Message<InterestGroupStateNotificationMessage> notification = new GenericMessage<InterestGroupStateNotificationMessage>(mesg);
             interestGroupStateNotificationChannel.send(notification);
         }
     }

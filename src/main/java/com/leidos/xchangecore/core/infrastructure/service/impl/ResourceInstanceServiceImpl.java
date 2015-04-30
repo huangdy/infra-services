@@ -46,16 +46,12 @@ import com.saic.precis.x2009.x06.base.IdentifierType;
 public class ResourceInstanceServiceImpl
     implements ResourceInstanceService, ServiceNamespaces {
 
-    Logger log = LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private NotificationService notificationService;
-
     private ResourceProfileService resourceProfileService;
-
     private ResourceInstanceDAO resourceInstanceDAO;
-
     private DirectoryService directoryService;
-
     private ConfigurationService configurationService;
 
     /**
@@ -79,16 +75,12 @@ public class ResourceInstanceServiceImpl
         throws ResourceProfileDoesNotExist {
 
         // get the profile from the ResourceProfile service
-        final ResourceProfileModel profileModel = this.resourceProfileService.getProfile(resourceProfileID);
+        final ResourceProfileModel profileModel = resourceProfileService.getProfile(resourceProfileID);
 
-        if (profileModel == null) {
+        if (profileModel == null)
             throw new ResourceProfileDoesNotExist(resourceProfileID.getStringValue() +
                                                   " does not exist");
-        }
-
-        // Tell the NotificationService to add the interests from the profile to the endpoint
-        // if this profile has not already been applied to this resource
-        else if ((resourceModel.getEndpoints().size() > 0) &&
+        else if (resourceModel.getEndpoints().size() > 0 &&
                  !resourceModel.getProfiles().contains(resourceProfileID.getStringValue())) {
 
             // get the resource's endpoint
@@ -101,26 +93,25 @@ public class ResourceInstanceServiceImpl
                 FilterType filter = null;
                 filter = NotificationUtils.getFilterFromInterest(interest);
                 try {
-                    this.notificationService.subscribe(endpoint, filter);
+                    notificationService.subscribe(endpoint, filter);
                 } catch (final InvalidProductTypeException e) {
-                    this.log.error("invalid work product type in subscription request");
+                    logger.error("invalid work product type in subscription request");
                 } catch (final NullSubscriberException e) {
-                    this.log.error("null subscriber in subscription request");
+                    logger.error("null subscriber in subscription request");
                 } catch (final EmptySubscriberNameException e) {
-                    this.log.error("empty subscriber name in subscription requeet");
+                    logger.error("empty subscriber name in subscription requeet");
                 } catch (final InvalidProductIDException e) {
-                    this.log.error("invalid product id in subscription request");
+                    logger.error("invalid product id in subscription request");
                 }
             }
 
             resourceModel.getProfiles().add(resourceProfileID.getStringValue());
 
-            if (profileModel.getDescription() != null) {
+            if (profileModel.getDescription() != null)
                 resourceModel.setDescription(profileModel.getDescription());
-            } else {
+            else
                 resourceModel.setDescription(resourceModel.getIdentifier() + "-" +
                                              profileModel.getIdentifier());
-            }
 
             return true;
         }
@@ -176,16 +167,15 @@ public class ResourceInstanceServiceImpl
         // continue to deliver notifications to the endpoint that will be stored on the server. One
         // issue here is that we may need set a limit on the notification queue size.
 
-        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
+        ResourceInstanceModel resourceModel = resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel == null) {
-            resourceModel = this.createResourceInstanceModel();
-            if ((localResourceID != null) && (localResourceID.getStringValue() != null)) {
+            resourceModel = createResourceInstanceModel();
+            if (localResourceID != null && localResourceID.getStringValue() != null)
                 resourceModel.setLocalResourceID(localResourceID.getStringValue());
-            }
         }
 
         // Persist the resource instance
-        this.resourceInstanceDAO.makePersistent(resourceModel);
+        resourceInstanceDAO.makePersistent(resourceModel);
 
         return resourceModel;
     }
@@ -225,10 +215,10 @@ public class ResourceInstanceServiceImpl
 
         // If the resource does not exist then create a new one
         if (r == null) {
-            r = this.createResourceInstanceModel();
+            r = createResourceInstanceModel();
 
             // Create a new endpoint
-            final EndpointReferenceType endpoint = this.notificationService.createPullPoint(id.getStringValue());
+            final EndpointReferenceType endpoint = notificationService.createPullPoint(id.getStringValue());
             r.getEndpoints().add(endpoint.getAddress().getStringValue());
 
             // fli added on 11/30/2011
@@ -239,14 +229,13 @@ public class ResourceInstanceServiceImpl
 
             // populate the model
             r.setResourceID(id.getStringValue());
-            if (id.getLabel() != null) {
+            if (id.getLabel() != null)
                 r.setLabel(id.getLabel());
-            } else {
+            else
                 r.setLabel("ID");
-            }
 
             // Set the owning core
-            r.setOwningCore(this.configurationService.getFullyQualifiedHostName());
+            r.setOwningCore(configurationService.getFullyQualifiedHostName());
 
         }
         return r;
@@ -261,12 +250,12 @@ public class ResourceInstanceServiceImpl
 
     public ConfigurationService getConfigurationService() {
 
-        return this.configurationService;
+        return configurationService;
     }
 
     public NotificationService getNotificationService() {
 
-        return this.notificationService;
+        return notificationService;
     }
 
     /**
@@ -281,15 +270,14 @@ public class ResourceInstanceServiceImpl
     @Override
     public ResourceInstance getResourceInstance(IdentifierType id) {
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
+        final ResourceInstanceModel resourceModel = resourceInstanceDAO.findByIdentifier(id.getStringValue());
 
-        if (resourceModel != null) {
+        if (resourceModel != null)
             // resourceModel.setNotMsgCount(notificationService.findMsgCountByEntityId(id.getStringValue()));
             return ResourceInstanceUtil.copyProperties(resourceModel,
-                this.notificationService.findMsgCountByEntityId(id.getStringValue()));
-        } else {
+                notificationService.findMsgCountByEntityId(id.getStringValue()));
+        else
             return null;
-        }
 
     }
 
@@ -307,23 +295,23 @@ public class ResourceInstanceServiceImpl
 
         final ResourceInstanceListType list = ResourceInstanceListType.Factory.newInstance();
 
-        final List<ResourceInstanceModel> resourceInstanceList = this.resourceInstanceDAO.findAll();
+        final List<ResourceInstanceModel> resourceInstanceList = resourceInstanceDAO.findAll();
         // if (resourceInstanceList != null) {
         // log.info("Found " + resourceInstanceList.size() + " resource instances");
         // } else {
         // log.info("No resource instances found");
         // }
 
-        if ((resourceInstanceList != null) && (resourceInstanceList.size() > 0)) {
+        if (resourceInstanceList != null && resourceInstanceList.size() > 0) {
             final ResourceInstance[] resources = new ResourceInstance[resourceInstanceList.size()];
             int i = 0;
             for (final ResourceInstanceModel resourceInstance : resourceInstanceList) {
                 // resourceInstance.setNotMsgCount(notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
-                final ResourceInstance resource = ResourceInstanceUtil.copyProperties(resourceInstance,
-                    this.notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
-                if (resource != null) {
+                final ResourceInstance resource = ResourceInstanceUtil.copyProperties(
+                    resourceInstance,
+                    notificationService.findMsgCountByEntityId(resourceInstance.getIdentifier()));
+                if (resource != null)
                     resources[i++] = resource;
-                }
             }
             list.setResourceInstanceArray(resources);
         }
@@ -332,13 +320,13 @@ public class ResourceInstanceServiceImpl
 
     public ResourceProfileService getResourceProfileService() {
 
-        return this.resourceProfileService;
+        return resourceProfileService;
     }
 
     private void init() {
 
-        final List<ResourceInstanceModel> instances = this.resourceInstanceDAO.findAll();
-        if ((instances != null) && (instances.size() > 0)) {
+        final List<ResourceInstanceModel> instances = resourceInstanceDAO.findAll();
+        if (instances != null && instances.size() > 0) {
             // for (ResourceInstanceModel instnce : instances) {
             // ResourceProfile theProfile = ResourceProfileUtil.copyProperties(profile);
             //
@@ -416,20 +404,17 @@ public class ResourceInstanceServiceImpl
         // a notification endpoint created with its profile's interests is created
 
         // check if a resource instance already exists
-        ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
+        ResourceInstanceModel resourceModel = resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel == null) {
-            resourceModel = this.createResourceInstance(id);
-            if ((localResourceID != null) && (localResourceID.getStringValue() != null)) {
+            resourceModel = createResourceInstance(id);
+            if (localResourceID != null && localResourceID.getStringValue() != null)
                 resourceModel.setLocalResourceID(localResourceID.getStringValue());
-            }
         }
 
         // Apply the profile based on the requested resourceProfileID
-        if (this.applyProfile(resourceModel, resourceProfileID)) {
-
+        if (applyProfile(resourceModel, resourceProfileID))
             // Persist the resource instance
-            resourceModel = this.resourceInstanceDAO.makePersistent(resourceModel);
-        }
+            resourceModel = resourceInstanceDAO.makePersistent(resourceModel);
 
         // Return ResourceInstance
         return resourceModel;
@@ -453,7 +438,7 @@ public class ResourceInstanceServiceImpl
 
     public void setResourceInstanceDAO(ResourceInstanceDAO p) {
 
-        this.resourceInstanceDAO = p;
+        resourceInstanceDAO = p;
     }
 
     public void setResourceProfileService(ResourceProfileService resourceProfileService) {
@@ -464,18 +449,18 @@ public class ResourceInstanceServiceImpl
     @Override
     public void systemInitializedHandler(String messgae) {
 
+        logger.debug("systemInitializedHandler: ... start ...");
         final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
-        this.directoryService.registerUICDSService(NS_ResourceInstanceService,
-            RESOURCEINSTANCE_SERVICE_NAME,
-            publishedProducts,
-            subscribedProducts);
-        this.init();
+        directoryService.registerUICDSService(NS_ResourceInstanceService,
+            RESOURCEINSTANCE_SERVICE_NAME, publishedProducts, subscribedProducts);
+        init();
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see
      * com.leidos.xchangecore.core.infrastructure.service.ResourceInstanceService#unregister(com
      * .saic.precis.x2009.x06.base.IdentifierType)
@@ -483,15 +468,14 @@ public class ResourceInstanceServiceImpl
     @Override
     public IdentifierType unregister(IdentifierType id) throws ResourceInstanceDoesNotExist {
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
+        final ResourceInstanceModel resourceModel = resourceInstanceDAO.findByIdentifier(id.getStringValue());
         if (resourceModel != null) {
-            this.notificationService.destroyPullPoint(resourceModel.getResourceID());
-            this.resourceInstanceDAO.makeTransient(resourceModel);
+            notificationService.destroyPullPoint(resourceModel.getResourceID());
+            resourceInstanceDAO.makeTransient(resourceModel);
             return id;
-        } else {
+        } else
             throw new ResourceInstanceDoesNotExist(id.getStringValue() +
                                                    " resource instance does not exist");
-        }
     }
 
     /**
@@ -512,12 +496,12 @@ public class ResourceInstanceServiceImpl
 
         boolean updated = false;
 
-        final ResourceInstanceModel resourceModel = this.resourceInstanceDAO.findByIdentifier(id.getStringValue());
+        final ResourceInstanceModel resourceModel = resourceInstanceDAO.findByIdentifier(id.getStringValue());
 
         if (resourceModel != null) {
 
             // call notificationService to update its endpoint
-            this.notificationService.updateEndpoint(id.getStringValue(), endpoint, isWebService);
+            notificationService.updateEndpoint(id.getStringValue(), endpoint, isWebService);
 
             // Set the endpoint in the model
             resourceModel.getEndpoints().clear();

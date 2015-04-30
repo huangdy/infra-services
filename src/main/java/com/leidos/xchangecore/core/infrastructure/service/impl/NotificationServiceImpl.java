@@ -156,11 +156,11 @@ public class NotificationServiceImpl
                                         final String msgType,
                                         final String message) {
 
-        this.logger.debug("addNotificationMessage:\n\tNotification: " + notification +
-                          "\n\tsubscriptionID: " + subscriptionID + "\n\tmsgType: " + msgType +
-                          "\n\tmesage: " + message);
+        logger.debug("addNotificationMessage:\n\tNotification: " + notification +
+            "\n\tsubscriptionID: " + subscriptionID + "\n\tmsgType: " + msgType +
+            "\n\tmesage: " + message);
         notification.addMessage(subscriptionID, msgType, message);
-        this.notificationDAO.makePersistent(notification);
+        notificationDAO.makePersistent(notification);
     }
 
     /**
@@ -175,7 +175,7 @@ public class NotificationServiceImpl
                                              final NotificationSubscription subscription) {
 
         notification.addSubscription(subscription);
-        this.notificationDAO.makePersistent(notification);
+        notificationDAO.makePersistent(notification);
 
     }
 
@@ -189,7 +189,7 @@ public class NotificationServiceImpl
     private void clearNotificationMessages(final Notification notification) {
 
         notification.clearMessages();
-        this.notificationDAO.makePersistent(notification);
+        notificationDAO.makePersistent(notification);
 
     }
 
@@ -224,8 +224,8 @@ public class NotificationServiceImpl
         // if notification msg is agreement msg type
         // else if (msgType.equals(AgreementRosterMessage.NAME)) {
         if (msgType.equals(AgreementRosterMessage.NAME)) {
-            this.logger.debug("createNotificationMessageHolder: for agreementID: " + message);
-            final Agreement agreement = this.agreementDAO.findById(Integer.parseInt(message));
+            logger.debug("createNotificationMessageHolder: for agreementID: " + message);
+            final Agreement agreement = agreementDAO.findById(Integer.parseInt(message));
             if (agreement != null) {
                 final AgreementType agreementType = AgreementUtil.copyProperties(agreement);
                 ec = agreementType.newCursor();
@@ -233,31 +233,29 @@ public class NotificationServiceImpl
         }
         // if notification msg is a notify msg
         else if (msgType.equals(NOTIFY_MESSAGE)) {
-            this.logger.debug("NOTIFY MESSAGE FOUND");
+            logger.debug("NOTIFY MESSAGE FOUND");
             XmlObject doc;
             try {
                 doc = XmlObject.Factory.parse(message);
-                if (doc != null) {
+                if (doc != null)
                     ec = doc.newCursor();
-                }
             } catch (final XmlException e) {
-                this.logger.debug("createNotificationMessageHolder: Error parsing message [" +
-                                  message + "]  into xml object");
+                logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
+                    "]  into xml object");
                 e.printStackTrace();
             }
 
             // xc.toChild(notificationMsg.getMessage());
         } else if (msgType.equals("WorkProductDeleted")) {
-            this.logger.debug("WorkProductDeleted MESSAGE FOUND");
+            logger.debug("WorkProductDeleted MESSAGE FOUND");
             XmlObject doc;
             try {
                 doc = XmlObject.Factory.parse(message);
-                if (doc != null) {
+                if (doc != null)
                     ec = doc.newCursor();
-                }
             } catch (final XmlException e) {
-                this.logger.debug("createNotificationMessageHolder: Error parsing message [" +
-                                  message + "]  into xml object");
+                logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
+                    "]  into xml object");
                 e.printStackTrace();
             }
         }
@@ -268,16 +266,15 @@ public class NotificationServiceImpl
             // WorkProductNotificationType.Factory.newInstance();
             // wpNotification.addNewWorkProduct().set(WorkProductHelper.toWorkProductSummary(product));
             // ec = wpNotification.newCursor();
-            this.logger.debug("WorkProductID MESSAGE FOUND");
+            logger.debug("WorkProductID MESSAGE FOUND");
             XmlObject doc;
             try {
                 doc = XmlObject.Factory.parse(message);
-                if (doc != null) {
+                if (doc != null)
                     ec = doc.newCursor();
-                }
             } catch (final XmlException e) {
-                this.logger.debug("createNotificationMessageHolder: Error parsing message [" +
-                                  message + "]  into xml object");
+                logger.debug("createNotificationMessageHolder: Error parsing message [" + message +
+                    "]  into xml object");
                 e.printStackTrace();
             }
         }
@@ -303,33 +300,33 @@ public class NotificationServiceImpl
     @Override
     public EndpointReferenceType createPullPoint(final String entityID) {
 
-        this.logger.debug("createPullPoint: jid: '" + entityID + "'");
+        logger.debug("createPullPoint: jid: '" + entityID + "'");
 
         final XmlOptions options = new XmlOptions();
         options.setSaveInner();
         final EndpointReferenceType endpoint = EndpointReferenceType.Factory.newInstance();
 
         // Set the url for the notification service for pull points
-        endpoint.addNewAddress().setStringValue(this.getConfigurationService().getWebServiceBaseURL() +
-                                                "/" + entityID);
+        endpoint.addNewAddress().setStringValue(
+            getConfigurationService().getWebServiceBaseURL() + "/" + entityID);
 
         // Add the service identification
         final MetadataType metadata = endpoint.addNewMetadata();
         final XmlCursor xc = metadata.newCursor();
         xc.toNextToken();
-        xc.insertElementWithText("scheme",
-            this.getConfigurationService().getServiceNameURN(NOTIFICATION_SERVICE_NAME));
+        xc.insertElementWithText("scheme", getConfigurationService().getServiceNameURN(
+            NOTIFICATION_SERVICE_NAME));
         xc.dispose();
 
         // create or update notification model and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
             notification.setEndpointWS(false);// not webservice but pullpoint
         }
         notification.setEndpointURL(endpoint.getAddress().getStringValue());
-        this.makePersistent(notification);
+        makePersistent(notification);
 
         return endpoint;
     }
@@ -337,15 +334,13 @@ public class NotificationServiceImpl
     @Override
     public boolean destroyPullPoint(final String entityID) {
 
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
-        if (notification == null) {
+        Notification notification = notificationDAO.findByEntityId(entityID);
+        if (notification == null)
             return false;
-        }
 
         // Remove all the subscriptions for this pull point
-        for (final NotificationSubscription subscription : notification.getSubscriptions()) {
-            this.pubSubService.unsubscribeBySubscriptionID(subscription.getSubscriptionID());
-        }
+        for (final NotificationSubscription subscription : notification.getSubscriptions())
+            pubSubService.unsubscribeBySubscriptionID(subscription.getSubscriptionID());
 
         // Given the CASCADE, clearing subscriptions and making the notification transient causes an
         // constraint error.
@@ -359,7 +354,7 @@ public class NotificationServiceImpl
         // making the notification transient causes an constraint error if you try
         // a findByEntityId again on the same entity So until we figure out that issue
         // we'll just leave the Notification object
-        this.makeTransient(notification);
+        makeTransient(notification);
         notification = null;
 
         return true;
@@ -369,7 +364,7 @@ public class NotificationServiceImpl
     @Override
     public int findMsgCountByEntityId(final String entityId) {
 
-        return this.notificationDAO.findMsgCountByEntityId(entityId);
+        return notificationDAO.findMsgCountByEntityId(entityId);
     }
 
     /**
@@ -379,12 +374,12 @@ public class NotificationServiceImpl
      */
     public AgreementDAO getAgreementDAO() {
 
-        return this.agreementDAO;
+        return agreementDAO;
     }
 
     public CommunicationsService getCommunicationsService() {
 
-        return this.communicationsService;
+        return communicationsService;
     }
 
     /**
@@ -395,7 +390,7 @@ public class NotificationServiceImpl
     @Override
     public ConfigurationService getConfigurationService() {
 
-        return this.configurationService;
+        return configurationService;
     }
 
     /**
@@ -409,22 +404,20 @@ public class NotificationServiceImpl
     @Override
     public NotificationMessageHolderType getCurrentMessage(final QName topic, final String jid) {
 
-        this.logger.debug("Looking for last current message on topic: " + topic.toString() +
-                          ", jid: " + jid);
-        final String message = this.pubSubService.getLastPublishedMessage(topic.toString());
-        this.logger.debug("Last current message received: " + message);
+        logger.debug("Looking for last current message on topic: " + topic.toString() + ", jid: " +
+            jid);
+        final String message = pubSubService.getLastPublishedMessage(topic.toString());
+        logger.debug("Last current message received: " + message);
 
         NotificationMessageHolderType t = NotificationMessageHolderType.Factory.newInstance();
 
-        if (message != null) {
-            if (topic.toString().toLowerCase().startsWith("profile")) {
-                t = this.createNotificationMessageHolder(ProfileNotificationMessage.NAME, message);
-            } else if (topic.toString().toLowerCase().startsWith("agreement")) {
-                t = this.createNotificationMessageHolder(AgreementRosterMessage.NAME, message);
-            } else {
-                t = this.createNotificationMessageHolder("WorkProductID", message);
-            }
-        }
+        if (message != null)
+            if (topic.toString().toLowerCase().startsWith("profile"))
+                t = createNotificationMessageHolder(ProfileNotificationMessage.NAME, message);
+            else if (topic.toString().toLowerCase().startsWith("agreement"))
+                t = createNotificationMessageHolder(AgreementRosterMessage.NAME, message);
+            else
+                t = createNotificationMessageHolder("WorkProductID", message);
         return t;
     }
 
@@ -442,9 +435,9 @@ public class NotificationServiceImpl
 
         IdentificationType[] identifications = null;
 
-        this.logger.debug("getMatchingMessages for user: " + entityId);
+        logger.debug("getMatchingMessages for user: " + entityId);
 
-        final Notification notification = this.notificationDAO.findByEntityId(entityId);
+        final Notification notification = notificationDAO.findByEntityId(entityId);
         if (notification != null) {
             final List<IdentificationType> workProductIdentificationList = new ArrayList<IdentificationType>();
 
@@ -454,25 +447,22 @@ public class NotificationServiceImpl
 
                 final Integer subscriptionId = notificationSubscription.getSubscriptionID();
 
-                final List<ProductSubscriptionByType> productSubscriptionList = this.productSubscriptionByTypeDAO.findBySubscriptionId(subscriptionId);
+                final List<ProductSubscriptionByType> productSubscriptionList = productSubscriptionByTypeDAO.findBySubscriptionId(subscriptionId);
                 for (final ProductSubscriptionByType productSubscription : productSubscriptionList) {
-                    final List<WorkProduct> workProductList = this.workProductService.listByProductType(productSubscription.getProductType());
-                    for (final WorkProduct workProduct : workProductList) {
-                        if (this.userInterestGroupDAO.isEligible(entityId,
+                    final List<WorkProduct> workProductList = workProductService.listByProductType(productSubscription.getProductType());
+                    for (final WorkProduct workProduct : workProductList)
+                        if (userInterestGroupDAO.isEligible(entityId,
                             workProduct.getFirstAssociatedInterestGroupID())) {
                             final IdentificationType identification = WorkProductHelper.getWorkProductIdentification(workProduct);
                             workProductIdentificationList.add(identification);
                         }
-                    }
                 }
             }
 
-            if ((workProductIdentificationList != null) &&
-                (workProductIdentificationList.size() > 0)) {
+            if (workProductIdentificationList != null && workProductIdentificationList.size() > 0)
                 identifications = new IdentificationType[workProductIdentificationList.size()];
-            } else {
+            else
                 identifications = new IdentificationType[0];
-            }
             workProductIdentificationList.toArray(identifications);
         }
         return identifications;
@@ -499,10 +489,10 @@ public class NotificationServiceImpl
         logEntry.setCategory(LogEntry.CATEGORY_NOTIFICATION);
         logEntry.setAction(LogEntry.ACTION_NOTIFICATION_POLL);
         logEntry.setEntityId(entityID);
-        this.logger.info(logEntry.getLogEntry());
+        logger.info(logEntry.getLogEntry());
 
         // if there's an entry for this id (i.e. bonnera@core.1.saic.com)
-        final Notification notification = this.notificationDAO.findByEntityId(entityID);
+        final Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification != null) {
 
             final ArrayList<NotificationMessageHolderType> messages = new ArrayList<NotificationMessageHolderType>();
@@ -511,33 +501,30 @@ public class NotificationServiceImpl
             final Set<NotificationMessage> notfMessages = notification.getMessages();
             if (notfMessages.size() > 0) {
 
-                this.logger.debug("getMessage: User: " + entityID + " has " + notfMessages.size() +
-                                  " messages");
+                logger.debug("getMessage: User: " + entityID + " has " + notfMessages.size() +
+                    " messages");
                 final List<NotificationMessage> notificationMessages = new ArrayList<NotificationMessage>();
                 notificationMessages.addAll(notfMessages);
                 Collections.sort(notificationMessages, new MessageComparator());
                 for (final NotificationMessage msg : notificationMessages) {
-                    final NotificationMessageHolderType notifyMessage = this.createNotificationMessageHolder(msg.getType(),
-                        new String(msg.getMessage()));
-                    if (notifyMessage != null) {
+                    final NotificationMessageHolderType notifyMessage = createNotificationMessageHolder(
+                        msg.getType(), new String(msg.getMessage()));
+                    if (notifyMessage != null)
                         messages.add(notifyMessage); // ddh - filter out interest group by the jid
-                    }
                 }
             }
 
             // Removes messages from queue
-            if (messages.size() > 0) {
-                this.clearNotificationMessages(notification);
-            }
-            this.logger.debug("getMessage: User: " + entityID + " can asscess " + messages.size() +
-                              " messages");
+            if (messages.size() > 0)
+                clearNotificationMessages(notification);
+            logger.debug("getMessage: User: " + entityID + " can asscess " + messages.size() +
+                " messages");
 
             response = new NotificationMessageHolderType[messages.size()];
             response = messages.toArray(response);
 
-        } else {
-            this.logger.error(entityID + " not found in subscription map");
-        }
+        } else
+            logger.error(entityID + " not found in subscription map");
 
         return response;
     }
@@ -549,7 +536,7 @@ public class NotificationServiceImpl
      */
     public NotificationDAO getNotificationDAO() {
 
-        return this.notificationDAO;
+        return notificationDAO;
     }
 
     private String getNotificationMessageBody(final WorkProduct product) {
@@ -560,23 +547,20 @@ public class NotificationServiceImpl
         body.append(" work product");
 
         EventType event = null;
-        if (product.getDigest() != null) {
+        if (product.getDigest() != null)
             event = DigestHelper.getFirstEventWithActivityNameIdentifier(product.getDigest().getDigest());
-        }
         if (event != null) {
             body.append(" associated with incident ");
             body.append(event.getIdentifierArray(0).getStringValue());
         }
 
         if (product.isActive()) {
-            if (product.getProductVersion() == 1) {
+            if (product.getProductVersion() == 1)
                 body.append(" created");
-            } else {
+            else
                 body.append(" updated ");
-            }
-        } else {
+        } else
             body.append(" deleted ");
-        }
         body.append(" by ");
         body.append(product.getUpdatedBy());
         body.append(" at ");
@@ -592,7 +576,7 @@ public class NotificationServiceImpl
      */
     public ProductSubscriptionByTypeDAO getProductSubscriptionByTypeDAO() {
 
-        return this.productSubscriptionByTypeDAO;
+        return productSubscriptionByTypeDAO;
     }
 
     /**
@@ -603,7 +587,7 @@ public class NotificationServiceImpl
     @Override
     public PubSubService getPubSubService() {
 
-        return this.pubSubService;
+        return pubSubService;
     }
 
     /**
@@ -618,7 +602,7 @@ public class NotificationServiceImpl
     public EndpointReferenceType getPullPoint(final String entityID) {
 
         EndpointReferenceType endpoint = null;
-        final Notification notification = this.notificationDAO.findByEntityId(entityID);
+        final Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification != null) {
             endpoint = EndpointReferenceType.Factory.newInstance();
             endpoint.addNewAddress().setStringValue(notification.getEndpointURL());
@@ -626,12 +610,11 @@ public class NotificationServiceImpl
             final MetadataType metadata = endpoint.addNewMetadata();
             final XmlCursor xc = metadata.newCursor();
             xc.toNextToken();
-            xc.insertElementWithText("scheme",
-                this.getConfigurationService().getServiceNameURN(NOTIFICATION_SERVICE_NAME));
+            xc.insertElementWithText("scheme", getConfigurationService().getServiceNameURN(
+                NOTIFICATION_SERVICE_NAME));
             xc.dispose();
-        } else {
+        } else
             return null;
-        }
         return endpoint;
     }
 
@@ -650,19 +633,18 @@ public class NotificationServiceImpl
 
         final Hashtable<String, List<String>> userIGIDListHash = new Hashtable<String, List<String>>();
         for (final Notification notification : notifications) {
-            final List<String> igIDList = this.userInterestGroupDAO.getInterestGroupList(notification.getEntityID());
-            if ((igIDList != null) && (igIDList.size() > 0)) {
+            final List<String> igIDList = userInterestGroupDAO.getInterestGroupList(notification.getEntityID());
+            if (igIDList != null && igIDList.size() > 0)
                 userIGIDListHash.put(notification.getEntityID(), igIDList);
-            } else {
+            else
                 userIGIDListHash.put(notification.getEntityID(), new ArrayList<String>());
-            }
         }
         return userIGIDListHash;
     }
 
     public UserInterestGroupDAO getUserInterestGroupDAO() {
 
-        return this.userInterestGroupDAO;
+        return userInterestGroupDAO;
     }
 
     /**
@@ -678,8 +660,8 @@ public class NotificationServiceImpl
     public void InvalidXpathNotification(final Integer subscriptionId, final String errorMessage) {
 
         // search all notifications and update any subscription msgs which have specified ID
-        for (final Notification notification : this.notificationDAO.findAll()) {
-            for (final NotificationSubscription sub : notification.getSubscriptions()) {
+        for (final Notification notification : notificationDAO.findAll())
+            for (final NotificationSubscription sub : notification.getSubscriptions())
                 if (subscriptionId.compareTo(sub.getSubscriptionID()) == 0) {
                     final ProductPublicationStatus status = new ProductPublicationStatus();
                     status.setStatus(ProductPublicationStatus.FailureStatus);
@@ -689,13 +671,9 @@ public class NotificationServiceImpl
                     final WorkProductPublicationResponseDocument errorResponseDoc = WorkProductPublicationResponseDocument.Factory.newInstance();
                     errorResponseDoc.addNewWorkProductPublicationResponse().set(errorResponse);
 
-                    this.addNotificationMessage(notification,
-                        subscriptionId,
-                        NOTIFY_MESSAGE,
+                    addNotificationMessage(notification, subscriptionId, NOTIFY_MESSAGE,
                         errorResponseDoc.toString());
                 }
-            }
-        }
     }
 
     /**
@@ -713,30 +691,30 @@ public class NotificationServiceImpl
                                           final String message) {
 
         // set url on webservice template
-        this.webServiceTemplate.setDefaultUri(notification.getEndpointURL());
+        webServiceTemplate.setDefaultUri(notification.getEndpointURL());
 
         // create the NotificationMessageRequest
         final NotifyRequestDocument request = NotifyRequestDocument.Factory.newInstance();
 
-        this.logger.debug("invokeWebServiceTemplate: using jid as " + notification.getEndpointURL());
-        request.addNewNotifyRequest().addNewNotificationMessage().setMessage(this.createNotificationMessageHolder(msgType,
-            message).getMessage());
+        logger.debug("invokeWebServiceTemplate: using jid as " + notification.getEndpointURL());
+        request.addNewNotifyRequest().addNewNotificationMessage().setMessage(
+            createNotificationMessageHolder(msgType, message).getMessage());
 
         final XmlCursor xc = request.getNotifyRequest().newCursor();
         xc.toNextToken();
         final QName to = new QName("http://www.w3.org/2005/08/addressing", "To");
         xc.insertElementWithText(to, notification.getEntityID());
         xc.dispose();
-        this.logger.debug("NOTIFY_REQUEST: " + request.toString());
+        logger.debug("NOTIFY_REQUEST: " + request.toString());
 
         // invoke webService
-        this.webServiceTemplate.marshalSendAndReceive(request);
+        webServiceTemplate.marshalSendAndReceive(request);
     }
 
     /**
      * Parsing the message to figure out whether the jid can access the work product based on the
      * Interest Group
-     * 
+     *
      * @param message
      * @return
      */
@@ -746,29 +724,29 @@ public class NotificationServiceImpl
         try {
             wpDoc = WorkProductDocument.Factory.parse(message);
         } catch (final Exception e) {
-            this.logger.error("Parsing: " + message + "\nParsing Error: " + e.getMessage());
+            logger.error("Parsing: " + message + "\nParsing Error: " + e.getMessage());
             return false;
         }
 
         // log.debug("WorkProductDocument:\n" + wpDoc.toString());
         final String igID = WorkProductHelper.getInterestGroupID(wpDoc.getWorkProduct());
-        this.logger.debug("interest group ID: " + igID);
-        final boolean eligibility = this.userInterestGroupDAO.isEligible(jid, igID);
-        this.logger.debug("User: " + jid + " is" + (eligibility ? " " : " not") +
-                          " allowed to access IG: " + igID);
+        logger.debug("interest group ID: " + igID);
+        final boolean eligibility = userInterestGroupDAO.isEligible(jid, igID);
+        logger.debug("User: " + jid + " is" + (eligibility ? " " : " not") +
+            " allowed to access IG: " + igID);
         return eligibility;
     }
 
     // @Transactional
     private Notification makePersistent(final Notification notification) {
 
-        return this.notificationDAO.makePersistent(notification);
+        return notificationDAO.makePersistent(notification);
     }
 
     // @Transactional
     private void makeTransient(final Notification notification) {
 
-        this.notificationDAO.makeTransient(notification);
+        notificationDAO.makeTransient(notification);
     }
 
     /**
@@ -787,7 +765,7 @@ public class NotificationServiceImpl
     public void newWorkProductVersion(final String productID, final Integer subscriptionId) {
 
         // get the product
-        final WorkProduct product = this.workProductService.getProduct(productID);
+        final WorkProduct product = workProductService.getProduct(productID);
 
         final WorkProductDocument productDoc = WorkProductDocument.Factory.newInstance();
         final WorkProductDocument.WorkProduct summary = WorkProductHelper.toWorkProductSummary(product);
@@ -795,9 +773,9 @@ public class NotificationServiceImpl
         productDoc.setWorkProduct(summary);
         final String productVersion = WorkProductHelper.getProductVersion(summary);
         final int version = Integer.parseInt(productVersion);
-        final Hashtable<String, List<String>> userIGIDListHash = this.getUserIGIDList(this.notificationDAO.findBySubscriptionId(subscriptionId));
+        final Hashtable<String, List<String>> userIGIDListHash = getUserIGIDList(notificationDAO.findBySubscriptionId(subscriptionId));
         try {
-            final TransactionTemplate tt = new TransactionTemplate(this.platformTransactionManager);
+            final TransactionTemplate tt = new TransactionTemplate(platformTransactionManager);
             tt.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
             // tt.setIsolationLevel(TransactionDefinition.ISOLATION_SERIALIZABLE);
             tt.execute(new TransactionCallbackWithoutResult() {
@@ -807,78 +785,64 @@ public class NotificationServiceImpl
 
                     // search all notifications and update any subscription msgs which have
                     // specified ID
-                    final List<Notification> notifications = NotificationServiceImpl.this.notificationDAO.findBySubscriptionId(subscriptionId);
+                    final List<Notification> notifications = notificationDAO.findBySubscriptionId(subscriptionId);
 
                     for (final Notification notification : notifications) {
-                        NotificationServiceImpl.this.logger.debug("adding workproduct: " +
-                                                                  productID + " with IGID: " +
-                                                                  igID + " to subid: " +
-                                                                  subscriptionId + " to entity: " +
-                                                                  notification.getEntityID());
+                        logger.debug("adding workproduct: " + productID + " with IGID: " + igID +
+                            " to subid: " + subscriptionId + " to entity: " +
+                            notification.getEntityID());
                         productDoc.setWorkProduct(summary);
 
                         // if endpoint is web service url
                         if (notification.isEndpointWS()) {
-                            NotificationServiceImpl.this.logger.debug("Notification going to be SENT to webServiceURL: " +
-                                                                      notification.getEndpointURL());
+                            logger.debug("Notification going to be SENT to webServiceURL: " +
+                                notification.getEndpointURL());
                             final String url = notification.getEndpointURL();
                             try {
                                 final URI u = new URI(url);
                                 final String proto = u.getScheme();
                                 // log.debug("Handling protocol: " + proto);
-                                if (proto.equalsIgnoreCase("xmpp")) {
+                                if (proto.equalsIgnoreCase("xmpp"))
                                     try {
-                                        NotificationServiceImpl.this.logger.debug("XMPP message sent to: " +
-                                                                                  u.getHost());
-                                        NotificationServiceImpl.this.communicationsService.sendXMPPMessage(NotificationServiceImpl.this.getNotificationMessageBody(product),
-                                            null,
-                                            productDoc.xmlText(),
-                                            u.getSchemeSpecificPart());
+                                        logger.debug("XMPP message sent to: " + u.getHost());
+                                        communicationsService.sendXMPPMessage(
+                                            NotificationServiceImpl.this.getNotificationMessageBody(product),
+                                            null, productDoc.xmlText(), u.getSchemeSpecificPart());
                                     } catch (final IllegalArgumentException e) {
-                                        NotificationServiceImpl.this.logger.error("IllegalArgumentException newWorkProductVersion sending XMPP message: " +
-                                                                                  e.getMessage());
+                                        logger.error("IllegalArgumentException newWorkProductVersion sending XMPP message: " +
+                                            e.getMessage());
                                     } catch (final Exception e) {
-                                        NotificationServiceImpl.this.logger.error("Exception newWorkProductVersion IllegalArgumentException: " +
-                                                                                  e.getMessage());
+                                        logger.error("Exception newWorkProductVersion IllegalArgumentException: " +
+                                            e.getMessage());
                                     }
-                                } else {
+                                else {
                                     // invoke specified webService
-                                    NotificationServiceImpl.this.logger.debug("WS-Notify message sent to :" +
-                                                                              u.toString());
-                                    NotificationServiceImpl.this.invokeWebServiceTemplate(notification,
-                                        "WorkProductID",
-                                        productDoc.toString());
+                                    logger.debug("WS-Notify message sent to :" + u.toString());
+                                    NotificationServiceImpl.this.invokeWebServiceTemplate(
+                                        notification, "WorkProductID", productDoc.toString());
                                 }
                             } catch (final URISyntaxException e) {
-                                NotificationServiceImpl.this.logger.debug("Error decoding URI: " +
-                                                                          e.getMessage());
+                                logger.debug("Error decoding URI: " + e.getMessage());
                             }
                         }
                         // if endpoint is pullpoint address
                         else {
                             final List<String> igIDList = userIGIDListHash.get(notification.getEntityID());
-                            NotificationServiceImpl.this.logger.debug("User: " +
-                                                                      notification.getEntityID() +
-                                                                      " can access " +
-                                                                      igIDList.size() + " IGs");
-                            if ((igID == null) ||
-                                ((igIDList.size() > 0) && igIDList.contains(igID))) {
+                            logger.debug("User: " + notification.getEntityID() + " can access " +
+                                igIDList.size() + " IGs");
+                            if (igID == null || igIDList.size() > 0 && igIDList.contains(igID)) {
 
-                                NotificationServiceImpl.this.logger.debug("Add notification for User: " +
-                                                                          notification.getEntityID());
+                                logger.debug("Add notification for User: " +
+                                    notification.getEntityID());
 
-                                if (version > 1) {
+                                if (version > 1)
                                     notification.clearoldMessage(productID);
-                                }
 
-                                notification.addMessage(subscriptionId,
-                                    productID,
+                                notification.addMessage(subscriptionId, productID,
                                     productDoc.toString());
-                            } else {
-                                NotificationServiceImpl.this.logger.debug("User: " +
-                                                                          notification.getEntityID() +
-                                                                          " can NOT access " + igID);
-                            }
+                            } else
+                                logger.debug("User: " + notification.getEntityID() +
+                                    " can NOT access " + igID);
                         }
                     }
                 }
@@ -886,8 +850,8 @@ public class NotificationServiceImpl
         } catch (final Exception e) {
             // System.err.println("productChangeNotificationHandler calling publishWorkProduct Exception sending message: "
             // + e.getMessage());
-            this.logger.error("Exception handling product change notification message when publishing: " +
-                              e.getMessage());
+            logger.error("Exception handling product change notification message when publishing: " +
+                e.getMessage());
         }
     }
 
@@ -904,16 +868,15 @@ public class NotificationServiceImpl
     public void notify(final String entityID, final NotificationMessageHolderType[] notifications) {
 
         // find Notification for desired entityID
-        this.logger.debug("Notify entityID: " + entityID);
-        final Notification notification = this.notificationDAO.findByEntityId(entityID);
+        logger.debug("Notify entityID: " + entityID);
+        final Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification != null) {
-            this.logger.debug("notifications to add: " + notifications.length);
+            logger.debug("notifications to add: " + notifications.length);
             // for each notify message add it to the list of notification messages
             for (final NotificationMessageHolderType notf : notifications) {
                 final NotificationMessageHolderType.Message msg = notf.getMessage();
-                if (msg != null) {
-                    this.addNotificationMessage(notification, 0, NOTIFY_MESSAGE, msg.toString());
-                }
+                if (msg != null)
+                    addNotificationMessage(notification, 0, NOTIFY_MESSAGE, msg.toString());
             }
         }
     }
@@ -926,10 +889,9 @@ public class NotificationServiceImpl
     public void sendSunscriberInterface() {
 
         // search all notifications and update any subscription msgs which have specified ID
-        final List<Notification> notifications = this.notificationDAO.findAll();
-        if (!notifications.isEmpty()) {
-            this.pubSubService.subscriberInterface(this);
-        }
+        final List<Notification> notifications = notificationDAO.findAll();
+        if (!notifications.isEmpty())
+            pubSubService.subscriberInterface(this);
     }
 
     /**
@@ -957,7 +919,7 @@ public class NotificationServiceImpl
     @Override
     public void setConfigurationService(final ConfigurationService service) {
 
-        this.configurationService = service;
+        configurationService = service;
     }
 
     /**
@@ -979,7 +941,7 @@ public class NotificationServiceImpl
      */
     public void setNotificationDAO(final NotificationDAO n) {
 
-        this.notificationDAO = n;
+        notificationDAO = n;
     }
 
     /**
@@ -990,7 +952,7 @@ public class NotificationServiceImpl
      */
     public void setProductSubscriptionByTypeDAO(final ProductSubscriptionByTypeDAO n) {
 
-        this.productSubscriptionByTypeDAO = n;
+        productSubscriptionByTypeDAO = n;
     }
 
     /**
@@ -1002,7 +964,7 @@ public class NotificationServiceImpl
     @Override
     public void setPubSubService(final PubSubService service) {
 
-        this.pubSubService = service;
+        pubSubService = service;
     }
 
     public void setUserInterestGroupDAO(final UserInterestGroupDAO userInterestGroupDAO) {
@@ -1048,20 +1010,21 @@ public class NotificationServiceImpl
 
         if (who.getAddress() != null) {
 
-            final String entityID = who.getAddress().getStringValue().substring(who.getAddress().getStringValue().lastIndexOf("/") + 1);
-            this.logger.debug("subscribing who: " + entityID);
+            final String entityID = who.getAddress().getStringValue().substring(
+                who.getAddress().getStringValue().lastIndexOf("/") + 1);
+            logger.debug("subscribing who: " + entityID);
 
             // Process topic subscriptions - Allow TopicExpression elements from either
             // the ProfileService schema or the WS-Topics schema
             final String topicExpression = FilterUtil.getTopic(what);
-            this.logger.debug("subscribing what: " + topicExpression);
+            logger.debug("subscribing what: " + topicExpression);
 
             // get the namespace map for xpaths
             final Map<String, String> namespaceMap = FilterUtil.getNamespaceMap(what);
 
             // get the xpath
             final String xPath = FilterUtil.getXPath(what);
-            this.logger.debug("xPath: " + xPath);
+            logger.debug("xPath: " + xPath);
 
             // Process xpath expressions
 
@@ -1072,88 +1035,76 @@ public class NotificationServiceImpl
             String productTypeValue = "";
             if (topicTreeCount > 0) {
                 productType = tokenizer.nextToken();
-                if (tokenizer.hasMoreElements() && (topicTreeCount > 1)) {
+                if (tokenizer.hasMoreElements() && topicTreeCount > 1)
                     productTypeValue = tokenizer.nextToken();
-                } else {
+                else
                     productTypeValue = "*";
-                }
 
                 // WorkProductID TopicExpression (workproduct/* or workproduct/1234)
                 if (productType.equalsIgnoreCase("workproduct")) {
                     if (productTypeValue.equals("*")) {
-                        this.logger.debug("Subscribing to ALL WorkProduct updates.");
-                        this.subscribeWorkProductID(productTypeValue, entityID);
+                        logger.debug("Subscribing to ALL WorkProduct updates.");
+                        subscribeWorkProductID(productTypeValue, entityID);
                     } else {
-                        this.logger.debug("Subscribing to WorkProductByID: " + productTypeValue);
-                        this.subscribeWorkProductID(String.valueOf(productTypeValue), entityID);
+                        logger.debug("Subscribing to WorkProductByID: " + productTypeValue);
+                        subscribeWorkProductID(String.valueOf(productTypeValue), entityID);
                     }
                 }
                 // AgreementID TopicExpression (agreement/* or agreement/1234)
                 else if (productType.equalsIgnoreCase("agreement")) {
                     if (productTypeValue.equals("*")) {
-                        this.logger.debug("Subscribing to ALL Agreement updates.");
-                        this.subscribeAgreement(productTypeValue, entityID);
+                        logger.debug("Subscribing to ALL Agreement updates.");
+                        subscribeAgreement(productTypeValue, entityID);
                     } else {
-                        this.logger.debug("Subscribing to AgreementID: " + productTypeValue);
-                        this.subscribeAgreement(productTypeValue, entityID);
+                        logger.debug("Subscribing to AgreementID: " + productTypeValue);
+                        subscribeAgreement(productTypeValue, entityID);
                     }
                 }
                 // ProfileID TopicExpression (profile/* or profile/user@core1)
                 else if (productType.equalsIgnoreCase("profile")) {
                     if (productTypeValue.equals("*")) {
-                        this.logger.debug("Subscribing to ALL Profile updates.");
-                        this.subscribeProfile(productTypeValue, entityID);
+                        logger.debug("Subscribing to ALL Profile updates.");
+                        subscribeProfile(productTypeValue, entityID);
                     } else {
-                        this.logger.debug("Subscribing to Profile Name: " + productTypeValue);
-                        this.subscribeProfile(productTypeValue, entityID);
+                        logger.debug("Subscribing to Profile Name: " + productTypeValue);
+                        subscribeProfile(productTypeValue, entityID);
                     }
                 }
                 // IncidentID TopicExpression (incident/* or incident/12345)
                 else if (productType.equalsIgnoreCase("Incident")) {
                     if (productTypeValue.equals("*")) {
-                        this.logger.debug("Subscribing to ALL Incident updates.");
-                        this.subscribeIncidentIdAndWorkProductType(productType,
-                            productTypeValue,
-                            xPath,
-                            namespaceMap,
-                            entityID);
+                        logger.debug("Subscribing to ALL Incident updates.");
+                        subscribeIncidentIdAndWorkProductType(productType, productTypeValue, xPath,
+                            namespaceMap, entityID);
                     } else {
-                        this.logger.debug("Subscribing to IncidentID: " + productTypeValue);
-                        this.subscribeIncidentIdAndWorkProductType(productType,
-                            productTypeValue,
-                            xPath,
-                            namespaceMap,
-                            entityID);
+                        logger.debug("Subscribing to IncidentID: " + productTypeValue);
+                        subscribeIncidentIdAndWorkProductType(productType, productTypeValue, xPath,
+                            namespaceMap, entityID);
                     }
                 } else // if productType has incident qualifier (<productType>/incident/*)
                 if (productTypeValue.equalsIgnoreCase("Incident")) {
                     String incidentIdQualifier = "";
-                    if (tokenizer.hasMoreTokens() && (topicTreeCount > 2)) {
+                    if (tokenizer.hasMoreTokens() && topicTreeCount > 2)
                         incidentIdQualifier = tokenizer.nextToken();
-                    } else {
+                    else
                         incidentIdQualifier = "*";
-                    }
-                    this.logger.debug("Subscribing to ProductType : " + productType +
-                                      " associated with IncidentID : " + incidentIdQualifier);
-                    this.subscribeIncidentIdAndWorkProductType(productType,
-                        incidentIdQualifier,
-                        xPath,
-                        namespaceMap,
-                        entityID);
+                    logger.debug("Subscribing to ProductType : " + productType +
+                            " associated with IncidentID : " + incidentIdQualifier);
+                    subscribeIncidentIdAndWorkProductType(productType, incidentIdQualifier, xPath,
+                        namespaceMap, entityID);
                 }
                 // All other productTypes in from <productType>/*
                 else if (productTypeValue.equals("*")) {
-                    this.logger.debug("Subscribing ProductType: " + productType);
-                    this.subscribeWorkProductType(productType, xPath, namespaceMap, entityID);
+                    logger.debug("Subscribing ProductType: " + productType);
+                    subscribeWorkProductType(productType, xPath, namespaceMap, entityID);
                 } else {
                     // the type could be something like application/pdf
                     final String type = productType + "/" + productTypeValue;
-                    this.logger.debug("Subscribing ProductType: " + type);
-                    this.subscribeWorkProductType(type, xPath, namespaceMap, entityID);
+                    logger.debug("Subscribing ProductType: " + type);
+                    subscribeWorkProductType(type, xPath, namespaceMap, entityID);
                 }
-            } else {
+            } else
                 throw new InvalidProductTypeException();
-            }
         }
     }
 
@@ -1177,7 +1128,7 @@ public class NotificationServiceImpl
         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         // create/update notification and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
@@ -1188,30 +1139,27 @@ public class NotificationServiceImpl
         final NotificationSubscription sub = new NotificationSubscription();
         sub.setSubscriptionID(subscriptionID);
 
-        this.addNotificationSubscription(notification, sub);
+        addNotificationSubscription(notification, sub);
 
         final String eeID = entityID;
         final Integer sID = subscriptionID;
         final Integer aID = agreementID.equals("*") ? -1 : Integer.parseInt(agreementID);
-        this.getPubSubService().addAgreementListener(aID,
+        getPubSubService().addAgreementListener(aID,
             new NotificationListener<AgreementRosterMessage>() {
 
                 @Override
                 public void onChange(final AgreementRosterMessage message) {
 
-                    NotificationServiceImpl.this.logger.debug("AgreementListener.:onChange: agreementID: " +
-                                                              message.getAgreementID());
+                    logger.debug("AgreementListener.:onChange: agreementID: " +
+                    message.getAgreementID());
 
-                    final Notification notification = NotificationServiceImpl.this.notificationDAO.findByEntityId(eeID);
-                    final Agreement agreement = NotificationServiceImpl.this.agreementDAO.findById(message.getAgreementID());
+                    final Notification notification = notificationDAO.findByEntityId(eeID);
+                    final Agreement agreement = agreementDAO.findById(message.getAgreementID());
                     String msg = new Integer(message.getAgreementID()).toString();
-                    if (agreement != null) {
+                    if (agreement != null)
                         msg = agreement.toString();
-                    }
-                    NotificationServiceImpl.this.addNotificationMessage(notification,
-                        sID,
-                        AgreementRosterMessage.NAME,
-                        msg);
+                    NotificationServiceImpl.this.addNotificationMessage(notification, sID,
+                        AgreementRosterMessage.NAME, msg);
                 }
             });
 
@@ -1246,14 +1194,11 @@ public class NotificationServiceImpl
                                                          final String entityID)
         throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
 
-        final Integer subID = this.getPubSubService().subscribeInterestGroupIdAndWorkProductType(wpType,
-            incidentID,
-            xpContext,
-            namespaceMap,
-            this);
+        final Integer subID = getPubSubService().subscribeInterestGroupIdAndWorkProductType(wpType,
+            incidentID, xpContext, namespaceMap, this);
 
         // create/update notification and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
@@ -1261,7 +1206,7 @@ public class NotificationServiceImpl
         final NotificationSubscription sub = new NotificationSubscription();
         sub.setSubscriptionID(subID);
 
-        this.addNotificationSubscription(notification, sub);
+        addNotificationSubscription(notification, sub);
 
         return subID;
     }
@@ -1286,7 +1231,7 @@ public class NotificationServiceImpl
         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         // create/update notification and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
@@ -1297,23 +1242,20 @@ public class NotificationServiceImpl
         final NotificationSubscription sub = new NotificationSubscription();
         sub.setSubscriptionID(subscriptionID);
 
-        this.addNotificationSubscription(notification, sub);
+        addNotificationSubscription(notification, sub);
 
         final String eeID = entityID;
         final Integer sID = subscriptionID;
-        this.getPubSubService().addProfileListener(profileID,
+        getPubSubService().addProfileListener(profileID,
             new NotificationListener<ProfileNotificationMessage>() {
 
                 @Override
                 public void onChange(final ProfileNotificationMessage message) {
 
-                    final Notification notification = NotificationServiceImpl.this.notificationDAO.findByEntityId(eeID);
-                    if (notification != null) {
-                        NotificationServiceImpl.this.addNotificationMessage(notification,
-                            sID,
-                            ProfileNotificationMessage.NAME,
-                            message.toString());
-                    }
+                    final Notification notification = notificationDAO.findByEntityId(eeID);
+                    if (notification != null)
+                        NotificationServiceImpl.this.addNotificationMessage(notification, sID,
+                            ProfileNotificationMessage.NAME, message.toString());
 
                 }
             });
@@ -1340,11 +1282,11 @@ public class NotificationServiceImpl
         throws InvalidProductIDException, NullSubscriberException, EmptySubscriberNameException {
 
         // Sub with PubSub
-        final Integer subscriptionID = this.getPubSubService().subscribeWorkProductID(workProductID,
+        final Integer subscriptionID = getPubSubService().subscribeWorkProductID(workProductID,
             this);
 
         // create/update notification and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
@@ -1352,7 +1294,7 @@ public class NotificationServiceImpl
         final NotificationSubscription sub = new NotificationSubscription();
         sub.setSubscriptionID(subscriptionID);
 
-        this.addNotificationSubscription(notification, sub);
+        addNotificationSubscription(notification, sub);
 
         return subscriptionID;
     }
@@ -1384,13 +1326,11 @@ public class NotificationServiceImpl
                                             final String entityID)
         throws InvalidProductTypeException, NullSubscriberException, EmptySubscriberNameException {
 
-        final Integer subID = this.getPubSubService().subscribeWorkProductType(wpType,
-            xpContext,
-            namespaceMap,
-            this);
+        final Integer subID = getPubSubService().subscribeWorkProductType(wpType, xpContext,
+            namespaceMap, this);
 
         // create/update notification and persist
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
@@ -1398,7 +1338,7 @@ public class NotificationServiceImpl
         final NotificationSubscription sub = new NotificationSubscription();
         sub.setSubscriptionID(subID);
 
-        this.addNotificationSubscription(notification, sub);
+        addNotificationSubscription(notification, sub);
 
         return subID;
     }
@@ -1412,12 +1352,12 @@ public class NotificationServiceImpl
     @Override
     public void systemInitializedHandler(final String messgae) {
 
+        logger.debug("systemInitializedHandler: ... start ...");
         final WorkProductTypeListType typeList = WorkProductTypeListType.Factory.newInstance();
-        this.directoryService.registerUICDSService(NS_NotificationService,
-            NOTIFICATION_SERVICE_NAME,
-            typeList,
-            typeList);
-        this.sendSunscriberInterface();
+        directoryService.registerUICDSService(NS_NotificationService, NOTIFICATION_SERVICE_NAME,
+            typeList, typeList);
+        sendSunscriberInterface();
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 
     /**
@@ -1436,17 +1376,16 @@ public class NotificationServiceImpl
                                final String endpointAddress,
                                final boolean isWebService) {
 
-        Notification notification = this.notificationDAO.findByEntityId(entityID);
+        Notification notification = notificationDAO.findByEntityId(entityID);
         if (notification == null) {
             notification = new Notification();
             notification.setEntityID(entityID);
         }
         notification.setEndpointURL(endpointAddress);
         notification.setEndpointWS(isWebService); // flag to tell notification if this is WS URL
-        notification = this.makePersistent(notification);
-        if (notification == null) {
-            this.logger.error("Error updating notification - makePersistent returned null");
-        }
+        notification = makePersistent(notification);
+        if (notification == null)
+            logger.error("Error updating notification - makePersistent returned null");
     }
 
     /**
@@ -1465,28 +1404,28 @@ public class NotificationServiceImpl
                                    final Integer subscriptionId) {
 
         // search all notifications and update any subscription msgs which have specified ID
-        final List<Notification> notifications = this.notificationDAO.findBySubscriptionId(subscriptionId);
+        final List<Notification> notifications = notificationDAO.findBySubscriptionId(subscriptionId);
         for (final Notification notification : notifications) {
             final WorkProductDeletedNotificationDocument doc = WorkProductDeletedNotificationDocument.Factory.newInstance();
             doc.addNewWorkProductDeletedNotification();
-            doc.getWorkProductDeletedNotification().addNewWorkProductIdentification().set(productChangedMessage.getIdentification().getWorkProductIdentification());
-            doc.getWorkProductDeletedNotification().addNewWorkProductProperties().set(productChangedMessage.getProperties().getWorkProductProperties());
-            final String interestGroupID = productChangedMessage.getProperties().getWorkProductProperties().getAssociatedGroups().getIdentifierArray(0).getStringValue();
-            this.logger.debug("trying to delete work product for " + notification.getEntityID() +
-                              " with IGID: " + interestGroupID);
+            doc.getWorkProductDeletedNotification().addNewWorkProductIdentification().set(
+                productChangedMessage.getIdentification().getWorkProductIdentification());
+            doc.getWorkProductDeletedNotification().addNewWorkProductProperties().set(
+                productChangedMessage.getProperties().getWorkProductProperties());
+            final String interestGroupID = productChangedMessage.getProperties().getWorkProductProperties().getAssociatedGroups().getIdentifierArray(
+                0).getStringValue();
+            logger.debug("trying to delete work product for " + notification.getEntityID() +
+                " with IGID: " + interestGroupID);
 
             // if endpoint is web service url
             if (notification.isEndpointWS()) {
-                this.logger.debug("Notification going to be SENT to webServiceURL: " +
-                                  notification.getEndpointURL());
+                logger.debug("Notification going to be SENT to webServiceURL: " +
+                    notification.getEndpointURL());
                 // invoke specified webService
-                this.invokeWebServiceTemplate(notification, "WorkProductDeleted", doc.toString());
-            } else if (this.userInterestGroupDAO.isEligible(notification.getEntityID(),
-                interestGroupID)) {
-                this.logger.debug("Delete Work Product: " + doc);
-                this.addNotificationMessage(notification,
-                    subscriptionId,
-                    "WorkProductDeleted",
+                invokeWebServiceTemplate(notification, "WorkProductDeleted", doc.toString());
+            } else if (userInterestGroupDAO.isEligible(notification.getEntityID(), interestGroupID)) {
+                logger.debug("Delete Work Product: " + doc);
+                addNotificationMessage(notification, subscriptionId, "WorkProductDeleted",
                     doc.toString());
             }
 

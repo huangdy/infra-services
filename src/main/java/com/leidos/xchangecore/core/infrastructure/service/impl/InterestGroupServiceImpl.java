@@ -280,6 +280,7 @@ public class InterestGroupServiceImpl
     @Override
     public void systemInitializedHandler(String messgae) {
 
+        logger.debug("systemInitializedHandler: ... start ...");
         String urn = getConfigurationService().getServiceNameURN(INTEREST_GROUP_SERVICE_NAME);
         WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
@@ -287,6 +288,7 @@ public class InterestGroupServiceImpl
             INTEREST_GROUP_SERVICE_NAME,
             publishedProducts,
             subscribedProducts);
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 
     private InterestGroupListInfoType toInterestGroupType(InterestGroupInfo ig) {

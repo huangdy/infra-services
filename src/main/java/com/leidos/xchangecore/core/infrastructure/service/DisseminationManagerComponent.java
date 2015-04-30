@@ -57,31 +57,28 @@ public class DisseminationManagerComponent {
                      printArrayList(message.getJidsToAdd()) + "\n" + "\tREMOVE: " +
                      printArrayList(message.getJidsToRemove()) + "\n");
 
-        String igid = message.getInterestGroupID();
+        final String igid = message.getInterestGroupID();
         // make sure there is an IG id first...
         if (igid != null) {
 
             // process the jids to add
-            if (!message.getJidsToAdd().isEmpty()) {
-                for (String jid : message.getJidsToAdd()) {
+            if (!message.getJidsToAdd().isEmpty())
+                for (final String jid : message.getJidsToAdd()) {
                     logger.debug("Adding user " + jid + " to IG " + igid);
                     addJID(igid, jid);
                 }
-            }
 
             // process the jids to remove
-            if (!message.getJidsToRemove().isEmpty()) {
-                for (String jid : message.getJidsToRemove()) {
+            if (!message.getJidsToRemove().isEmpty())
+                for (final String jid : message.getJidsToRemove()) {
                     logger.debug("Removing user " + jid + " from IG " + igid);
                     removeJID(igid, jid);
                 }
-            }
 
             // TODO: process groups add/remove
             // TODO: dynamic lookup?  move to queue manager?
-        } else {
+        } else
             logger.info("No interest group ID was found");
-        }
     }
 
     public UserInterestGroupDAO getUserInterestGroupDAO() {
@@ -93,9 +90,8 @@ public class DisseminationManagerComponent {
     private String printArrayList(ArrayList<String> list) {
 
         String listString = "";
-        for (String s : list) {
+        for (final String s : list)
             listString += s + " ";
-        }
         return listString;
     }
 
@@ -131,9 +127,7 @@ public class DisseminationManagerComponent {
      */
     public void systemInitializedHandler(String message) {
 
-        // No need to do anything yet
-        logger.info("Dissemination Manager - initialized");
-
-        // TODO: check database (disseminationManagerDAO)for existing map on startup and recreate manager list
+        logger.debug("systemInitializedHandler: ... start ...");
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 }

@@ -19,14 +19,14 @@ import com.leidos.xchangecore.core.infrastructure.service.SearchService;
 
 /**
  * The SearchService Interface implementation.
- * 
+ *
  * @ssdd
  */
 public class SearchServiceImpl
-    implements SearchService {
+implements SearchService {
 
     /** The log. */
-    Logger log = LoggerFactory.getLogger(SearchServiceImpl.class);
+    private final Logger logger = LoggerFactory.getLogger(SearchServiceImpl.class);
 
     /** The em. */
     @PersistenceContext
@@ -35,21 +35,11 @@ public class SearchServiceImpl
     private DirectoryService directoryService;
 
     /**
-     * Sets the directory service.
-     * 
-     * @param directoryService the new directory service
-     */
-    public void setDirectoryService(DirectoryService directoryService) {
-
-        this.directoryService = directoryService;
-    }
-
-    /**
      * Find entities.
-     * 
+     *
      * @param queryString the query string
      * @param classes the classes
-     * 
+     *
      * @return the list
      * @ssdd
      */
@@ -59,30 +49,41 @@ public class SearchServiceImpl
         List<?> results = null;
 
         try {
-            FullTextEntityManager textEm = Search.getFullTextEntityManager(em);
-            QueryParser parser = new QueryParser("name", new StopAnalyzer());
-            org.apache.lucene.search.Query luceneQuery = parser.parse(queryString);
-            FullTextQuery fullTextQuery = textEm.createFullTextQuery(luceneQuery, classes);
+            final FullTextEntityManager textEm = Search.getFullTextEntityManager(em);
+            final QueryParser parser = new QueryParser("name", new StopAnalyzer());
+            final org.apache.lucene.search.Query luceneQuery = parser.parse(queryString);
+            final FullTextQuery fullTextQuery = textEm.createFullTextQuery(luceneQuery, classes);
             results = fullTextQuery.getResultList();
 
             int count = 0;
-            for (Object o : results) {
-                log.debug("Result: " + o);
+            for (final Object o : results) {
+                logger.debug("Result: " + o);
                 ++count;
             }
-            log.debug("matches: " + count);
-        } catch (Exception e) {
+            logger.debug("matches: " + count);
+        } catch (final Exception e) {
             throw new RuntimeException(e);
         }
         return results;
     }
 
+    /**
+     * Sets the directory service.
+     *
+     * @param directoryService the new directory service
+     */
+    public void setDirectoryService(DirectoryService directoryService) {
+
+        this.directoryService = directoryService;
+    }
+
+    @Override
     public void systemInitializedHandler(String messgae) {
 
-        WorkProductTypeListType typeList = WorkProductTypeListType.Factory.newInstance();
+        logger.debug("systemInitializedHandler: ... start ...");
+        final WorkProductTypeListType typeList = WorkProductTypeListType.Factory.newInstance();
         directoryService.registerUICDSService("http://uicds.dctd.saic.com/searchService",
-            SEARCH_SERVICE_NAME,
-            typeList,
-            typeList);
+            SEARCH_SERVICE_NAME, typeList, typeList);
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 }

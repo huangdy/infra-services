@@ -66,10 +66,10 @@ import com.leidos.xchangecore.core.infrastructure.service.WorkProductService;
  * @ssdd
  */
 public class DirectoryServiceImpl
-    implements DirectoryService {
+implements DirectoryService {
 
     private class AgreementListener
-        implements NotificationListener<AgreementRosterMessage> {
+    implements NotificationListener<AgreementRosterMessage> {
 
         private final Logger logger = LoggerFactory.getLogger(AgreementListener.class);
 
@@ -77,28 +77,23 @@ public class DirectoryServiceImpl
         public void onChange(AgreementRosterMessage message) {
 
             logger.info("AgreementListener: onChange: agreementID: " + message.getAgreementID());
-            for (String coreName : message.getCores().keySet()) {
+            for (final String coreName : message.getCores().keySet()) {
                 logger.info("   " + coreName + ":" + message.getCores().get(coreName));
                 // If we know about this core then only worry about recind
-                if (coreStatusMap.containsKey(coreName)) {
+                if (coreStatusMap.containsKey(coreName))
                     switch (message.getCores().get(coreName)) {
                     case RESCIND: {
                         removeCoreFromStatusMap(coreName);
                         sendMessageToConsole(coreName, "remove");
                     }
                     }
-                }
-                // else only worry about the create, set to offline and
-                // the presence updates will change the status through
-                // the core roster status update handlers
-                else {
+                else
                     switch (message.getCores().get(coreName)) {
                     case CREATE: {
                         addCoreToStatusMap(coreName, CoreStatusType.OFFLINE);
                         sendMessageToConsole(coreName, "create");
                     }
                     }
-                }
             }
         }
 
@@ -174,13 +169,13 @@ public class DirectoryServiceImpl
                                                  String lat,
                                                  String lon) {
 
-        String location = lat + " " + lon;
+        final String location = lat + " " + lon;
         logger.debug("Adding core, " + coreName + ", to status map.  Location: " + location);
         coreStatusMap.put(coreName, updatedStatus);
 
         coreLocationMap.put(coreName.toLowerCase(), location);
         logger.debug("Added " + coreName + " to status map - retrieved location: " +
-                     coreLocationMap.get(coreName));
+            coreLocationMap.get(coreName));
     }
 
     /**
@@ -192,13 +187,14 @@ public class DirectoryServiceImpl
     @Override
     public void coreRosterHandler(CoreRosterMessage message) {
 
-        Map<String, String> coreStatusUpdateMap = message.getCoreStatusMap();
+        final Map<String, String> coreStatusUpdateMap = message.getCoreStatusMap();
 
-        Set<String> coreNames = coreStatusUpdateMap.keySet();
+        final Set<String> coreNames = coreStatusUpdateMap.keySet();
 
-        for (String coreName : coreNames) {
+        for (final String coreName : coreNames) {
 
-            CoreStatusType.Enum updatedStatus = coreStatusUpdateMap.get(coreName).equals("available") ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
+            final CoreStatusType.Enum updatedStatus = coreStatusUpdateMap.get(coreName).equals(
+                "available") ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
             logger.info("coreRosterHandler: [" + coreName + "," + updatedStatus.toString() + "]");
             addCoreToStatusMap(coreName, updatedStatus);
 
@@ -216,8 +212,8 @@ public class DirectoryServiceImpl
     @Override
     public void coreStatusUpdateHandler(CoreStatusUpdateMessage message) {
 
-        String coreName = message.getCoreName();
-        String coreStatus = message.getCoreStatus();
+        final String coreName = message.getCoreName();
+        final String coreStatus = message.getCoreStatus();
 
         logger.debug("coreStatusUpdateHandler: coreName: " + coreName + ", status: " + coreStatus);
 
@@ -226,27 +222,24 @@ public class DirectoryServiceImpl
             sendMessageToConsole(coreName, "remove");
         } else {
             logger.info("coreStatusUpdate: [" + coreName + "], status: " + coreStatus +
-                        ", mutually agreed: " +
-                        (getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? "true" : "false"));
-            CoreStatusType.Enum updatedStatus = coreStatus.equals(CoreStatusUpdateMessage.Status_Available) &&
-                                                getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
+                ", mutually agreed: " +
+                (getAgreementDAO().isRemoteCoreMutuallyAgreed(coreName) ? "true" : "false"));
+            final CoreStatusType.Enum updatedStatus = coreStatus.equals(CoreStatusUpdateMessage.Status_Available) &&
+                                                      getAgreementDAO().isRemoteCoreMutuallyAgreed(
+                                                          coreName) ? CoreStatusType.ONLINE : CoreStatusType.OFFLINE;
 
             logger.info("coreStatusUpdate: [" + coreName + "," + updatedStatus.toString() + "]");
-            if (!("".equals(message.getCoreLatitude()) || "".equals(message.getCoreLongitude()))) {
-                addCoreToStatusMap(coreName,
-                    updatedStatus,
-                    message.getCoreLatitude(),
+            if (!("".equals(message.getCoreLatitude()) || "".equals(message.getCoreLongitude())))
+                addCoreToStatusMap(coreName, updatedStatus, message.getCoreLatitude(),
                     message.getCoreLongitude());
-            } else {
+            else
                 addCoreToStatusMap(coreName, updatedStatus);
-            }
         }
         sendMessageToConsole(coreName, "update");
         sendCoreStatus(coreName, coreStatus);
 
-        if (coreStatus.contains("available")) {
+        if (coreStatus.contains("available"))
             sendCoreStatus(coreName, coreStatus);
-        }
     }
 
     public AgreementDAO getAgreementDAO() {
@@ -286,12 +279,12 @@ public class DirectoryServiceImpl
             coreConfig.setName(coreName);
             coreConfig.setOnlineStatus(coreStatusMap.get(coreName));
 
-            String coreNameLower = coreName.toLowerCase();
+            final String coreNameLower = coreName.toLowerCase();
             if (coreLocationMap.containsKey(coreNameLower)) {
                 logger.debug("\tcorename: " + coreNameLower);
                 logger.debug("\tlocString: " + coreLocationMap.get(coreNameLower));
 
-                String[] location = coreLocationMap.get(coreNameLower).split("\\s");
+                final String[] location = coreLocationMap.get(coreNameLower).split("\\s");
                 logger.debug("\tlocation.length: " + location.length);
                 logger.debug("\tlocation[]: " + location[0] + " " + location[1]);
 
@@ -319,31 +312,31 @@ public class DirectoryServiceImpl
     @Override
     public synchronized CoreConfigListType getCoreList() {
 
-        CoreConfigListType coreList = CoreConfigListType.Factory.newInstance();
+        final CoreConfigListType coreList = CoreConfigListType.Factory.newInstance();
 
-        Set<String> coreNames = coreStatusMap.keySet();
+        final Set<String> coreNames = coreStatusMap.keySet();
 
         String localCoreName = "localhost";
         try {
             localCoreName = InetAddress.getLocalHost().getHostName().toLowerCase();
-        } catch (UnknownHostException e) {
+        } catch (final UnknownHostException e) {
             logger.error("Cannot get host name: " + e.getMessage());
         }
 
-        for (String coreName : coreNames) {
+        for (final String coreName : coreNames) {
             logger.debug("getCoreList: " + coreName);
-            CoreConfigType coreConfig = coreList.addNewCore();
+            final CoreConfigType coreConfig = coreList.addNewCore();
             coreConfig.setName(coreName);
             coreConfig.setLocalCore(coreName.indexOf(localCoreName) != -1 ? true : false);
             coreConfig.setURL(coreName);
             coreConfig.setOnlineStatus(coreStatusMap.get(coreName));
 
-            String coreNameLower = coreName.toLowerCase();
+            final String coreNameLower = coreName.toLowerCase();
             if (coreLocationMap.containsKey(coreNameLower)) {
                 logger.debug("corename: " + coreNameLower);
                 logger.debug("\tlocString: " + coreLocationMap.get(coreNameLower));
 
-                String[] location = coreLocationMap.get(coreNameLower).split("\\s");
+                final String[] location = coreLocationMap.get(coreNameLower).split("\\s");
                 logger.debug("\tlocation.length: " + location.length);
                 logger.debug("\tlocation[]: " + location[0] + " " + location[1]);
 
@@ -387,13 +380,13 @@ public class DirectoryServiceImpl
     public ExternalDataSourceConfigListType getExternalDataSourceList(String coreName) {
 
         // Get list of data sources from database
-        List<ExternalDataSourceConfig> externalDataSources = externalDataSourceConfigDAO.findByCoreName(coreName);
+        final List<ExternalDataSourceConfig> externalDataSources = externalDataSourceConfigDAO.findByCoreName(coreName);
 
-        ExternalDataSourceConfigListType externalDataSourceList = ExternalDataSourceConfigListType.Factory.newInstance();
+        final ExternalDataSourceConfigListType externalDataSourceList = ExternalDataSourceConfigListType.Factory.newInstance();
 
         // Construct the return list from the items retrieved from the database
-        for (ExternalDataSourceConfig externalDataSource : externalDataSources) {
-            ExternalDataSourceConfigType externalDataSourceConfig = externalDataSourceList.addNewExternalDataSource();
+        for (final ExternalDataSourceConfig externalDataSource : externalDataSources) {
+            final ExternalDataSourceConfigType externalDataSourceConfig = externalDataSourceList.addNewExternalDataSource();
             externalDataSourceConfig.setURN(externalDataSource.getUrn());
             externalDataSourceConfig.setCoreName(externalDataSource.getCoreName());
         }
@@ -414,28 +407,26 @@ public class DirectoryServiceImpl
     public ExternalToolConfigListType getExternalToolList(String coreName) {
 
         // Get list of external tools from database
-        Set<RegisteredService> externalTools = registeredServiceDAO.findByServiceTypeAndCoreName(RegisteredService.SERVICE_TYPE.EXTERNAL,
-            coreName);
+        final Set<RegisteredService> externalTools = registeredServiceDAO.findByServiceTypeAndCoreName(
+            RegisteredService.SERVICE_TYPE.EXTERNAL, coreName);
 
-        ExternalToolConfigListType externalToolList = ExternalToolConfigListType.Factory.newInstance();
+        final ExternalToolConfigListType externalToolList = ExternalToolConfigListType.Factory.newInstance();
 
         // Construct the return list from the items retrieved from the database
-        for (RegisteredService externalTool : externalTools) {
-            ExternalToolConfigType externalToolConfig = externalToolList.addNewExternalTool();
+        for (final RegisteredService externalTool : externalTools) {
+            final ExternalToolConfigType externalToolConfig = externalToolList.addNewExternalTool();
             externalToolConfig.setURN(externalTool.getURN());
             externalToolConfig.setCoreName(externalTool.getCoreName());
             externalToolConfig.setToolName(externalTool.getServiceName());
 
-            WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
-            for (PublishedProduct publishedProduct : externalTool.getPublishedProducts()) {
+            final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
+            for (final PublishedProduct publishedProduct : externalTool.getPublishedProducts())
                 publishedProducts.addProductType(publishedProduct.getProductType());
-            }
             externalToolConfig.setPublishedProducts(publishedProducts);
 
-            WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
-            for (SubscribedProduct subscribedProduct : externalTool.getSubscribedProducts()) {
+            final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
+            for (final SubscribedProduct subscribedProduct : externalTool.getSubscribedProducts())
                 subscribedProducts.addProductType(subscribedProduct.getProductType());
-            }
             externalToolConfig.setSubscribedProducts(subscribedProducts);
         }
         // }
@@ -452,23 +443,21 @@ public class DirectoryServiceImpl
     @Override
     public WorkProduct[] getIncidentList() {
 
-        ArrayList<WorkProduct> workProducts = new ArrayList<WorkProduct>();
+        final ArrayList<WorkProduct> workProducts = new ArrayList<WorkProduct>();
         List<String> incidentWPIDs;
         try {
-            incidentWPIDs = workProductService.getProductIDListByTypeAndXQuery("Incident",
-                null,
+            incidentWPIDs = workProductService.getProductIDListByTypeAndXQuery("Incident", null,
                 null);
-            for (String incidentWPID : incidentWPIDs) {
-                WorkProduct wp = workProductService.getProduct(incidentWPID);
-                if (wp != null) {
+            for (final String incidentWPID : incidentWPIDs) {
+                final WorkProduct wp = workProductService.getProduct(incidentWPID);
+                if (wp != null)
                     workProducts.add(wp);
-                }
             }
-        } catch (InvalidXpathException e) {
+        } catch (final InvalidXpathException e) {
             logger.error("invalid xpath getting product id by list and XQuery");
         }
 
-        WorkProduct[] products = new WorkProduct[workProducts.size()];
+        final WorkProduct[] products = new WorkProduct[workProducts.size()];
         return workProducts.toArray(products);
 
     }
@@ -494,12 +483,11 @@ public class DirectoryServiceImpl
     @Override
     public WorkProductTypeListType getPublishedProductTypeList() {
 
-        WorkProductTypeListType productList = WorkProductTypeListType.Factory.newInstance();
+        final WorkProductTypeListType productList = WorkProductTypeListType.Factory.newInstance();
 
-        Set<PublishedProduct> publishedProducts = publishedProductDAO.findAllPublishedProducts();
-        for (PublishedProduct prod : publishedProducts) {
+        final Set<PublishedProduct> publishedProducts = publishedProductDAO.findAllPublishedProducts();
+        for (final PublishedProduct prod : publishedProducts)
             productList.addProductType(prod.getProductType());
-        }
 
         return productList;
     }
@@ -520,49 +508,44 @@ public class DirectoryServiceImpl
         // }
 
         // process cache requests
-        for (RegisterUICDSServiceRequestData request : cachedUICDSServiceRequests) {
+        for (final RegisterUICDSServiceRequestData request : cachedUICDSServiceRequests) {
             logger.info("process cached registration request fro service:" + request.serviceName);
-            registerUICDSService(request.urn,
-                request.serviceName,
-                request.publshiedProducts,
+            registerUICDSService(request.urn, request.serviceName, request.publshiedProducts,
                 request.subscribedProducts);
         }
         cachedUICDSServiceRequests.clear();
 
         // Get a list of UICDS services from database
-        Set<RegisteredService> services = registeredServiceDAO.findByServiceTypeAndCoreName(RegisteredService.SERVICE_TYPE.UICDS,
-            coreName);
+        final Set<RegisteredService> services = registeredServiceDAO.findByServiceTypeAndCoreName(
+            RegisteredService.SERVICE_TYPE.UICDS, coreName);
 
-        ServiceConfigListType serviceList = ServiceConfigListType.Factory.newInstance();
+        final ServiceConfigListType serviceList = ServiceConfigListType.Factory.newInstance();
 
         // Need to put result in hash map first to get rid of duplicates created by the many-to-many
         // associations
-        HashSet<RegisteredService> hashList = new HashSet<RegisteredService>();
-        for (RegisteredService service : services) {
+        final HashSet<RegisteredService> hashList = new HashSet<RegisteredService>();
+        for (final RegisteredService service : services)
             hashList.add(service);
-        }
 
         // Construct the return list from the items retrieved from the database
-        for (RegisteredService service : hashList) {
+        for (final RegisteredService service : hashList) {
             // if (log.isDebugEnabled()) {
             // log.debug("getServiceList: found service: " + service.getServiceName() + ")");
             // }
 
-            ServiceConfigType serviceConfig = serviceList.addNewService();
+            final ServiceConfigType serviceConfig = serviceList.addNewService();
             serviceConfig.setServiceName(service.getServiceName());
             serviceConfig.setCoreName(service.getCoreName());
             serviceConfig.setURN(service.getURN());
 
-            WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
-            for (PublishedProduct publishedProduct : service.getPublishedProducts()) {
+            final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
+            for (final PublishedProduct publishedProduct : service.getPublishedProducts())
                 publishedProducts.addProductType(publishedProduct.getProductType());
-            }
             serviceConfig.setPublishedProducts(publishedProducts);
 
-            WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
-            for (SubscribedProduct subscribedProduct : service.getSubscribedProducts()) {
+            final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
+            for (final SubscribedProduct subscribedProduct : service.getSubscribedProducts())
                 subscribedProducts.addProductType(subscribedProduct.getProductType());
-            }
             serviceConfig.setSubscribedProducts(subscribedProducts);
         }
 
@@ -583,23 +566,20 @@ public class DirectoryServiceImpl
     public String getServiceNameByPublishedProductType(String publishedProductType)
         throws InvalidProductTypeException {
 
-        if (logger.isInfoEnabled()) {
+        if (logger.isInfoEnabled())
             logger.info("getServiceNameByPublishedProductType: productType=" + publishedProductType);
-        }
         String serviceName = null;
 
-        Set<PublishedProduct> publishedProductList = publishedProductDAO.findByProductType(publishedProductType);
-        if (publishedProductList.size() == 0) {
+        final Set<PublishedProduct> publishedProductList = publishedProductDAO.findByProductType(publishedProductType);
+        if (publishedProductList.size() == 0)
             throw new InvalidProductTypeException();
-        } else {
-            for (PublishedProduct product : publishedProductList) {
+        else
+            for (final PublishedProduct product : publishedProductList) {
                 serviceName = product.getPublisher().getServiceName();
                 break;
             }
-        }
-        if (logger.isInfoEnabled()) {
+        if (logger.isInfoEnabled())
             logger.info("getServiceNameByPublishedProductType: serviceName=" + serviceName);
-        }
         return serviceName;
     }
 
@@ -612,11 +592,11 @@ public class DirectoryServiceImpl
     @Override
     public SOSConfigListType getSOSList() {
 
-        Set<String> sosIDs = sosMap.keySet();
+        final Set<String> sosIDs = sosMap.keySet();
 
-        SOSConfigListType sosList = SOSConfigListType.Factory.newInstance();
-        for (String sosID : sosIDs) {
-            SOSConfigType sos = sosList.addNewSos();
+        final SOSConfigListType sosList = SOSConfigListType.Factory.newInstance();
+        for (final String sosID : sosIDs) {
+            final SOSConfigType sos = sosList.addNewSos();
             sos.setServiceID(sosID);
             sos.setURN(sosMap.get(sosID));
         }
@@ -632,12 +612,11 @@ public class DirectoryServiceImpl
     @Override
     public WorkProductTypeListType getSubscribedProductTypeList() {
 
-        WorkProductTypeListType productList = WorkProductTypeListType.Factory.newInstance();
+        final WorkProductTypeListType productList = WorkProductTypeListType.Factory.newInstance();
 
-        Set<SubscribedProduct> subscribedProducts = subscribedProductDAO.findAllSubscribedProducts();
-        for (SubscribedProduct prod : subscribedProducts) {
+        final Set<SubscribedProduct> subscribedProducts = subscribedProductDAO.findAllSubscribedProducts();
+        for (final SubscribedProduct prod : subscribedProducts)
             productList.addProductType(prod.getProductType());
-        }
 
         return productList;
     }
@@ -650,7 +629,7 @@ public class DirectoryServiceImpl
     @Override
     public boolean isRemoteCoreOnline(String remoteJID) {
 
-        Enum status = coreStatusMap.get(remoteJID);
+        final Enum status = coreStatusMap.get(remoteJID);
         return status == null ? false : status.equals(CoreStatusType.ONLINE) ? true : false;
     }
 
@@ -663,19 +642,17 @@ public class DirectoryServiceImpl
     @Override
     public void registerExternalDataSource(String urn) {
 
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled())
             logger.debug("registerExternalDataSource (urn: " + urn + ")");
-        }
 
         // Persist external data source in the database, overriding any existing one
-        ExternalDataSourceConfig externalDataSourceConfig = new ExternalDataSourceConfig(urn,
-                                                                                         configurationService.getCoreName());
+        final ExternalDataSourceConfig externalDataSourceConfig = new ExternalDataSourceConfig(urn,
+                                                                                               configurationService.getCoreName());
 
         // Delete previous registration (should be just one) if one exists
-        List<ExternalDataSourceConfig> dataSources = externalDataSourceConfigDAO.findByUrn(urn);
-        for (ExternalDataSourceConfig dataSource : dataSources) {
+        final List<ExternalDataSourceConfig> dataSources = externalDataSourceConfigDAO.findByUrn(urn);
+        for (final ExternalDataSourceConfig dataSource : dataSources)
             externalDataSourceConfigDAO.makeTransient(dataSource);
-        }
         externalDataSourceConfigDAO.makePersistent(externalDataSourceConfig);
     }
 
@@ -694,37 +671,35 @@ public class DirectoryServiceImpl
                                      WorkProductTypeListType publishedProducts,
                                      WorkProductTypeListType subscribedProducts) {
 
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled())
             logger.debug("registerExternalTool (urn: " + urn + ")");
-        }
 
         // Persist the external tool in the database, overriding any existing one
-        Set<PublishedProduct> publishedList = new HashSet<PublishedProduct>();
+        final Set<PublishedProduct> publishedList = new HashSet<PublishedProduct>();
         for (Integer i = 0; i < publishedProducts.sizeOfProductTypeArray(); i++) {
-            PublishedProduct publishedProduct = new PublishedProduct(publishedProducts.getProductTypeArray(i));
+            final PublishedProduct publishedProduct = new PublishedProduct(publishedProducts.getProductTypeArray(i));
             publishedList.add(publishedProduct);
         }
 
-        Set<SubscribedProduct> subscribedList = new HashSet<SubscribedProduct>();
+        final Set<SubscribedProduct> subscribedList = new HashSet<SubscribedProduct>();
         for (Integer i = 0; i < subscribedProducts.sizeOfProductTypeArray(); i++) {
-            SubscribedProduct subscribedProduct = new SubscribedProduct(subscribedProducts.getProductTypeArray(i));
+            final SubscribedProduct subscribedProduct = new SubscribedProduct(subscribedProducts.getProductTypeArray(i));
             subscribedList.add(subscribedProduct);
         }
 
-        String coreName = configurationService.getCoreName();
-        RegisteredService externalTool = new RegisteredService(urn,
-                                                               toolName,
-                                                               RegisteredService.SERVICE_TYPE.EXTERNAL,
-                                                               coreName,
-                                                               publishedList,
-                                                               subscribedList);
+        final String coreName = configurationService.getCoreName();
+        final RegisteredService externalTool = new RegisteredService(urn,
+                                                                     toolName,
+                                                                     RegisteredService.SERVICE_TYPE.EXTERNAL,
+                                                                     coreName,
+                                                                     publishedList,
+                                                                     subscribedList);
 
         // Delete previous registration (should be just one) if one exists
-        Set<RegisteredService> tools = registeredServiceDAO.findByServiceNameAndCoreName(toolName,
-            coreName);
-        for (RegisteredService tool : tools) {
+        final Set<RegisteredService> tools = registeredServiceDAO.findByServiceNameAndCoreName(
+            toolName, coreName);
+        for (final RegisteredService tool : tools)
             registeredServiceDAO.makeTransient(tool);
-        }
         registeredServiceDAO.makePersistent(externalTool);
     }
 
@@ -758,65 +733,60 @@ public class DirectoryServiceImpl
 
         // @Transactional(propagation = Propagation.REQUIRES_NEW)
         if (!registeredServiceDAO.isSessionInitialized()) {
-            if (logger.isInfoEnabled()) {
+            if (logger.isInfoEnabled())
                 logger.info("registerUICDSService - session not yer initialized - cache requrest for (serviceName: " +
-                            serviceName + ")");
-            }
+                    serviceName + ")");
 
             // buffer up this request for later
             cachedUICDSServiceRequests.add(new RegisterUICDSServiceRequestData(urn,
-                                                                               serviceName,
-                                                                               publishedProducts,
-                                                                               subscribedProducts));
+                serviceName,
+                publishedProducts,
+                subscribedProducts));
         } else {
 
-            if (logger.isInfoEnabled()) {
+            if (logger.isInfoEnabled())
                 logger.info("===> registerUICDSService (serviceName: " + serviceName + ")");
-            }
 
             // Persist the external tool in the database if one doesn't already exist
-            Set<PublishedProduct> publishedList = new HashSet<PublishedProduct>();
+            final Set<PublishedProduct> publishedList = new HashSet<PublishedProduct>();
             for (Integer i = 0; i < publishedProducts.sizeOfProductTypeArray(); i++) {
-                if (logger.isInfoEnabled()) {
+                if (logger.isInfoEnabled())
                     logger.info("=====> registerUICDSService (publishedProductType: " +
-                                publishedProducts.getProductTypeArray(i) + ")");
-                }
-                PublishedProduct publishedProduct = new PublishedProduct(publishedProducts.getProductTypeArray(i));
+                        publishedProducts.getProductTypeArray(i) + ")");
+                final PublishedProduct publishedProduct = new PublishedProduct(publishedProducts.getProductTypeArray(i));
                 publishedList.add(publishedProduct);
             }
 
-            Set<SubscribedProduct> subscribedList = new HashSet<SubscribedProduct>();
+            final Set<SubscribedProduct> subscribedList = new HashSet<SubscribedProduct>();
             for (Integer i = 0; i < subscribedProducts.sizeOfProductTypeArray(); i++) {
                 logger.info("=====> registerUICDSService (subscribedproductType: " +
-                            subscribedProducts.getProductTypeArray(i) + ")");
-                SubscribedProduct subscribedProduct = new SubscribedProduct(subscribedProducts.getProductTypeArray(i));
+                    subscribedProducts.getProductTypeArray(i) + ")");
+                final SubscribedProduct subscribedProduct = new SubscribedProduct(subscribedProducts.getProductTypeArray(i));
                 subscribedList.add(subscribedProduct);
             }
 
             // Persist the UICDS service in the database overriding any existing one
-            String coreName = configurationService.getCoreName();
-            RegisteredService service = new RegisteredService(urn,
-                                                              serviceName,
-                                                              RegisteredService.SERVICE_TYPE.UICDS,
-                                                              coreName,
-                                                              publishedList,
-                                                              subscribedList);
+            final String coreName = configurationService.getCoreName();
+            final RegisteredService service = new RegisteredService(urn,
+                                                                    serviceName,
+                                                                    RegisteredService.SERVICE_TYPE.UICDS,
+                                                                    coreName,
+                                                                    publishedList,
+                                                                    subscribedList);
 
             // Delete previous registration (should be just one) if one exists
-            Set<RegisteredService> services = registeredServiceDAO.findByServiceNameAndCoreName(serviceName,
-                coreName);
+            final Set<RegisteredService> services = registeredServiceDAO.findByServiceNameAndCoreName(
+                serviceName, coreName);
 
-            for (RegisteredService svc : services) {
-                if (logger.isDebugEnabled()) {
+            for (final RegisteredService svc : services) {
+                if (logger.isDebugEnabled())
                     logger.debug("Remove existing registration for " +
-                                 svc.getServiceName().toString());
-                }
+                        svc.getServiceName().toString());
                 registeredServiceDAO.makeTransient(svc);
             }
 
-            if (logger.isDebugEnabled()) {
+            if (logger.isDebugEnabled())
                 logger.debug("adding new registration for " + serviceName);
-            }
             registeredServiceDAO.makePersistent(service);
 
         }
@@ -831,17 +801,15 @@ public class DirectoryServiceImpl
     private void sendCoreStatus(String coreName, String coreStatus) {
 
         if (coreStatus.equals("available") || coreStatus.toLowerCase().contains("online")) {
-            String jid = getCoreName();
+            final String jid = getCoreName();
             String message = "Remote-CoreStatus: [" + jid + "]\n";
             message += "Status: [" + getOverallCoreStatus() + "]";
-            String resource = getConsoleResource();
+            final String resource = getConsoleResource();
             String remoteJid = coreName;
-            if (!remoteJid.contains("/")) {
+            if (!remoteJid.contains("/"))
                 remoteJid = coreName + "/" + resource;
-            }
-            if (resource != null) {
+            if (resource != null)
                 getCommunicationsService().sendXMPPMessage(message, "message", "message", remoteJid);
-            }
         }
     }
 
@@ -849,9 +817,7 @@ public class DirectoryServiceImpl
 
         String updateMessage = "DirectoryService-CoreStatus:[" + coreName + "]\n";
         updateMessage += "Operation:[" + operation + "]";
-        communicationsService.sendXMPPMessage(updateMessage,
-            "message",
-            "message",
+        communicationsService.sendXMPPMessage(updateMessage, "message", "message",
             getLocalCoreJid());
     }
 
@@ -922,31 +888,33 @@ public class DirectoryServiceImpl
     @Override
     public void systemInitializedHandler(String messgae) {
 
+        logger.debug("systemInitializedHandler: ... start ...");
         logger.debug("systemInitializedHandler: localJID: " + getLocalCoreJid());
 
         try {
             // call getServiceList so any cached registration requests get processed
-            ServiceConfigListType serviceList = getServiceList(getLocalCoreJid());
+            final ServiceConfigListType serviceList = getServiceList(getLocalCoreJid());
             if (logger.isDebugEnabled()) {
                 logger.debug("number of registered services=" + serviceList.sizeOfServiceArray());
                 logger.debug("DirectoryServiceImpl:systemInitializedHandler - completed");
             }
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             logger.error("Exception caught while getting service list.   exception=" +
-                         e.getMessage());
+                e.getMessage());
             e.printStackTrace();
         }
 
         // Subscribe for notifications of changes in agreements
         try {
             pubSubService.addAgreementListener(-1, new AgreementListener());
-        } catch (InvalidProductIDException e) {
+        } catch (final InvalidProductIDException e) {
             logger.error("Agreement subscription has invalid product id");
-        } catch (NullSubscriberException e) {
+        } catch (final NullSubscriberException e) {
             logger.error("Agreement subscription has null subscriber");
-        } catch (EmptySubscriberNameException e) {
+        } catch (final EmptySubscriberNameException e) {
             logger.error("Agreement subscription has empty subscriber name");
         }
+        logger.debug("systemInitializedHandler: ... done ...");
     }
 
     /**
@@ -958,15 +926,13 @@ public class DirectoryServiceImpl
     @Override
     public void unregisterExternalDataSource(String urn) {
 
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled())
             logger.debug("unregisterExternalDataSource (urn: " + urn + ")");
-        }
 
         // Delete previous registration (should be just one) if one exists
-        List<ExternalDataSourceConfig> dataSources = externalDataSourceConfigDAO.findByUrn(urn);
-        for (ExternalDataSourceConfig dataSource : dataSources) {
+        final List<ExternalDataSourceConfig> dataSources = externalDataSourceConfigDAO.findByUrn(urn);
+        for (final ExternalDataSourceConfig dataSource : dataSources)
             externalDataSourceConfigDAO.makeTransient(dataSource);
-        }
     }
 
     /**
@@ -978,17 +944,16 @@ public class DirectoryServiceImpl
     @Override
     public void unregisterExternalTool(String urn) {
 
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled())
             logger.debug("unregisterExternalTool (urn: " + urn + ")");
-        }
 
-        String coreName = configurationService.getCoreName();
+        final String coreName = configurationService.getCoreName();
 
         // Delete previous registration (should be just one) if one exists
-        Set<RegisteredService> tools = registeredServiceDAO.findByUrnAndCoreName(urn, coreName);
-        for (RegisteredService tool : tools) {
+        final Set<RegisteredService> tools = registeredServiceDAO.findByUrnAndCoreName(urn,
+            coreName);
+        for (final RegisteredService tool : tools)
             registeredServiceDAO.makeTransient(tool);
-        }
     }
 
     /**
@@ -1012,18 +977,16 @@ public class DirectoryServiceImpl
     @Override
     public void unregisterUICDSService(String serviceName) {
 
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled())
             logger.debug("unregisterUICDSService (serviceName: " + serviceName + ")");
-        }
 
-        String coreName = configurationService.getCoreName();
+        final String coreName = configurationService.getCoreName();
 
         // Delete previous registration (should be just one) if one exists
-        Set<RegisteredService> services = registeredServiceDAO.findByServiceNameAndCoreName(serviceName,
-            coreName);
-        for (RegisteredService svc : services) {
+        final Set<RegisteredService> services = registeredServiceDAO.findByServiceNameAndCoreName(
+            serviceName, coreName);
+        for (final RegisteredService svc : services)
             registeredServiceDAO.makeTransient(svc);
-        }
 
     }
 
