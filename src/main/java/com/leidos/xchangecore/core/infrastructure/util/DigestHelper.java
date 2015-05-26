@@ -51,7 +51,8 @@ import com.usersmarts.xmf2.Configuration;
 import com.usersmarts.xmf2.MarshalContext;
 import com.vividsolutions.jts.geom.Geometry;
 
-public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
+public class DigestHelper
+implements InfrastructureNamespaces, DigestConstant {
 
     private static Configuration gmlParseCfg = new Configuration(GMLDomModule.class);
 
@@ -60,51 +61,59 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     public static boolean containWhatClause(DigestType digest, String whatClause) {
 
         final Set<ThingType> whats = getThingsByWhatType(digest,
-                InfrastructureNamespaces.NS_UCORE_CODESPACE, whatClause);
+            InfrastructureNamespaces.NS_UCORE_CODESPACE, whatClause);
         return whats.size() > 0;
     }
 
     public static CauseOfRelationshipType getCauseByEffectID(DigestType digest, String effectID) {
 
         final RelationshipType[] relationships = digest.getRelationshipAbstractArray();
-        for (final RelationshipType relationship : relationships)
+        for (final RelationshipType relationship : relationships) {
             if (relationship instanceof CauseOfRelationshipType) {
                 final CauseOfRelationshipType causeOf = (CauseOfRelationshipType) relationship;
                 if (causeOf.getEffect().getRef().size() > 0) {
                     final String effectValue = (String) causeOf.getEffect().getRef().get(0);
-                    if (effectValue.equals(effectID))
+                    if (effectValue.equals(effectID)) {
                         return causeOf;
+                    }
                 }
             }
+        }
         return null;
     }
 
     public static EventType getFirstEventWithActivityNameIdentifier(DigestType digest) {
 
         final ThingType[] things = digest.getThingAbstractArray();
-        for (final ThingType thing : things)
+        for (final ThingType thing : things) {
             if (thing instanceof EventType) {
-                final XmlObject[] ids = thing.selectChildren(IdentifierType.type.getName()
-                        .getNamespaceURI(), "Identifier");
-                if (ids.length != 0)
-                    for (final XmlObject object : ids)
-                        if (((IdentifierType) object).getCode().equals("ActivityName"))
+                final XmlObject[] ids = thing.selectChildren(
+                    IdentifierType.type.getName().getNamespaceURI(), "Identifier");
+                if (ids.length != 0) {
+                    for (final XmlObject object : ids) {
+                        if (((IdentifierType) object).getCode().equals("ActivityName")) {
                             return (EventType) thing;
+                        }
+                    }
+                }
             }
+        }
         return null;
     }
 
     public static Geometry getFirstGeometry(DigestType digest) {
 
-        for (final ThingType thing : digest.getThingAbstractArray())
+        for (final ThingType thing : digest.getThingAbstractArray()) {
             if (thing instanceof LocationType) {
                 final LocationType location = (LocationType) thing;
                 for (final GeoLocationType geo : location.getGeoLocationArray()) {
                     final Geometry geometry = getGeometry(geo);
-                    if (geometry != null)
+                    if (geometry != null) {
                         return geometry;
+                    }
                 }
             }
+        }
         return null;
     }
 
@@ -121,7 +130,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         } else if (abstr instanceof CircleByCenterPointType) {
             final PointType point = PointType.Factory.newInstance();
             point.addNewPoint().setPos(
-                    ((CircleByCenterPointType) abstr).getCircleByCenterPoint().getPos());
+                ((CircleByCenterPointType) abstr).getCircleByCenterPoint().getPos());
             final Node node = point.getPoint().getDomNode();
             result = getGeometry(node);
         }
@@ -138,55 +147,66 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     public static Geometry getGeometryFromLocationByID(DigestType digest, String id) {
 
         final XmlObject[] elements = digest.selectChildren(NS_UCORE, "Location");
-        if (elements != null && elements.length > 0)
-            for (final XmlObject element : elements)
+        if ((elements != null) && (elements.length > 0)) {
+            for (final XmlObject element : elements) {
                 if (element instanceof LocationType) {
                     final LocationType location = (LocationType) element;
-                    if (location.getId().equals(id))
+                    if (location.getId().equals(id)) {
                         for (final GeoLocationType geo : location.getGeoLocationArray()) {
                             final Geometry geometry = getGeometry(geo);
-                            if (geometry != null)
+                            if (geometry != null) {
                                 return geometry;
+                            }
                         }
+                    }
                 }
+            }
+        }
         return null;
     }
 
     public static List<LocationType> getLocationElements(DigestType digest) {
 
         final ArrayList<LocationType> list = new ArrayList<LocationType>();
-        final XmlObject[] locations = digest.selectChildren(gov.ucore.ucore.x20.LocationType.type
-                .getName().getNamespaceURI(), "Location");
-        if (locations.length > 0)
+        final XmlObject[] locations = digest.selectChildren(
+            gov.ucore.ucore.x20.LocationType.type.getName().getNamespaceURI(), "Location");
+        if (locations.length > 0) {
             for (final XmlObject object : locations) {
                 final LocationType location = (LocationType) object;
                 list.add(location);
             }
+        }
         return list;
     }
 
-    public static EventLocationRelationshipType getLocationRelationshipByTypeAndEventID(
-            DigestType digest, String type, ThingRefType eventID) {
+    public static EventLocationRelationshipType getLocationRelationshipByTypeAndEventID(DigestType digest,
+                                                                                        String type,
+                                                                                        ThingRefType eventID) {
 
-        final XmlObject[] relationships = digest.selectChildren(EventLocationRelationshipType.type
-                .getName().getNamespaceURI(), type);
+        final XmlObject[] relationships = digest.selectChildren(
+            EventLocationRelationshipType.type.getName().getNamespaceURI(), type);
         for (final XmlObject relationship : relationships) {
             final EventLocationRelationshipType elRelationship = (EventLocationRelationshipType) relationship;
-            if (elRelationship.getEventRef().getRef().get(0).equals(eventID.getRef().get(0)))
+            if (elRelationship.getEventRef().getRef().get(0).equals(eventID.getRef().get(0))) {
                 return elRelationship;
+            }
         }
         return null;
     }
 
-    public static SimplePropertyType getSimplePropertyFromThing(ThingType thing, String codespace,
-            String code, String label, String value) {
+    public static SimplePropertyType getSimplePropertyFromThing(ThingType thing,
+                                                                String codespace,
+                                                                String code,
+                                                                String label,
+                                                                String value) {
 
-        if (thing == null)
+        if (thing == null) {
             return null;
+        }
 
         SimplePropertyType result = null;
-        final XmlObject[] props = thing.selectChildren(SimplePropertyType.type.getName()
-                .getNamespaceURI(), "SimpleProperty");
+        final XmlObject[] props = thing.selectChildren(
+            SimplePropertyType.type.getName().getNamespaceURI(), "SimpleProperty");
         for (final XmlObject prop : props) {
             final SimplePropertyType property = (SimplePropertyType) prop;
             if (simplePropertyMatches(property, codespace, code, label, value)) {
@@ -197,14 +217,17 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         return result;
     }
 
-    public static Set<ThingType> getThingsByWhatType(DigestType digest, String codespace,
-            String code) {
+    public static Set<ThingType> getThingsByWhatType(DigestType digest,
+        String codespace,
+        String code) {
 
         final ThingType[] things = digest.getThingAbstractArray();
         final Set<ThingType> results = new HashSet<ThingType>();
-        for (final ThingType thing : things)
-            if (objectHasWhatType(codespace, code, null, null, thing))
+        for (final ThingType thing : things) {
+            if (objectHasWhatType(codespace, code, null, null, thing)) {
                 results.add(thing);
+            }
+        }
         return results;
     }
 
@@ -213,6 +236,20 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         return "Event";
     }
 
+    private static boolean isMatched(String regexp, String content) {
+
+        final boolean isNegative = regexp.startsWith("!");
+        if (isNegative) {
+            regexp = regexp.substring(1);
+        }
+
+        String re = regexp.replaceAll("\\*", ".\\*");
+        re = "(?i:" + re + ")";
+        final boolean isMatched = content.matches(re);
+        return isNegative ? !isMatched : isMatched;
+    }
+
+    /*
     private static boolean isMatched(String regexp, String content) {
 
         regexp = regexp.toLowerCase();
@@ -227,11 +264,15 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         return matchedContent.equals(filteredContent);
     }
 
-    public static boolean objectHasWhatType(String codespace, String code, String label,
-            String value, XmlObject event) {
+     */
+    public static boolean objectHasWhatType(String codespace,
+                                            String code,
+                                            String label,
+                                            String value,
+                                            XmlObject event) {
 
         final XmlObject[] props = event.selectChildren(WhatType.type.getName().getNamespaceURI(),
-                "What");
+            "What");
 
         for (final XmlObject prop : props) {
 
@@ -240,36 +281,43 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
             if (codespace != null) {
                 // Find the SimpleProperty with the correct codespace (there may be more than one)
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                        "codespace")) == null)
+                    "codespace")) == null) {
                     continue;
+                }
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
-                if (stringValue != null && stringValue.equalsIgnoreCase(codespace) == false)
+                if ((stringValue != null) && (stringValue.equalsIgnoreCase(codespace) == false)) {
                     continue;
+                }
             }
 
             if (code != null) {
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                        "code")) == null)
+                    "code")) == null) {
                     continue;
+                }
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
-                if (isMatched(code, stringValue) == false)
+                if (isMatched(code, stringValue) == false) {
                     continue;
+                }
             }
 
             if (label != null) {
                 if ((xmlObject = prop.selectAttribute(WhatType.type.getName().getNamespaceURI(),
-                        "label")) == null)
+                    "label")) == null) {
                     continue;
+                }
 
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
-                if (stringValue != null && stringValue.equalsIgnoreCase(label) == false)
+                if ((stringValue != null) && (stringValue.equalsIgnoreCase(label) == false)) {
                     continue;
+                }
             }
 
             if (value != null) {
                 stringValue = ((SimpleValue) xmlObject).getStringValue();
-                if (stringValue != null && stringValue.equalsIgnoreCase(value) == false)
+                if ((stringValue != null) && (stringValue.equalsIgnoreCase(value) == false)) {
                     continue;
+                }
             }
             return true;
         }
@@ -277,32 +325,42 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         return false;
     }
 
-    protected static boolean simplePropertyMatches(SimplePropertyType property, String codespace,
-            String code, String label, String value) {
+    protected static boolean simplePropertyMatches(SimplePropertyType property,
+                                                   String codespace,
+                                                   String code,
+                                                   String label,
+                                                   String value) {
 
         // must have at least a label
-        if (label == null)
+        if (label == null) {
             return false;
+        }
 
         if (property.getLabel().getStringValue().equals(label)) {
             boolean codespaceOK = false;
             boolean codeOK = false;
             boolean valueOK = false;
             if (codespace != null) {
-                if (property.getCodespace().equals(codespace))
+                if (property.getCodespace().equals(codespace)) {
                     codespaceOK = true;
-            } else
+                }
+            } else {
                 codespaceOK = true;
+            }
             if (code != null) {
-                if (property.getCode().equals(code))
+                if (property.getCode().equals(code)) {
                     codeOK = true;
-            } else
+                }
+            } else {
                 codeOK = true;
+            }
             if (value != null) {
-                if (property.getStringValue().equals(value))
+                if (property.getStringValue().equals(value)) {
                     valueOK = true;
-            } else
+                }
+            } else {
                 valueOK = true;
+            }
             return codespaceOK && codeOK && valueOK;
         }
         return false;
@@ -318,23 +376,23 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     }
 
     protected void addCircleToLocation(LocationType location,
-            net.opengis.gml.x32.CircleByCenterPointType circle) {
+                                       net.opengis.gml.x32.CircleByCenterPointType circle) {
 
         circle.getPos().setSrsName(GeoUtil.EPSG4326);
         final CircleByCenterPointType uCircle = CircleByCenterPointType.Factory.newInstance();
         uCircle.addNewCircleByCenterPoint().set(circle);
         XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
-                S_CircleByCenterPoint, CircleByCenterPointType.type, uCircle);
+            S_CircleByCenterPoint, CircleByCenterPointType.type, uCircle);
     }
 
     public void addLineStringToLocation(LocationType location,
-            net.opengis.gml.x32.LineStringType line) {
+                                        net.opengis.gml.x32.LineStringType line) {
 
         line.setSrsName(GeoUtil.EPSG4326);
         final LineStringType uLine = LineStringType.Factory.newInstance();
         uLine.addNewLineString().set(line);
         XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
-                "LineString", LineStringType.type, uLine);
+            "LineString", LineStringType.type, uLine);
     }
 
     public void addPointToLocation(LocationType location, net.opengis.gml.x32.PointType point) {
@@ -342,7 +400,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         final PointType uPoint = PointType.Factory.newInstance();
         uPoint.addNewPoint().set(point);
         XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
-                S_Point, PointType.type, uPoint);
+            S_Point, PointType.type, uPoint);
     }
 
     public void addPolygonToLocation(LocationType location, net.opengis.gml.x32.PolygonType polygon) {
@@ -350,27 +408,35 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         polygon.setSrsName(GeoUtil.EPSG4326);
         if (polygon.getExterior().getAbstractRing() instanceof LinearRingType) {
             final LinearRingType ring = (LinearRingType) polygon.getExterior().getAbstractRing();
-            for (final DirectPositionType pos : ring.getPosArray())
+            for (final DirectPositionType pos : ring.getPosArray()) {
                 pos.setSrsName(GeoUtil.EPSG4326);
+            }
         }
         final PolygonType uPolygon = PolygonType.Factory.newInstance();
         uPolygon.addNewPolygon().set(polygon);
         XmlUtil.substitute(location.addNewGeoLocation().addNewGeoLocationAbstract(), NS_UCORE,
-                S_Polygon, PolygonType.type, uPolygon);
+            S_Polygon, PolygonType.type, uPolygon);
     }
 
-    public void addSimplePropertyToThing(ThingType thing, String codespace, String code,
-            String label, String value) {
+    public void addSimplePropertyToThing(ThingType thing,
+                                         String codespace,
+                                         String code,
+                                         String label,
+                                         String value) {
 
         final SimplePropertyType property = SimplePropertyType.Factory.newInstance();
-        if (codespace != null)
+        if (codespace != null) {
             property.setCodespace(codespace);
-        if (code != null)
+        }
+        if (code != null) {
             property.setCode(code);
-        if (label != null)
+        }
+        if (label != null) {
             property.addNewLabel().setStringValue(label);
-        if (value != null)
+        }
+        if (value != null) {
             property.setStringValue(value);
+        }
         thing.addNewSimpleProperty().set(property);
     }
 
@@ -387,9 +453,11 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     public EventType getEvent(String eventId) {
 
         final ThingType[] things = digest.getDigest().getThingAbstractArray();
-        for (final ThingType thing : things)
-            if (thing.getId().equalsIgnoreCase(eventId.trim()) && thing instanceof EventType)
+        for (final ThingType thing : things) {
+            if (thing.getId().equalsIgnoreCase(eventId.trim()) && (thing instanceof EventType)) {
                 return (EventType) thing;
+            }
+        }
         return null;
     }
 
@@ -418,7 +486,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         causeOf.setEffect(effectRef);
 
         XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_CauseOf,
-                CauseOfRelationshipType.type, causeOf);
+            CauseOfRelationshipType.type, causeOf);
     }
 
     public void setCircle(LocationType location, net.opengis.gml.x32.CircleByCenterPointType circle) {
@@ -431,18 +499,22 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
 
         // add an Entity
         XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Entity,
-                EntityType.type, entity);
+            EntityType.type, entity);
     }
 
     public void setEvent(EventType event) {
 
         // add an Event
         XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Event,
-                EventType.type, event);
+            EventType.type, event);
     }
 
-    public void setEvent(String eventId, String descriptor, String identifier, String[] codespace,
-            ContentMetadataType metadata, SimplePropertyType property) {
+    public void setEvent(String eventId,
+                         String descriptor,
+                         String identifier,
+                         String[] codespace,
+                         ContentMetadataType metadata,
+                         SimplePropertyType property) {
 
         final EventType event = EventType.Factory.newInstance();
         event.setId(eventId);
@@ -459,16 +531,20 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
                 id.setCodespace(codespace[0]);
                 id.setCode(codespace[1]);
                 id.addNewLabel().setStringValue(codespace[2]);
-            } else
+            } else {
                 id.addNewLabel().setStringValue("label");
+            }
         }
 
-        if (descriptor != null)
+        if (descriptor != null) {
             event.addNewDescriptor().setStringValue(descriptor);
-        if (metadata != null)
+        }
+        if (metadata != null) {
             event.setMetadata(metadata);
-        if (property != null)
+        }
+        if (property != null) {
             event.addNewSimpleProperty().set(property);
+        }
 
         this.setEvent(event);
     }
@@ -479,8 +555,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     // to)
     public void setHasDestinationOf(String eventId, String locationId, Calendar cal) {
 
-        final EntityLocationRelationshipType hasDestinationOf = EntityLocationRelationshipType.Factory
-                .newInstance();
+        final EntityLocationRelationshipType hasDestinationOf = EntityLocationRelationshipType.Factory.newInstance();
         hasDestinationOf.setId(UUIDUtil.getID(S_HasDestionationOf));
 
         // add a time instant
@@ -488,7 +563,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         time.setValue(cal);
 
         XmlUtil.substitute(hasDestinationOf.addNewTime().addNewTimeAbstract(), NS_UCORE,
-                S_TimeInstant, TimeInstantType.type, time);
+            S_TimeInstant, TimeInstantType.type, time);
 
         // set the event reference
         final EntityRefType eventRef = EntityRefType.Factory.newInstance();
@@ -506,21 +581,20 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
 
         // System.out.println(hasDestinationOf);
         XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE,
-                S_HasDestionationOf, EntityLocationRelationshipType.type, hasDestinationOf);
+            S_HasDestionationOf, EntityLocationRelationshipType.type, hasDestinationOf);
     }
 
     // The InvolvedIn relationship is used to associate an Agent with an Event
     public void setInvolvedIn(String agentId, String eventId, Calendar cal) {
 
-        final AgentEventRelationshipType involvedIn = AgentEventRelationshipType.Factory
-                .newInstance();
+        final AgentEventRelationshipType involvedIn = AgentEventRelationshipType.Factory.newInstance();
         involvedIn.setId(UUIDUtil.getID(S_InvolvedIn));
 
         // add a time instant
         final TimeInstantType time = TimeInstantType.Factory.newInstance();
         time.setValue(cal);
         XmlUtil.substitute(involvedIn.addNewTime().addNewTimeAbstract(), NS_UCORE, S_TimeInstant,
-                TimeInstantType.type, time);
+            TimeInstantType.type, time);
 
         // set the event reference
         final EventRefType eventRef = EventRefType.Factory.newInstance();
@@ -538,7 +612,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
 
         // System.out.println(hasDestinationOf);
         XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_InvolvedIn,
-                AgentEventRelationshipType.type, involvedIn);
+            AgentEventRelationshipType.type, involvedIn);
     }
 
     public void setLineString(LocationType location, net.opengis.gml.x32.LineStringType line) {
@@ -551,8 +625,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     // a place.
     public void setLocatedAt(String entityId, String locationId, Calendar cal) {
 
-        final EntityLocationExtendedRelationshipType locatedAt = EntityLocationExtendedRelationshipType.Factory
-                .newInstance();
+        final EntityLocationExtendedRelationshipType locatedAt = EntityLocationExtendedRelationshipType.Factory.newInstance();
         locatedAt.setId(UUIDUtil.getID(S_LocatedAt));
 
         if (cal != null) {
@@ -583,43 +656,51 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
             TimeInstantType time = TimeInstantType.Factory.newInstance();
             try {
                 // check yyyy
-                if (!cal.isSet(Calendar.YEAR))
+                if (!cal.isSet(Calendar.YEAR)) {
                     cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+                }
 
                 // check MM
-                if (!cal.isSet(Calendar.MONTH))
+                if (!cal.isSet(Calendar.MONTH)) {
                     cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+                }
 
                 // check dd
-                if (!cal.isSet(Calendar.DAY_OF_MONTH))
+                if (!cal.isSet(Calendar.DAY_OF_MONTH)) {
                     cal.set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH));
+                }
 
                 // check HH
-                if (!cal.isSet(Calendar.HOUR_OF_DAY))
+                if (!cal.isSet(Calendar.HOUR_OF_DAY)) {
                     cal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY));
+                }
 
                 // check mm
-                if (!cal.isSet(Calendar.MINUTE))
+                if (!cal.isSet(Calendar.MINUTE)) {
                     cal.set(Calendar.MINUTE, now.get(Calendar.MINUTE));
+                }
 
                 // check ss
-                if (!cal.isSet(Calendar.SECOND))
+                if (!cal.isSet(Calendar.SECOND)) {
                     cal.set(Calendar.SECOND, now.get(Calendar.SECOND));
+                }
 
                 // check timezone
-                if (cal.getTimeZone() == null)
+                if (cal.getTimeZone() == null) {
                     cal.setTimeZone(now.getTimeZone());
+                }
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
-                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">"
-                        + buf.toString() + "</Value>", null);
+                time = TimeInstantType.Factory.parse(
+                    "<Value xmlns=\"http://ucore.gov/ucore/2.0\">" + buf.toString() + "</Value>",
+                    null);
             } catch (final Exception e) {
                 time.setValue(now);
             }
 
             XmlUtil.substitute(locatedAt.addNewTime().addNewTimeAbstract(), NS_UCORE,
-                    S_TimeInstant, TimeInstantType.type, time);
+                S_TimeInstant, TimeInstantType.type, time);
         }
 
         final EntityRefType entityRef = EntityRefType.Factory.newInstance();
@@ -635,13 +716,13 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         locatedAt.setLocationRef(locationRef);
 
         XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_LocatedAt,
-                EntityLocationExtendedRelationshipType.type, locatedAt);
+            EntityLocationExtendedRelationshipType.type, locatedAt);
     }
 
     public void setLocation(LocationType location) {
 
         XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Location,
-                LocationType.type, location);
+            LocationType.type, location);
     }
 
     // The OccursAt Relationship is used to associate an Event (like the forest
@@ -649,8 +730,7 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     // and place.
     public void setOccursAt(String eventId, String locationId, Calendar cal) {
 
-        final EventLocationRelationshipType occursAt = EventLocationRelationshipType.Factory
-                .newInstance();
+        final EventLocationRelationshipType occursAt = EventLocationRelationshipType.Factory.newInstance();
         occursAt.setId(UUIDUtil.getID(S_OccursAt));
 
         if (cal != null) {
@@ -681,43 +761,51 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
             TimeInstantType time = TimeInstantType.Factory.newInstance();
             try {
                 // check yyyy
-                if (!cal.isSet(Calendar.YEAR))
+                if (!cal.isSet(Calendar.YEAR)) {
                     cal.set(Calendar.YEAR, now.get(Calendar.YEAR));
+                }
 
                 // check MM
-                if (!cal.isSet(Calendar.MONTH))
+                if (!cal.isSet(Calendar.MONTH)) {
                     cal.set(Calendar.MONTH, now.get(Calendar.MONTH));
+                }
 
                 // check dd
-                if (!cal.isSet(Calendar.DAY_OF_MONTH))
+                if (!cal.isSet(Calendar.DAY_OF_MONTH)) {
                     cal.set(Calendar.DAY_OF_MONTH, now.get(Calendar.DAY_OF_MONTH));
+                }
 
                 // check HH
-                if (!cal.isSet(Calendar.HOUR_OF_DAY))
+                if (!cal.isSet(Calendar.HOUR_OF_DAY)) {
                     cal.set(Calendar.HOUR_OF_DAY, now.get(Calendar.HOUR_OF_DAY));
+                }
 
                 // check mm
-                if (!cal.isSet(Calendar.MINUTE))
+                if (!cal.isSet(Calendar.MINUTE)) {
                     cal.set(Calendar.MINUTE, now.get(Calendar.MINUTE));
+                }
 
                 // check ss
-                if (!cal.isSet(Calendar.SECOND))
+                if (!cal.isSet(Calendar.SECOND)) {
                     cal.set(Calendar.SECOND, now.get(Calendar.SECOND));
+                }
 
                 // check timezone
-                if (cal.getTimeZone() == null)
+                if (cal.getTimeZone() == null) {
                     cal.setTimeZone(now.getTimeZone());
+                }
 
                 final StringBuffer buf = new StringBuffer(iso8601Format.format(cal.getTime()));
                 buf.insert(buf.length() - 2, ':');
-                time = TimeInstantType.Factory.parse("<Value xmlns=\"http://ucore.gov/ucore/2.0\">"
-                        + buf.toString() + "</Value>", null);
+                time = TimeInstantType.Factory.parse(
+                    "<Value xmlns=\"http://ucore.gov/ucore/2.0\">" + buf.toString() + "</Value>",
+                    null);
             } catch (final Exception e) {
                 time.setValue(now);
             }
 
             XmlUtil.substitute(occursAt.addNewTime().addNewTimeAbstract(), NS_UCORE, S_TimeInstant,
-                    TimeInstantType.type, time);
+                TimeInstantType.type, time);
         }
 
         // set the event reference
@@ -735,13 +823,13 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
         occursAt.setLocationRef(locationRef);
 
         XmlUtil.substitute(digest.getDigest().addNewRelationshipAbstract(), NS_UCORE, S_OccursAt,
-                EventLocationRelationshipType.type, occursAt);
+            EventLocationRelationshipType.type, occursAt);
     }
 
     public void setOrganization(OrganizationType org) {
 
         XmlUtil.substitute(digest.getDigest().addNewThingAbstract(), NS_UCORE, S_Organization,
-                OrganizationType.type, org);
+            OrganizationType.type, org);
     }
 
     public void setPoint(LocationType location, net.opengis.gml.x32.PointType point) {
@@ -759,30 +847,35 @@ public class DigestHelper implements InfrastructureNamespaces, DigestConstant {
     public void setWhatForEvent(WhatType theWhat, String eventId) {
 
         final ThingType[] things = digest.getDigest().getThingAbstractArray();
-        for (final ThingType thing : things)
+        for (final ThingType thing : things) {
             if (thing.getId().equals(eventId)) {
 
                 WhatType[] whats = null;
-                if (thing instanceof EventType)
+                if (thing instanceof EventType) {
                     whats = ((EventType) thing).getWhatArray();
-                else if (thing instanceof EntityType)
+                } else if (thing instanceof EntityType) {
                     whats = ((EntityType) thing).getWhatArray();
-                else if (thing instanceof CollectionType)
+                } else if (thing instanceof CollectionType) {
                     whats = ((CollectionType) thing).getWhatArray();
+                }
                 boolean found = false;
-                for (final WhatType what : whats)
+                for (final WhatType what : whats) {
                     if (what.equals(theWhat)) {
                         found = true;
                         break;
                     }
-                if (!found)
-                    if (thing instanceof EventType)
+                }
+                if (!found) {
+                    if (thing instanceof EventType) {
                         ((EventType) thing).addNewWhat().set(theWhat);
-                    else if (thing instanceof EntityType)
+                    } else if (thing instanceof EntityType) {
                         ((EntityType) thing).addNewWhat().set(theWhat);
-                    else if (thing instanceof CollectionType)
+                    } else if (thing instanceof CollectionType) {
                         ((CollectionType) thing).addNewWhat().set(theWhat);
+                    }
+                }
             }
+        }
     }
 
     @Override
