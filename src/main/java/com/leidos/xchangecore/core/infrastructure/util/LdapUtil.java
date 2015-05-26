@@ -30,8 +30,8 @@ public class LdapUtil {
 
     private static Hashtable<String, String> env = new Hashtable<String, String>();
 
-    private static final String GroupName_USERS = "users";
-    private static final String GroupName_ADMINS = "admins";
+    private static final String GroupName_USERS = "xchangecore-users";
+    private static final String GroupName_ADMINS = "xchangecore-admins";
 
     // ldap connection parameters
     private static String S_SecurityPrincipal = "cn=\"Directory Manager\"";
@@ -79,9 +79,8 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                                                                       searchFilter,
-                                                                       searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+                searchControls);
 
             SearchResult searchResult;
 
@@ -133,9 +132,8 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                                                                       searchFilter,
-                                                                       searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+                searchControls);
 
             SearchResult searchResult;
 
@@ -190,9 +188,8 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                                                                       searchFilter,
-                                                                       searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+                searchControls);
 
             // Close the context when we're done
             ctx.close();
