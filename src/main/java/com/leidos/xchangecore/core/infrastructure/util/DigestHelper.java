@@ -56,7 +56,7 @@ implements InfrastructureNamespaces, DigestConstant {
 
     private static Configuration gmlParseCfg = new Configuration(GMLDomModule.class);
 
-    private static Logger log = LoggerFactory.getLogger(DigestHelper.class);
+    private static Logger logger = LoggerFactory.getLogger(DigestHelper.class);
 
     public static boolean containWhatClause(DigestType digest, String whatClause) {
 
@@ -224,7 +224,8 @@ implements InfrastructureNamespaces, DigestConstant {
         final ThingType[] things = digest.getThingAbstractArray();
         final Set<ThingType> results = new HashSet<ThingType>();
         for (final ThingType thing : things) {
-            if (objectHasWhatType(codespace, code, null, null, thing)) {
+            if ((thing instanceof EventType) &&
+                objectHasWhatType(codespace, code, null, null, thing)) {
                 results.add(thing);
             }
         }
@@ -249,22 +250,6 @@ implements InfrastructureNamespaces, DigestConstant {
         return isNegative ? !isMatched : isMatched;
     }
 
-    /*
-    private static boolean isMatched(String regexp, String content) {
-
-        regexp = regexp.toLowerCase();
-        content = content.toLowerCase();
-
-        if (regexp.contains(S_MetaCharacter) == false)
-            return regexp.equals(content);
-
-        final String theRegExp = regexp.replaceAll("\\*", ".\\*");
-        final String filteredContent = regexp.replaceAll("\\*", "");
-        final String matchedContent = content.replaceAll(theRegExp, filteredContent);
-        return matchedContent.equals(filteredContent);
-    }
-
-     */
     public static boolean objectHasWhatType(String codespace,
                                             String code,
                                             String label,
