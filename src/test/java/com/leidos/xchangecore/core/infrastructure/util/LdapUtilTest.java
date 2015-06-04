@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {
-    "classpath*.*/CoreProperties.xml", "file:src/test/resources/contexts/test-LdapUtilContext.xml"
+    "classpath*:*/applicationContext-infra.xml"
 })
 public class LdapUtilTest {
 
@@ -20,8 +20,8 @@ public class LdapUtilTest {
     @Test
     public void testListOfMembers() {
 
-        List<String> members = ldapUtil.listOfMembers();
-        for (String member : members) {
+        final List<String> members = ldapUtil.listOfMembers();
+        for (final String member : members) {
             System.out.println("Member: " + member);
         }
     }

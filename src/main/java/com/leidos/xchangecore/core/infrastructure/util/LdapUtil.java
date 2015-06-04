@@ -41,13 +41,9 @@ public class LdapUtil {
 
     // some useful regex
     private static Pattern commonNamePattern = Pattern.compile("cn=([^,]+)");
+
     static {
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");
-
-        // intialize connection string
-        // env.put(Context.PROVIDER_URL, S_ConnectionUrl);
-
-        // initialize lookup access (default Directory Manager)
         env.put(Context.SECURITY_PRINCIPAL, S_SecurityPrincipal);
     }
 
@@ -62,7 +58,8 @@ public class LdapUtil {
         logger.debug("getCNLocation: Looking up lat/lon for cn=" + cn);
 
         final String[] locationArray = new String[] {
-            "", ""
+            "",
+            ""
         };
 
         try {
@@ -74,12 +71,12 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             final String[] attrsFilter = {
-                "geoLatitude", "geoLongitude"
+                "geoLatitude",
+                "geoLongitude"
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
                 searchControls);
 
             SearchResult searchResult;
@@ -132,8 +129,7 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
                 searchControls);
 
             SearchResult searchResult;
@@ -189,8 +185,7 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
                 searchControls);
 
             // Close the context when we're done
@@ -229,19 +224,17 @@ public class LdapUtil {
 
     public List<String> listOfMembers() {
 
-        List<String> members = new ArrayList<String>();
+        final List<String> members = new ArrayList<String>();
         try {
             // Create initial context
             final DirContext ctx = new InitialDirContext(env);
 
-            final String searchFilter = "(&(dc=" + getLdapDomain() +
-                ",dc=us)(objectClass=inetOrgPerson))";
+            final String searchFilter = "objectClass=inetOrgPerson";
 
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("",
-                searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
                 searchControls);
 
             // Close the context when we're done
@@ -250,8 +243,10 @@ public class LdapUtil {
             while (results.hasMoreElements()) {
                 final SearchResult result = results.nextElement();
 
-                logger.debug("listOfMembers: " + result.getName());
-                members.add(result.getName());
+                final Matcher matcher = LdapUtil.commonNamePattern.matcher(result.getName());
+                if (matcher.find()) {
+                    members.add(matcher.group(1));
+                }
             }
 
         } catch (final Exception e) {
