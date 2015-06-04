@@ -6,6 +6,7 @@ package com.leidos.xchangecore.core.infrastructure.util;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,8 +62,7 @@ public class LdapUtil {
         logger.debug("getCNLocation: Looking up lat/lon for cn=" + cn);
 
         final String[] locationArray = new String[] {
-            "",
-            ""
+            "", ""
         };
 
         try {
@@ -74,12 +74,12 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
             final String[] attrsFilter = {
-                "geoLatitude",
-                "geoLongitude"
+                "geoLatitude", "geoLongitude"
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                searchFilter,
                 searchControls);
 
             SearchResult searchResult;
@@ -132,7 +132,8 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                searchFilter,
                 searchControls);
 
             SearchResult searchResult;
@@ -188,7 +189,8 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                searchFilter,
                 searchControls);
 
             // Close the context when we're done
@@ -223,6 +225,41 @@ public class LdapUtil {
             logger.error("groupContainsMember: " + e.getMessage());
             return false;
         }
+    }
+
+    public List<String> listOfMembers() {
+
+        List<String> members = new ArrayList<String>();
+        try {
+            // Create initial context
+            final DirContext ctx = new InitialDirContext(env);
+
+            final String searchFilter = "(&(dc=" + getLdapDomain() +
+                ",dc=us)(objectClass=inetOrgPerson))";
+
+            final SearchControls searchControls = new SearchControls();
+            searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
+
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                searchFilter,
+                searchControls);
+
+            // Close the context when we're done
+            ctx.close();
+
+            while (results.hasMoreElements()) {
+                final SearchResult result = results.nextElement();
+
+                logger.debug("listOfMembers: " + result.getName());
+                members.add(result.getName());
+            }
+
+        } catch (final Exception e) {
+            logger.error("listOfMembers: " + e.getMessage());
+            return members;
+        }
+
+        return members;
     }
 
     public void setLdapDomain(String ldapDomain) {
