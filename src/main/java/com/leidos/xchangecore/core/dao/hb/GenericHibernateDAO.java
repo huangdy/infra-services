@@ -23,7 +23,7 @@ import com.leidos.xchangecore.core.dao.GenericDAO;
 
 @Transactional(readOnly = true)
 public abstract class GenericHibernateDAO<T, ID extends Serializable>
-    implements GenericDAO<T, ID> {
+implements GenericDAO<T, ID> {
 
     Logger logger = LoggerFactory.getLogger(GenericHibernateDAO.class);
 
@@ -58,13 +58,13 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
     @SuppressWarnings("unchecked")
     protected List<T> findAllByOrder(Order... orders) {
 
-        Criteria crit = getSession().createCriteria(getPersistentClass());
-        for (Order order : orders) {
+        final Criteria crit = getSession().createCriteria(getPersistentClass());
+        for (final Order order : orders) {
             crit.addOrder(order);
         }
 
-        List<T> list = crit.list();
-        if (list != null && list.size() > 1) {
+        final List<T> list = crit.list();
+        if ((list != null) && (list.size() > 1)) {
             return DistinctResultTransformer.INSTANCE.transformList(list);
         } else {
             return list;
@@ -79,29 +79,29 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 
         List<T> list = null;
 
-        int retries = 10;
+        final int retries = 10;
         while (retries > 0) {
             try {
-                Criteria crit = getSession().createCriteria(getPersistentClass());
-                for (Criterion c : criterion) {
+                final Criteria crit = getSession().createCriteria(getPersistentClass());
+                for (final Criterion c : criterion) {
                     // logger.debug("findByCriteria: " + c);
                     crit.add(c);
                 }
                 list = crit.list();
                 break;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
                 logger.warn("findByCriteria: " + e.getMessage() +
-                            ", sleep half second then try again");
+                    ", sleep half second then try again");
                 try {
                     Thread.sleep(500);
-                } catch (Exception se) {
+                } catch (final Exception se) {
                     logger.error("Cannot sleep one second: " + se.getMessage());
                 }
             }
         }
-        logger.debug("findByCriteria: found " + (list != null ? list.size() : 0) + " entries");
-        if (list != null && list.size() > 1) {
+        // logger.debug("findByCriteria: found " + (list != null ? list.size() : 0) + " entries");
+        if ((list != null) && (list.size() > 1)) {
             return DistinctResultTransformer.INSTANCE.transformList(list);
         } else {
             return list;
@@ -110,53 +110,51 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 
     @Override
     public List<T> findByCriteriaAndOrder(int startIndex,
-                                          List<Order> orderList,
-                                          List<Criterion> criterionList) {
+        List<Order> orderList,
+        List<Criterion> criterionList) {
 
         List<T> list = null;
-        int retries = 10;
+        final int retries = 10;
         while (retries > 0) {
             try {
-                Criteria criteria = getSession().createCriteria(getPersistentClass());
-                for (Criterion c : criterionList) {
+                final Criteria criteria = getSession().createCriteria(getPersistentClass());
+                for (final Criterion c : criterionList) {
                     // logger.debug("findByCriteriaAndOrder: criterion: " + c);
                     criteria.add(c);
                 }
-                for (Order o : orderList) {
+                for (final Order o : orderList) {
                     // logger.debug("findByCriteriaAndOrder: order: " + o);
                     criteria.addOrder(o);
                 }
                 criteria.setFirstResult(startIndex);
                 list = criteria.list();
                 break;
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
                 logger.warn("findByCriteriaAndOrder: " + e.getMessage() +
-                            ", sleep half second then try again");
+                    ", sleep half second then try again");
                 try {
                     Thread.sleep(500);
-                } catch (Exception se) {
+                } catch (final Exception se) {
                     logger.error("Cannot sleep one second: " + se.getMessage());
                 }
             }
         }
 
-        logger.debug("findByCriteriaAndOrder: found " + (list != null ? list.size() : 0) +
-                     " entries");
-
+        // logger.debug("findByCriteriaAndOrder: found " + (list != null ? list.size() : 0) + " entries");
         return list;
     }
 
     @SuppressWarnings("unchecked")
     protected List<T> findByCriteriaInOrder(Order o, Criterion... criterions) {
 
-        Criteria crit = getSession().createCriteria(getPersistentClass());
-        for (Criterion c : criterions) {
+        final Criteria crit = getSession().createCriteria(getPersistentClass());
+        for (final Criterion c : criterions) {
             crit.add(c);
         }
         crit.addOrder(o);
-        List<T> list = crit.list();
-        if (list != null && list.size() > 1) {
+        final List<T> list = crit.list();
+        if ((list != null) && (list.size() > 1)) {
             return DistinctResultTransformer.INSTANCE.transformList(list);
         } else {
             return list;
@@ -168,14 +166,14 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
     public List<T> findByExample(T exampleInstance, String... excludeProperty)
         throws HibernateException {
 
-        Criteria crit = getSession().createCriteria(getPersistentClass());
-        Example example = Example.create(exampleInstance);
-        for (String exclude : excludeProperty) {
+        final Criteria crit = getSession().createCriteria(getPersistentClass());
+        final Example example = Example.create(exampleInstance);
+        for (final String exclude : excludeProperty) {
             example.excludeProperty(exclude);
         }
         crit.add(example);
-        List<T> list = crit.list();
-        if (list != null && list.size() > 1) {
+        final List<T> list = crit.list();
+        if ((list != null) && (list.size() > 1)) {
             return DistinctResultTransformer.INSTANCE.transformList(list);
         } else {
             return list;
@@ -185,7 +183,7 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
     @Override
     public T findById(ID id) {
 
-        T entity = em.find(getPersistentClass(), id);
+        final T entity = em.find(getPersistentClass(), id);
         return entity;
     }
 
@@ -226,7 +224,7 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
         if (em == null) {
             throw new IllegalStateException("Session has not been set on DAO before usage");
         }
-        Session result = (Session) em.getDelegate();
+        final Session result = (Session) em.getDelegate();
         return result;
     }
 
@@ -245,7 +243,7 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
         try {
             getSession().saveOrUpdate(entity);
             // logger.debug("makePersistent: ... done ...");
-        } catch (Exception e) {
+        } catch (final Exception e) {
             logger.error("makePersistent: " + e.getMessage());
         }
         return entity;
@@ -256,9 +254,8 @@ public abstract class GenericHibernateDAO<T, ID extends Serializable>
 
         try {
             getSession().delete(entity);
-            // getSession().flush();
             // logger.debug("makeTransient: ... done ...");
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
             logger.warn("makeTransient: " + e.getMessage());
         }
     }

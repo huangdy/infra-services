@@ -23,7 +23,7 @@ import org.hibernate.search.annotations.Index;
 @Entity
 // @Table(name = "EXTENDED_METADATA")
 public class ExtendedMetadata
-    implements Serializable {
+implements Serializable {
 
     /**
      *
@@ -97,5 +97,17 @@ public class ExtendedMetadata
     public void setValue(String value) {
 
         this.value = value;
+    }
+
+    @Override
+    public String toString() {
+
+        final StringBuffer sb = new StringBuffer();
+        sb.append("ExtendedMetadata:\n");
+        sb.append("\tCodespace: " + codespace + "\n");
+        sb.append("\tCode: " + code + "\n");
+        sb.append("\tLabel: " + label + "\n");
+        sb.append("\tValue: " + value + "\n");
+        return sb.toString();
     }
 }

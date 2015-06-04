@@ -190,36 +190,28 @@ public class LdapUtil {
 
             // Close the context when we're done
             ctx.close();
-            boolean isInGroup = false;
+            // boolean isInGroup = false;
             if (results.hasMoreElements()) {
                 //9/26/2014 Tom and Andrew - add logging and conditional logic to check if results contain group passed in
                 while (results.hasMoreElements()) {
                     final SearchResult result = results.nextElement();
-                    logger.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-                    logger.debug("Results: ");
                     logger.debug("Name: " + result.getName());
                     logger.debug("Name in namespace " + result.getNameInNamespace());
-                    logger.debug("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
                     if (result.getName().equals("cn=" + group)) {
-                        isInGroup = true;
+                        // isInGroup = true;
                         logger.debug("Found that this member " + member + " is in group " + group);
+                        return true;
                     }
                 }
-
-                //                return true;
             } else {
-                logger.debug("User is not in any groups.");
-                return false;
+                logger.debug("User: " + member + " is not in any groups.");
             }
-            if (!isInGroup) {
-                logger.debug("User is not in group " + group);
-            }
-            return isInGroup;
+            logger.debug("User: " + member + " is not in group " + group);
 
         } catch (final Exception e) {
             logger.error("groupContainsMember: " + e.getMessage());
-            return false;
         }
+        return false;
     }
 
     public List<String> listOfMembers() {

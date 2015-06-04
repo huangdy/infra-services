@@ -17,9 +17,9 @@ import com.saic.precis.x2009.x06.base.ExtendedMetadataType;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * 
+ *
  * @author nathan
- * 
+ *
  */
 public class AgreementUtil {
 
@@ -27,7 +27,7 @@ public class AgreementUtil {
 
     /**
      * Converts the persisted agreement to a xml type
-     * 
+     *
      * @param agreement
      * @return AgreementType
      */
@@ -37,20 +37,20 @@ public class AgreementUtil {
             return null;
         }
 
-        AgreementType agreementType = AgreementType.Factory.newInstance();
+        final AgreementType agreementType = AgreementType.Factory.newInstance();
         agreementType.setId(agreement.getId());
         if (agreement.getDescription() != null) {
             agreementType.setDescription(agreement.getDescription());
         }
 
         // copy the consumer and provider
-        if (agreement.getRemoteCore() != null && agreement.getLocalCore() != null) {
+        if ((agreement.getRemoteCore() != null) && (agreement.getLocalCore() != null)) {
 
-            Principals principals = agreementType.addNewPrincipals();
+            final Principals principals = agreementType.addNewPrincipals();
 
             // add the remote core
             principals.addNewRemoteCore();
-            IdentifierType remoteCore = IdentifierType.Factory.newInstance();
+            final IdentifierType remoteCore = IdentifierType.Factory.newInstance();
             remoteCore.setStringValue(agreement.getRemoteCore().getValue());
             if (agreement.getRemoteCore().getLabel() != null) {
                 remoteCore.setLabel(agreement.getRemoteCore().getLabel());
@@ -59,7 +59,7 @@ public class AgreementUtil {
 
             // add the local core
             principals.addNewLocalCore();
-            IdentifierType localCore = IdentifierType.Factory.newInstance();
+            final IdentifierType localCore = IdentifierType.Factory.newInstance();
             localCore.setStringValue(agreement.getLocalCore().getValue());
             if (agreement.getLocalCore().getLabel() != null) {
                 localCore.setLabel(agreement.getLocalCore().getLabel());
@@ -70,19 +70,19 @@ public class AgreementUtil {
         }
 
         // copy the share rules
-        if (agreement.getShareRules() != null && agreement.getShareRules().size() > 0) {
+        if ((agreement.getShareRules() != null) && (agreement.getShareRules().size() > 0)) {
 
             // set the shareRulesEnabled field
-            ShareRules shareRules = ShareRules.Factory.newInstance();
+            final ShareRules shareRules = ShareRules.Factory.newInstance();
             shareRules.setEnabled(agreement.isEnabled());
 
-            ShareRule[] shareRuleArray = new ShareRule[agreement.getShareRules().size()];
+            final ShareRule[] shareRuleArray = new ShareRule[agreement.getShareRules().size()];
 
             int i = 0;
 
-            for (com.leidos.xchangecore.core.infrastructure.model.ShareRule rule : agreement.getShareRules()) {
+            for (final com.leidos.xchangecore.core.infrastructure.model.ShareRule rule : agreement.getShareRules()) {
 
-                ShareRule shareRule = AgreementType.ShareRules.ShareRule.Factory.newInstance();
+                final ShareRule shareRule = AgreementType.ShareRules.ShareRule.Factory.newInstance();
 
                 // copy id
                 shareRule.setId(rule.getRuleID());
@@ -92,8 +92,8 @@ public class AgreementUtil {
 
                 // copy the interest group
                 if (rule.getInterestGroup() != null) {
-                    ConditionType condition = shareRule.addNewCondition();
-                    CodespaceValueType interestGroup = condition.addNewInterestGroup();
+                    final ConditionType condition = shareRule.addNewCondition();
+                    final CodespaceValueType interestGroup = condition.addNewInterestGroup();
 
                     if (rule.getInterestGroup().getLabel() != null) {
                         interestGroup.setLabel(rule.getInterestGroup().getLabel());
@@ -108,26 +108,31 @@ public class AgreementUtil {
 
                     // copy extended metadata
 
-                    if (rule.getExtendedMetadata() != null && rule.getExtendedMetadata().size() > 0) {
+                    if ((rule.getExtendedMetadata() != null) &&
+                        (rule.getExtendedMetadata().size() > 0)) {
 
-                        for (ExtendedMetadata em : rule.getExtendedMetadata()) {
-                            ExtendedMetadataType extendedMetadata = condition.addNewExtendedMetadata();
+                        for (final ExtendedMetadata em : rule.getExtendedMetadata()) {
+                            final ExtendedMetadataType extendedMetadata = condition.addNewExtendedMetadata();
                             extendedMetadata.setCode(em.getCode());
                             extendedMetadata.setCodespace(em.getCodespace());
                             extendedMetadata.setLabel(em.getLabel());
                             extendedMetadata.setStringValue(em.getValue());
+                            /*
                             logger.debug("copying extended metadata: " +
                                          extendedMetadata.getCodespace() + " - " +
                                          extendedMetadata.getCode() + " = " +
                                          extendedMetadata.getStringValue());
+                             */
                         }
 
                     }
 
                     if (rule.getRemoteCoreProximity() != null) {
+                        /*
                         logger.debug("copying Proximity value: " +
-                                     rule.getRemoteCoreProximity().toString());
-                        RemoteCoreProximity proximity = condition.addNewRemoteCoreProximity();
+                            rule.getRemoteCoreProximity().toString());
+                         */
+                        final RemoteCoreProximity proximity = condition.addNewRemoteCoreProximity();
                         proximity.setShareOnNoLoc(Boolean.valueOf(rule.getShareOnNoLoc()));
                         proximity.setStringValue(rule.getRemoteCoreProximity());
                     }
@@ -137,11 +142,11 @@ public class AgreementUtil {
 
                 // copy work product types
 
-                if (rule.getWorkProducts() != null && rule.getWorkProducts().size() > 0) {
-                    WorkProducts workProducts = shareRule.addNewWorkProducts();
+                if ((rule.getWorkProducts() != null) && (rule.getWorkProducts().size() > 0)) {
+                    final WorkProducts workProducts = shareRule.addNewWorkProducts();
 
-                    for (com.leidos.xchangecore.core.infrastructure.model.CodeSpaceValueType workProduct : rule.getWorkProducts()) {
-                        CodespaceValueType workProductType = workProducts.addNewType();
+                    for (final com.leidos.xchangecore.core.infrastructure.model.CodeSpaceValueType workProduct : rule.getWorkProducts()) {
+                        final CodespaceValueType workProductType = workProducts.addNewType();
                         if (workProduct.getCodeSpace() != null) {
                             workProductType.setCodespace(workProduct.getCodeSpace());
                         }
@@ -163,7 +168,7 @@ public class AgreementUtil {
             agreementType.setShareRules(shareRules);
         } else {
             // set the shareRulesEnabled field
-            ShareRules shareRules = ShareRules.Factory.newInstance();
+            final ShareRules shareRules = ShareRules.Factory.newInstance();
             shareRules.setEnabled(agreement.isEnabled());
             agreementType.setShareRules(shareRules);
         }
