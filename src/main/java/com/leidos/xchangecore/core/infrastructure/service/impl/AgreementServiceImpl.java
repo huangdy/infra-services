@@ -42,7 +42,7 @@ import com.saic.precis.x2009.x06.base.CodespaceValueType;
  * @ssdd
  */
 public class AgreementServiceImpl
-    implements AgreementService {
+implements AgreementService {
 
     // public static final String SHARE_RULE_ID_PREFIX = "UICDS-";
 
@@ -180,21 +180,20 @@ public class AgreementServiceImpl
                         }
                         rule.setExtendedMetadata(extendedMetadataSet);
                         logger.debug("createAgreement: added extendedmetadata to the rule: size = " +
-                                     rule.getExtendedMetadata().size());
+                            rule.getExtendedMetadata().size());
                     } else
                         logger.debug("createAgreement: no extended metadata in share rule");
 
                     if (shareRule.getCondition().getRemoteCoreProximity() != null) {
-                        if (agreement.getRemoteJIDs() != null ||
-                            agreement.getRemoteJIDs().size() <= 0) {
+                        if (agreement.getRemoteJIDs().size() > 0) {
                             final String message = "createAgreement: Can only sepecify proximity when the target are groups";
                             logger.error(message);
                             throw new IllegalArgumentException(message);
                         }
                         logger.debug("createAgreement: Share Rule has remote core proximity " +
-                                     shareRule.getCondition().getRemoteCoreProximity().getStringValue());
+                            shareRule.getCondition().getRemoteCoreProximity().getStringValue());
                         logger.debug("createAgreement: Share Rule has share on no location - " +
-                                     shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
+                            shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
                         rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
                         rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
                     } else
@@ -264,7 +263,7 @@ public class AgreementServiceImpl
             final Agreement agreement = getDao().findByRemoteCoreName(remoteJID);
             if (agreement != null) {
                 logger.debug("deleteInterestGroupFromRemoteCoreHandlerremoteJID: " + remoteJID +
-                             " has rescinded the agreement and set mutuallyAgreed to false");
+                    " has rescinded the agreement and set mutuallyAgreed to false");
                 agreement.setMutuallyAgreed(false);
                 getDao().makePersistent(agreement);
             }
@@ -393,7 +392,7 @@ public class AgreementServiceImpl
 
         if (isLocalCore(agreement.getRemoteCorename())) {
             logger.debug("rescindAgreement: agreementID: " + agreementID +
-                         " is intra-core agreement");
+                " is intra-core agreement");
             return true;
         }
 
@@ -408,7 +407,7 @@ public class AgreementServiceImpl
             deleteInterestGroupSharedFromRemoteCoreChannel.send(theMessage);
         } catch (final Exception e) {
             logger.error("rescindAgreement: send DeleteInterestGroupForRemoteCoreMessage: " +
-                         agreement.getRemoteCorename() + ": " + e.getMessage());
+                agreement.getRemoteCorename() + ": " + e.getMessage());
         }
 
         return true;
@@ -425,12 +424,12 @@ public class AgreementServiceImpl
 
         final String realRemoteCoreName = getRealCoreName(agreement.getRemoteCorename());
         logger.debug("sendAgreementRosterUpdate: Agreement's real remote core name: " +
-                     realRemoteCoreName);
+            realRemoteCoreName);
 
         if (isLocalCore(realRemoteCoreName)) {
             logger.debug("sendAgreementRosterUpdate: the remote core: " +
-                         agreement.getRemoteCore().getValue() +
-                         " is the local core, no message need to be sent");
+                agreement.getRemoteCore().getValue() +
+                " is the local core, no message need to be sent");
             return;
         }
 
@@ -471,7 +470,7 @@ public class AgreementServiceImpl
 
             if (remoteCoreSet.contains(realRemoteCoreName)) {
                 logger.error("sendInitialAgreementRoster: duplicate agreement for remote core:" +
-                             realRemoteCoreName);
+                    realRemoteCoreName);
                 continue;
             }
 
@@ -599,7 +598,7 @@ public class AgreementServiceImpl
                     }
                     rule.setExtendedMetadata(extendedMetadataSet);
                     logger.debug("Added extendedmetadata to the rule: size=" +
-                                 rule.getExtendedMetadata().size());
+                        rule.getExtendedMetadata().size());
                 }
 
                 if (shareRule.getCondition().getRemoteCoreProximity() != null) {

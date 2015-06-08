@@ -33,6 +33,8 @@ public class LdapUtil {
 
     private static final String GroupName_USERS = "xchangecore-users";
     private static final String GroupName_ADMINS = "xchangecore-admins";
+    private static final String UserObjectName = "objectClass=inetOrgPerson";
+    private static final String GroupObjectName = "objectClass=groupOfUniqueNames";
 
     // ldap connection parameters
     private static String S_SecurityPrincipal = "cn=\"Directory Manager\"";
@@ -76,8 +78,9 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
-                searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             SearchResult searchResult;
 
@@ -129,8 +132,9 @@ public class LdapUtil {
             };
             searchControls.setReturningAttributes(attrsFilter);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
-                searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             SearchResult searchResult;
 
@@ -140,9 +144,8 @@ public class LdapUtil {
                 final Attribute members = searchResult.getAttributes().get("uniqueMember");
                 for (int i = 0; i < members.size(); i++) {
                     matcher = LdapUtil.commonNamePattern.matcher(members.get(i).toString());
-                    if (matcher.find()) {
+                    if (matcher.find())
                         membersArray.add(matcher.group(1));
-                    }
                 }
             }
 
@@ -185,13 +188,14 @@ public class LdapUtil {
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
-                searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             // Close the context when we're done
             ctx.close();
             // boolean isInGroup = false;
-            if (results.hasMoreElements()) {
+            if (results.hasMoreElements())
                 //9/26/2014 Tom and Andrew - add logging and conditional logic to check if results contain group passed in
                 while (results.hasMoreElements()) {
                     final SearchResult result = results.nextElement();
@@ -203,9 +207,8 @@ public class LdapUtil {
                         return true;
                     }
                 }
-            } else {
+            else
                 logger.debug("User: " + member + " is not in any groups.");
-            }
             logger.debug("User: " + member + " is not in group " + group);
 
         } catch (final Exception e) {
@@ -214,20 +217,26 @@ public class LdapUtil {
         return false;
     }
 
-    public List<String> listOfMembers() {
+    public List<String> listOfGroup() {
+
+        return listOfObjectByType(false);
+    }
+
+    private List<String> listOfObjectByType(boolean isUser) {
 
         final List<String> members = new ArrayList<String>();
         try {
             // Create initial context
             final DirContext ctx = new InitialDirContext(env);
 
-            final String searchFilter = "objectClass=inetOrgPerson";
+            final String searchFilter = isUser ? UserObjectName : GroupObjectName;
 
             final SearchControls searchControls = new SearchControls();
             searchControls.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
-            final NamingEnumeration<SearchResult> results = ctx.search("", searchFilter,
-                searchControls);
+            final NamingEnumeration<SearchResult> results = ctx.search("",
+                                                                       searchFilter,
+                                                                       searchControls);
 
             // Close the context when we're done
             ctx.close();
@@ -236,17 +245,24 @@ public class LdapUtil {
                 final SearchResult result = results.nextElement();
 
                 final Matcher matcher = LdapUtil.commonNamePattern.matcher(result.getName());
-                if (matcher.find()) {
+                if (matcher.find())
                     members.add(matcher.group(1));
-                }
             }
 
         } catch (final Exception e) {
-            logger.error("listOfMembers: " + e.getMessage());
+            logger.error("listOfObjectByType: " + e.getMessage());
             return members;
         }
 
         return members;
+    }
+
+    /*
+     * To get a list of all users defined in domain
+     */
+    public List<String> listOfUsers() {
+
+        return listOfObjectByType(true);
     }
 
     public void setLdapDomain(String ldapDomain) {

@@ -20,10 +20,13 @@ public class LdapUtilTest {
     @Test
     public void testListOfMembers() {
 
-        final List<String> members = ldapUtil.listOfMembers();
-        for (final String member : members) {
-            System.out.println("Member: " + member);
-        }
+        List<String> members = ldapUtil.listOfUsers();
+        for (final String user : members)
+            System.out.println("User: " + user);
+
+        members = ldapUtil.listOfGroup();
+        for (final String group : members)
+            System.out.println("Group: " + group);
     }
 
 }
