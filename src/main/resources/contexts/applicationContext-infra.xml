@@ -450,6 +450,7 @@
     </bean>
     <bean id="agreementService" class="com.leidos.xchangecore.core.infrastructure.service.impl.AgreementServiceImpl">
         <property name="dao" ref="agreementDAO" />
+        <property name="ldapUtil" ref="ldapUtil" />
         <property name="agreementRosterChannel" ref="agreementRosterChannel" />
         <property name="deleteInterestGroupSharedFromRemoteCoreChannel" ref="deleteInterestGroupSharedFromRemoteCoreChannel" />
         <property name="configurationService" ref="configurationService" />

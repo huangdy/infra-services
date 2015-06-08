@@ -29,6 +29,7 @@ import com.leidos.xchangecore.core.infrastructure.service.AgreementService;
 import com.leidos.xchangecore.core.infrastructure.service.ConfigurationService;
 import com.leidos.xchangecore.core.infrastructure.service.DirectoryService;
 import com.leidos.xchangecore.core.infrastructure.util.AgreementUtil;
+import com.leidos.xchangecore.core.infrastructure.util.LdapUtil;
 import com.saic.precis.x2009.x06.base.CodespaceValueType;
 
 /**
@@ -44,44 +45,18 @@ import com.saic.precis.x2009.x06.base.CodespaceValueType;
 public class AgreementServiceImpl
 implements AgreementService {
 
-    // public static final String SHARE_RULE_ID_PREFIX = "UICDS-";
-
     Logger logger = LoggerFactory.getLogger(AgreementServiceImpl.class);
+
     private ConfigurationService configService;
     private DirectoryService directoryService;
 
     private AgreementDAO dao;
+
+    private LdapUtil ldapUtil;
+
     private MessageChannel agreementRosterChannel;
 
     private MessageChannel deleteInterestGroupSharedFromRemoteCoreChannel;
-
-    /*
-    @Override
-    public void coreStatusUpdateHandler(CoreStatusUpdateMessage message) {
-
-        String coreName = message.getCoreName();
-
-        if (coreName.endsWith("/CoreConnection")) {
-            coreName = coreName.substring(0, coreName.indexOf("/CoreConnection"));
-        }
-        logger.debug("coreStatusUpdateHandler: [" + coreName + "]" + message.getCoreStatus());
-        if (message.getCoreStatus().equalsIgnoreCase(CoreStatusUpdateMessage.Status_Subscribed)) {
-            Agreement agreement = getDao().findByRemoteCoreName(coreName);
-            if (agreement != null) {
-                logger.debug("coreStatusUpdateHandler: set to mutually agreed with " + coreName);
-                agreement.setMutuallyAgreed(true);
-            }
-        } else if (message.getCoreStatus().equalsIgnoreCase(CoreStatusUpdateMessage.Status_Subscribed)) {
-            Agreement agreement = getDao().findByRemoteCoreName(coreName);
-            if (agreement != null) {
-                logger.debug("coreStatusUpdateHandler: set to mutually agreed with " + coreName);
-                agreement.setMutuallyAgreed(false);
-            }
-
-        }
-        logger.debug("coreStatusUpdateHandler: ... exit ...");
-    }
-     */
 
     /**
      * Creates a core to core agreement and enables share rules if specified. Processes share rules
@@ -104,31 +79,43 @@ implements AgreementService {
         logger.debug("createAgreement: " + agreementType.getPrincipals().xmlText());
 
         if (agreementType.getPrincipals().getRemoteCore() == null ||
-            agreementType.getPrincipals().getRemoteCore().isNil())
+            agreementType.getPrincipals().getRemoteCore().isNil()) {
             throw new IllegalArgumentException("Remote core is null in agreement request");
+        }
         if (agreementType.getPrincipals().getLocalCore() == null ||
-            agreementType.getPrincipals().getLocalCore().isNil())
+            agreementType.getPrincipals().getLocalCore().isNil()) {
             throw new IllegalArgumentException("Local core is null in agreement request");
+        }
 
-        if (agreementType.getShareRules() == null)
+        if (agreementType.getShareRules() == null) {
             throw new MissingShareRulesElementException();
+        }
 
         Agreement agreement = new Agreement();
-        if (agreementType.getDescription() != null)
+        if (agreementType.getDescription() != null) {
             agreement.setDescription(agreementType.getDescription());
+        }
         // Set the Consumer
         final CodeSpaceValueType remoteCore = new CodeSpaceValueType();
-        if (agreementType.getPrincipals().getRemoteCore().getLabel() != null)
+        if (agreementType.getPrincipals().getRemoteCore().getLabel() != null) {
             remoteCore.setLabel(agreementType.getPrincipals().getRemoteCore().getLabel());
+        }
         remoteCore.setValue(agreementType.getPrincipals().getRemoteCore().getStringValue());
         agreement.setRemoteCore(remoteCore);
 
         // Set the Provider
         final CodeSpaceValueType localCore = new CodeSpaceValueType();
-        if (agreementType.getPrincipals().getLocalCore().getLabel() != null)
+        if (agreementType.getPrincipals().getLocalCore().getLabel() != null) {
             localCore.setLabel(agreementType.getPrincipals().getLocalCore().getLabel());
+        }
         localCore.setValue(agreementType.getPrincipals().getLocalCore().getStringValue());
         agreement.setLocalCore(localCore);
+
+        try {
+            isValidateJIDsAndGroups(agreement);
+        } catch (final Exception e) {
+            throw new MissingConditionInShareRuleException(e.getMessage());
+        }
 
         // set enable field for ruleSet
         agreement.setEnabled(agreementType.getShareRules().getEnabled());
@@ -139,28 +126,30 @@ implements AgreementService {
             // Set the Share Rules
             final HashSet<ShareRule> shareRules = new HashSet<ShareRule>();
 
-            final int ruleID = 0;
             for (final AgreementType.ShareRules.ShareRule shareRule : agreementType.getShareRules().getShareRuleArray()) {
                 final ShareRule rule = new ShareRule();
-                if (shareRule.getId() == null)
-                    logger.info("createAgreement: shareRuleID: is null");
-                // rule.setRuleID(SHARE_RULE_ID_PREFIX + ruleID++);
-                else {
+                if (shareRule.getId() == null) {
+                    logger.error("createAgreement: shareRuleID: is null");
+                    throw new IllegalArgumentException("shareRuleID not set");
+                } else {
                     logger.info("createAgreement: shareRuleID: " + shareRule.getId());
                     rule.setRuleID(shareRule.getId());
                 }
                 rule.setEnabled(shareRule.getEnabled());
 
-                if (shareRule.getCondition() == null)
+                if (shareRule.getCondition() == null) {
                     throw new MissingConditionInShareRuleException();
-                else {
+                } else {
                     final CodeSpaceValueType interestGroup = new CodeSpaceValueType();
-                    if (shareRule.getCondition().getInterestGroup().getCodespace() != null)
+                    if (shareRule.getCondition().getInterestGroup().getCodespace() != null) {
                         interestGroup.setCodeSpace(shareRule.getCondition().getInterestGroup().getCodespace());
-                    if (shareRule.getCondition().getInterestGroup().getLabel() != null)
+                    }
+                    if (shareRule.getCondition().getInterestGroup().getLabel() != null) {
                         interestGroup.setLabel(shareRule.getCondition().getInterestGroup().getLabel());
-                    if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
+                    }
+                    if (shareRule.getCondition().getInterestGroup().getStringValue() != null) {
                         interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
+                    }
 
                     logger.debug("createAgreement: extendedMetadata: ");
                     final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
@@ -180,9 +169,10 @@ implements AgreementService {
                         }
                         rule.setExtendedMetadata(extendedMetadataSet);
                         logger.debug("createAgreement: added extendedmetadata to the rule: size = " +
-                            rule.getExtendedMetadata().size());
-                    } else
+                                     rule.getExtendedMetadata().size());
+                    } else {
                         logger.debug("createAgreement: no extended metadata in share rule");
+                    }
 
                     if (shareRule.getCondition().getRemoteCoreProximity() != null) {
                         if (agreement.getRemoteJIDs().size() > 0) {
@@ -191,13 +181,14 @@ implements AgreementService {
                             throw new IllegalArgumentException(message);
                         }
                         logger.debug("createAgreement: Share Rule has remote core proximity " +
-                            shareRule.getCondition().getRemoteCoreProximity().getStringValue());
+                                     shareRule.getCondition().getRemoteCoreProximity().getStringValue());
                         logger.debug("createAgreement: Share Rule has share on no location - " +
-                            shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
+                                     shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
                         rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
                         rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
-                    } else
+                    } else {
                         logger.debug("createAgreement: no remote core proximity in share rule");
+                    }
 
                     rule.setInterestGroup(interestGroup);
 
@@ -210,12 +201,15 @@ implements AgreementService {
                     for (final CodespaceValueType type : shareRule.getWorkProducts().getTypeArray()) {
                         final CodeSpaceValueType workProduct = new CodeSpaceValueType();
 
-                        if (type.getCodespace() != null)
+                        if (type.getCodespace() != null) {
                             workProduct.setCodeSpace(type.getCodespace());
-                        if (type.getLabel() != null)
+                        }
+                        if (type.getLabel() != null) {
                             workProduct.setLabel(type.getLabel());
-                        if (type.getStringValue() != null)
+                        }
+                        if (type.getStringValue() != null) {
                             workProduct.setValue(type.getStringValue());
+                        }
 
                         workProducts.add(workProduct);
                         j++;
@@ -285,8 +279,9 @@ implements AgreementService {
         final Agreement agreement = getDao().findById(agreementID);
         AgreementType response = null;
 
-        if (agreement != null)
+        if (agreement != null) {
             response = AgreementUtil.copyProperties(agreement);
+        }
 
         return response;
     }
@@ -307,8 +302,9 @@ implements AgreementService {
 
         if (agreements.size() > 0) {
             final AgreementType[] agreementTypes = new AgreementType[agreements.size()];
-            for (int i = 0; i < agreements.size(); i++)
+            for (int i = 0; i < agreements.size(); i++) {
                 agreementTypes[i] = AgreementUtil.copyProperties(agreements.get(i));
+            }
             response.setAgreementArray(agreementTypes);
         }
         return response;
@@ -339,14 +335,20 @@ implements AgreementService {
         return directoryService;
     }
 
+    public LdapUtil getLdapUtil() {
+
+        return ldapUtil;
+    }
+
     @Override
     public String[] getListOfUsersSharedWith(String user, String incdientType) {
 
         final List<Agreement> agreementList = dao.findAll();
         for (final Agreement agreement : agreementList) {
-            if (!agreement.isEnabled())
+            if (!agreement.isEnabled()) {
                 // if the agreement is inactive at this moment then ignore this agreement
                 continue;
+            }
             if (!agreement.getLocalCorename().equalsIgnoreCase(agreement.getRemoteCorename())) {
                 logger.debug("Inter-Core agreement: LocalJID: " + agreement.getLocalCorename() +
                              ", RemoteJID: " + agreement.getRemoteCorename());
@@ -367,6 +369,36 @@ implements AgreementService {
     private boolean isLocalCore(String remoteCoreNameFQN) {
 
         return directoryService.getCoreName().equalsIgnoreCase(getRealCoreName(remoteCoreNameFQN));
+    }
+
+    private void isValidateJIDsAndGroups(Agreement agreement) throws Exception {
+
+        List<String> members = getLdapUtil().listOfUsers();
+        isValidMember(agreement.getLocalJIDs(), members, true);
+        isValidMember(agreement.getRemoteJIDs(), members, true);
+        members = getLdapUtil().listOfGroup();
+        isValidMember(agreement.getLocalGroups(), members, false);
+        isValidMember(agreement.getRemoteGroups(), members, false);
+    }
+
+    private void isValidMember(Set<String> ids, List<String> members, boolean isUser)
+        throws Exception {
+
+        for (final String id : ids) {
+            boolean found = false;
+            for (final String member : members) {
+                if (id.equalsIgnoreCase(member)) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found == false) {
+                final String message = "isValid: " + (isUser ? "User: " : "Group: ") + id +
+                    " does not exist";
+                logger.error(message);
+                throw new Exception(message);
+            }
+        }
     }
 
     /**
@@ -517,6 +549,11 @@ implements AgreementService {
         directoryService = service;
     }
 
+    public void setLdapUtil(LdapUtil ldapUtil) {
+
+        this.ldapUtil = ldapUtil;
+    }
+
     /** {@inheritDoc} */
     @Override
     public void systemInitializedHandler(String messgae) {
@@ -546,13 +583,15 @@ implements AgreementService {
     public AgreementType updateAgreement(AgreementType agreementType) {
 
         final Agreement agreement = getDao().findById(agreementType.getId());
-        if (agreement == null)
+        if (agreement == null) {
             return AgreementType.Factory.newInstance();
+        }
 
         logger.debug("updateAgreement: agreementID: " + agreementType.getId());
 
-        if (agreementType.getDescription() != null && agreementType.getDescription().length() > 0)
+        if (agreementType.getDescription() != null && agreementType.getDescription().length() > 0) {
             agreement.setDescription(agreementType.getDescription());
+        }
 
         agreement.setLocalValue(agreementType.getPrincipals().getLocalCore().getStringValue());
         agreement.setRemoteValue(agreementType.getPrincipals().getRemoteCore().getStringValue());
@@ -574,12 +613,15 @@ implements AgreementService {
                 rule.setEnabled(shareRule.getEnabled());
 
                 final CodeSpaceValueType interestGroup = new CodeSpaceValueType();
-                if (shareRule.getCondition().getInterestGroup().getCodespace() != null)
+                if (shareRule.getCondition().getInterestGroup().getCodespace() != null) {
                     interestGroup.setCodeSpace(shareRule.getCondition().getInterestGroup().getCodespace());
-                if (shareRule.getCondition().getInterestGroup().getLabel() != null)
+                }
+                if (shareRule.getCondition().getInterestGroup().getLabel() != null) {
                     interestGroup.setLabel(shareRule.getCondition().getInterestGroup().getLabel());
-                if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
+                }
+                if (shareRule.getCondition().getInterestGroup().getStringValue() != null) {
                     interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
+                }
 
                 logger.debug("checking for extendedMetadata");
                 final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
@@ -608,28 +650,21 @@ implements AgreementService {
 
                 rule.setInterestGroup(interestGroup);
 
-                // if (shareRule.getCondition().getTimeInterval() != null) {
-                // rule.setTimeInterval(shareRule.getCondition().getTimeInterval());
-                // }
-                //
-                // if (shareRule.getCondition().getPolygon() != null) {
-                // rule.setPolygon(shareRule.getCondition().getPolygon());
-                // }
-
                 if (shareRule.getWorkProducts() != null) {
-                    // CodeSpaceValueType[] workProducts = new
-                    // CodeSpaceValueType[shareRule.getWorkProducts().sizeOfTypeArray()];
                     final HashSet<CodeSpaceValueType> workProducts = new HashSet<CodeSpaceValueType>();
                     int j = 0;
                     for (final CodespaceValueType type : shareRule.getWorkProducts().getTypeArray()) {
                         final CodeSpaceValueType workProduct = new CodeSpaceValueType();
 
-                        if (type.getCodespace() != null)
+                        if (type.getCodespace() != null) {
                             workProduct.setCodeSpace(type.getCodespace());
-                        if (type.getLabel() != null)
+                        }
+                        if (type.getLabel() != null) {
                             workProduct.setLabel(type.getLabel());
-                        if (type.getStringValue() != null)
+                        }
+                        if (type.getStringValue() != null) {
                             workProduct.setValue(type.getStringValue());
+                        }
 
                         workProducts.add(workProduct);
                         j++;
@@ -648,8 +683,9 @@ implements AgreementService {
             // model.setShareRules(shareRulesArray);
             agreement.setShareRules(shareRules);
 
-        } else
+        } else {
             agreement.setShareRules(new HashSet<ShareRule>());
+        }
 
         // persist the agreement
         Agreement model2 = null;
@@ -673,5 +709,4 @@ implements AgreementService {
 
         return response;
     }
-
 }
