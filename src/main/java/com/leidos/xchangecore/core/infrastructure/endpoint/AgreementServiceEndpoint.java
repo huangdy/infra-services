@@ -1,7 +1,5 @@
 package com.leidos.xchangecore.core.infrastructure.endpoint;
 
-import javax.xml.soap.SOAPException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +22,7 @@ import org.uicds.agreementService.UpdateAgreementResponseDocument;
 import com.leidos.xchangecore.core.infrastructure.exceptions.AgreementWithCoreExists;
 import com.leidos.xchangecore.core.infrastructure.exceptions.MissingConditionInShareRuleException;
 import com.leidos.xchangecore.core.infrastructure.exceptions.MissingShareRulesElementException;
+import com.leidos.xchangecore.core.infrastructure.exceptions.SOAPServiceException;
 import com.leidos.xchangecore.core.infrastructure.service.AgreementService;
 import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
 
@@ -43,11 +42,11 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * conditions are based on the type of incident as designated in the ActivityCategoryText of the
  * incident document. The following examples of agreements show the different ways that sharing can
  * be specified.
- * 
+ *
  * <h1>Share all incidents</h1> There are two ways to share all incidents, have an empty ShareRules
  * element or disable all the individual ShareRules. <h2>
  * Empty ShareRules</h2>
- * 
+ *
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
@@ -57,9 +56,9 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *     &lt;as:ShareRules enabled=&quot;true&quot; xsi:nil=&quot;true&quot;/&gt;
  *   &lt;/as:Agreement&gt;
  * </pre>
- * 
+ *
  * <h2>Disable All ShareRules</h2>
- * 
+ *
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
@@ -75,11 +74,11 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *     &lt;/as:ShareRules&gt;
  *   &lt;/as:Agreement&gt;
  * </pre>
- * 
+ *
  * <h1>Share no incidents</h1> Once the ShareRules enabled attribute is set to false no more new
  * incidents will be shared with the other party. All incidents that are currently shared will
  * continue to be shared until they are closed and archived.
- * 
+ *
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
@@ -89,9 +88,9 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *     &lt;as:ShareRules enabled=&quot;false&quot; xsi:nil=&quot;true&quot;/&gt;
  *   &lt;/as:Agreement&gt;
  * </pre>
- * 
+ *
  * <h1>Share only Traffic incidents</h1>
- * 
+ *
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
@@ -106,11 +105,11 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *       &lt;/as:ShareRule&gt;
  *     &lt;/as:ShareRules&gt;
  *   &lt;/as:Agreement&gt;
- * 
+ *
  * </pre>
- * 
+ *
  * <h1>Share only Geo, Traffic and CBRNE incidents</h1>
- * 
+ *
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
@@ -136,7 +135,7 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *     &lt;/as:ShareRules&gt;
  *   &lt;/as:Agreement&gt;
  * </pre>
- * 
+ *
  * <h1>Manual Sharing of Incidents</h1> This rule will not be processed by the automatic sharing
  * process. It will allow a call to the shareIncident operation on the Incident Management Service
  * to share an incident to any core that has an agreement. This rule may be used in addition to
@@ -144,7 +143,7 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * the other rules and this rule will allow a call to shareIncident to share incidents that do not
  * match other explict rules. Setting the value of the InterestGroup element with this codespace to
  * false will turn off this ability.
- * 
+ *
  * <pre>
  *    &lt;as:ShareRules enabled="true"&gt;
  *      &lt;as:ShareRule enabled="true" id="manual"&gt;
@@ -153,11 +152,11 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  *       &lt;/as:Condition&gt;
  *    &lt;/as:ShareRule&gt;
  * </pre>
- * 
+ *
  * <p>
  * Note that the time interval and polygon in the Condition element are currently not used.
  * <p>
- * 
+ *
  * @author William Summers
  * @since 1.0
  * @see <a href="../../wsdl/AgreementService.wsdl">Appendix: AgreementService.wsdl</a>
@@ -177,14 +176,14 @@ public class AgreementServiceEndpoint
 
     /**
      * Allows the client to create a new Agreement.
-     * 
+     *
      * @see <a href="../../services/Agreement/0.1/Agreement.xsd">Appendix: Agreement.xsd</a>
      * @see <a href="../../services/Agreement/0.1/AgreementService.xsd">Appendix: AgreementService.xsd</a>
-     * 
+     *
      * @param CreateAgreementRequestDocument
-     * 
+     *
      * @return CreateAgreementResponseDocument
-     * 
+     *
      * @throws MissingShareRulesElementException - Invalid request (ShareRules element is missing)
      * @throws MissingConditionInShareRuleException - Problem with the Rules elements
      * @throws AgreementWithCoreExists - An agreement with this core already exists
@@ -192,17 +191,16 @@ public class AgreementServiceEndpoint
      */
     @PayloadRoot(namespace = NS_AgreementService, localPart = "CreateAgreementRequest")
     public CreateAgreementResponseDocument createAgreement(CreateAgreementRequestDocument requestDoc)
-        throws MissingShareRulesElementException, MissingConditionInShareRuleException,
-        AgreementWithCoreExists {
+        throws SOAPServiceException {
 
         log.debug("createAgreement: id=" +
                   requestDoc.getCreateAgreementRequest().getAgreement().getPrincipals().getRemoteCore());
 
         // call create agreement
-        AgreementType agreement = agreementService.createAgreement(requestDoc.getCreateAgreementRequest().getAgreement());
+        final AgreementType agreement = agreementService.createAgreement(requestDoc.getCreateAgreementRequest().getAgreement());
 
         // return doc
-        CreateAgreementResponseDocument response = CreateAgreementResponseDocument.Factory.newInstance();
+        final CreateAgreementResponseDocument response = CreateAgreementResponseDocument.Factory.newInstance();
         response.addNewCreateAgreementResponse().setAgreement(agreement);
         return response;
 
@@ -210,53 +208,53 @@ public class AgreementServiceEndpoint
 
     /**
      * Allows the client to retrieve an agreement associated with a specific agreementID.
-     * 
+     *
      * @see <a href="../../services/Agreement/0.1/AgreementService.xsd">Appendix: AgreementService.xsd</a>
-     * 
+     *
      * @param GetAgreementRequestDocument
-     * 
+     *
      * @return GetAgreementResponseDocument
      * @idd
      */
     @PayloadRoot(namespace = NS_AgreementService, localPart = "GetAgreementRequest")
     public GetAgreementResponseDocument getAgreement(GetAgreementRequestDocument requestDoc)
-        throws SOAPException {
+        throws SOAPServiceException {
 
         log.debug("getAgreement: agreementID: " +
                   requestDoc.getGetAgreementRequest().getAgreementID());
 
-        AgreementType agreement = agreementService.getAgreement(requestDoc.getGetAgreementRequest().getAgreementID());
+        final AgreementType agreement = agreementService.getAgreement(requestDoc.getGetAgreementRequest().getAgreementID());
         if (agreement != null) {
-            GetAgreementResponseDocument response = GetAgreementResponseDocument.Factory.newInstance();
+            final GetAgreementResponseDocument response = GetAgreementResponseDocument.Factory.newInstance();
             response.addNewGetAgreementResponse().setAgreement(agreement);
             return response;
         } else {
-            throw new SOAPException("Agreement: " +
-                                    requestDoc.getGetAgreementRequest().getAgreementID() +
-                                    " not existed");
+            throw new SOAPServiceException("GetAgreement: " +
+                                           requestDoc.getGetAgreementRequest().getAgreementID() +
+                                           " not existed");
         }
     }
 
     /**
      * Allows the client to retrieve a list of existing Agreements.
-     * 
+     *
      * @see <a href="../../services/Agreement/0.1/AgreementService.xsd">Appendix: AgreementService.xsd</a>
-     * 
+     *
      * @param GetAgreementListRequestDocument
-     * 
+     *
      * @return GetAgreementListResponseDocument
-     * 
+     *
      * @idd
      */
 
     @PayloadRoot(namespace = NS_AgreementService, localPart = "GetAgreementListRequest")
     public GetAgreementListResponseDocument getAgreementList(GetAgreementListRequestDocument requestDoc) {
 
-        GetAgreementListResponseDocument response = GetAgreementListResponseDocument.Factory.newInstance();
+        final GetAgreementListResponseDocument response = GetAgreementListResponseDocument.Factory.newInstance();
 
         log.debug("getAgreementList");
 
-        AgreementListType agreementsList = agreementService.getAgreementList();
+        final AgreementListType agreementsList = agreementService.getAgreementList();
 
         response.addNewGetAgreementListResponse().setAgreementList(agreementsList);
 
@@ -265,11 +263,11 @@ public class AgreementServiceEndpoint
 
     /**
      * Allows the client to delete an existing agreement.
-     * 
+     *
      * @see <a href="../../services/Agreement/0.1/AgreementService.xsd">Appendix: AgreementService.xsd</a>
-     * 
+     *
      * @param RescindAgreementRequestDocument
-     * 
+     *
      * @return RescindAgreementResponseDocument
      * @idd
      */
@@ -279,8 +277,8 @@ public class AgreementServiceEndpoint
         log.debug("rescindAgreement: agreementID: " +
                   requestDoc.getRescindAgreementRequest().getAgreementID());
 
-        boolean isSuccess = agreementService.rescindAgreement(requestDoc.getRescindAgreementRequest().getAgreementID());
-        RescindAgreementResponseDocument response = RescindAgreementResponseDocument.Factory.newInstance();
+        final boolean isSuccess = agreementService.rescindAgreement(requestDoc.getRescindAgreementRequest().getAgreementID());
+        final RescindAgreementResponseDocument response = RescindAgreementResponseDocument.Factory.newInstance();
         response.addNewRescindAgreementResponse().setStatus(isSuccess);
 
         return response;
@@ -294,25 +292,26 @@ public class AgreementServiceEndpoint
 
     /**
      * Allows the client to modify an existing Agreement.
-     * 
+     *
      * @see <a href="../../services/Agreement/0.1/Agreement.xsd">Appendix: Agreement.xsd</a>
      * @see <a href="../../services/Agreement/0.1/AgreementService.xsd">Appendix: AgreementService.xsd</a>
-     * 
+     *
      * @param UpdateAgreementRequestDocument
-     * 
+     *
      * @return UpdateAgreementResponseDocument
-     * 
+     *
      * @idd
      */
     @PayloadRoot(namespace = NS_AgreementService, localPart = "UpdateAgreementRequest")
-    public UpdateAgreementResponseDocument updateAgreement(UpdateAgreementRequestDocument requestDoc) {
+    public UpdateAgreementResponseDocument updateAgreement(UpdateAgreementRequestDocument requestDoc)
+        throws SOAPServiceException {
 
         log.debug("updateAgreement: agreementID: " +
                   requestDoc.getUpdateAgreementRequest().getAgreement().getId());
 
-        AgreementType agreement = agreementService.updateAgreement(requestDoc.getUpdateAgreementRequest().getAgreement());
+        final AgreementType agreement = agreementService.updateAgreement(requestDoc.getUpdateAgreementRequest().getAgreement());
 
-        UpdateAgreementResponseDocument response = UpdateAgreementResponseDocument.Factory.newInstance();
+        final UpdateAgreementResponseDocument response = UpdateAgreementResponseDocument.Factory.newInstance();
         response.addNewUpdateAgreementResponse().setAgreement(agreement);
 
         // return agreementService.amendAgreement(requestDoc);

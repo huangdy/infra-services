@@ -4,9 +4,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.uicds.agreementService.AgreementListType;
 import org.uicds.agreementService.AgreementType;
 
-import com.leidos.xchangecore.core.infrastructure.exceptions.AgreementWithCoreExists;
 import com.leidos.xchangecore.core.infrastructure.exceptions.MissingConditionInShareRuleException;
-import com.leidos.xchangecore.core.infrastructure.exceptions.MissingShareRulesElementException;
+import com.leidos.xchangecore.core.infrastructure.exceptions.SOAPServiceException;
 import com.leidos.xchangecore.core.infrastructure.messages.DeleteInterestGroupForRemoteCoreMessage;
 
 /**
@@ -34,9 +33,7 @@ public interface AgreementService {
      * @see AgreementType
      * @ssdd
      */
-    public AgreementType createAgreement(AgreementType agreement)
-        throws MissingShareRulesElementException, MissingConditionInShareRuleException,
-        AgreementWithCoreExists;
+    public AgreementType createAgreement(AgreementType agreement) throws SOAPServiceException;
 
     void deleteInterestGroupSharedFromRemoteCoreHandler(DeleteInterestGroupForRemoteCoreMessage msg);
 
@@ -131,5 +128,5 @@ public interface AgreementService {
      * @see AgreementType
      * @ssdd
      */
-    public AgreementType updateAgreement(AgreementType agreement);
+    public AgreementType updateAgreement(AgreementType agreement) throws SOAPServiceException;
 }
