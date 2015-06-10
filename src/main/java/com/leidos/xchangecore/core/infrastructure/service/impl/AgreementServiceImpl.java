@@ -43,7 +43,7 @@ import com.saic.precis.x2009.x06.base.CodespaceValueType;
  * @ssdd
  */
 public class AgreementServiceImpl
-    implements AgreementService {
+implements AgreementService {
 
     Logger logger = LoggerFactory.getLogger(AgreementServiceImpl.class);
 
@@ -76,46 +76,40 @@ public class AgreementServiceImpl
 
         logger.debug("createAgreement: " + agreementType.getPrincipals().xmlText());
 
-        if ((agreementType.getPrincipals().getRemoteCore() == null) ||
-            agreementType.getPrincipals().getRemoteCore().isNil()) {
+        if (agreementType.getPrincipals().getRemoteCore() == null ||
+            agreementType.getPrincipals().getRemoteCore().isNil())
             throw new SOAPServiceException("Create Agreement: Remote core is null in agreement request");
-        }
-        if ((agreementType.getPrincipals().getLocalCore() == null) ||
-            agreementType.getPrincipals().getLocalCore().isNil()) {
+        if (agreementType.getPrincipals().getLocalCore() == null ||
+            agreementType.getPrincipals().getLocalCore().isNil())
             throw new SOAPServiceException("Create Agreement: Local core is null in agreement request");
-        }
 
-        if (agreementType.getShareRules() == null) {
+        if (agreementType.getShareRules() == null)
             throw new SOAPServiceException("Create Agreement: missing Shared Rules");
-        }
 
         Agreement agreement = new Agreement();
-        if (agreementType.getDescription() != null) {
+        if (agreementType.getDescription() != null)
             agreement.setDescription(agreementType.getDescription());
-        }
         // Set the Consumer
         final CodeSpaceValueType remoteCore = new CodeSpaceValueType();
-        if (agreementType.getPrincipals().getRemoteCore().getLabel() != null) {
+        if (agreementType.getPrincipals().getRemoteCore().getLabel() != null)
             remoteCore.setLabel(agreementType.getPrincipals().getRemoteCore().getLabel());
-        }
         remoteCore.setValue(agreementType.getPrincipals().getRemoteCore().getStringValue());
         agreement.setRemoteCore(remoteCore);
 
         // Set the Provider
         final CodeSpaceValueType localCore = new CodeSpaceValueType();
-        if (agreementType.getPrincipals().getLocalCore().getLabel() != null) {
+        if (agreementType.getPrincipals().getLocalCore().getLabel() != null)
             localCore.setLabel(agreementType.getPrincipals().getLocalCore().getLabel());
-        }
         localCore.setValue(agreementType.getPrincipals().getLocalCore().getStringValue());
         agreement.setLocalCore(localCore);
 
-        isValidateJIDsAndGroups(agreement);
+        isValidateJIDsAndGroups(agreement.getLocalValue(), agreement.getRemoteValue());
 
         // set enable field for ruleSet
         agreement.setEnabled(agreementType.getShareRules().getEnabled());
 
-        if ((agreementType.getShareRules() != null) &&
-            (agreementType.getShareRules().sizeOfShareRuleArray() > 0)) {
+        if (agreementType.getShareRules() != null &&
+            agreementType.getShareRules().sizeOfShareRuleArray() > 0) {
 
             // Set the Share Rules
             final HashSet<ShareRule> shareRules = new HashSet<ShareRule>();
@@ -131,24 +125,21 @@ public class AgreementServiceImpl
                 }
                 rule.setEnabled(shareRule.getEnabled());
 
-                if (shareRule.getCondition() == null) {
+                if (shareRule.getCondition() == null)
                     throw new SOAPServiceException("Create Agreement: Shared Rule's condition is null");
-                } else {
+                else {
                     final CodeSpaceValueType interestGroup = new CodeSpaceValueType();
-                    if (shareRule.getCondition().getInterestGroup().getCodespace() != null) {
+                    if (shareRule.getCondition().getInterestGroup().getCodespace() != null)
                         interestGroup.setCodeSpace(shareRule.getCondition().getInterestGroup().getCodespace());
-                    }
-                    if (shareRule.getCondition().getInterestGroup().getLabel() != null) {
+                    if (shareRule.getCondition().getInterestGroup().getLabel() != null)
                         interestGroup.setLabel(shareRule.getCondition().getInterestGroup().getLabel());
-                    }
-                    if (shareRule.getCondition().getInterestGroup().getStringValue() != null) {
+                    if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
                         interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
-                    }
 
                     logger.debug("createAgreement: extendedMetadata: ");
                     final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
-                    if ((shareRule.getCondition().getExtendedMetadataArray() != null) &&
-                        (shareRule.getCondition().getExtendedMetadataArray().length > 0)) {
+                    if (shareRule.getCondition().getExtendedMetadataArray() != null &&
+                        shareRule.getCondition().getExtendedMetadataArray().length > 0) {
                         final ExtendedMetadata em = new ExtendedMetadata();
                         for (int i = 0; i < shareRule.getCondition().getExtendedMetadataArray().length; i++) {
 
@@ -163,10 +154,9 @@ public class AgreementServiceImpl
                         }
                         rule.setExtendedMetadata(extendedMetadataSet);
                         logger.debug("createAgreement: added extendedmetadata to the rule: size = " +
-                            rule.getExtendedMetadata().size());
-                    } else {
+                                     rule.getExtendedMetadata().size());
+                    } else
                         logger.debug("createAgreement: no extended metadata in share rule");
-                    }
 
                     if (shareRule.getCondition().getRemoteCoreProximity() != null) {
                         if (agreement.getRemoteJIDs().size() > 0) {
@@ -175,15 +165,13 @@ public class AgreementServiceImpl
                             throw new SOAPServiceException(message);
                         }
                         logger.debug("createAgreement: Share Rule has remote core proximity " +
-                            shareRule.getCondition().getRemoteCoreProximity().getStringValue());
+                                     shareRule.getCondition().getRemoteCoreProximity().getStringValue());
                         logger.debug("createAgreement: Share Rule has share on no location - " +
-                            shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
+                                     shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
                         rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
-                        rule.setShareOnNoLoc(Boolean.valueOf(
-                            shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
-                    } else {
+                        rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
+                    } else
                         logger.debug("createAgreement: no remote core proximity in share rule");
-                    }
 
                     rule.setInterestGroup(interestGroup);
 
@@ -196,15 +184,12 @@ public class AgreementServiceImpl
                     for (final CodespaceValueType type : shareRule.getWorkProducts().getTypeArray()) {
                         final CodeSpaceValueType workProduct = new CodeSpaceValueType();
 
-                        if (type.getCodespace() != null) {
+                        if (type.getCodespace() != null)
                             workProduct.setCodeSpace(type.getCodespace());
-                        }
-                        if (type.getLabel() != null) {
+                        if (type.getLabel() != null)
                             workProduct.setLabel(type.getLabel());
-                        }
-                        if (type.getStringValue() != null) {
+                        if (type.getStringValue() != null)
                             workProduct.setValue(type.getStringValue());
-                        }
 
                         workProducts.add(workProduct);
                         j++;
@@ -238,7 +223,7 @@ public class AgreementServiceImpl
         } catch (final Exception e) {
             logger.error("createAgreement: exception occurred persisting agreement object");
             throw new SOAPServiceException("Create Agreement: Cannot persist the model: " +
-                                           e.getMessage());
+                e.getMessage());
         }
 
         return response;
@@ -253,7 +238,7 @@ public class AgreementServiceImpl
             final Agreement agreement = getDao().findByRemoteCoreName(remoteJID);
             if (agreement != null) {
                 logger.debug("deleteInterestGroupFromRemoteCoreHandlerremoteJID: " + remoteJID +
-                             " has rescinded the agreement and set mutuallyAgreed to false");
+                    " has rescinded the agreement and set mutuallyAgreed to false");
                 agreement.setMutuallyAgreed(false);
                 getDao().makePersistent(agreement);
             }
@@ -275,9 +260,8 @@ public class AgreementServiceImpl
         final Agreement agreement = getDao().findById(agreementID);
         AgreementType response = null;
 
-        if (agreement != null) {
+        if (agreement != null)
             response = AgreementUtil.copyProperties(agreement);
-        }
 
         return response;
     }
@@ -298,9 +282,8 @@ public class AgreementServiceImpl
 
         if (agreements.size() > 0) {
             final AgreementType[] agreementTypes = new AgreementType[agreements.size()];
-            for (int i = 0; i < agreements.size(); i++) {
+            for (int i = 0; i < agreements.size(); i++)
                 agreementTypes[i] = AgreementUtil.copyProperties(agreements.get(i));
-            }
             response.setAgreementArray(agreementTypes);
         }
         return response;
@@ -341,13 +324,12 @@ public class AgreementServiceImpl
 
         final List<Agreement> agreementList = dao.findAll();
         for (final Agreement agreement : agreementList) {
-            if (!agreement.isEnabled()) {
+            if (!agreement.isEnabled())
                 // if the agreement is inactive at this moment then ignore this agreement
                 continue;
-            }
             if (!agreement.getLocalCorename().equalsIgnoreCase(agreement.getRemoteCorename())) {
                 logger.debug("Inter-Core agreement: LocalJID: " + agreement.getLocalCorename() +
-                    ", RemoteJID: " + agreement.getRemoteCorename());
+                             ", RemoteJID: " + agreement.getRemoteCorename());
                 continue;
             }
         }
@@ -367,14 +349,15 @@ public class AgreementServiceImpl
         return directoryService.getCoreName().equalsIgnoreCase(getRealCoreName(remoteCoreNameFQN));
     }
 
-    private void isValidateJIDsAndGroups(Agreement agreement) throws SOAPServiceException {
+    private void isValidateJIDsAndGroups(String localJIDs, String remoteJIDs)
+        throws SOAPServiceException {
 
         List<String> members = getLdapUtil().listOfUsers();
-        isValidMember(agreement.getLocalJIDs(), members, true);
-        isValidMember(agreement.getRemoteJIDs(), members, true);
+        isValidMember(AgreementUtil.getIDs(localJIDs, AgreementUtil.N_IDS), members, true);
+        isValidMember(AgreementUtil.getIDs(remoteJIDs, AgreementUtil.N_IDS), members, true);
         members = getLdapUtil().listOfGroup();
-        isValidMember(agreement.getLocalGroups(), members, false);
-        isValidMember(agreement.getRemoteGroups(), members, false);
+        isValidMember(AgreementUtil.getIDs(localJIDs, AgreementUtil.N_GROUPS), members, false);
+        isValidMember(AgreementUtil.getIDs(remoteJIDs, AgreementUtil.N_GROUPS), members, false);
     }
 
     private void isValidMember(Set<String> ids, List<String> members, boolean isUser)
@@ -382,12 +365,11 @@ public class AgreementServiceImpl
 
         for (final String id : ids) {
             boolean found = false;
-            for (final String member : members) {
+            for (final String member : members)
                 if (id.equalsIgnoreCase(member)) {
                     found = true;
                     break;
                 }
-            }
             if (found == false) {
                 final String message = (isUser ? "User: " : "Group: ") + id + " does not exist";
                 logger.error(message);
@@ -419,7 +401,7 @@ public class AgreementServiceImpl
 
         if (isLocalCore(agreement.getRemoteCorename())) {
             logger.debug("rescindAgreement: agreementID: " + agreementID +
-                         " is intra-core agreement");
+                " is intra-core agreement");
             return true;
         }
 
@@ -434,7 +416,7 @@ public class AgreementServiceImpl
             deleteInterestGroupSharedFromRemoteCoreChannel.send(theMessage);
         } catch (final Exception e) {
             logger.error("rescindAgreement: send DeleteInterestGroupForRemoteCoreMessage: " +
-                         agreement.getRemoteCorename() + ": " + e.getMessage());
+                agreement.getRemoteCorename() + ": " + e.getMessage());
         }
 
         return true;
@@ -451,12 +433,12 @@ public class AgreementServiceImpl
 
         final String realRemoteCoreName = getRealCoreName(agreement.getRemoteCorename());
         logger.debug("sendAgreementRosterUpdate: Agreement's real remote core name: " +
-                     realRemoteCoreName);
+            realRemoteCoreName);
 
         if (isLocalCore(realRemoteCoreName)) {
             logger.debug("sendAgreementRosterUpdate: the remote core: " +
-                         agreement.getRemoteCore().getValue() +
-                         " is the local core, no message need to be sent");
+                agreement.getRemoteCore().getValue() +
+                " is the local core, no message need to be sent");
             return;
         }
 
@@ -497,7 +479,7 @@ public class AgreementServiceImpl
 
             if (remoteCoreSet.contains(realRemoteCoreName)) {
                 logger.error("sendInitialAgreementRoster: duplicate agreement for remote core:" +
-                             realRemoteCoreName);
+                    realRemoteCoreName);
                 continue;
             }
 
@@ -506,7 +488,7 @@ public class AgreementServiceImpl
 
             // send out an intial roster for each agreement
             final AgreementRosterMessage message = new AgreementRosterMessage(agreement.getId(),
-                cores);
+                                                                              cores);
             final Message<AgreementRosterMessage> notification = new GenericMessage<AgreementRosterMessage>(message);
             agreementRosterChannel.send(notification);
             // save the remote core
@@ -557,7 +539,9 @@ public class AgreementServiceImpl
         final String urn = getConfigurationService().getServiceNameURN(AGREEMENT_SERVICE_NAME);
         final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
-        directoryService.registerUICDSService(urn, AGREEMENT_SERVICE_NAME, publishedProducts,
+        directoryService.registerUICDSService(urn,
+            AGREEMENT_SERVICE_NAME,
+            publishedProducts,
             subscribedProducts);
         sendInitialAgreementRoster();
         logger.debug("systemInitializedHandler: ... done ...");
@@ -575,17 +559,17 @@ public class AgreementServiceImpl
     @Override
     public AgreementType updateAgreement(AgreementType agreementType) throws SOAPServiceException {
 
-        final Agreement agreement = getDao().findById(agreementType.getId());
-        if (agreement == null) {
-            return AgreementType.Factory.newInstance();
-        }
-
         logger.debug("updateAgreement: agreementID: " + agreementType.getId());
 
-        if ((agreementType.getDescription() != null) &&
-            (agreementType.getDescription().length() > 0)) {
+        final Agreement agreement = getDao().findById(agreementType.getId());
+        if (agreement == null)
+            return AgreementType.Factory.newInstance();
+
+        isValidateJIDsAndGroups(agreementType.getPrincipals().getLocalCore().getStringValue(),
+            agreementType.getPrincipals().getRemoteCore().getStringValue());
+
+        if (agreementType.getDescription() != null && agreementType.getDescription().length() > 0)
             agreement.setDescription(agreementType.getDescription());
-        }
 
         // setup the local JIDs/Groups
         agreement.setLocalValue(agreementType.getPrincipals().getLocalCore().getStringValue());
@@ -593,15 +577,13 @@ public class AgreementServiceImpl
         agreement.setRemoteValue(agreementType.getPrincipals().getRemoteCore().getStringValue());
         // validate the JIDs and Groups
 
-        isValidateJIDsAndGroups(agreement);
-
         // set enable field for ruleSet
         agreement.setEnabled(agreementType.getShareRules().getEnabled());
 
         //TODO to check the difference instead of just set with the new values.
 
-        if ((agreementType.getShareRules() != null) &&
-            (agreementType.getShareRules().sizeOfShareRuleArray() > 0)) {
+        if (agreementType.getShareRules() != null &&
+            agreementType.getShareRules().sizeOfShareRuleArray() > 0) {
 
             // Set the Share Rules
             // ShareRule[] shareRulesArray = new ShareRule[length];
@@ -613,20 +595,17 @@ public class AgreementServiceImpl
                 rule.setEnabled(shareRule.getEnabled());
 
                 final CodeSpaceValueType interestGroup = new CodeSpaceValueType();
-                if (shareRule.getCondition().getInterestGroup().getCodespace() != null) {
+                if (shareRule.getCondition().getInterestGroup().getCodespace() != null)
                     interestGroup.setCodeSpace(shareRule.getCondition().getInterestGroup().getCodespace());
-                }
-                if (shareRule.getCondition().getInterestGroup().getLabel() != null) {
+                if (shareRule.getCondition().getInterestGroup().getLabel() != null)
                     interestGroup.setLabel(shareRule.getCondition().getInterestGroup().getLabel());
-                }
-                if (shareRule.getCondition().getInterestGroup().getStringValue() != null) {
+                if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
                     interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
-                }
 
                 logger.debug("checking for extendedMetadata");
                 final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
-                if ((shareRule.getCondition().getExtendedMetadataArray() != null) &&
-                    (shareRule.getCondition().getExtendedMetadataArray().length > 0)) {
+                if (shareRule.getCondition().getExtendedMetadataArray() != null &&
+                    shareRule.getCondition().getExtendedMetadataArray().length > 0) {
                     logger.debug("Admitted to some extendedMetadata");
                     final ExtendedMetadata em = new ExtendedMetadata();
                     for (int i = 0; i < shareRule.getCondition().getExtendedMetadataArray().length; i++) {
@@ -640,7 +619,7 @@ public class AgreementServiceImpl
                     }
                     rule.setExtendedMetadata(extendedMetadataSet);
                     logger.debug("Added extendedmetadata to the rule: size=" +
-                                 rule.getExtendedMetadata().size());
+                        rule.getExtendedMetadata().size());
                 }
 
                 if (shareRule.getCondition().getRemoteCoreProximity() != null) {
@@ -650,8 +629,7 @@ public class AgreementServiceImpl
                         throw new SOAPServiceException(message);
                     }
                     rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
-                    rule.setShareOnNoLoc(Boolean.valueOf(
-                        shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
+                    rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
                 }
 
                 rule.setInterestGroup(interestGroup);
@@ -662,15 +640,12 @@ public class AgreementServiceImpl
                     for (final CodespaceValueType type : shareRule.getWorkProducts().getTypeArray()) {
                         final CodeSpaceValueType workProduct = new CodeSpaceValueType();
 
-                        if (type.getCodespace() != null) {
+                        if (type.getCodespace() != null)
                             workProduct.setCodeSpace(type.getCodespace());
-                        }
-                        if (type.getLabel() != null) {
+                        if (type.getLabel() != null)
                             workProduct.setLabel(type.getLabel());
-                        }
-                        if (type.getStringValue() != null) {
+                        if (type.getStringValue() != null)
                             workProduct.setValue(type.getStringValue());
-                        }
 
                         workProducts.add(workProduct);
                         j++;
@@ -689,9 +664,8 @@ public class AgreementServiceImpl
             // model.setShareRules(shareRulesArray);
             agreement.setShareRules(shareRules);
 
-        } else {
+        } else
             agreement.setShareRules(new HashSet<ShareRule>());
-        }
 
         // persist the agreement
         Agreement model2 = null;

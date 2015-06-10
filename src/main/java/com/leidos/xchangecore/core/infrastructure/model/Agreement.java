@@ -13,7 +13,7 @@ import javax.persistence.OneToMany;
 
 /**
  * The Agreement data model.
- * 
+ *
  * @ssdd
  */
 @Entity
@@ -40,7 +40,7 @@ public class Agreement {
     private String description;
 
     @OneToMany(cascade = {
-        CascadeType.ALL
+                          CascadeType.ALL
     }, fetch = FetchType.EAGER)
     @org.hibernate.annotations.Cascade(value = org.hibernate.annotations.CascadeType.DELETE_ORPHAN)
     private Set<ShareRule> shareRules;
@@ -64,7 +64,7 @@ public class Agreement {
 
     /**
      * Gets the id.
-     * 
+     *
      * @return the id
      * @ssdd
      */
@@ -73,23 +73,35 @@ public class Agreement {
         return id;
     }
 
-    // public Map<String,CodeSpaceValueType> getPrincipals() {
-    // if (principals == null) {
-    // principals = new HashMap<String,CodeSpaceValueType>();
-    // }
-    // return principals;
-    // }
-
     private Set<String> getIDs(String jid, String type) {
 
         Set<String> idSet = new HashSet<String>();
-        parseIt(jid, type, idSet);
+
+        // ignore the core part
+        int index = jid.indexOf("?");
+        if (index == -1)
+            return idSet;
+
+        String jidString = jid.substring(index + 1);
+
+        // separate each ids and groups
+        String[] list = jidString.split("&", -1);
+        for (String item : list) {
+            String[] parts = item.split("=");
+            // if the type is not specified the continue
+            if (parts[0].equalsIgnoreCase(type) == false)
+                continue;
+
+            String[] ids = parts[1].split(",", -1);
+            for (String id : ids)
+                idSet.add(id);
+        }
         return idSet;
     }
 
     /**
      * Gets the local code space.
-     * 
+     *
      * @return the local code space
      * @ssdd
      */
@@ -100,7 +112,7 @@ public class Agreement {
 
     /**
      * Gets the local core.
-     * 
+     *
      * @return the local core
      * @ssdd
      */
@@ -129,7 +141,7 @@ public class Agreement {
 
     /**
      * Gets the local value.
-     * 
+     *
      * @return the local value
      * @ssdd
      */
@@ -140,7 +152,7 @@ public class Agreement {
 
     /**
      * Gets the remote code space.
-     * 
+     *
      * @return the remote code space
      * @ssdd
      */
@@ -151,7 +163,7 @@ public class Agreement {
 
     /**
      * Gets the remote core.
-     * 
+     *
      * @return the remote core
      * @ssdd
      */
@@ -180,7 +192,7 @@ public class Agreement {
 
     /**
      * Gets the remote value.
-     * 
+     *
      * @return the remote value
      * @ssdd
      */
@@ -191,15 +203,14 @@ public class Agreement {
 
     /**
      * Gets the share rules.
-     * 
+     *
      * @return the share rules
      * @ssdd
      */
     public Set<ShareRule> getShareRules() {
 
-        if (shareRules == null) {
+        if (shareRules == null)
             shareRules = new HashSet<ShareRule>();
-        }
         return shareRules;
     }
 
@@ -209,11 +220,11 @@ public class Agreement {
 
         return new String(localValue + remoteValue).hashCode();
     }
-    */
+     */
 
     /**
      * Checks if is enabled.
-     * 
+     *
      * @return true, if is enabled
      * @ssdd
      */
@@ -232,26 +243,6 @@ public class Agreement {
         return mutuallyAgreed;
     }
 
-    private void parseIt(String path, String type, Set<String> idSet) {
-
-        int index = path.indexOf("?");
-        if (index == -1) {
-            return;
-        }
-
-        String jidString = path.substring(index + 1);
-        String[] list = jidString.split("&", -1);
-        for (String item : list) {
-            String[] parts = item.split("=");
-            String[] ids = parts[1].split(",", -1);
-            for (String id : ids) {
-                if (parts[0].equalsIgnoreCase(type)) {
-                    idSet.add(id);
-                }
-            }
-        }
-    }
-
     public void setDescription(String description) {
 
         this.description = description;
@@ -259,7 +250,7 @@ public class Agreement {
 
     /**
      * Sets the enabled.
-     * 
+     *
      * @param enabled the new enabled
      * @ssdd
      */
@@ -270,7 +261,7 @@ public class Agreement {
 
     /**
      * Sets the id.
-     * 
+     *
      * @param id the new id
      * @ssdd
      */
@@ -281,7 +272,7 @@ public class Agreement {
 
     /**
      * Sets the local code space.
-     * 
+     *
      * @param localCodeSpace the new local code space
      * @ssdd
      */
@@ -292,7 +283,7 @@ public class Agreement {
 
     /**
      * Sets the local core.
-     * 
+     *
      * @param localCore the new local core
      * @ssdd
      */
@@ -304,7 +295,7 @@ public class Agreement {
 
     /**
      * Sets the local value.
-     * 
+     *
      * @param localValue the new local value
      * @ssdd
      */
@@ -320,7 +311,7 @@ public class Agreement {
 
     /**
      * Sets the remote code space.
-     * 
+     *
      * @param remoteCodeSpace the new remote code space
      */
     public void setRemoteCodeSpace(String remoteCodeSpace) {
@@ -330,7 +321,7 @@ public class Agreement {
 
     /**
      * Sets the remote core.
-     * 
+     *
      * @param remoteCore the new remote core
      * @ssdd
      */
@@ -342,7 +333,7 @@ public class Agreement {
 
     /**
      * Sets the remote value.
-     * 
+     *
      * @param remoteValue the new remote value
      * @ssdd
      */
@@ -353,7 +344,7 @@ public class Agreement {
 
     /**
      * Sets the share rules.
-     * 
+     *
      * @param shareRules the new share rules
      * @ssdd
      */
@@ -381,17 +372,15 @@ public class Agreement {
         if (!getLocalGroups().isEmpty()) {
             sb.append("\t\tGroup: ");
             String[] ids = getLocalGroups().toArray(new String[getLocalGroups().size()]);
-            for (String id : ids) {
+            for (String id : ids)
                 sb.append(id + " ");
-            }
             sb.append("\n");
         }
         if (!getLocalJIDs().isEmpty()) {
             sb.append("\t\tJID: ");
             String[] ids = getLocalJIDs().toArray(new String[getLocalJIDs().size()]);
-            for (String id : ids) {
+            for (String id : ids)
                 sb.append(id + " ");
-            }
             sb.append("\n");
         }
 
@@ -400,17 +389,15 @@ public class Agreement {
         if (!getRemoteGroups().isEmpty()) {
             sb.append("\t\tGroup: ");
             String[] ids = getRemoteGroups().toArray(new String[getRemoteGroups().size()]);
-            for (String id : ids) {
+            for (String id : ids)
                 sb.append(id + " ");
-            }
             sb.append("\n");
         }
         if (!getRemoteJIDs().isEmpty()) {
             sb.append("\t\tJID: ");
             String[] ids = getRemoteJIDs().toArray(new String[getRemoteJIDs().size()]);
-            for (String id : ids) {
+            for (String id : ids)
                 sb.append(id + " ");
-            }
             sb.append("\n");
         }
 
