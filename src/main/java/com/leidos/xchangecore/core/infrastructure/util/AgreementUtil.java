@@ -34,13 +34,15 @@ public class AgreementUtil {
      */
     public static AgreementType copyProperties(Agreement agreement) {
 
-        if (agreement == null)
+        if (agreement == null) {
             return null;
+        }
 
         final AgreementType agreementType = AgreementType.Factory.newInstance();
         agreementType.setId(agreement.getId());
-        if (agreement.getDescription() != null)
+        if (agreement.getDescription() != null) {
             agreementType.setDescription(agreement.getDescription());
+        }
 
         // copy the consumer and provider
         if (agreement.getRemoteCore() != null && agreement.getLocalCore() != null) {
@@ -51,16 +53,18 @@ public class AgreementUtil {
             principals.addNewRemoteCore();
             final IdentifierType remoteCore = IdentifierType.Factory.newInstance();
             remoteCore.setStringValue(agreement.getRemoteCore().getValue());
-            if (agreement.getRemoteCore().getLabel() != null)
+            if (agreement.getRemoteCore().getLabel() != null) {
                 remoteCore.setLabel(agreement.getRemoteCore().getLabel());
+            }
             principals.setRemoteCore(remoteCore);
 
             // add the local core
             principals.addNewLocalCore();
             final IdentifierType localCore = IdentifierType.Factory.newInstance();
             localCore.setStringValue(agreement.getLocalCore().getValue());
-            if (agreement.getLocalCore().getLabel() != null)
+            if (agreement.getLocalCore().getLabel() != null) {
                 localCore.setLabel(agreement.getLocalCore().getLabel());
+            }
             principals.setLocalCore(localCore);
 
             agreementType.setPrincipals(principals);
@@ -92,17 +96,20 @@ public class AgreementUtil {
                     final ConditionType condition = shareRule.addNewCondition();
                     final CodespaceValueType interestGroup = condition.addNewInterestGroup();
 
-                    if (rule.getInterestGroup().getLabel() != null)
+                    if (rule.getInterestGroup().getLabel() != null) {
                         interestGroup.setLabel(rule.getInterestGroup().getLabel());
-                    if (rule.getInterestGroup().getCodeSpace() != null)
+                    }
+                    if (rule.getInterestGroup().getCodeSpace() != null) {
                         interestGroup.setCodespace(rule.getInterestGroup().getCodeSpace());
-                    if (rule.getInterestGroup().getValue() != null)
+                    }
+                    if (rule.getInterestGroup().getValue() != null) {
                         interestGroup.setStringValue(rule.getInterestGroup().getValue());
+                    }
                     condition.setInterestGroup(interestGroup);
 
                     // copy extended metadata
 
-                    if (rule.getExtendedMetadata() != null && rule.getExtendedMetadata().size() > 0)
+                    if (rule.getExtendedMetadata() != null && rule.getExtendedMetadata().size() > 0) {
                         for (final ExtendedMetadata em : rule.getExtendedMetadata()) {
                             final ExtendedMetadataType extendedMetadata = condition.addNewExtendedMetadata();
                             extendedMetadata.setCode(em.getCode());
@@ -116,6 +123,7 @@ public class AgreementUtil {
                                          extendedMetadata.getStringValue());
                              */
                         }
+                    }
 
                     if (rule.getRemoteCoreProximity() != null) {
                         /*
@@ -137,10 +145,12 @@ public class AgreementUtil {
 
                     for (final com.leidos.xchangecore.core.infrastructure.model.CodeSpaceValueType workProduct : rule.getWorkProducts()) {
                         final CodespaceValueType workProductType = workProducts.addNewType();
-                        if (workProduct.getCodeSpace() != null)
+                        if (workProduct.getCodeSpace() != null) {
                             workProductType.setCodespace(workProduct.getCodeSpace());
-                        if (workProduct.getLabel() != null)
+                        }
+                        if (workProduct.getLabel() != null) {
                             workProductType.setLabel(workProduct.getLabel());
+                        }
                         workProductType.setStringValue(workProduct.getValue());
 
                     }
@@ -167,26 +177,29 @@ public class AgreementUtil {
 
     public static Set<String> getIDs(String jid, String type) {
 
-        Set<String> idSet = new HashSet<String>();
+        final Set<String> idSet = new HashSet<String>();
 
         // ignore the core part
-        int index = jid.indexOf("?");
-        if (index == -1)
+        final int index = jid.indexOf("?");
+        if (index == -1) {
             return idSet;
+        }
 
-        String jidString = jid.substring(index + 1);
+        final String jidString = jid.substring(index + 1);
 
         // separate each ids and groups
-        String[] list = jidString.split("&", -1);
-        for (String item : list) {
-            String[] parts = item.split("=");
+        final String[] list = jidString.split("&", -1);
+        for (final String item : list) {
+            final String[] parts = item.split("=");
             // if the type is not specified the continue
-            if (parts[0].equalsIgnoreCase(type) == false)
+            if (parts[0].trim().equalsIgnoreCase(type) == false) {
                 continue;
+            }
 
-            String[] ids = parts[1].split(",", -1);
-            for (String id : ids)
-                idSet.add(id);
+            final String[] ids = parts[1].split(",", -1);
+            for (final String id : ids) {
+                idSet.add(id.trim());
+            }
         }
         return idSet;
     }
