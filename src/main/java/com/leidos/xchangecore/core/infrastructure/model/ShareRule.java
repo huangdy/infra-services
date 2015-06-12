@@ -1,7 +1,5 @@
 package com.leidos.xchangecore.core.infrastructure.model;
 
-import com.leidos.xchangecore.core.infrastructure.util.AgreementUtil;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,14 +18,14 @@ import org.slf4j.LoggerFactory;
 
 /**
  * The ShareRule data model.
- * 
+ *
  * @ssdd
  */
 @Entity
 // @Embeddable
 public class ShareRule {
 
-    static Logger log = LoggerFactory.getLogger(ShareRule.class);
+    static Logger logger = LoggerFactory.getLogger(ShareRule.class);
 
     @Id
     @Column(name = "SHARE_RULE_ID")
@@ -73,11 +71,12 @@ public class ShareRule {
     @Column(name = "SHARE_ON_NO_LOC")
     private String shareOnNoLoc;
 
+    @Override
     public boolean equals(Object obj) {
 
-        ShareRule shareRuleObject = (ShareRule) obj;
+        final ShareRule shareRuleObject = (ShareRule) obj;
 
-        StringBuffer hash = new StringBuffer();
+        final StringBuffer hash = new StringBuffer();
         // Interest Group Type
         if (!("".equals(interestGroupCodeSpace) | ("".equals(interestGroupValue)))) {
             hash.append(interestGroupCodeSpace);
@@ -86,7 +85,7 @@ public class ShareRule {
 
         // Extended Metadata
         if (extendedMetadata != null) {
-            for (ExtendedMetadata data : extendedMetadata) {
+            for (final ExtendedMetadata data : extendedMetadata) {
                 hash.append(data.getCode());
                 hash.append(data.getCodespace());
                 hash.append(data.getValue());
@@ -99,7 +98,7 @@ public class ShareRule {
         }
 
         // compute share rule object hash
-        StringBuffer shareRuleObjectHash = new StringBuffer();
+        final StringBuffer shareRuleObjectHash = new StringBuffer();
         // Interest Group Type
         if (!("".equals(shareRuleObject.getInterestGroup().getCodeSpace()) | ("".equals(shareRuleObject.getInterestGroup().getValue())))) {
             shareRuleObjectHash.append(shareRuleObject.getInterestGroup().getCodeSpace());
@@ -108,7 +107,7 @@ public class ShareRule {
 
         // Extended Metadata
         if (shareRuleObject.extendedMetadata != null) {
-            for (ExtendedMetadata data : shareRuleObject.extendedMetadata) {
+            for (final ExtendedMetadata data : shareRuleObject.extendedMetadata) {
                 shareRuleObjectHash.append(data.getCode());
                 shareRuleObjectHash.append(data.getCodespace());
                 shareRuleObjectHash.append(data.getValue());
@@ -123,9 +122,90 @@ public class ShareRule {
         return (hash.equals(shareRuleObjectHash));
     }
 
+    /**
+     * Gets the agreement.
+     *
+     * @return the agreement
+     * @ssdd
+     */
+    public Agreement getAgreement() {
+
+        return agreement;
+    }
+
+    public Set<ExtendedMetadata> getExtendedMetadata() {
+
+        if (extendedMetadata == null) {
+            extendedMetadata = new HashSet<ExtendedMetadata>();
+        }
+        return extendedMetadata;
+    }
+
+    /**
+     * Gets the id.
+     *
+     * @return the id
+     * @ssdd
+     */
+    public Integer getId() {
+
+        return id;
+    }
+
+    /**
+     * Gets the interest group.
+     *
+     * @return the interest group
+     * @ssdd
+     */
+    public CodeSpaceValueType getInterestGroup() {
+
+        final CodeSpaceValueType c = new CodeSpaceValueType();
+        c.setCodeSpace(interestGroupCodeSpace);
+        c.setLabel(interestGroupLabel);
+        c.setValue(interestGroupValue);
+        return c;
+    }
+
+    public String getRemoteCoreProximity() {
+
+        return remoteCoreProximity;
+    }
+
+    /**
+     * Gets the rule id.
+     *
+     * @return the rule id
+     * @ssdd
+     */
+    public String getRuleID() {
+
+        return ruleID;
+    }
+
+    public String getShareOnNoLoc() {
+
+        return shareOnNoLoc;
+    }
+
+    /**
+     * Gets the work products.
+     *
+     * @return the work products
+     * @ssdd
+     */
+    public Set<CodeSpaceValueType> getWorkProducts() {
+
+        if (workProducts == null) {
+            workProducts = new HashSet<CodeSpaceValueType>();
+        }
+        return workProducts;
+    }
+
+    @Override
     public int hashCode() {
 
-        StringBuffer hash = new StringBuffer();
+        final StringBuffer hash = new StringBuffer();
         // Interest Group Type
         if (!("".equals(interestGroupCodeSpace) | "".equals(interestGroupValue))) {
             hash.append(interestGroupCodeSpace);
@@ -134,7 +214,7 @@ public class ShareRule {
 
         // Extended Metadata
         if (extendedMetadata != null) {
-            for (ExtendedMetadata data : extendedMetadata) {
+            for (final ExtendedMetadata data : extendedMetadata) {
                 hash.append(data.getCode());
                 hash.append(data.getCodespace());
                 hash.append(data.getValue());
@@ -150,52 +230,8 @@ public class ShareRule {
     }
 
     /**
-     * Gets the id.
-     * 
-     * @return the id
-     * @ssdd
-     */
-    public Integer getId() {
-
-        return id;
-    }
-
-    /**
-     * Sets the id.
-     * 
-     * @param id the new id
-     * @ssdd
-     */
-    public void setId(Integer id) {
-
-        this.id = id;
-    }
-
-    /**
-     * Gets the agreement.
-     * 
-     * @return the agreement
-     * @ssdd
-     */
-    public Agreement getAgreement() {
-
-        return agreement;
-    }
-
-    /**
-     * Sets the agreement.
-     * 
-     * @param agreement the new agreement
-     * @ssdd
-     */
-    public void setAgreement(Agreement agreement) {
-
-        this.agreement = agreement;
-    }
-
-    /**
      * Checks if is enabled.
-     * 
+     *
      * @return true, if is enabled
      * @ssdd
      */
@@ -205,8 +241,19 @@ public class ShareRule {
     }
 
     /**
+     * Sets the agreement.
+     *
+     * @param agreement the new agreement
+     * @ssdd
+     */
+    public void setAgreement(Agreement agreement) {
+
+        this.agreement = agreement;
+    }
+
+    /**
      * Sets the enabled.
-     * 
+     *
      * @param enabled the new enabled
      * @ssdd
      */
@@ -215,46 +262,32 @@ public class ShareRule {
         this.enabled = enabled;
     }
 
-    /**
-     * Gets the rule id.
-     * 
-     * @return the rule id
-     * @ssdd
-     */
-    public String getRuleID() {
+    public void setExtendedMetadata(Set<ExtendedMetadata> extendedMetadata) {
 
-        return ruleID;
+        logger.debug("setExtendedMetadata: count: " + extendedMetadata.size());
+        this.extendedMetadata = getExtendedMetadata();
+        this.extendedMetadata.clear();
+        for (final ExtendedMetadata em : extendedMetadata) {
+            logger.debug("setExtendedMetadata: adding " + em);
+            this.extendedMetadata.add(em);
+        }
+        logger.debug("setExtendedMetadata: added: " + this.extendedMetadata.size());
     }
 
     /**
-     * Sets the rule id.
-     * 
-     * @param ruleID the new rule id
+     * Sets the id.
+     *
+     * @param id the new id
      * @ssdd
      */
-    public void setRuleID(String ruleID) {
+    public void setId(Integer id) {
 
-        this.ruleID = ruleID;
-    }
-
-    /**
-     * Gets the interest group.
-     * 
-     * @return the interest group
-     * @ssdd
-     */
-    public CodeSpaceValueType getInterestGroup() {
-
-        CodeSpaceValueType c = new CodeSpaceValueType();
-        c.setCodeSpace(interestGroupCodeSpace);
-        c.setLabel(interestGroupLabel);
-        c.setValue(interestGroupValue);
-        return c;
+        this.id = id;
     }
 
     /**
      * Sets the interest group.
-     * 
+     *
      * @param interestGroup the new interest group
      * @ssdd
      */
@@ -265,23 +298,30 @@ public class ShareRule {
         interestGroupValue = interestGroup.getValue();
     }
 
+    public void setRemoteCoreProximity(String remoteCoreProximity) {
+
+        this.remoteCoreProximity = remoteCoreProximity;
+    }
+
     /**
-     * Gets the work products.
-     * 
-     * @return the work products
+     * Sets the rule id.
+     *
+     * @param ruleID the new rule id
      * @ssdd
      */
-    public Set<CodeSpaceValueType> getWorkProducts() {
+    public void setRuleID(String ruleID) {
 
-        if (workProducts == null) {
-            workProducts = new HashSet<CodeSpaceValueType>();
-        }
-        return workProducts;
+        this.ruleID = ruleID;
+    }
+
+    public void setShareOnNoLoc(String shareOnNoLoc) {
+
+        this.shareOnNoLoc = shareOnNoLoc;
     }
 
     /**
      * Sets the work products.
-     * 
+     *
      * @param workProducts the new work products
      * @ssdd
      */
@@ -289,48 +329,11 @@ public class ShareRule {
 
         this.workProducts = getWorkProducts();
         this.workProducts.clear();
-        for (CodeSpaceValueType workProduct : workProducts) {
+        for (final CodeSpaceValueType workProduct : workProducts) {
             // workProduct.setShareRule(this);
             this.workProducts.add(workProduct);
         }
         // this.workProducts = workProducts;
-    }
-
-    public Set<ExtendedMetadata> getExtendedMetadata() {
-
-        if (extendedMetadata == null) {
-            extendedMetadata = new HashSet<ExtendedMetadata>();
-        }
-        return extendedMetadata;
-    }
-
-    public void setExtendedMetadata(Set<ExtendedMetadata> extendedMetadata) {
-
-        this.extendedMetadata = getExtendedMetadata();
-        this.extendedMetadata.clear();
-        for (ExtendedMetadata em : extendedMetadata) {
-            this.extendedMetadata.add(em);
-        }
-    }
-
-    public String getRemoteCoreProximity() {
-
-        return remoteCoreProximity;
-    }
-
-    public void setRemoteCoreProximity(String remoteCoreProximity) {
-
-        this.remoteCoreProximity = remoteCoreProximity;
-    }
-
-    public String getShareOnNoLoc() {
-
-        return shareOnNoLoc;
-    }
-
-    public void setShareOnNoLoc(String shareOnNoLoc) {
-
-        this.shareOnNoLoc = shareOnNoLoc;
     }
 
 }

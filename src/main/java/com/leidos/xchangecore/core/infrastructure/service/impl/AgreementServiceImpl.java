@@ -136,24 +136,26 @@ implements AgreementService {
                     if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
                         interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
 
-                    logger.debug("createAgreement: extendedMetadata: ");
+                    logger.debug("createAgreement: creating extended Metadata: count: " +
+                                 shareRule.getCondition().getExtendedMetadataArray().length);
                     final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
                     if (shareRule.getCondition().getExtendedMetadataArray() != null &&
                         shareRule.getCondition().getExtendedMetadataArray().length > 0) {
-                        final ExtendedMetadata em = new ExtendedMetadata();
+                        ExtendedMetadata em = null;
                         for (int i = 0; i < shareRule.getCondition().getExtendedMetadataArray().length; i++) {
 
+                            em = new ExtendedMetadata();
                             em.setCode(shareRule.getCondition().getExtendedMetadataArray(i).getCode());
                             em.setCodespace(shareRule.getCondition().getExtendedMetadataArray(i).getCodespace());
                             em.setLabel(shareRule.getCondition().getExtendedMetadataArray(i).getLabel());
                             em.setValue(shareRule.getCondition().getExtendedMetadataArray(i).getStringValue());
 
-                            logger.debug("createAgreement: create ExtendedMetadata: " + em);
+                            // logger.debug("createAgreement: create ExtendedMetadata: " + em);
 
                             extendedMetadataSet.add(em);
                         }
                         rule.setExtendedMetadata(extendedMetadataSet);
-                        logger.debug("createAgreement: added extendedmetadata to the rule: size = " +
+                        logger.debug("createAgreement: added extendedmetadata to the rule: count: " +
                                      rule.getExtendedMetadata().size());
                     } else
                         logger.debug("createAgreement: no extended metadata in share rule");
@@ -169,7 +171,8 @@ implements AgreementService {
                         logger.debug("createAgreement: Share Rule has share on no location - " +
                                      shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc());
                         rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
-                        rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
+                        rule.setShareOnNoLoc(Boolean.valueOf(
+                            shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
                     } else
                         logger.debug("createAgreement: no remote core proximity in share rule");
 
@@ -539,9 +542,7 @@ implements AgreementService {
         final String urn = getConfigurationService().getServiceNameURN(AGREEMENT_SERVICE_NAME);
         final WorkProductTypeListType publishedProducts = WorkProductTypeListType.Factory.newInstance();
         final WorkProductTypeListType subscribedProducts = WorkProductTypeListType.Factory.newInstance();
-        directoryService.registerUICDSService(urn,
-            AGREEMENT_SERVICE_NAME,
-            publishedProducts,
+        directoryService.registerUICDSService(urn, AGREEMENT_SERVICE_NAME, publishedProducts,
             subscribedProducts);
         sendInitialAgreementRoster();
         logger.debug("systemInitializedHandler: ... done ...");
@@ -602,23 +603,30 @@ implements AgreementService {
                 if (shareRule.getCondition().getInterestGroup().getStringValue() != null)
                     interestGroup.setValue(shareRule.getCondition().getInterestGroup().getStringValue());
 
-                logger.debug("checking for extendedMetadata");
+                logger.debug("updateAgreement: adding extended metadata: count: " +
+                             shareRule.getCondition().getExtendedMetadataArray().length);
+
                 final Set<ExtendedMetadata> extendedMetadataSet = new HashSet<ExtendedMetadata>();
+
                 if (shareRule.getCondition().getExtendedMetadataArray() != null &&
                     shareRule.getCondition().getExtendedMetadataArray().length > 0) {
-                    logger.debug("Admitted to some extendedMetadata");
-                    final ExtendedMetadata em = new ExtendedMetadata();
+
+                    ExtendedMetadata em = null;
                     for (int i = 0; i < shareRule.getCondition().getExtendedMetadataArray().length; i++) {
-                        logger.debug("Trying to recreate it. i=" + i);
+
+                        em = new ExtendedMetadata();
                         em.setCode(shareRule.getCondition().getExtendedMetadataArray(i).getCode());
                         em.setCodespace(shareRule.getCondition().getExtendedMetadataArray(i).getCodespace());
                         em.setLabel(shareRule.getCondition().getExtendedMetadataArray(i).getLabel());
                         em.setValue(shareRule.getCondition().getExtendedMetadataArray(i).getStringValue());
 
+                        // logger.debug("updateAgreement: adding: " + em);
                         extendedMetadataSet.add(em);
                     }
+                    logger.debug("updateAgreement: added extended metadata: count: " +
+                                 extendedMetadataSet.size());
                     rule.setExtendedMetadata(extendedMetadataSet);
-                    logger.debug("Added extendedmetadata to the rule: size=" +
+                    logger.debug("updateAgreement: rule's extended metadata: " +
                         rule.getExtendedMetadata().size());
                 }
 
@@ -629,7 +637,8 @@ implements AgreementService {
                         throw new SOAPServiceException(message);
                     }
                     rule.setRemoteCoreProximity(shareRule.getCondition().getRemoteCoreProximity().getStringValue());
-                    rule.setShareOnNoLoc(Boolean.valueOf(shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
+                    rule.setShareOnNoLoc(Boolean.valueOf(
+                        shareRule.getCondition().getRemoteCoreProximity().getShareOnNoLoc()).toString());
                 }
 
                 rule.setInterestGroup(interestGroup);

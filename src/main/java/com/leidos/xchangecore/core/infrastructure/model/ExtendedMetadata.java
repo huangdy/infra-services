@@ -21,14 +21,10 @@ import org.hibernate.search.annotations.Index;
  */
 
 @Entity
-// @Table(name = "EXTENDED_METADATA")
 public class ExtendedMetadata
-implements Serializable {
+    implements Serializable {
 
-    /**
-     *
-     */
-    private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 8100093131894050477L;
 
     @Id
     @Column(name = "ID")
@@ -51,7 +47,7 @@ implements Serializable {
     @Field(index = Index.TOKENIZED)
     private String value;
 
-    public void ExtendedMetadata() {
+    public ExtendedMetadata() {
 
         codespace = "";
         code = "";
@@ -77,6 +73,12 @@ implements Serializable {
     public String getValue() {
 
         return value;
+    }
+
+    @Override
+    public int hashCode() {
+
+        return code.hashCode() + codespace.hashCode() + label.hashCode() + value.hashCode();
     }
 
     public void setCode(String code) {
