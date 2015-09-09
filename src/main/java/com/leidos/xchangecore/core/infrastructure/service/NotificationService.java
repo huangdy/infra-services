@@ -11,7 +11,7 @@ import com.leidos.xchangecore.core.infrastructure.exceptions.NullSubscriberExcep
 import com.saic.precis.x2009.x06.base.IdentificationType;
 
 /**
- * Provides WS-Notification v1.3 services for UICDS services.
+ * Provides WS-Notification v1.3 services for XchangeCore services.
  * 
  * @author Nathan Lewnes
  * @ssdd

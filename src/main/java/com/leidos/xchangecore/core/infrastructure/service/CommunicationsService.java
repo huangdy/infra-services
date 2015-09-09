@@ -9,7 +9,7 @@ import com.leidos.xchangecore.core.infrastructure.exceptions.RemoteCoreUnknownEx
 import com.leidos.xchangecore.core.infrastructure.messages.Core2CoreMessage;
 
 /**
- * The CommunicationsService interface provides the mechanism for UICDS services to send
+ * The CommunicationsService interface provides the mechanism for XchangeCore services to send
  * messages to a remote core.  The messages are handled by the CommunicationsService
  * at the receiver and dispatched to the correct message handler based on message type.
  *
@@ -45,7 +45,7 @@ public interface CommunicationsService {
      *
      * @param message The string message
      * @param messageType The type of message
-     * @param hostName JID of the receiving core (e.g. uicds@uicds-test1.saic.com)
+     * @param hostName JID of the receiving core (e.g. XchangeCore@XchangeCore-test1.leidos.com)
      * @throws LocalCoreNotOnlineException
      * @throws NoShareRuleInAgreementException
      * @throws NoShareAgreementException

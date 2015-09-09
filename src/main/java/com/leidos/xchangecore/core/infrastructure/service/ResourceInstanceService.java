@@ -10,8 +10,8 @@ import com.leidos.xchangecore.core.infrastructure.model.ResourceInstanceModel;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * The UICDS Resource Instance service provides a means to create, discover, and
- * update information about UICDS resource instances.
+ * The XchangeCore Resource Instance service provides a means to create, discover, and
+ * update information about XchangeCore resource instances.
  * 
  * @author Andre Bonner
  * @since 1.0
@@ -38,7 +38,7 @@ public interface ResourceInstanceService {
      * 
      * @param id UICDS identifier - should be the same name as that used for authentication.
      * @param localResourceID - Local system identifier - identifier used by the local system for this resource
-     * @param resourceProfileID - Resource Profile identifier - UICDS resource profile this application will represent.
+     * @param resourceProfileID - Resource Profile identifier - XchangeCore resource profile this application will represent.
      * @return the resource instance model
      * @ssdd
      */
@@ -52,7 +52,7 @@ public interface ResourceInstanceService {
      * 
      * @param id UICDS identifier - should be the same name as that used for authentication.
      * @param localResourceID - Local system identifier - identifier used by the local system for this resource
-     * @param resourceProfileID - Resource Profile identifier - UICDS resource profile this application will represent.
+     * @param resourceProfileID - Resource Profile identifier - XchangeCore resource profile this application will represent.
      * @return the resource instance model
      * @ssdd
      */

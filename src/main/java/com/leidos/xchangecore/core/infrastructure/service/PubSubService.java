@@ -15,7 +15,7 @@ import com.leidos.xchangecore.core.infrastructure.messages.ProductChangeNotifica
 import com.leidos.xchangecore.core.infrastructure.messages.ProfileNotificationMessage;
 
 /**
- * The PubSubService interface provides the ability for UICDS services to subscribe work products.
+ * The PubSubService interface provides the ability for XchangeCore services to subscribe work products.
  * Two types of subscription are provided:
  *
  * <ul>

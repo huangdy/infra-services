@@ -17,7 +17,7 @@ import com.leidos.xchangecore.core.infrastructure.util.NodeRenderer;
 import com.leidos.xchangecore.core.infrastructure.util.WorkProductView;
 
 /**
- * The Search Service provides UICDS clients with services to discover and
+ * The Search Service provides XchangeCore clients with services to discover and
  * access work products using OpenSearch enabled feeds.
  *
  * The Search Service accepts queries in the following format:
@@ -122,7 +122,7 @@ import com.leidos.xchangecore.core.infrastructure.util.WorkProductView;
  * </tr>
  * <tr>
  * <td width="20%">xml</td>
- * <td>UICDS Work Product Format (UCore 2.0 DataItemPackage)</td>
+ * <td>XchangeCore Work Product Format (UCore 2.0 DataItemPackage)</td>
  * </tr>
  * </tbody>
  * </table>

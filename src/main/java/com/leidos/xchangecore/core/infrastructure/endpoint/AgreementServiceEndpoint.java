@@ -27,8 +27,8 @@ import com.leidos.xchangecore.core.infrastructure.service.AgreementService;
 import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
 
 /**
- * The UICDS Agreement Service provides a means to define information sharing agreements between
- * UICDS Cores. These information sharing agreements define the terms and conditions under which
+ * The XchangeCore Agreement Service provides a means to define information sharing agreements between
+ * XchangeCore Cores. These information sharing agreements define the terms and conditions under which
  * agencies will share information. These agreements must be mutually established prior to sharing
  * data. Once an agreement is in place the core servers will be allowed to share incidents.
  * <p/>
@@ -38,7 +38,7 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * An instance of an information sharing agreement specifies the unique identity of the member
  * parties, the conditions for sharing of an incident, and the scope of the agreement. Each party to
  * the agreement is represented by the unique identity of their core which is the Jabber Identifier
- * assigned to their core. In general, this is of the form uicds@hostname.domain.name. The share
+ * assigned to their core. In general, this is of the form XchangeCore@hostname.domain.name. The share
  * conditions are based on the type of incident as designated in the ActivityCategoryText of the
  * incident document. The following examples of agreements show the different ways that sharing can
  * be specified.
@@ -50,8 +50,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
- *       &lt;as:LocalCore&gt;uicds@core.domain.com&lt;/as:LocalCore&gt;
- *       &lt;as:RemoteCore&gt;uicds@core.otherdomain.com&lt;/as:RemoteCore&gt;
+ *       &lt;as:LocalCore&gt;XchangeCore@core.domain.com&lt;/as:LocalCore&gt;
+ *       &lt;as:RemoteCore&gt;XchangeCore@core.otherdomain.com&lt;/as:RemoteCore&gt;
  *     &lt;/as:Principals&gt;
  *     &lt;as:ShareRules enabled=&quot;true&quot; xsi:nil=&quot;true&quot;/&gt;
  *   &lt;/as:Agreement&gt;
@@ -62,8 +62,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
- *       &lt;as:LocalCore&gt;uicds@core.domain.com&lt;/as:LocalCore&gt;
- *       &lt;as:RemoteCore&gt;uicds@core.otherdomain.com&lt;/as:RemoteCore&gt;
+ *       &lt;as:LocalCore&gt;XchangeCore@core.domain.com&lt;/as:LocalCore&gt;
+ *       &lt;as:RemoteCore&gt;XchangeCore@core.otherdomain.com&lt;/as:RemoteCore&gt;
  *     &lt;/as:Principals&gt;
  *     &lt;as:ShareRules enabled=&quot;true&quot;&gt;
  *       &lt;as:ShareRule enabled=&quot;false&quot; id=&quot;rule1&quot;&gt;
@@ -82,8 +82,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
- *       &lt;as:LocalCore&gt;uicds@core.domain.com&lt;/as:LocalCore&gt;
- *       &lt;as:RemoteCore&gt;uicds@core.otherdomain.com&lt;/as:RemoteCore&gt;
+ *       &lt;as:LocalCore&gt;XchangeCore@core.domain.com&lt;/as:LocalCore&gt;
+ *       &lt;as:RemoteCore&gt;XchangeCore@core.otherdomain.com&lt;/as:RemoteCore&gt;
  *     &lt;/as:Principals&gt;
  *     &lt;as:ShareRules enabled=&quot;false&quot; xsi:nil=&quot;true&quot;/&gt;
  *   &lt;/as:Agreement&gt;
@@ -94,8 +94,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
- *       &lt;as:LocalCore&gt;uicds@core.domain.com&lt;/as:LocalCore&gt;
- *       &lt;as:RemoteCore&gt;uicds@core.otherdomain.com&lt;/as:RemoteCore&gt;
+ *       &lt;as:LocalCore&gt;XchangeCore@core.domain.com&lt;/as:LocalCore&gt;
+ *       &lt;as:RemoteCore&gt;XchangeCore@core.otherdomain.com&lt;/as:RemoteCore&gt;
  *     &lt;/as:Principals&gt;
  *     &lt;as:ShareRules enabled=&quot;true&quot;&gt;
  *       &lt;as:ShareRule enabled=&quot;true&quot; id=&quot;idvalue2&quot;&gt;
@@ -113,8 +113,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
  * <pre>
  *   &lt;as:Agreement&gt;
  *     &lt;as:Principals&gt;
- *       &lt;as:LocalCore&gt;uicds@core.domain.com&lt;/as:LocalCore&gt;
- *       &lt;as:RemoteCore&gt;uicds@core.otherdomain.com&lt;/as:RemoteCore&gt;
+ *       &lt;as:LocalCore&gt;XchangeCore@core.domain.com&lt;/as:LocalCore&gt;
+ *       &lt;as:RemoteCore&gt;XchangeCore@core.otherdomain.com&lt;/as:RemoteCore&gt;
  *     &lt;/as:Principals&gt;
  *     &lt;as:ShareRules enabled=&quot;true&quot;&gt;
  *       &lt;as:ShareRule enabled=&quot;false&quot; id=&quot;idvalue0&quot;&gt;

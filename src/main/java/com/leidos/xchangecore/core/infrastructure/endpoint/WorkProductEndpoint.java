@@ -42,7 +42,7 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  * The Work Product Service provides operations to manage work products and their relationships to
  * Interest Groups (i.e. incidents). The services provided are:
  * <ul>
- * <li>Publish a work product of any type that is not managed by the UICDS product management
+ * <li>Publish a work product of any type that is not managed by the XchangeCore product management
  * services</li>
  * <li>Get a work product</li>
  * <li>Close a work product (mark it as inactive and unable to be updated)</li>
@@ -51,15 +51,15 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  * <li>Get a list of work product associated with an interest group Id</li>
  * </ul>
  * <p>
- * UICDS work products are defined as a UCore Data Information Package (DIP).
+ * XchangeCore work products are defined as a UCore Data Information Package (DIP).
  * <p>
  * <img src="doc-files/WorkProduct.png" />
  * <p>
  * <!-- NEWPAGE -->
  * <p>
- * A UICDS work product contains metadata and a structured payload. The metadata elements are
- * UICDS-generated data, are immutable, and are defined as substitutable elements for a UCore
- * PackageMetadataExtension element. The two UICDS metadata elements are:
+ * A XchangeCore work product contains metadata and a structured payload. The metadata elements are
+ * XchangeCore-generated data, are immutable, and are defined as substitutable elements for a UCore
+ * PackageMetadataExtension element. The two XchangeCore metadata elements are:
  * <ul>
  * <li>Work Product Identification
  * <li>Work Product Properties
@@ -130,8 +130,8 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  * Note that any work products of Binary, Link, or Any XML types should also create a UCore digest
  * element to summarize the contents of the work product if applicable.
  * <p>
- * UICDS does not currently use the AttachmentLink, RenderingInstructions, or Narrative elements but
- * clients are free to add data to these elements and UICDS will preserve this data.
+ * XchangeCore does not currently use the AttachmentLink, RenderingInstructions, or Narrative elements but
+ * clients are free to add data to these elements and XchangeCore will preserve this data.
  * <p>
  * A WorkProductProcessingStatus will be returned for publish and update requests. The
  * WorkProductProcessingStatus is defined as follows:

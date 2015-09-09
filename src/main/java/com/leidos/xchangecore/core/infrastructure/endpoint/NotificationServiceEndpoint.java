@@ -29,9 +29,9 @@ import com.saic.precis.x2009.x06.base.IdentificationListType;
 import com.saic.precis.x2009.x06.base.IdentificationType;
 
 /**
- * The UICDS system Notification Service provides a WS-Notification (WSN) compliant service
- * interface to provide push and pull based notifications to UICDS Notification Consumers (UICDS
- * clients). The situations that UICDS may notify Notification Consumers about are:
+ * The XchangeCore system Notification Service provides a WS-Notification (WSN) compliant service
+ * interface to provide push and pull based notifications to XchangeCore Notification Consumers (XchangeCore
+ * clients). The situations that XchangeCore may notify Notification Consumers about are:
  * <ul>
  * <li>Changes to work products that an applied resource profile has expressed interest in
  * <li>Domain specific messages
@@ -40,19 +40,19 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * <li>Changes to agreements
  * </ul>
  * <p>
- * The UICDS core will subscribe a UICDS client to the topics specified in the resource profile that
- * is applied to a UICDS's resource instance. Thus the UICDS core acts as a Subscriber as defined in
- * WSN. The UICDS core does not supply a NotificationProducer subscribe operation or a
+ * The XchangeCore core will subscribe a XchangeCore client to the topics specified in the resource profile that
+ * is applied to a XchangeCore's resource instance. Thus the XchangeCore core acts as a Subscriber as defined in
+ * WSN. The XchangeCore core does not supply a NotificationProducer subscribe operation or a
  * SubscriptionManager interface for clients to directly subscribe or manage subscriptions. All
  * subscription changes should be initiated by manipulating the appropriate resource profile.
  * <p>
- * A single pull point will be created by the UICDS core for each UICDS resource instance when it is
+ * A single pull point will be created by the XchangeCore core for each XchangeCore resource instance when it is
  * created. The URL for that pull point will be contained in the resource instance data. Clients may
  * then retrieve their resource instance to obtain the pull point address. The pull point only
  * implements the GetMessages operation of the PullPoint interface not the DestroyPullPoint
  * operation. Pull points will be destroyed if the resource instance is unregistered through the
- * Resource Instance Service. The UICDS notification service also does not implement the
- * CreatePullPoint interface because UICDS manages pullpoints through resource instance creation.
+ * Resource Instance Service. The XchangeCore notification service also does not implement the
+ * CreatePullPoint interface because XchangeCore manages pullpoints through resource instance creation.
  * 
  * An additional operation, GetMatchingMessages is provided to get a list of the work products that
  * match the input resource instance's current subscriptions. This method allows an endpoint to get
@@ -60,7 +60,7 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * current work products were created or updated. Only the latest notification per work product will
  * be included in the list.
  * <p>
- * A UICDS client can become a push client by setting the endpoint for the resource instance
+ * A XchangeCore client can become a push client by setting the endpoint for the resource instance
  * associated with the client using the updateEndpoint operation of the Resource Instance Service.
  * The endpoint must implement the WSN Notify interface or be an XMPP client. WSN Notify endpoints
  * should be an http url to the service. XMPP clients should be of the form xmpp:<JID> (i.e.
@@ -70,16 +70,16 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * summary of the work product type, the name of the associated incident, who updated it, and when.
  * The full notification will be a sub-element of the XMPP message element.
  * <p>
- * Interests in the UICDS resource profiles are expressed using the WS-Topics Full Topic Expression
+ * Interests in the XchangeCore resource profiles are expressed using the WS-Topics Full Topic Expression
  * Language. Notifications for domain specific work products such as Alerts, Incidents, and Maps in
  * the Emergency Management domain may also be subscribed to in this manner.
  * 
- * The base set of topics in the UICDS TopicSpace are:
+ * The base set of topics in the XchangeCore TopicSpace are:
  * <ul>
  * <li>profile
  * <li>agreement
  * <li>workproduct
- * <li>specific UICDS work product types as defined in the domain's services
+ * <li>specific XchangeCore work product types as defined in the domain's services
  * </ul>
  * 
  * The following are examples of TopicExpressions that can be used in profiles:
@@ -106,7 +106,7 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * <li>workproduct/98765
  * </ul>
  * Notification of all Alert work products regardless of what incident they are associated with.
- * This pattern can be used for any work product type that any of the UICDS domain services produce
+ * This pattern can be used for any work product type that any of the XchangeCore domain services produce
  * or that clients submit as direct work products.
  * <ul>
  * <li>alert</li>
@@ -124,7 +124,7 @@ import com.saic.precis.x2009.x06.base.IdentificationType;
  * </ul>
  * Notification about changes to an agreement for the named core:
  * <ul>
- * <li>agreement/uicds@other.core.org
+ * <li>agreement/XchangeCore@other.core.org
  * </ul>
  * <p>
  * 

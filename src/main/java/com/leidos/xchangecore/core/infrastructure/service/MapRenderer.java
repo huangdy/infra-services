@@ -38,7 +38,7 @@ import com.vividsolutions.jts.geom.Envelope;
  * final image
  * 
  * @author Patrick Neal - Image Matters, LLC
- * @package com.saic.dctd.uicds.core.service
+ * @package com.leidos.xchangecore.core.infrastructure.service
  * @created Nov 24, 2008
  * @ssdd
  */

@@ -32,7 +32,7 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * A UICDS resource instance represents a resource that is capable of receiving notifications.
+ * A XchangeCore resource instance represents a resource that is capable of receiving notifications.
  * Resource instances are maintained in a hibernate model.
  *
  * @author Andre Bonner
@@ -138,7 +138,7 @@ public class ResourceInstanceServiceImpl
                                          IdentifierType resourceProfileID) {
 
         // Applications can check in with or without a profile. Checking in with a profile shows how
-        // an application checks into UICDS to enable it to start receiving notifications. This
+        // an application checks into XchangeCore to enable it to start receiving notifications. This
         // diagram represents an application that is designed to monitor the core. It is probably
         // going to have interests in all new incidents and alerts. This application's profile is
         // created by an administrative GUI delivered with the core. All Resource Profiles will be

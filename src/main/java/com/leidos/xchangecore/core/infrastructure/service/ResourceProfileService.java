@@ -9,8 +9,8 @@ import com.leidos.xchangecore.core.infrastructure.model.ResourceProfileModel;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * The UICDS Resource Profile Management Service provides a means to create,
- * discover, and update information about UICDS Resource Profiles.
+ * The XchangeCore Resource Profile Management Service provides a means to create,
+ * discover, and update information about XchangeCore Resource Profiles.
  * 
  * @author Andre Bonner
  * @since 1.0
@@ -22,7 +22,7 @@ public interface ResourceProfileService {
     public static final String RESOURCEPROFILE_SERVICE_NAME = "ResourceProfileService";
 
     /**
-     * Creates a new profile for a UICDS entity
+     * Creates a new profile for a XchangeCore entity
      * 
      * @param request
      * @return the resource profile model
@@ -47,7 +47,7 @@ public interface ResourceProfileService {
     public void deleteProfile(IdentifierType profileID);
 
     /**
-     * Returns the profile associated with a UICDS entity
+     * Returns the profile associated with a XchangeCore entity
      * 
      * @param profileID the profile id
      * 

@@ -44,10 +44,10 @@ import com.leidos.xchangecore.core.infrastructure.util.ServletUtil;
 import com.leidos.xchangecore.core.infrastructure.util.WorkProductHelper;
 
 /**
- * The Directory Service allows UICDS clients to retrieve information on common data sources, common
+ * The Directory Service allows XchangeCore clients to retrieve information on common data sources, common
  * tools, and services available on this core installation. The following information is available:
  * <ul>
- * <li>UICDS Cores that have Information Sharing Agreements
+ * <li>XchangeCore Cores that have Information Sharing Agreements
  * <li>Available services
  * <li>Available external tools
  * <li>Available external data sources
@@ -87,7 +87,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Retrieves a list of incidents that are active in the UICDS core.
+     * Retrieves a list of incidents that are active in the XchangeCore core.
      * 
      * @param GetIncidentListRequestDocument
      * 
@@ -145,7 +145,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Retrieves a list of cores, their addresses, and online status . The list of UICDS cores
+     * Retrieves a list of cores, their addresses, and online status . The list of XchangeCore cores
      * contains entries for each core with which this core has agreements along with status
      * information.<BR>
      * 
@@ -170,7 +170,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Retrieves a list of registered external data sources that have registered with the UICDS
+     * Retrieves a list of registered external data sources that have registered with the XchangeCore
      * core.
      * 
      * @param GetExternalDataSourceListRequestDocument
@@ -196,7 +196,7 @@ public class DirectoryServiceEndpoint
 
     /**
      * Retrieves a list of external tools and their WPS interface URLs that are registered with the
-     * UICDS core.
+     * XchangeCore core.
      * 
      * @param GetExternalToolListRequestDocument
      * 
@@ -220,7 +220,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Retrieves a list of sensors that are registered with the UICDS core.
+     * Retrieves a list of sensors that are registered with the XchangeCore core.
      * 
      * @param GetSensorListRequestDocument
      * 
@@ -242,7 +242,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Retrieves a list of registered services that are registered with the UICDS core.
+     * Retrieves a list of registered services that are registered with the XchangeCore core.
      * 
      * @param GetServiceListRequestDocument
      * 
@@ -265,7 +265,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Registers an external data source that implements the Open Search interface with the UICDS
+     * Registers an external data source that implements the Open Search interface with the XchangeCore
      * core.
      * 
      * @param RegisterExternalDataSourceRequestDocument
@@ -286,7 +286,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Registers an external tool that implements the WPS interface with the UICDS core.
+     * Registers an external tool that implements the WPS interface with the XchangeCore core.
      * 
      * @param RegisterExternalToolRequestDocument
      * 
@@ -312,7 +312,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Registers a UICDS service with the UICDS core.
+     * Registers a XchangeCore service with the XchangeCore core.
      * 
      * @param RegisterUICDSServiceRequestDocument
      * 
@@ -393,7 +393,7 @@ public class DirectoryServiceEndpoint
     }
 
     /**
-     * Unregisters a UICDS service.
+     * Unregisters a XchangeCore service.
      * 
      * @param UnregisterUICDSServiceRequestDocument
      * 

@@ -12,8 +12,8 @@ import com.leidos.xchangecore.core.infrastructure.messages.ProductToInterestGrou
 import com.leidos.xchangecore.core.infrastructure.messages.PublishProductMessage;
 
 /**
- * The CommunicationsInterestGroupSharingService interface provides the ability for UICDS services
- * to share an interest group with other cores. This interface should be implemented by UICDS
+ * The CommunicationsInterestGroupSharingService interface provides the ability for XchangeCore services
+ * to share an interest group with other cores. This interface should be implemented by XchangeCore
  * services that manage interest groups.
  *
  * @author Aruna Hau

@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.leidos.xchangecore.core.infrastructure.messages.ProductChangeNotificationMessage;
 
 /**
- * The PubSubNotificationService interface provides the ability for UICDS services to be notified
+ * The PubSubNotificationService interface provides the ability for XchangeCore services to be notified
  * about work products being published.
  *
  * @author Aruna Hau
@@ -17,7 +17,7 @@ import com.leidos.xchangecore.core.infrastructure.messages.ProductChangeNotifica
 public interface PubSubNotificationService {
 
     /**
-     * Provides the subscriber name, for example, the UICDS service name.
+     * Provides the subscriber name, for example, the XchangeCore service name.
      *
      * @return service name
      * @ssdd

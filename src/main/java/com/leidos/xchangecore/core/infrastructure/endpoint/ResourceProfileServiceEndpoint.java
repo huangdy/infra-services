@@ -38,8 +38,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * The UICDS Resource Profile Management Service provides a means to create, discover, and update
- * UICDS Resource Profiles. UICDS resource profiles contain resource typing information and interest
+ * The XchangeCore Resource Profile Management Service provides a means to create, discover, and update
+ * XchangeCore Resource Profiles. XchangeCore resource profiles contain resource typing information and interest
  * expressions for notifications that can be applied to resource instances. The resource profiles
  * generally represent a role that a potential resource instance will fulfill with respect to a
  * particular instantiation of an Interest Group (i.e. incident).
@@ -74,7 +74,7 @@ import com.saic.precis.x2009.x06.base.IdentifierType;
  * Resource Profile interests are expressed as topic expressions as defined in the WS-Notification
  * 1.3 specification. See the
  * {@link com.leidos.xchangecore.core.infrastructure.endpoint.NotificationServiceEndpoint} for details on
- * how topic expressions can be formed to express interests in UICDS work products.
+ * how topic expressions can be formed to express interests in XchangeCore work products.
  * <p>
  * 
  * @author William Summers

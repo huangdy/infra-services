@@ -89,8 +89,7 @@ public class WorkProductServiceImpl
 
         // figure out whether this product associate to an interest group or not
         // if it's associated with an IG then check whether this core owns it.
-        // TODO - check with Aruna whether there is anything needs to be done at
-        // InterestGroupManagementComponent
+
         final Set<String> igIDSet = product.getAssociatedInterestGroupIDs();
         boolean isOwner = false;
         if ((igIDSet != null) && (igIDSet.size() > 0)) {
@@ -172,8 +171,7 @@ public class WorkProductServiceImpl
 
         // figure out whether this product associate to an interest group or not
         // if it's associated with an IG then check whether this core owns it.
-        // TODO - check with Aruna whether there is anything needs to be done at
-        // InterestGroupManagementComponent
+
         final Set<String> igIDSet = product.getAssociatedInterestGroupIDs();
         boolean isOwner = false;
 

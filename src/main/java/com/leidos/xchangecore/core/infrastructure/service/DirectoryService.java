@@ -64,7 +64,7 @@ public interface DirectoryService {
     public CoreConfigListType getCoreList();
 
     /**
-     * Retrieves the name of local UICDS core
+     * Retrieves the name of local XchangeCore core
      *
      * @return coreName: String
      * @ssdd
@@ -72,7 +72,7 @@ public interface DirectoryService {
     public String getCoreName();
 
     /**
-     * Retrieves a list of incidents that are active in the UICDS core.
+     * Retrieves a list of incidents that are active in the XchangeCore core.
      *
      * @return list of incidents
      * @see IncidentInfoListType
@@ -91,7 +91,7 @@ public interface DirectoryService {
 
     /**
      * Retrieves a list of external tools and their WPS interface URLs that are registered with the
-     * UICDS core.
+     * XchangeCore core.
      *
      * @param coreName String
      * @return list of external tools
@@ -101,7 +101,7 @@ public interface DirectoryService {
     public ExternalToolConfigListType getExternalToolList(String coreName);
 
     /**
-     * Retrieves a list of incidents that are active in the UICDS core.
+     * Retrieves a list of incidents that are active in the XchangeCore core.
      *
      * @return list of incidents
      * @see IncidentInfoListType
@@ -123,7 +123,7 @@ public interface DirectoryService {
     public WorkProductTypeListType getPublishedProductTypeList();
 
     /**
-     * Retrieves a list of services that are registered with the UICDS core.
+     * Retrieves a list of services that are registered with the XchangeCore core.
      *
      * @param coreName
      * @return list of services
@@ -133,7 +133,7 @@ public interface DirectoryService {
     public ServiceConfigListType getServiceList(String coreName);
 
     /**
-     * Returns the name of the UICDS service which published a given work product type
+     * Returns the name of the XchangeCore service which published a given work product type
      *
      * @param publishedProductType the published product type
      * @return service name - the service name
@@ -146,7 +146,7 @@ public interface DirectoryService {
         throws InvalidProductTypeException;
 
     /**
-     * Retrieves a list of sensors that are registered with the UICDS core.
+     * Retrieves a list of sensors that are registered with the XchangeCore core.
      *
      * @return list of sensors
      * @see SOSConfigListType
@@ -166,7 +166,7 @@ public interface DirectoryService {
     boolean isRemoteCoreOnline(String remoteJID);
 
     /**
-     * Registers an external data source that implements the Open Search interface with UICDS.
+     * Registers an external data source that implements the Open Search interface with XchangeCore.
      *
      * @param urn the URL for the external data source
      * @ssdd
@@ -174,7 +174,7 @@ public interface DirectoryService {
     public void registerExternalDataSource(String urn);
 
     /**
-     * Registers an external tool that implements the WPS interface with UICDS.
+     * Registers an external tool that implements the WPS interface with XchangeCore.
      *
      * @param urn the URL for the external tools
      * @param toolName the tool name
@@ -199,7 +199,7 @@ public interface DirectoryService {
     public void registerSOS(String sensorID, String sosURN);
 
     /**
-     * Registers a UICDS service.
+     * Registers a XchangeCore service.
      *
      * @param urn the URL for the service
      * @param serviceName the service name

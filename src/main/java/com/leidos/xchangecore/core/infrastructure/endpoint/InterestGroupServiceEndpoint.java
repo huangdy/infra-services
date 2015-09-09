@@ -37,14 +37,14 @@ import org.uicds.interestGroupService.UpdateInterestGroupResponseDocument;
 import org.uicds.workProductService.WorkProductListDocument.WorkProductList;
 
 /**
- * The Interest Group Service allows clients to manage UICDS Interest Group. It includes services
+ * The Interest Group Service allows clients to manage XchangeCore Interest Group. It includes services
  * to:
  * <ul>
  * <li>create an interest group</li>
  * <li>create an incident from a CAP version 1.1 alert document</li>
  * <li>get the interest group restricted document </li>
  * <li>update information about an interest group</li>
- * <li>share the interest group with other UICDS cores</li>
+ * <li>share the interest group with other XchangeCore cores</li>
  * <li>close an interest group</li>
  * <li>archive an interest group</li>
  * </ul>

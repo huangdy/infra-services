@@ -36,8 +36,8 @@ import com.leidos.xchangecore.core.infrastructure.util.ServiceNamespaces;
 import com.saic.precis.x2009.x06.base.IdentifierType;
 
 /**
- * The UICDS Resource Instance service provides a means to create, discover, update, and remove
- * UICDS resource instances. A UICDS resource instance represents a resource that is capable of
+ * The XchangeCore Resource Instance service provides a means to create, discover, update, and remove
+ * XchangeCore resource instances. A XchangeCore resource instance represents a resource that is capable of
  * receiving notifications as described in
  * {@link com.leidos.xchangecore.core.infrastructure.endpoint.NotificationServiceEndpoint}. The notification
  * interests for a resource instance are expressed as resource profiles which represent a role that
@@ -48,8 +48,8 @@ import com.saic.precis.x2009.x06.base.IdentifierType;
  * <p>
  * <!-- NEWPAGE -->
  * <p>
- * Each UICDS resource instance is represented within UICDS by an identifier which is unique across
- * UICDS cores and has the following form:
+ * Each XchangeCore resource instance is represented within XchangeCore by an identifier which is unique across
+ * XchangeCore cores and has the following form:
  * <p>
  * instanceID@coreID where
  * <ul>
