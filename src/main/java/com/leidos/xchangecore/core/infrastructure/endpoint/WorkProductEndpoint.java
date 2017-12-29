@@ -168,10 +168,9 @@ import com.saic.precis.x2009.x06.structures.WorkProductDocument;
  * 
  */
 @Endpoint
-public class WorkProductEndpoint
-    implements ServiceNamespaces {
+public class WorkProductEndpoint implements ServiceNamespaces {
 
-    private static Logger log = LoggerFactory.getLogger(WorkProductEndpoint.class);
+    private static Logger logger = LoggerFactory.getLogger(WorkProductEndpoint.class);
 
     @Autowired
     private UserInterestGroupDAO userInterestGroupDAO;
@@ -201,20 +200,14 @@ public class WorkProductEndpoint
     public ArchiveProductResponseDocument archiveProduct(ArchiveProductRequestDocument request)
         throws DatatypeConfigurationException, InvalidProductIDException, SOAPException {
 
-        ArchiveProductResponseDocument response = ArchiveProductResponseDocument.Factory.newInstance();
-
-        WorkProduct wp = productService.getProduct(request.getArchiveProductRequest().getWorkProductIdentification());
-        if (wp == null) {
-            throw new InvalidProductIDException();
-        }
-
-        if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-            wp.getFirstAssociatedInterestGroupID())) {
-            response.addNewArchiveProductResponse().set(WorkProductHelper.toWorkProductProcessingStatus(productService.archiveProduct(request.getArchiveProductRequest().getWorkProductIdentification())));
+        ProductPublicationStatus status = productService.archiveProduct(request.getArchiveProductRequest().getWorkProductIdentification());
+        if (status != null && status.getStatus().equals(ProductPublicationStatus.FailureStatus)) {
+            throw new SOAPException(status.getReasonForFailure());
         } else {
-            throw new SOAPException("Permission Denied");
+            ArchiveProductResponseDocument response = ArchiveProductResponseDocument.Factory.newInstance();
+            response.addNewArchiveProductResponse().set(WorkProductHelper.toWorkProductProcessingStatus(status));
+            return response;
         }
-        return response;
     }
 
     /**
@@ -233,8 +226,9 @@ public class WorkProductEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_WorkProductService, localPart = "AssociateWorkProductToInterestGroupRequest")
-    public AssociateWorkProductToInterestGroupResponseDocument associateWorkProductToInterestGroup(AssociateWorkProductToInterestGroupRequestDocument request)
-        throws SOAPException {
+    public AssociateWorkProductToInterestGroupResponseDocument
+           associateWorkProductToInterestGroup(AssociateWorkProductToInterestGroupRequestDocument request)
+               throws SOAPException {
 
         if (request.getAssociateWorkProductToInterestGroupRequest() == null ||
             request.getAssociateWorkProductToInterestGroupRequest().getWorkProductID() == null ||
@@ -245,7 +239,7 @@ public class WorkProductEndpoint
         }
 
         String wpID = productService.associateWorkProductToInterestGroup(request.getAssociateWorkProductToInterestGroupRequest().getWorkProductID().getStringValue(),
-            request.getAssociateWorkProductToInterestGroupRequest().getIncidentID().getStringValue());
+                                                                         request.getAssociateWorkProductToInterestGroupRequest().getIncidentID().getStringValue());
 
         WorkProduct wp = productService.getProduct(wpID);
 
@@ -279,22 +273,16 @@ public class WorkProductEndpoint
      */
     @PayloadRoot(namespace = NS_WorkProductService, localPart = "CloseProductRequest")
     public CloseProductResponseDocument closeProduct(CloseProductRequestDocument request)
-        throws DatatypeConfigurationException, InvalidProductIDException, SOAPException {
+        throws DatatypeConfigurationException, SOAPException {
 
-        CloseProductResponseDocument response = CloseProductResponseDocument.Factory.newInstance();
-
-        WorkProduct wp = productService.getProduct(request.getCloseProductRequest().getWorkProductIdentification());
-        if (wp == null) {
-            throw new InvalidProductIDException();
-        }
-
-        if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-            wp.getFirstAssociatedInterestGroupID())) {
-            response.addNewCloseProductResponse().addNewWorkProductPublicationResponse().set(WorkProductHelper.toWorkProductPublicationResponse(productService.closeProduct(request.getCloseProductRequest().getWorkProductIdentification())));
+        ProductPublicationStatus status = productService.closeProduct(request.getCloseProductRequest().getWorkProductIdentification());
+        if (status != null && status.getStatus().equals(ProductPublicationStatus.FailureStatus)) {
+            throw new SOAPException(status.getReasonForFailure());
         } else {
-            throw new SOAPException("Permission Denied");
+            CloseProductResponseDocument response = CloseProductResponseDocument.Factory.newInstance();
+            response.addNewCloseProductResponse().addNewWorkProductPublicationResponse().set(WorkProductHelper.toWorkProductPublicationResponse(status));
+            return response;
         }
-        return response;
     }
 
     /**
@@ -313,15 +301,16 @@ public class WorkProductEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_WorkProductService, localPart = "GetAssociatedWorkProductListRequest")
-    public GetAssociatedWorkProductListResponseDocument getAssociatedWorkProductList(GetAssociatedWorkProductListRequestDocument request)
-        throws DatatypeConfigurationException {
+    public GetAssociatedWorkProductListResponseDocument
+           getAssociatedWorkProductList(GetAssociatedWorkProductListRequestDocument request)
+               throws DatatypeConfigurationException {
 
         GetAssociatedWorkProductListResponseDocument response = GetAssociatedWorkProductListResponseDocument.Factory.newInstance();
         WorkProduct[] products = productService.getAssociatedWorkProductList(request.getGetAssociatedWorkProductListRequest().getIdentifier().getStringValue());
         List<WorkProduct> productList = new ArrayList<WorkProduct>();
         for (WorkProduct wp : products) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                wp.getFirstAssociatedInterestGroupID())) {
+                                                wp.getFirstAssociatedInterestGroupID())) {
                 productList.add(wp);
             }
         }
@@ -353,15 +342,14 @@ public class WorkProductEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_WorkProductService, localPart = "GetProductRequest")
-    public GetProductResponseDocument getProduct(GetProductRequestDocument request)
-        throws SOAPException {
+    public GetProductResponseDocument getProduct(GetProductRequestDocument request) throws SOAPException {
 
         GetProductResponseDocument response = GetProductResponseDocument.Factory.newInstance();
 
         WorkProduct wp = productService.getProduct(request.getGetProductRequest().getWorkProductIdentification());
         if (wp != null) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                wp.getFirstAssociatedInterestGroupID())) {
+                                                wp.getFirstAssociatedInterestGroupID())) {
                 WorkProductDocument.WorkProduct theWorkProduct = WorkProductHelper.toWorkProduct(wp);
                 response.addNewGetProductResponse().setWorkProduct(theWorkProduct);
             } else {
@@ -390,15 +378,15 @@ public class WorkProductEndpoint
      * @idd
      */
     @PayloadRoot(namespace = NS_WorkProductService, localPart = "GetProductCurrentVersionRequest")
-    public GetProductCurrentVersionResponseDocument getProductCurrentVersion(GetProductCurrentVersionRequestDocument request)
-        throws SOAPException {
+    public GetProductCurrentVersionResponseDocument
+           getProductCurrentVersion(GetProductCurrentVersionRequestDocument request) throws SOAPException {
 
         GetProductCurrentVersionResponseDocument response = GetProductCurrentVersionResponseDocument.Factory.newInstance();
 
         WorkProduct wp = productService.getProduct(request.getGetProductCurrentVersionRequest().getIdentifier().getStringValue());
         if (wp != null) {
             if (userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                wp.getFirstAssociatedInterestGroupID())) {
+                                                wp.getFirstAssociatedInterestGroupID())) {
                 WorkProductDocument.WorkProduct theWorkProduct = WorkProductHelper.toWorkProduct(wp);
                 response.addNewGetProductCurrentVersionResponse().setWorkProduct(theWorkProduct);
             } else {
@@ -440,10 +428,11 @@ public class WorkProductEndpoint
             wp.associateInterestGroup(request.getPublishProductRequest().getIncidentId());
         }
 
-        // if the product associated with an interest group then check the permission for this user to see whether he/she can publish it
+        // if the product associated with an interest group then check the permission for this user to see whether
+        // he/she can publish it
         if (wp.getFirstAssociatedInterestGroupID() != null &&
             userInterestGroupDAO.isEligible(ServletUtil.getPrincipalName(),
-                wp.getFirstAssociatedInterestGroupID()) == false) {
+                                            wp.getFirstAssociatedInterestGroupID()) == false) {
             throw new PermissionDeniedException();
         }
 
